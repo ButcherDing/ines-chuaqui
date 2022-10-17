@@ -1,4 +1,3 @@
-import { useAppDispatch } from "../../store/hooks/hooks";
 import { AuthContainer } from "./authentication.styles";
 
 // import SignUpForm from "../../components/sign-up-form/sign-up-form.component";
