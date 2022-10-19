@@ -1,5 +1,14 @@
 import styled from "styled-components";
 
+export const SeriesTitleContainer = styled.div`
+  display: flex;
+  justify-content: center;
+`;
+
+export const SeriesTitle = styled.div`
+  padding: 2rem;
+`;
+
 export const SliderContainer = styled.div`
   display: flex;
   margin: 0 auto;
@@ -19,3 +28,7 @@ export const Artwork = styled.div`
 `;
 
 export const BtnContainer = styled.div``;
+
+export const Button = styled.button`
+  color: blue;
+`;

@@ -1,71 +1,77 @@
-import { RootState, GetState, store } from "../store";
+import { RootState } from "../store";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
+import { DocumentData } from "firebase/firestore";
 
-import { getFirebaseStorageUrl } from "../../utils/firebase/firebase.utils";
-
-// import type { RootState } from "../store"
-
-// const slides: Slide[] = [
-//   { path: "/img-copy/skull-1.jpg", title: "Skull1" },
-//   { path: "/img-copy/skull-2.jpg", title: "Skull2" },
-//   { path: "/img-copy/skull-3.jpg", title: "Skull3" },
-//   { path: "/img-copy/skull-4.jpg", title: "Skull4" },
-//   { path: "/img-copy/skull-5.jpg", title: "Skull5" },
-// ];
-
-const slides: Slide[] = [
-  { path: "/pieces/skull-1.jpg", title: "Skull1" },
-  { path: "/pieces/skull-2.jpg", title: "Skull2" },
-  { path: "/pieces/skull-3.jpg", title: "Skull3" },
-  { path: "/pieces/skull-4.jpg", title: "Skull4" },
-  { path: "/pieces/skull-5.jpg", title: "Skull5" },
-];
-
-export type Slide = {
-  path: string;
-  title: string;
-};
+import {
+  getCollectionAndDocuments,
+  getFirebaseStorageUrl,
+} from "../../utils/firebase/firebase.utils";
 
 export interface GalleryState {
-  // TODO any
-  collection: any;
-  slides: Slide[];
+  // can we not be more specific about type here, overload seriesData?
+  seriesData: DocumentData[] | [];
   curSlide: number;
+  curSlidePath: string;
   curSlideUrl: string;
+  curSeries: number;
   isLoading: boolean;
   error?: null | Error;
 }
+export type Series = {
+  title: string;
+  pieces: Piece[];
+};
+
+export type Slide = {
+  description: string;
+  id: number;
+  fetchPath: string;
+  title: string;
+};
+
+export type Piece = {
+  description: string;
+  fetchPath: string;
+  id: number;
+  title: string;
+};
 
 const initialState: GalleryState = {
-  collection: {},
-  slides: slides,
+  seriesData: [],
   curSlide: 0,
+  curSlidePath: "",
+  curSeries: 0,
   curSlideUrl: "",
   isLoading: false,
   error: null,
 };
 
-// these are 'automagically' turned into non-mutating reducers, abstracted away from us. This is not actually how redux works - remember the whole point of reducers is not to mutate our original state! Immutability please!
-
-// placeholder only: TODO: get images onto firebase and fetch dynamically
-// export const getCollection = createAsyncThunk(
-//   'collection/getCollection',
-//   async (thunkAPI) => {
-//     const res = await fetch('https://jsonplaceholder.typicode.com/posts').then(
-//       (data) => data.json()
-//     )
-//     return res
-//   })
-export const getCollection = createAsyncThunk(
-  "collection/getCollection",
+export const getImage = createAsyncThunk(
+  "gallery/getImage",
   async (_, thunkAPI) => {
     const state = thunkAPI.getState() as RootState;
-    const curSlide = state.gallery.curSlide;
-    console.log(curSlide);
-    return await getFirebaseStorageUrl(slides[curSlide].path);
+    const pathForFirestore =
+      state.gallery.seriesData[state.gallery.curSeries].pieces[
+        state.gallery.curSlide
+      ].fetchPath;
+    return await getFirebaseStorageUrl(pathForFirestore);
+  }
+);
 
-    // dispatch to new action setting the path, action (below) sets the state, job done (except we need a useEffect to fire when we boot up the app to initialize our curSlideUrl)
+export const getSeriesData = createAsyncThunk(
+  "gallery/getSeriesData",
+  async (_, thunkAPI) => {
+    const state = thunkAPI.getState() as RootState;
+    const seriesData = await getCollectionAndDocuments("series");
+    const res = await getFirebaseStorageUrl(
+      seriesData[state.gallery.curSeries].pieces[state.gallery.curSlide]
+        .fetchPath
+    );
+    if (res) {
+      const curSlideUrl = res;
+      return { seriesData, curSlideUrl };
+    }
   }
 );
 
@@ -82,23 +88,46 @@ export const gallerySlice = createSlice({
     incrementByAmount: (state, action: PayloadAction<number>) => {
       state.curSlide += action.payload;
     },
+    setCurSeries: (state, action: PayloadAction<string>) => {
+      const seriesIndex = state.seriesData
+        .map((series) => series.title)
+        .indexOf(action.payload);
+      state.curSeries = seriesIndex;
+    },
     // set url to payload
   },
+  // TODO factor out addcase into actions
   extraReducers: (builder) => {
-    builder.addCase(getCollection.pending, (state, action) => {
+    // get image
+    builder.addCase(getImage.pending, (state, action) => {
       state.isLoading = true;
     });
-    builder.addCase(getCollection.fulfilled, (state, { payload }) => {
+    builder.addCase(getImage.fulfilled, (state, { payload }) => {
       state.isLoading = false;
       if (payload) state.curSlideUrl = payload;
     });
-    builder.addCase(getCollection.rejected, (state, { payload }) => {
+    builder.addCase(getImage.rejected, (state, { payload }) => {
+      state.isLoading = false;
+    });
+    // get series array - only supposed to be on initial render
+    builder.addCase(getSeriesData.pending, (state, action) => {
+      state.isLoading = true;
+    });
+    builder.addCase(getSeriesData.fulfilled, (state, { payload }) => {
+      state.isLoading = false;
+      if (payload === undefined) return;
+      state.seriesData = payload.seriesData;
+      state.curSlideUrl = payload.curSlideUrl;
+      // state.curSeries = 0;
+    });
+    builder.addCase(getSeriesData.rejected, (state, { payload }) => {
       state.isLoading = false;
     });
   },
 });
 
-export const { increment, decrement, incrementByAmount } = gallerySlice.actions;
+export const { increment, decrement, incrementByAmount, setCurSeries } =
+  gallerySlice.actions;
 // export const selectCount = (state: RootState) => state.gallery.curSlide
 
 export default gallerySlice.reducer;

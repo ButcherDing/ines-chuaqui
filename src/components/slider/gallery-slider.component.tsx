@@ -1,47 +1,81 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { useEffect } from "react";
 import {
   decrement,
   increment,
-  getCollection,
+  getImage,
+  getSeriesData,
+  setCurSeries,
 } from "../../store/gallery/gallery.slice";
 import { useAppSelector, useAppDispatch } from "../../store/hooks/hooks";
 
-import { BtnSlider } from "../button-slider/button-slider.component";
+import { ReactComponent as NextArrow } from "../../assets/logos/chevron-forward-outline.svg";
+import { ReactComponent as PrevArrow } from "../../assets/logos/chevron-back-outline.svg";
 
-import { Artwork, SliderContainer } from "./gallery-slider.styles";
+import {
+  Artwork,
+  SliderContainer,
+  SeriesTitleContainer,
+  SeriesTitle,
+  Button,
+} from "./gallery-slider.styles";
 
 export const GallerySlider = () => {
-  // const [slideIndex, setSlideIndex] = useState<number>(0);
-
+  //// Mount Dispatch
   const dispatch = useAppDispatch();
-  const curSlide = useAppSelector((state) => state.gallery.curSlide);
-  const curSlideUrl = useAppSelector((state) => state.gallery.curSlideUrl);
-  const slides = useAppSelector((state) => state.gallery.slides);
 
+  //// Selectors
+  const curSlidePath = useAppSelector((state) => state.gallery.curSlidePath);
+  const curSlideUrl = useAppSelector((state) => state.gallery.curSlideUrl);
+  const curSlide = useAppSelector((state) => state.gallery.curSlide);
+  const curSeries = useAppSelector((state) => state.gallery.curSlide);
+  const seriesData = useAppSelector((state) => state.gallery.seriesData);
+
+  //// Handlers
   const nextSlideHandler = () => {
-    // should this logic(guard clauses) really live here?
-    if (curSlide === slides.length - 1) return;
     dispatch(increment());
   };
 
   const prevSlideHandler = () => {
-    if (curSlide === 0) return;
     dispatch(decrement());
   };
 
+  const changeSeriesHandler = (seriesTitle: string) => {
+    dispatch(setCurSeries(seriesTitle));
+  };
+
   useEffect(() => {
-    dispatch(getCollection());
-  }, [curSlide]);
+    dispatch(getSeriesData());
+    // dispatch(getImage());
+  }, []);
+
+  useEffect(() => {
+    dispatch(getImage());
+  }, [curSlidePath]);
+
+  // console.log(seriesData[curSeries].pieces[curSlide].fetchPath);
 
   return (
-    <SliderContainer>
-      <BtnSlider moveSlide={prevSlideHandler} direction="prev" />
-      <Artwork>
-        <img src={curSlideUrl} alt="test" />
-      </Artwork>
-      <BtnSlider moveSlide={nextSlideHandler} direction="next" />
-    </SliderContainer>
+    <Fragment>
+      <SeriesTitleContainer>
+        {seriesData.map((series) => (
+          <SeriesTitle
+            onClick={(event) => changeSeriesHandler(series.title)}
+            key={series.title}
+          >
+            {series.title}
+          </SeriesTitle>
+        ))}
+      </SeriesTitleContainer>
+
+      <SliderContainer>
+        <Button onClick={prevSlideHandler} />
+        <Artwork>
+          <img src={curSlideUrl} alt="test" />
+        </Artwork>
+        <Button onClick={nextSlideHandler} />
+      </SliderContainer>
+    </Fragment>
   );
 };
 // BtnSlider needs stuff removed - do onClick to trigger the handlers, also move the logic to our slice.
