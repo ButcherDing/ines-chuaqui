@@ -23,13 +23,19 @@ import {
   QueryDocumentSnapshot,
 } from "firebase/firestore";
 
+import type { Series } from "../../store/gallery/gallery.slice";
+
+import type { DocumentData } from "firebase/firestore";
+
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
 
-import { GALLERY_DATA } from "../../assets/series/collections";
+//// VERY NAUGHTY //////////
+import { Piece } from "../../store/gallery/gallery.slice";
+import { SERIES_DATA } from "../../assets/series/collections";
 
-console.log(GALLERY_DATA[0].pieces[0].fetchPath);
+//////////////////////////
 
-// import { Gallery } from "../../store/categories/categories.types";
+//////////// CONFIG
 
 const firebaseConfig = {
   apiKey: "AIzaSyA1Kii6LFuGn10JjliymmOZv3lgn3x4wlM",
@@ -85,12 +91,11 @@ export const getDocumentFromFirebase = async (
   }
 };
 
-/////////////////////////////////////////////////////////////////////
-
 export type ObjectToAdd = {
   title: string;
 };
-// extends, not 'is'.
+
+// note: extends, not 'is'.
 export const addCollectionAndDocuments = async <T extends ObjectToAdd>(
   collectionKey: string,
   objectsToAdd: T[]
@@ -110,19 +115,42 @@ export const addCollectionAndDocuments = async <T extends ObjectToAdd>(
   await batch.commit();
   console.log("batch committed");
 };
+
 //// example call
-// addCollectionAndDocuments("series", GALLERY_DATA);
+// addCollectionAndDocuments("series", SERIES_DATA);
 
 export const getCollectionAndDocuments = async (collectionName: string) => {
   const collectionRef = collection(db, collectionName);
   const q = query(collectionRef);
   const querySnapshot = await getDocs(q);
+  console.log(querySnapshot);
   return querySnapshot.docs.map((docSnapshot) => docSnapshot.data());
+
+  // const data = querySnapshot.docs.map((docSnapshot) => docSnapshot.data());
+  // console.log(data);
+
+  /////////// ALSO NAUGHTY
+
+  // I would like to exit callback hell here, but typescript no likey. if I chain em normally, error: "Property 'forEach' does not exist on type 'void'."
+
+  // const fetcher = (data) => {
+  //   data.forEach((series) =>
+  //     series.pieces.forEach(
+  //       async (piece: Piece) =>
+  //         (piece.storeUrl = await getFirebaseStorageUrl(piece.fetchPath))
+  //     )
+  //   );
+  //   console.log(data);
+  //   return data;
+  // };
+
+  // ///////////////
+
+  // return fetcher(data);
 };
 
 ////////////////////////////////////////////////////////////////
 
-// Add a new document in collection "cities"
 // export const addDocumentToCollection = async (
 //   collectionKey: string,
 //   documentName: string,

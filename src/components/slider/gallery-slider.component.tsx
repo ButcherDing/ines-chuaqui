@@ -3,14 +3,11 @@ import { useEffect } from "react";
 import {
   decrement,
   increment,
-  getImage,
   getSeriesData,
+  getPieceUrls,
   setCurSeries,
 } from "../../store/gallery/gallery.slice";
 import { useAppSelector, useAppDispatch } from "../../store/hooks/hooks";
-
-import { ReactComponent as NextArrow } from "../../assets/logos/chevron-forward-outline.svg";
-import { ReactComponent as PrevArrow } from "../../assets/logos/chevron-back-outline.svg";
 
 import {
   Artwork,
@@ -25,10 +22,8 @@ export const GallerySlider = () => {
   const dispatch = useAppDispatch();
 
   //// Selectors
-  const curSlidePath = useAppSelector((state) => state.gallery.curSlidePath);
+
   const curSlideUrl = useAppSelector((state) => state.gallery.curSlideUrl);
-  const curSlide = useAppSelector((state) => state.gallery.curSlide);
-  const curSeries = useAppSelector((state) => state.gallery.curSlide);
   const seriesData = useAppSelector((state) => state.gallery.seriesData);
 
   //// Handlers
@@ -46,12 +41,11 @@ export const GallerySlider = () => {
 
   useEffect(() => {
     dispatch(getSeriesData());
-    // dispatch(getImage());
   }, []);
 
   useEffect(() => {
-    dispatch(getImage());
-  }, [curSlidePath]);
+    dispatch(getPieceUrls());
+  }, [seriesData]);
 
   // console.log(seriesData[curSeries].pieces[curSlide].fetchPath);
 
