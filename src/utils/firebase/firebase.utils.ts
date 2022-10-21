@@ -214,11 +214,13 @@ export const createUserDocumentFromAuth = async (
 //// sign up
 export const createAuthUserWithEmailAndPassword = async (
   email: string,
-  password: string
+  password: string,
+  userName: string
 ) => {
   if (!email || !password) return;
 
-  return await createUserWithEmailAndPassword(auth, email, password);
+  const res = await createUserWithEmailAndPassword(auth, email, password);
+  return res;
 };
 //// sign out
 export const signOutUser = async () => await signOut(auth);

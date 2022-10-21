@@ -7,7 +7,10 @@ import { useAppDispatch } from "../../store/hooks/hooks";
 import { useAppSelector } from "../../store/hooks/hooks";
 
 import { SignInContainer, ButtonsContainer } from "./sign-in-form.styles";
-import { signInGooglePopupAsync } from "../../store/user/user-slice";
+import {
+  signInGooglePopupAsync,
+  signInEmailPassAsync,
+} from "../../store/user/user-slice";
 
 const defaultFormFields = {
   email: "",
@@ -26,20 +29,15 @@ const SignInForm = () => {
   const dispatch = useAppDispatch();
 
   // Action Handlers
-  const signInWithGoogle = async () => {
-    await dispatch(signInGooglePopupAsync());
+  const signInWithGoogle = () => {
+    dispatch(signInGooglePopupAsync());
   };
 
-  // const handleSubmit = async (event) => {
-  //   event.preventDefault();
-
-  //   try {
-  //     await signInEmailPass(email, password);
-  //     resetFormFields();
-  //   } catch (error) {
-  //     console.log("user sign in failed", error);
-  //   }
-  // };
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    await dispatch(signInEmailPassAsync(formFields));
+    resetFormFields();
+  };
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -51,7 +49,7 @@ const SignInForm = () => {
     <SignInContainer>
       <h2>Sign in</h2>
       <span>Sign in with your email and password</span>
-      <form>
+      <form onSubmit={handleSubmit}>
         <FormInput
           label="Email"
           type="email"
