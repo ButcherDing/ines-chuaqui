@@ -7,7 +7,7 @@ import {
   getFirebaseStorageUrl,
 } from "../../utils/firebase/firebase.utils";
 
-import { updateCurSlideHelper } from "./gallery.reducerHelper";
+import { updateSliderHelper } from "./gallery.reducerHelper";
 
 export interface GalleryState {
   seriesData: Series[];
@@ -44,8 +44,8 @@ const initialState: GalleryState = {
 
 //////////////
 
-export const getSeriesData = createAsyncThunk(
-  "gallery/getSeriesData",
+export const getSeriesDataAsync = createAsyncThunk(
+  "gallery/getSeriesDataAsync",
   async (_, thunkAPI) => {
     const res = await getCollectionAndDocuments("series");
     const seriesData = [...(res as Series[])];
@@ -56,8 +56,8 @@ export const getSeriesData = createAsyncThunk(
 );
 
 // a lot of this logic could be moved to firebase utils - this is a very specific type of data manipulation happening in here is the problem. Can we do something more generic like using a method to look for all the addresses in the data we pass to utils?
-export const getFirestoreUrls = createAsyncThunk(
-  "gallery/getFirestoreUrls",
+export const getFirestoreUrlsAsync = createAsyncThunk(
+  "gallery/getFirestoreUrlsAsync",
   async (_, thunkAPI) => {
     const urlFetcher = async () => {
       const state = thunkAPI.getState() as RootState;
@@ -86,47 +86,51 @@ export const gallerySlice = createSlice({
     // TODO: Clean this shit up. Don't need all these reducers, they basically do the same thing, set it to some number. You can just use some helper functions in the component to calc your slide. Could also try a deep clone to streamline things.
 
     setCurSlideIndex: (state, { payload }) => {
-      // NAUGHTY
-      const stateCopy = JSON.parse(JSON.stringify(state));
-      const updates = updateCurSlideHelper(stateCopy, payload);
+      const updates = updateSliderHelper(state, payload, state.curSeriesIndex);
       if (updates === undefined) return;
+
       state.curSlideIndex = updates.newSlideIndex;
       state.curSlideUrl = updates.newSlideUrl;
     },
 
     setCurSeriesIndex: (state, action: PayloadAction<string>) => {
-      const seriesIndex = state.seriesData
+      const newSeriesIndex = state.seriesData
         .map((series) => series.title)
         .indexOf(action.payload);
-      state.curSeriesIndex = seriesIndex;
+
+      const updates = updateSliderHelper(state, 0, newSeriesIndex);
+      if (updates === undefined) return;
+
+      state.curSeriesIndex = newSeriesIndex;
       state.curSlideIndex = 0;
+      state.curSlideUrl = updates.newSlideUrl;
     },
   },
   // TODO factor out addcase into actions
   extraReducers: (builder) => {
     // get series array - only supposed to be on initial render
-    builder.addCase(getSeriesData.pending, (state, action) => {
+    builder.addCase(getSeriesDataAsync.pending, (state, action) => {
       state.isLoading = true;
     });
-    builder.addCase(getSeriesData.fulfilled, (state, { payload }) => {
+    builder.addCase(getSeriesDataAsync.fulfilled, (state, { payload }) => {
       state.isLoading = false;
       state.seriesData = payload;
     });
-    builder.addCase(getSeriesData.rejected, (state, { payload }) => {
+    builder.addCase(getSeriesDataAsync.rejected, (state, { payload }) => {
       state.isLoading = false;
       state.error = payload as Error;
     });
 
-    builder.addCase(getFirestoreUrls.pending, (state, action) => {
+    builder.addCase(getFirestoreUrlsAsync.pending, (state, action) => {
       state.isLoading = true;
     });
-    builder.addCase(getFirestoreUrls.fulfilled, (state, { payload }) => {
+    builder.addCase(getFirestoreUrlsAsync.fulfilled, (state, { payload }) => {
       state.isLoading = false;
-      if (!payload) return;
+      // if (!payload) return;
       state.storeUrls = payload;
       state.curSlideUrl = payload[state.curSlideIndex];
     });
-    builder.addCase(getFirestoreUrls.rejected, (state, { payload }) => {
+    builder.addCase(getFirestoreUrlsAsync.rejected, (state, { payload }) => {
       state.isLoading = false;
     });
   },

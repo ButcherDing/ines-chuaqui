@@ -5,17 +5,22 @@ export type UpdateCurSlideHelperReturn = void | {
   newSlideUrl: string;
 };
 
-export const updateCurSlideHelper = (
+export const updateSliderHelper = (
   state: GalleryState,
-  payload: number
+  newSlideIndex: number,
+  newSeriesIndex: number
 ): UpdateCurSlideHelperReturn => {
   console.log(state);
-  const { seriesData, curSeriesIndex, storeUrls } = state;
-  if (payload >= seriesData[curSeriesIndex].pieces.length || payload < 0)
+  const stateCopy = JSON.parse(JSON.stringify(state));
+  console.log(stateCopy);
+  const { seriesData, storeUrls } = stateCopy;
+  if (
+    newSlideIndex >= seriesData[newSeriesIndex].pieces.length ||
+    newSlideIndex < 0
+  )
     return;
-  // otherwise update the state with the action
-  const newSlideIndex: number = payload;
-  const newModFetchPath: string = seriesData[curSeriesIndex].pieces[
+  // otherwise update the state with the new series and slide indices
+  const newModFetchPath: string = seriesData[newSeriesIndex].pieces[
     newSlideIndex
   ].fetchPath
     .slice(1)

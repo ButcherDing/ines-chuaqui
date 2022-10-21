@@ -1,3 +1,5 @@
+import { ReactComponent as NextArrow } from "../../assets/logos/chevron-forward-outline.svg";
+import { ReactComponent as PrevArrow } from "../../assets/logos/chevron-back-outline.svg";
 import styled from "styled-components";
 
 export const SeriesTitleContainer = styled.div`
@@ -27,8 +29,5 @@ export const Artwork = styled.div`
   }
 `;
 
-export const BtnContainer = styled.div``;
-
-export const Button = styled.button`
-  color: blue;
-`;
+export const NextButton = styled(NextArrow)``;
+export const PrevButton = styled(PrevArrow)``;

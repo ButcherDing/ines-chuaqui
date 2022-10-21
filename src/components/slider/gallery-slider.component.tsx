@@ -1,8 +1,8 @@
 import React, { Fragment } from "react";
 import { useEffect } from "react";
 import {
-  getSeriesData,
-  getFirestoreUrls,
+  getSeriesDataAsync,
+  getFirestoreUrlsAsync,
   setCurSeriesIndex,
   setCurSlideIndex,
 } from "../../store/gallery/gallery.slice";
@@ -13,7 +13,8 @@ import {
   SliderContainer,
   SeriesTitleContainer,
   SeriesTitle,
-  Button,
+  PrevButton,
+  NextButton,
 } from "./gallery-slider.styles";
 
 export const GallerySlider = () => {
@@ -40,11 +41,11 @@ export const GallerySlider = () => {
   };
 
   useEffect(() => {
-    dispatch(getSeriesData());
+    dispatch(getSeriesDataAsync());
   }, []);
 
   useEffect(() => {
-    dispatch(getFirestoreUrls());
+    dispatch(getFirestoreUrlsAsync());
   }, [seriesData]);
 
   // console.log(seriesData[curSeriesIndex].pieces[curSlideIndex].fetchPath);
@@ -63,11 +64,11 @@ export const GallerySlider = () => {
       </SeriesTitleContainer>
 
       <SliderContainer>
-        <Button onClick={goNextSlide} />
+        <PrevButton onClick={goNextSlide} />
         <Artwork>
           <img src={curSlideUrl} alt="test" />
         </Artwork>
-        <Button onClick={goPrevSlide} />
+        <NextButton onClick={goPrevSlide} />
       </SliderContainer>
     </Fragment>
   );
