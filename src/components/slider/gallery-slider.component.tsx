@@ -1,11 +1,10 @@
 import React, { Fragment } from "react";
 import { useEffect } from "react";
 import {
-  decrement,
-  increment,
   getSeriesData,
-  getPieceUrls,
-  setCurSeries,
+  getFirestoreUrls,
+  setCurSeriesIndex,
+  setCurSlideIndex,
 } from "../../store/gallery/gallery.slice";
 import { useAppSelector, useAppDispatch } from "../../store/hooks/hooks";
 
@@ -24,19 +23,20 @@ export const GallerySlider = () => {
   //// Selectors
 
   const curSlideUrl = useAppSelector((state) => state.gallery.curSlideUrl);
+  const curSlideIndex = useAppSelector((state) => state.gallery.curSlideIndex);
   const seriesData = useAppSelector((state) => state.gallery.seriesData);
 
   //// Handlers
-  const nextSlideHandler = () => {
-    dispatch(increment());
+  const goPrevSlide = () => {
+    dispatch(setCurSlideIndex(curSlideIndex + 1));
   };
 
-  const prevSlideHandler = () => {
-    dispatch(decrement());
+  const goNextSlide = () => {
+    dispatch(setCurSlideIndex(curSlideIndex - 1));
   };
 
-  const changeSeriesHandler = (seriesTitle: string) => {
-    dispatch(setCurSeries(seriesTitle));
+  const changeSeries = (seriesTitle: string) => {
+    dispatch(setCurSeriesIndex(seriesTitle));
   };
 
   useEffect(() => {
@@ -44,17 +44,17 @@ export const GallerySlider = () => {
   }, []);
 
   useEffect(() => {
-    dispatch(getPieceUrls());
+    dispatch(getFirestoreUrls());
   }, [seriesData]);
 
-  // console.log(seriesData[curSeries].pieces[curSlide].fetchPath);
+  // console.log(seriesData[curSeriesIndex].pieces[curSlideIndex].fetchPath);
 
   return (
     <Fragment>
       <SeriesTitleContainer>
         {seriesData.map((series) => (
           <SeriesTitle
-            onClick={(event) => changeSeriesHandler(series.title)}
+            onClick={(event) => changeSeries(series.title)}
             key={series.title}
           >
             {series.title}
@@ -63,11 +63,11 @@ export const GallerySlider = () => {
       </SeriesTitleContainer>
 
       <SliderContainer>
-        <Button onClick={prevSlideHandler} />
+        <Button onClick={goNextSlide} />
         <Artwork>
           <img src={curSlideUrl} alt="test" />
         </Artwork>
-        <Button onClick={nextSlideHandler} />
+        <Button onClick={goPrevSlide} />
       </SliderContainer>
     </Fragment>
   );
