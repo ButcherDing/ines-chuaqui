@@ -4,10 +4,11 @@ import type { PayloadAction } from "@reduxjs/toolkit";
 import {
   createAuthUserWithEmailAndPassword,
   createUserDocumentFromAuth,
+  getCurrentUser,
   signInEmailPass,
   signInWithGooglePopup,
+  signOutUser,
 } from "../../utils/firebase/firebase.utils";
-import { EmailAuthCredential } from "firebase/auth";
 
 type FormInput = {
   email: string;
@@ -19,7 +20,7 @@ interface SignUpFormInput extends FormInput {
 }
 
 export type UserData = {
-  createdAt: Date;
+  createdAt: Date; // |  {seconds: number, nanoseconds: number};
   displayName: string;
   email: string;
 };
@@ -36,14 +37,15 @@ const initialState: UserState = {
   error: null,
 };
 
-export const getUserDataAsync = createAsyncThunk(
-  "authentication/getUserDataAsync",
-  async (thunkAPI) => {
-    const res = await fetch("https://jsonplaceholder.typicode.com/posts").then(
-      (data) => data.json()
-    );
-    console.log(res);
-    return res;
+export const checkUserSession = createAsyncThunk(
+  "authentication/checkUserSession",
+  async (_, thunkAPI) => {
+    try {
+      const res = await getCurrentUser();
+      console.log(res);
+    } catch (error) {
+      console.log("error checking user", error);
+    }
   }
 );
 
@@ -53,7 +55,10 @@ export const signInEmailPassAsync = createAsyncThunk(
     try {
       const { email, password } = signInFormInput;
       const res = await signInEmailPass(email, password);
-      console.log(res);
+      if (!res) return;
+      const userSnapshot = await createUserDocumentFromAuth(res.user);
+      if (!userSnapshot) return;
+      return userSnapshot.data();
     } catch (error) {
       console.log("user sign in failed", error);
     }
@@ -65,8 +70,10 @@ export const signInGooglePopupAsync = createAsyncThunk(
   async (thunkAPI) => {
     const res = await signInWithGooglePopup();
     console.log(res);
-    const userSnapshot = createUserDocumentFromAuth(res.user);
+    const userSnapshot = await createUserDocumentFromAuth(res.user);
     console.log(userSnapshot);
+    if (!userSnapshot) return;
+    return userSnapshot.data();
   }
 );
 
@@ -74,15 +81,22 @@ export const signUpWithEmailPassAsync = createAsyncThunk(
   "authentication/signUpWithEmailPass",
   async (signUpFormInput: SignUpFormInput, thunkAPI) => {
     const { email, password, displayName } = signUpFormInput;
-    const res = await createAuthUserWithEmailAndPassword(
-      email,
-      password,
-      displayName
-    );
+    const res = await createAuthUserWithEmailAndPassword(email, password);
     console.log(res);
     if (!res) return;
-    const userSnapshot = createUserDocumentFromAuth(res.user);
-    console.log(userSnapshot);
+    const userSnapshot = await createUserDocumentFromAuth(res.user, {
+      displayName,
+    });
+    if (!userSnapshot) return;
+    // should this check be in our utils?
+    return userSnapshot.data();
+  }
+);
+
+export const signOut = createAsyncThunk(
+  "authentication/signOut",
+  async (_, thunkAPI) => {
+    await signOutUser();
   }
 );
 
@@ -95,22 +109,14 @@ export const userSlice = createSlice({
     },
   },
   extraReducers(builder) {
-    builder.addCase(getUserDataAsync.pending, (state, action) => {
-      state.isLoading = true;
-    });
-    builder.addCase(getUserDataAsync.fulfilled, (state, { payload }) => {
-      state.isLoading = false;
-      state.currentUser = payload;
-    });
-    builder.addCase(getUserDataAsync.rejected, (state, { payload }) => {
-      state.isLoading = false;
-    });
     builder.addCase(signInGooglePopupAsync.pending, (state, action) => {
       state.isLoading = true;
     });
     builder.addCase(signInGooglePopupAsync.fulfilled, (state, { payload }) => {
       state.isLoading = false;
-      // state.currentUser = payload;
+      console.log(payload);
+      if (!payload) return;
+      state.currentUser = payload;
     });
     builder.addCase(signInGooglePopupAsync.rejected, (state, { payload }) => {
       state.isLoading = false;
@@ -120,9 +126,40 @@ export const userSlice = createSlice({
     });
     builder.addCase(signInEmailPassAsync.fulfilled, (state, { payload }) => {
       state.isLoading = false;
+      console.log(payload);
+      if (!payload) return;
+      state.currentUser = payload;
     });
     builder.addCase(signInEmailPassAsync.rejected, (state, { payload }) => {
       state.isLoading = false;
     });
+    //////////////// Sign Out
+    builder.addCase(signOut.pending, (state) => {
+      state.isLoading = true;
+    });
+
+    builder.addCase(signOut.fulfilled, (state) => {
+      state.isLoading = false;
+      state.currentUser = null;
+    });
+    builder.addCase(signOut.rejected, (state) => {
+      state.isLoading = false;
+    });
+    builder.addCase(checkUserSession.pending, (state) => {
+      state.isLoading = true;
+    });
+
+    builder.addCase(checkUserSession.fulfilled, (state, { payload }) => {
+      // state.currentUser = payload;
+      state.isLoading = false;
+    });
+    builder.addCase(checkUserSession.rejected, (state) => {
+      state.isLoading = false;
+    });
   },
 });
+
+export const { setUser } = userSlice.actions;
+// export const selectCount = (state: RootState) => state.gallery.curSlideIndex
+
+export default userSlice.reducer;

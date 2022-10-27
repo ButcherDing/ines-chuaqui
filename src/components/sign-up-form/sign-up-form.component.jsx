@@ -37,13 +37,13 @@ const SignUpForm = () => {
 
   const handleChange = (event) => {
     const { name, value } = event.target;
-
+    console.log(event.target);
     setFormFields({ ...formFields, [name]: value });
   };
 
   return (
     <SignUpContainer>
-      <h2>Don't have an account?</h2>
+      <h2>New account</h2>
       <span>Sign up with your email and password</span>
       <form onSubmit={handleSubmit}>
         <FormInput

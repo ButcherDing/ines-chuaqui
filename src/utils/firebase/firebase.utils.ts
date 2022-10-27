@@ -25,7 +25,7 @@ import {
 
 import type { Series } from "../../store/gallery/gallery.slice";
 
-import type { DocumentData } from "firebase/firestore";
+import type { DocumentData, DocumentReference } from "firebase/firestore";
 
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
 
@@ -184,15 +184,16 @@ export type UserData = {
   email: string;
 };
 
+// smells bad
 export const createUserDocumentFromAuth = async (
   userAuth: User,
   additionalInformation = {} as AdditionalInformation
 ): Promise<void | QueryDocumentSnapshot<UserData>> => {
   if (!userAuth) return;
   const userDocRef = doc(db, "users", userAuth.uid);
-
+  console.log("userDocRef:", userDocRef);
   const userSnapshot = await getDoc(userDocRef);
-
+  console.log("userSnapshot:", userSnapshot.data());
   if (!userSnapshot.exists()) {
     // can add other properties below
     const { displayName, email } = userAuth;
@@ -209,13 +210,13 @@ export const createUserDocumentFromAuth = async (
       console.log("error creating user", err);
     }
   }
+
   return userSnapshot as QueryDocumentSnapshot<UserData>;
 };
 //// sign up
 export const createAuthUserWithEmailAndPassword = async (
   email: string,
-  password: string,
-  userName: string
+  password: string
 ) => {
   if (!email || !password) return;
 
@@ -223,9 +224,11 @@ export const createAuthUserWithEmailAndPassword = async (
   return res;
 };
 //// sign out
-export const signOutUser = async () => await signOut(auth);
-
-// deprecated? No, look at our new getCurrentUser
+export const signOutUser = async () => {
+  const res = await signOut(auth);
+  console.log(res);
+};
+// not sure how this works anymore
 export const onAuthStateChangedListener = (callback: NextOrObserver<User>) =>
   onAuthStateChanged(auth, callback);
 
@@ -235,6 +238,7 @@ export const getCurrentUser = (): Promise<User | null> => {
       auth,
       (userAuth) => {
         unsubscribe();
+        console.log(userAuth);
         resolve(userAuth);
       },
       reject

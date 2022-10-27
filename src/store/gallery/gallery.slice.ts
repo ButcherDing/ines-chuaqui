@@ -108,7 +108,7 @@ export const gallerySlice = createSlice({
   },
   // TODO factor out addcase into actions
   extraReducers: (builder) => {
-    // get series array - only supposed to be on initial render
+    //////////// get series array - only supposed to be on initial render
     builder.addCase(getSeriesDataAsync.pending, (state, action) => {
       state.isLoading = true;
     });
@@ -120,7 +120,7 @@ export const gallerySlice = createSlice({
       state.isLoading = false;
       state.error = payload as Error;
     });
-
+    //////////// Get URLs for pieces
     builder.addCase(getFirestoreUrlsAsync.pending, (state, action) => {
       state.isLoading = true;
     });

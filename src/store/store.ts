@@ -1,5 +1,6 @@
 import { configureStore, ThunkAction, Action } from "@reduxjs/toolkit";
 import galleryReducer from "./gallery/gallery.slice";
+import userReducer from "./user/user-slice";
 
 import logger from "redux-logger";
 
@@ -7,6 +8,7 @@ export const store = configureStore({
   reducer: {
     gallery: galleryReducer,
     // cart: cartReducer
+    user: userReducer,
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
 });
