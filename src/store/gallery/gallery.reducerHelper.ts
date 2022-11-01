@@ -10,9 +10,7 @@ export const updateSliderHelper = (
   newSlideIndex: number,
   newSeriesIndex: number
 ): UpdateCurSlideHelperReturn => {
-  console.log(state);
   const stateCopy = JSON.parse(JSON.stringify(state));
-  console.log(stateCopy);
   const { seriesData, storeUrls } = stateCopy;
   if (
     newSlideIndex >= seriesData[newSeriesIndex].pieces.length ||

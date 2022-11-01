@@ -4,7 +4,7 @@ const CartIcon = () => {
   const cartCount = 5;
 
   const cartToggler = () => {
-    console.log("toggles the cart");
+    console.log("toggles the cart?");
   };
 
   return (

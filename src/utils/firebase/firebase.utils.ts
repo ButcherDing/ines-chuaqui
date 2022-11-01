@@ -84,10 +84,9 @@ export const getDocumentFromFirebase = async (
   const docSnap = await getDoc(docRef);
 
   if (docSnap.exists()) {
-    console.log("Document data:", docSnap.data());
   } else {
     // doc.data() will be undefined in this case
-    console.log("No such document!");
+    console.error("No such document!");
   }
 };
 
@@ -123,30 +122,7 @@ export const getCollectionAndDocuments = async (collectionName: string) => {
   const collectionRef = collection(db, collectionName);
   const q = query(collectionRef);
   const querySnapshot = await getDocs(q);
-  console.log(querySnapshot);
   return querySnapshot.docs.map((docSnapshot) => docSnapshot.data());
-
-  // const data = querySnapshot.docs.map((docSnapshot) => docSnapshot.data());
-  // console.log(data);
-
-  /////////// ALSO NAUGHTY
-
-  // I would like to exit callback hell here, but typescript no likey. if I chain em normally, error: "Property 'forEach' does not exist on type 'void'."
-
-  // const fetcher = (data) => {
-  //   data.forEach((series) =>
-  //     series.pieces.forEach(
-  //       async (piece: Piece) =>
-  //         (piece.storeUrl = await getFirebaseStorageUrl(piece.fetchPath))
-  //     )
-  //   );
-  //   console.log(data);
-  //   return data;
-  // };
-
-  // ///////////////
-
-  // return fetcher(data);
 };
 
 ////////////////////////////////////////////////////////////////
@@ -157,7 +133,7 @@ export const getCollectionAndDocuments = async (collectionName: string) => {
 //   document: object
 // ): Promise<void> => {
 //   await setDoc(doc(db, collectionKey, documentName), document);
-//   console.log("done... maybe?");
+//   console.log("document added");
 // };
 
 // addDocumentToCollection("series", "skulls", skullsJson);
@@ -191,9 +167,7 @@ export const createUserDocumentFromAuth = async (
 ): Promise<void | QueryDocumentSnapshot<UserData>> => {
   if (!userAuth) return;
   const userDocRef = doc(db, "users", userAuth.uid);
-  console.log("userDocRef:", userDocRef);
   const userSnapshot = await getDoc(userDocRef);
-  console.log("userSnapshot:", userSnapshot.data());
   if (!userSnapshot.exists()) {
     // can add other properties below
     const { displayName, email } = userAuth;
@@ -210,7 +184,7 @@ export const createUserDocumentFromAuth = async (
       console.log("error creating user", err);
     }
   }
-
+  // does this make sense here? what if no userSnapshot? error handling...
   return userSnapshot as QueryDocumentSnapshot<UserData>;
 };
 //// sign up
@@ -225,8 +199,7 @@ export const createAuthUserWithEmailAndPassword = async (
 };
 //// sign out
 export const signOutUser = async () => {
-  const res = await signOut(auth);
-  console.log(res);
+  await signOut(auth);
 };
 // not sure how this works anymore
 export const onAuthStateChangedListener = (callback: NextOrObserver<User>) =>

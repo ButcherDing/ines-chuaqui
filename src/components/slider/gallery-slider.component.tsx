@@ -48,8 +48,6 @@ export const GallerySlider = () => {
     dispatch(getFirestoreUrlsAsync());
   }, [seriesData]);
 
-  // console.log(seriesData[curSeriesIndex].pieces[curSlideIndex].fetchPath);
-
   return (
     <Fragment>
       <SeriesTitleContainer>

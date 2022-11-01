@@ -42,7 +42,6 @@ export const checkUserSession = createAsyncThunk(
   async (_, thunkAPI) => {
     try {
       const res = await getCurrentUser();
-      console.log(res);
     } catch (error) {
       console.log("error checking user", error);
     }
@@ -69,9 +68,9 @@ export const signInGooglePopupAsync = createAsyncThunk(
   "authentication/signInWithGoogle",
   async (thunkAPI) => {
     const res = await signInWithGooglePopup();
-    console.log(res);
+
     const userSnapshot = await createUserDocumentFromAuth(res.user);
-    console.log(userSnapshot);
+
     if (!userSnapshot) return;
     return userSnapshot.data();
   }
@@ -82,7 +81,7 @@ export const signUpWithEmailPassAsync = createAsyncThunk(
   async (signUpFormInput: SignUpFormInput, thunkAPI) => {
     const { email, password, displayName } = signUpFormInput;
     const res = await createAuthUserWithEmailAndPassword(email, password);
-    console.log(res);
+
     if (!res) return;
     const userSnapshot = await createUserDocumentFromAuth(res.user, {
       displayName,
@@ -114,7 +113,6 @@ export const userSlice = createSlice({
     });
     builder.addCase(signInGooglePopupAsync.fulfilled, (state, { payload }) => {
       state.isLoading = false;
-      console.log(payload);
       if (!payload) return;
       state.currentUser = payload;
     });
@@ -126,7 +124,6 @@ export const userSlice = createSlice({
     });
     builder.addCase(signInEmailPassAsync.fulfilled, (state, { payload }) => {
       state.isLoading = false;
-      console.log(payload);
       if (!payload) return;
       state.currentUser = payload;
     });

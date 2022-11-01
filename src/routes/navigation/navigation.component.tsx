@@ -21,8 +21,8 @@ export const Navigation = () => {
 
   const signOutHandler = () => {
     dispatch(signOut());
-    console.log("clicked sign out");
   };
+
   return (
     <Fragment>
       <NavigationContainer>

@@ -49,8 +49,6 @@ export const getSeriesDataAsync = createAsyncThunk(
   async (_, thunkAPI) => {
     const res = await getCollectionAndDocuments("series");
     const seriesData = [...(res as Series[])];
-    const num = seriesData.length;
-    console.log(seriesData);
     return seriesData;
   }
 );
@@ -62,8 +60,6 @@ export const getFirestoreUrlsAsync = createAsyncThunk(
     const urlFetcher = async () => {
       const state = thunkAPI.getState() as RootState;
       const copyArr = [...state.gallery.seriesData];
-      console.log(copyArr);
-
       const pathArr = state.gallery.seriesData.flatMap((series) =>
         series.pieces.map((piece) => piece.fetchPath)
       );

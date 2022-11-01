@@ -58,5 +58,3 @@ export const SERIES_DATA = [
     ],
   },
 ];
-
-console.log();
