@@ -1,30 +1,36 @@
 import styled from "styled-components";
-
+import {
+  primaryColor,
+  primaryShade,
+  primaryTint,
+  secondaryTint,
+} from "../../general.styles";
 import { SpinnerContainer } from "../spinner/spinner.styles";
 
 export const BaseButton = styled.button`
-  min-width: 165px;
-  width: auto;
-  height: 50px;
-  letter-spacing: 0.5px;
-  line-height: 50px;
-  padding: 0 35px 0 35px;
-  font-size: 15px;
-  background-color: black;
-  color: white;
-  text-transform: uppercase;
-  font-family: "Open Sans Condensed";
-  font-weight: bolder;
-  border: none;
-  cursor: pointer;
+  /* min-width: 2.5rem; */
   display: flex;
   justify-content: center;
   align-items: center;
+  color: ${primaryShade};
+  background-color: white;
+  min-width: 2.5rem;
+  height: 4rem;
+  line-height: 1.4;
+  letter-spacing: 0.05rem;
+  padding: 0 3.5rem 0 3.5rem;
+  font-size: 1.4rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 0.3rem 1.2rem;
+  outline: ${primaryShade} solid 0.15rem;
+  /* text-transform: uppercase; */
+  cursor: pointer;
 
   &:hover {
-    background-color: white;
-    color: black;
-    border: 1px solid black;
+    background-color: ${secondaryTint};
+    color: ${primaryShade};
+    outline: ${primaryShade} solid 0.15rem;
   }
 `;
 

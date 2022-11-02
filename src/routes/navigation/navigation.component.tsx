@@ -32,6 +32,7 @@ export const Navigation = () => {
           </LogoContainer>
           <NavLinksContainer>
             <NavLink to="/gallery">Gallery</NavLink>
+            <NavLink to="/shop">Shop</NavLink>
             {currentUser ? (
               <NavLink as="span" onClick={signOutHandler}>
                 Sign Out

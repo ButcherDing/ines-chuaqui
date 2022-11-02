@@ -7,14 +7,16 @@ import {
   getFirebaseStorageUrl,
 } from "../../utils/firebase/firebase.utils";
 
-import { updateSliderHelper } from "./gallery.reducerHelper";
+import { loadImages, updateSliderHelper } from "./gallery.reducerHelper";
 
 export interface GalleryState {
   seriesData: Series[];
-  storeUrls: string[];
+  // storeUrls: string[];
+  // preloadedImgs: any;
   curSlideIndex: number;
   curSlideUrl: string;
   curSeriesIndex: number;
+  showModal: boolean;
   isLoading: boolean;
   error?: null | Error;
 }
@@ -27,13 +29,17 @@ export type Series = {
 export type Piece = {
   description: string;
   fetchPath: string;
+  lgUrl: string;
+  smUrl: string;
   id: number;
   title: string;
 };
 
 const initialState: GalleryState = {
   seriesData: [],
-  storeUrls: [],
+  // storeUrls: [],
+  // preloadedImgs: [],
+  showModal: false,
   curSlideIndex: 0,
   curSeriesIndex: 0,
   curSlideUrl: "",
@@ -53,34 +59,41 @@ export const getSeriesDataAsync = createAsyncThunk(
   }
 );
 
-// a lot of this logic could be moved to firebase utils - this is a very specific type of data manipulation happening in here is the problem. Can we do something more generic like using a method to look for all the addresses in the data we pass to utils?
-export const getFirestoreUrlsAsync = createAsyncThunk(
-  "gallery/getFirestoreUrlsAsync",
-  async (_, thunkAPI) => {
-    const urlFetcher = async () => {
-      const state = thunkAPI.getState() as RootState;
-      const copyArr = [...state.gallery.seriesData];
-      const pathArr = state.gallery.seriesData.flatMap((series) =>
-        series.pieces.map((piece) => piece.fetchPath)
-      );
-
-      const urlPromiseArr = pathArr.map((path) => {
-        return getFirebaseStorageUrl(path);
-      });
-
-      return Promise.all(urlPromiseArr);
-    };
-    const urlArr = await urlFetcher();
-    return urlArr as string[];
+export const getImagesAsync = createAsyncThunk(
+  "gallery/getImagesAsync",
+  async (urls: string[], thunkAPI) => {
+    const preloadedImgs = await loadImages(urls);
+    console.log(preloadedImgs);
+    if (!preloadedImgs) return;
+    return preloadedImgs;
   }
 );
+// a lot of this logic could be moved to firebase utils - this is a very specific type of data manipulation happening in here is the problem. Can we do something more generic like using a method to look for all the addresses in the data we pass to utils?
+// export const getFirestoreUrlsAsync = createAsyncThunk(
+//   "gallery/getFirestoreUrlsAsync",
+//   async (_, thunkAPI) => {
+//     const urlFetcher = async () => {
+//       const state = thunkAPI.getState() as RootState;
+//       // const copyArr = [...state.gallery.seriesData];
+//       const pathArr = state.gallery.seriesData.flatMap((series) =>
+//         series.pieces.map((piece) => piece.fetchPath)
+//       );
+
+//       const urlPromiseArr = pathArr.map((path) => {
+//         return getFirebaseStorageUrl(path);
+//       });
+
+//       return Promise.all(urlPromiseArr);
+//     };
+//     const urlArr = await urlFetcher();
+//     return urlArr as string[];
+//   }
+// );
 
 export const gallerySlice = createSlice({
   name: "gallery",
   initialState,
   reducers: {
-    // TODO: Clean this shit up. Don't need all these reducers, they basically do the same thing, set it to some number. You can just use some helper functions in the component to calc your slide. Could also try a deep clone to streamline things.
-
     setCurSlideIndex: (state, { payload }) => {
       const updates = updateSliderHelper(state, payload, state.curSeriesIndex);
       if (updates === undefined) return;
@@ -101,8 +114,12 @@ export const gallerySlice = createSlice({
       state.curSlideIndex = 0;
       state.curSlideUrl = updates.newSlideUrl;
     },
+
+    setShowModal: (state, action: PayloadAction<boolean>) => {
+      state.showModal = action.payload;
+    },
   },
-  // TODO factor out addcase into actions
+  // TODO - can we not collapse all these into a single "loading" thunk or the like?
   extraReducers: (builder) => {
     //////////// get series array - only supposed to be on initial render
     builder.addCase(getSeriesDataAsync.pending, (state, action) => {
@@ -117,22 +134,35 @@ export const gallerySlice = createSlice({
       state.error = payload as Error;
     });
     //////////// Get URLs for pieces
-    builder.addCase(getFirestoreUrlsAsync.pending, (state, action) => {
-      state.isLoading = true;
-    });
-    builder.addCase(getFirestoreUrlsAsync.fulfilled, (state, { payload }) => {
-      state.isLoading = false;
-      // if (!payload) return;
-      state.storeUrls = payload;
-      state.curSlideUrl = payload[state.curSlideIndex];
-    });
-    builder.addCase(getFirestoreUrlsAsync.rejected, (state, { payload }) => {
-      state.isLoading = false;
-    });
+    // builder.addCase(getFirestoreUrlsAsync.pending, (state, action) => {
+    //   state.isLoading = true;
+    // });
+    // builder.addCase(getFirestoreUrlsAsync.fulfilled, (state, { payload }) => {
+    //   // if (!payload) return;
+    //   state.storeUrls = payload;
+    //   state.curSlideUrl = payload[state.curSlideIndex];
+    //   state.isLoading = false;
+    // });
+    // builder.addCase(getFirestoreUrlsAsync.rejected, (state, { payload }) => {
+    //   state.isLoading = false;
+    // });
+    //////////// Preload Piece images
+    // builder.addCase(getImagesAsync.pending, (state, action) => {
+    //   state.isLoading = true;
+    // });
+    // builder.addCase(getImagesAsync.fulfilled, (state, { payload }) => {
+    //   if (!payload) return;
+    //   state.preloadedImgs = payload;
+    //   state.isLoading = false;
+    // });
+    // builder.addCase(getImagesAsync.rejected, (state) => {
+    //   state.isLoading = false;
+    // });
   },
 });
 
-export const { setCurSlideIndex, setCurSeriesIndex } = gallerySlice.actions;
+export const { setCurSlideIndex, setCurSeriesIndex, setShowModal } =
+  gallerySlice.actions;
 // export const selectCount = (state: RootState) => state.gallery.curSlideIndex
 
 export default gallerySlice.reducer;

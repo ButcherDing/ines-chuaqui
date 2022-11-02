@@ -1,8 +1,8 @@
 import React, { Fragment } from "react";
 import { useEffect } from "react";
 import {
-  getSeriesDataAsync,
-  getFirestoreUrlsAsync,
+  // getSeriesDataAsync,
+  // getFirestoreUrlsAsync,
   setCurSeriesIndex,
   setCurSlideIndex,
 } from "../../store/gallery/gallery.slice";
@@ -26,6 +26,7 @@ export const GallerySlider = () => {
   const curSlideUrl = useAppSelector((state) => state.gallery.curSlideUrl);
   const curSlideIndex = useAppSelector((state) => state.gallery.curSlideIndex);
   const seriesData = useAppSelector((state) => state.gallery.seriesData);
+  
 
   //// Handlers
   const goPrevSlide = () => {
@@ -40,13 +41,7 @@ export const GallerySlider = () => {
     dispatch(setCurSeriesIndex(seriesTitle));
   };
 
-  useEffect(() => {
-    dispatch(getSeriesDataAsync());
-  }, []);
 
-  useEffect(() => {
-    dispatch(getFirestoreUrlsAsync());
-  }, [seriesData]);
 
   return (
     <Fragment>

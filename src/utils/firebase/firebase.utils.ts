@@ -23,15 +23,8 @@ import {
   QueryDocumentSnapshot,
 } from "firebase/firestore";
 
-import type { Series } from "../../store/gallery/gallery.slice";
-
-import type { DocumentData, DocumentReference } from "firebase/firestore";
-
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
-
-//// VERY NAUGHTY //////////
-import { Piece } from "../../store/gallery/gallery.slice";
-import { SERIES_DATA } from "../../assets/series/collections";
+import { SERIES_DATA } from "../../assets/series-data/series-data";
 
 //////////////////////////
 

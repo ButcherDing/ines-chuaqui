@@ -18,16 +18,31 @@ export const updateSliderHelper = (
   )
     return;
   // otherwise update the state with the new series and slide indices
-  const newModFetchPath: string = seriesData[newSeriesIndex].pieces[
+  const newFetchPath: string = seriesData[newSeriesIndex].pieces[
     newSlideIndex
   ].fetchPath
     .slice(1)
     .replace("/", "%2F");
 
   const newSlideUrl = (state.curSlideUrl = storeUrls.filter((url: string) =>
-    url.includes(newModFetchPath)
+    url.includes(newFetchPath)
   )[0]);
 
   const updates = { newSlideIndex, newSlideUrl };
   return updates;
+};
+
+export const loadImages = (urls: string[]) => {
+  const loadedImages = [];
+  const imgPromises = urls.map((url) => {
+    return new Promise((resolve, reject) => {
+      const img = new Image();
+      img.onload = resolve;
+      img.onerror = reject;
+      img.src = url;
+      loadedImages.push(img);
+    });
+  });
+  console.log(imgPromises);
+  return Promise.all(imgPromises);
 };

@@ -42,6 +42,11 @@ export const checkUserSession = createAsyncThunk(
   async (_, thunkAPI) => {
     try {
       const res = await getCurrentUser();
+      console.log(res);
+      if (!res || res === null) return;
+      const userData = await createUserDocumentFromAuth(res);
+      if (!userData) return;
+      return userData.data();
     } catch (error) {
       console.log("error checking user", error);
     }
@@ -107,7 +112,9 @@ export const userSlice = createSlice({
       state.currentUser = action.payload;
     },
   },
+  /// TODO: this definitely smells like the wrong way to do this. Even though the doc seems to say like this. Repetitive.
   extraReducers(builder) {
+    ////////////////// Sign in with Google
     builder.addCase(signInGooglePopupAsync.pending, (state, action) => {
       state.isLoading = true;
     });
@@ -119,6 +126,8 @@ export const userSlice = createSlice({
     builder.addCase(signInGooglePopupAsync.rejected, (state, { payload }) => {
       state.isLoading = false;
     });
+
+    ///////////////// Sign in with Email
     builder.addCase(signInEmailPassAsync.pending, (state, action) => {
       state.isLoading = true;
     });
@@ -130,6 +139,21 @@ export const userSlice = createSlice({
     builder.addCase(signInEmailPassAsync.rejected, (state, { payload }) => {
       state.isLoading = false;
     });
+
+    /////////////// Check User Session
+    builder.addCase(checkUserSession.pending, (state) => {
+      state.isLoading = true;
+    });
+
+    builder.addCase(checkUserSession.fulfilled, (state, { payload }) => {
+      if (!payload) return;
+      state.currentUser = payload;
+      state.isLoading = false;
+    });
+    builder.addCase(checkUserSession.rejected, (state) => {
+      state.isLoading = false;
+    });
+
     //////////////// Sign Out
     builder.addCase(signOut.pending, (state) => {
       state.isLoading = true;
@@ -140,17 +164,6 @@ export const userSlice = createSlice({
       state.currentUser = null;
     });
     builder.addCase(signOut.rejected, (state) => {
-      state.isLoading = false;
-    });
-    builder.addCase(checkUserSession.pending, (state) => {
-      state.isLoading = true;
-    });
-
-    builder.addCase(checkUserSession.fulfilled, (state, { payload }) => {
-      // state.currentUser = payload;
-      state.isLoading = false;
-    });
-    builder.addCase(checkUserSession.rejected, (state) => {
       state.isLoading = false;
     });
   },

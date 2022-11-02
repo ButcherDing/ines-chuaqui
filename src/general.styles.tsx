@@ -28,12 +28,13 @@ Large: 1.8
 --- 02 COLORS
 
 - Primary: #e74c3c
-- Tints:
+- Tints: #ec7063, #f3a69e, #fadbd8
+- Shades: #451712, #5c1e18, #8b2e24;
 
 - Secondary: #3cd7e7
+- Tints: #c5f3f8, #d8f7fa, #ecfbfd
 
 
-- Shades: #451712, #5c1e18, #8b2e24;
 https://maketintsandshades.com/
 
 - Accents:
@@ -67,10 +68,14 @@ import styled from "styled-components";
 
 export const primaryColor = "#e74c3c";
 export const primaryShade = "#8b2e24";
+export const primaryTint = "#fadbd8";
+
+export const secondaryTint = "#ecfbfd";
 
 export const GlobalStyle = createGlobalStyle`
 * {
   box-sizing: border-box;
+  font-family: "Roboto Flex", sans-serif;
 }
 
 html {
@@ -81,7 +86,6 @@ html {
 body {
   margin: 0;
   padding: 2rem;
-  font-family: "Roboto Flex", sans-serif;
   line-height: 1;
   font-weight: 300;
   color: ${primaryShade};
