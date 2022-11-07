@@ -7,18 +7,18 @@ import {
   getFirebaseStorageUrl,
 } from "../../utils/firebase/firebase.utils";
 
-import { loadImages, updateSliderHelper } from "./gallery.reducerHelper";
+// import { updateSliderHelper } from "./gallery.reducerHelper";
 
 export interface GalleryState {
   seriesData: Series[];
-  // storeUrls: string[];
-  // preloadedImgs: any;
-  curSlideIndex: number;
-  curSlideUrl: string;
   curSeriesIndex: number;
   showModal: boolean;
   isLoading: boolean;
   error?: null | Error;
+  // storeUrls: string[];
+  // preloadedImgs: any;
+  // curSlideIndex: number;
+  // curSlideUrl: string;
 }
 
 export type Series = {
@@ -28,27 +28,26 @@ export type Series = {
 
 export type Piece = {
   description: string;
-  fetchPath: string;
-  lgUrl: string;
-  smUrl: string;
+  largeImageUrl: string;
+  smallImageUrl: string;
   id: number;
   title: string;
+  printPrice?: number;
 };
 
 const initialState: GalleryState = {
   seriesData: [],
-  // storeUrls: [],
-  // preloadedImgs: [],
-  showModal: false,
-  curSlideIndex: 0,
   curSeriesIndex: 0,
-  curSlideUrl: "",
+  showModal: false,
   isLoading: false,
   error: null,
+  // storeUrls: [],
+  // preloadedImgs: [],
+  // curSlideIndex: 0,
+  // curSlideUrl: "",
 };
-///////////// REDUCER HELPER FUNCTIONS
 
-//////////////
+////////// THUNKS
 
 export const getSeriesDataAsync = createAsyncThunk(
   "gallery/getSeriesDataAsync",
@@ -59,15 +58,15 @@ export const getSeriesDataAsync = createAsyncThunk(
   }
 );
 
-export const getImagesAsync = createAsyncThunk(
-  "gallery/getImagesAsync",
-  async (urls: string[], thunkAPI) => {
-    const preloadedImgs = await loadImages(urls);
-    console.log(preloadedImgs);
-    if (!preloadedImgs) return;
-    return preloadedImgs;
-  }
-);
+// export const getImagesAsync = createAsyncThunk(
+//   "gallery/getImagesAsync",
+//   async (urls: string[], thunkAPI) => {
+//     const preloadedImgs = await loadImages(urls);
+//     console.log(preloadedImgs);
+//     if (!preloadedImgs) return;
+//     return preloadedImgs;
+//   }
+// );
 // a lot of this logic could be moved to firebase utils - this is a very specific type of data manipulation happening in here is the problem. Can we do something more generic like using a method to look for all the addresses in the data we pass to utils?
 // export const getFirestoreUrlsAsync = createAsyncThunk(
 //   "gallery/getFirestoreUrlsAsync",
@@ -90,29 +89,31 @@ export const getImagesAsync = createAsyncThunk(
 //   }
 // );
 
+/////////////// SLICE
+
 export const gallerySlice = createSlice({
   name: "gallery",
   initialState,
   reducers: {
-    setCurSlideIndex: (state, { payload }) => {
-      const updates = updateSliderHelper(state, payload, state.curSeriesIndex);
-      if (updates === undefined) return;
+    // setCurSlideIndex: (state, { payload }) => {
+    //   const updates = updateSliderHelper(state, payload, state.curSeriesIndex);
+    //   if (updates === undefined) return;
 
-      state.curSlideIndex = updates.newSlideIndex;
-      state.curSlideUrl = updates.newSlideUrl;
-    },
+    //   state.curSlideIndex = updates.newSlideIndex;
+    //   state.curSlideUrl = updates.newSlideUrl;
+    // },
 
     setCurSeriesIndex: (state, action: PayloadAction<string>) => {
       const newSeriesIndex = state.seriesData
         .map((series) => series.title)
         .indexOf(action.payload);
 
-      const updates = updateSliderHelper(state, 0, newSeriesIndex);
-      if (updates === undefined) return;
+      // const updates = updateSliderHelper(state, 0, newSeriesIndex);
+      // if (updates === undefined) return;
 
       state.curSeriesIndex = newSeriesIndex;
-      state.curSlideIndex = 0;
-      state.curSlideUrl = updates.newSlideUrl;
+      // state.curSlideIndex = 0;
+      // state.curSlideUrl = updates.newSlideUrl;
     },
 
     setShowModal: (state, action: PayloadAction<boolean>) => {
@@ -161,7 +162,7 @@ export const gallerySlice = createSlice({
   },
 });
 
-export const { setCurSlideIndex, setCurSeriesIndex, setShowModal } =
+export const { /*setCurSlideIndex,*/ setCurSeriesIndex, setShowModal } =
   gallerySlice.actions;
 // export const selectCount = (state: RootState) => state.gallery.curSlideIndex
 

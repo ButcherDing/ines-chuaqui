@@ -204,7 +204,7 @@ export const getCurrentUser = (): Promise<User | null> => {
       auth,
       (userAuth) => {
         unsubscribe();
-        console.log(userAuth);
+        // console.log(userAuth);
         resolve(userAuth);
       },
       reject

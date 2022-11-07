@@ -12,6 +12,7 @@ import {
 export interface ShopSeriesProps {
   readonly series: Series;
   className?: string;
+  key: string;
 }
 
 export const ShopSeries: FC<ShopSeriesProps> = ({ series }) => {
@@ -20,8 +21,8 @@ export const ShopSeries: FC<ShopSeriesProps> = ({ series }) => {
       <h3>{series.title}</h3>
       <ShopRow>
         {series.pieces.map((piece) => (
-          <ShopRowItemContainer>
-            <ShopRowItem src={piece.smUrl} alt={piece.title} key={piece.id} />
+          <ShopRowItemContainer key={"shop_row_key" + piece.title}>
+            <ShopRowItem src={piece.smallImageUrl} alt={piece.title} />
             <Button>Order Print</Button>
           </ShopRowItemContainer>
         ))}

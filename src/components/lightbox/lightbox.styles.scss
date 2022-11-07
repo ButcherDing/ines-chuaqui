@@ -1,0 +1,31 @@
+// this would be a lot easier to do dynamically with styled components
+// must be a better way in sass tho
+
+.lightbox {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  align-items: center;
+  grid-gap: 1.5rem;
+}
+
+.lightbox .lightbox-image {
+  width: 40rem;
+  max-height: 95%;
+  max-width: 95%;
+}
+
+.grid-2-columns {
+  grid-template-columns: repeat(2, 1fr);
+}
+.grid-3-columns {
+  grid-template-columns: repeat(3, 1fr);
+}
+.grid-4-columns {
+  grid-template-columns: repeat(4, 1fr);
+}
+.grid-5-columns {
+  grid-template-columns: repeat(5, 1fr);
+}
+.grid-6-columns {
+  grid-template-columns: repeat(6, 1fr);
+}

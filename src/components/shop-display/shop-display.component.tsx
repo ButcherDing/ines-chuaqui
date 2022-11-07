@@ -11,7 +11,7 @@ export const ShopDisplay = () => {
   return (
     <ShopDisplayContainer>
       {seriesArr.map((series) => (
-        <ShopSeries series={series} key={series.title} />
+        <ShopSeries series={series} key={"shop_series" + series.title} />
       ))}
     </ShopDisplayContainer>
   );

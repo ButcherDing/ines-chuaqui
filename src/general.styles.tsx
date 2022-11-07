@@ -33,6 +33,7 @@ Large: 1.8
 
 - Secondary: #3cd7e7
 - Tints: #c5f3f8, #d8f7fa, #ecfbfd
+- Shades: #2a97a2
 
 
 https://maketintsandshades.com/
@@ -70,6 +71,8 @@ export const primaryColor = "#e74c3c";
 export const primaryShade = "#8b2e24";
 export const primaryTint = "#fadbd8";
 
+export const secondaryColor = "#3cd7e7";
+export const secondaryShade = "#2a97a2";
 export const secondaryTint = "#ecfbfd";
 
 export const GlobalStyle = createGlobalStyle`

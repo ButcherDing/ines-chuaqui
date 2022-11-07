@@ -4,6 +4,8 @@ import {
   primaryShade,
   primaryTint,
   secondaryTint,
+  secondaryColor,
+  secondaryShade,
 } from "../../general.styles";
 import { SpinnerContainer } from "../spinner/spinner.styles";
 
@@ -26,6 +28,7 @@ export const BaseButton = styled.button`
   outline: ${primaryShade} solid 0.15rem;
   /* text-transform: uppercase; */
   cursor: pointer;
+  transition: all 0.4s;
 
   &:hover {
     background-color: ${secondaryTint};
@@ -35,11 +38,13 @@ export const BaseButton = styled.button`
 `;
 
 export const GoogleSignInButton = styled(BaseButton)`
-  background-color: #4285f4;
-  color: white;
+  background-color: #3cd7e7;
+  color: ${primaryShade};
+  transition: all 0.3s;
 
   &:hover {
-    background-color: #357ae8;
+    background-color: #2a97a2;
+    color: white;
     border: none;
   }
 `;
@@ -48,6 +53,7 @@ export const InvertedButton = styled(BaseButton)`
   background-color: white;
   color: black;
   border: 1px solid black;
+  transition: all 0.4s;
 
   &:hover {
     background-color: black;

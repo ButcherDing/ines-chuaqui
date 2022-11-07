@@ -1,10 +1,16 @@
 import { CartIconContainer, ShoppingIcon, ItemCount } from "./cart-icon.styles";
+import { selectCartCount, setIsCartOpen } from "../../store/cart/cart.slice";
+import { useAppDispatch, useAppSelector } from "../../store/hooks/hooks";
 
 const CartIcon = () => {
-  const cartCount = 5;
+  const dispatch = useAppDispatch();
+  const setIsCartOpenHandler = () => dispatch(setIsCartOpen(!isCartOpen));
+  const isCartOpen = useAppSelector((state) => state.cart.isCartOpen);
+  const cartItems = useAppSelector((state) => state.cart.cartItems);
+  const cartCount = useAppSelector(selectCartCount);
 
   const cartToggler = () => {
-    console.log("toggles the cart?");
+    dispatch(setIsCartOpen(!isCartOpen));
   };
 
   return (
@@ -16,3 +22,5 @@ const CartIcon = () => {
 };
 
 export default CartIcon;
+
+// onclick from

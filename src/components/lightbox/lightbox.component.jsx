@@ -1,32 +1,38 @@
-import { useEffect } from "react";
+import { useEffect, Fragment } from "react";
 
-import "lightbox.js-react/dist/index.css";
-import "./lightbox.styles.jsx";
+import "../../index.css";
+import "./lightbox.styles.scss";
 import { SlideshowLightbox, initLightboxJS } from "lightbox.js-react";
-import { CustomLightBox, CustomImage } from "./lightbox.styles.jsx";
 
-export const Lightbox = () => {
-  // useEffect(() => {
-  //   initLightboxJS("AEBD-F4A5-C371-3200", "Individual");
-  // });
+import { Series } from "../../store/gallery/gallery.slice";
+import { useAppSelector } from "../../store/hooks/hooks";
+
+// where should we use our selectors? best practices
+
+export const Lightbox = ({ series }) => {
+  const numStyleCols = series.pieces.length;
 
   return (
-    <CustomLightBox className="container grid grid-cols-3 gap-2 mx-auto">
-      <CustomImage
-        className="w-full rounded"
-        src="https://i.ibb.co/CKmZh2Z/skull-1.jpg"
-        alt="skull painting with flowers"
-      />
-      <CustomImage
-        className="w-full rounded"
-        src="https://i.ibb.co/pJ435cL/skull-2.jpg"
-        alt="skull painting with flowers"
-      />
-      <CustomImage
-        className="w-full rounded"
-        src="https://i.ibb.co/XbFsSHY/skull-3.jpg"
-        alt="skull painting with flowers"
-      />
-    </CustomLightBox>
+    <SlideshowLightbox
+      data-series={series.pieces.length}
+      imgAnimation="fade"
+      imgfullScreen={true}
+      className={`lightbox grid-${numStyleCols}-columns`}
+    >
+      {series.pieces.map((piece) => (
+        <img
+          className=".lightbox-image"
+          src={piece.smallImageUrl}
+          key={piece.title}
+          alt={`a painting called` + piece.title}
+        />
+      ))}
+    </SlideshowLightbox>
   );
 };
+
+///////////////////
+
+// useEffect(() => {
+//   initLightboxJS("AEBD-F4A5-C371-3200", "Individual");
+// });
