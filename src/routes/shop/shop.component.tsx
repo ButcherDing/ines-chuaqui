@@ -19,7 +19,6 @@ export const Shop = () => {
     <Fragment>
       <h1>Print Shop</h1>
       <Suspense fallback={<Spinner />}>
-        {/* <Image url={storeUrls[0]}></Image> */}
         <ShopDisplay />
       </Suspense>
     </Fragment>

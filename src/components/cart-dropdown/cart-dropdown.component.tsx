@@ -1,5 +1,5 @@
 import "./cart-dropdown.styles";
-import Button from "../../components/button/button.component";
+import Button from "../button/button.component";
 
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";

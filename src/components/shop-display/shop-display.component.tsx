@@ -1,12 +1,11 @@
 import { useAppSelector } from "../../store/hooks/hooks";
 import { ShopDisplayContainer } from "./shop-display.styles";
-import ShopSeries from "../series-row/shop-series.component";
+import ShopSeries from "../series-row/series-row.component";
 
 export const ShopDisplay = () => {
   const seriesArr = useAppSelector((state) => state.gallery.seriesData).map(
     (series) => series
   );
-  console.log(seriesArr);
 
   return (
     <ShopDisplayContainer>

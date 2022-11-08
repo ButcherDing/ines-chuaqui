@@ -18,7 +18,6 @@ import { signOut } from "../../store/user/user-slice";
 export const Navigation = () => {
   const dispatch = useAppDispatch();
   const currentUser = useAppSelector((state) => state.user.currentUser);
-  const isCartOpen = useAppSelector((state) => state.cart.isCartOpen);
 
   const signOutHandler = () => {
     dispatch(signOut());

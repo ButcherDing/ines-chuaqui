@@ -1,6 +1,9 @@
+import { Fragment } from "react";
+
 import { CartIconContainer, ShoppingIcon, ItemCount } from "./cart-icon.styles";
 import { selectCartCount, setIsCartOpen } from "../../store/cart/cart.slice";
 import { useAppDispatch, useAppSelector } from "../../store/hooks/hooks";
+import CartDropdown from "../cart-dropdown/cart-dropdown.component";
 
 const CartIcon = () => {
   const dispatch = useAppDispatch();
@@ -14,10 +17,13 @@ const CartIcon = () => {
   };
 
   return (
-    <CartIconContainer onClick={cartToggler}>
-      <ShoppingIcon className="shopping-icon" />
-      <ItemCount className="item-count">{cartCount}</ItemCount>
-    </CartIconContainer>
+    <Fragment>
+      <CartIconContainer onClick={cartToggler}>
+        <ShoppingIcon className="shopping-icon" />
+        <ItemCount className="item-count">{cartCount}</ItemCount>
+      </CartIconContainer>
+      {isCartOpen && <CartDropdown />}
+    </Fragment>
   );
 };
 

@@ -1,8 +1,13 @@
 import { FC } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { plusQuantity, minusQuantity } from "../../store/cart/cart.action";
-import { selectCartItems } from "../../store/cart/cart.selector";
-import { CartItem } from "../../store/cart/cart.types";
+
+import {
+  minusCartItem,
+  plusCartItem,
+  selectCartItems,
+} from "../../store/cart/cart.slice";
+import { CartItem } from "../../store/cart/cart.slice";
+import { setCartItems } from "../../store/cart/cart.slice";
 import { QuantityContainer, Arrow, Value } from "./quantity-button.styles";
 
 type QuantityButtonProps = {
@@ -10,14 +15,13 @@ type QuantityButtonProps = {
 };
 
 export const QuantityButton: FC<QuantityButtonProps> = ({ cartItem }) => {
-  const cartItems = useSelector(selectCartItems);
   const dispatch = useDispatch();
 
   const plusHandler = () => {
-    dispatch(plusQuantity(cartItems, cartItem));
+    dispatch(plusCartItem(cartItem));
   };
   const minusHandler = () => {
-    dispatch(minusQuantity(cartItems, cartItem));
+    dispatch(minusCartItem(cartItem));
   };
 
   return (
