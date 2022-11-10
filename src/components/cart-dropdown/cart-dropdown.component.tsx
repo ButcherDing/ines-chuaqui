@@ -25,7 +25,7 @@ const CartDropdown = () => {
           cartItems.map((cartItem) => (
             <CartItem
               cartItem={cartItem}
-              key={cartItem.id + cartItem.buyType.size}
+              key={cartItem.title + " cart " + cartItem.buyType.size}
             ></CartItem>
           ))
         ) : (

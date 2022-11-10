@@ -22,24 +22,15 @@ const Checkout = () => {
   return (
     <CheckoutContainer>
       <CheckoutHeaders>
-        <HeaderBlock>
-          <span>Product</span>
-        </HeaderBlock>
-        <HeaderBlock>
-          <span>Description</span>
-        </HeaderBlock>
-        <HeaderBlock>
-          <span>Quantity</span>
-        </HeaderBlock>
-        <HeaderBlock>
-          <span>Price</span>
-        </HeaderBlock>
-        <HeaderBlock>
-          <span>Remove</span>
-        </HeaderBlock>
+        <HeaderBlock>Product</HeaderBlock>
+        <HeaderBlock>Title</HeaderBlock>
+        <HeaderBlock>Size</HeaderBlock>
+        <HeaderBlock>Quantity</HeaderBlock>
+        <HeaderBlock>Price</HeaderBlock>
+        <HeaderBlock>Remove</HeaderBlock>
       </CheckoutHeaders>
       {cartItems.map((cartItem) => (
-        <CheckoutItem cartItem={cartItem} key={cartItem.id} />
+        <CheckoutItem cartItem={cartItem} key={cartItem.cartId} />
       ))}
       <Total>Total: $ {cartTotal}</Total>
 

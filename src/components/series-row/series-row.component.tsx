@@ -1,10 +1,8 @@
-import { FC, Fragment } from "react";
-import { Piece, Series } from "../../store/gallery/gallery.slice";
+import { FC } from "react";
+import { Series } from "../../store/gallery/gallery.slice";
 import { useAppDispatch } from "../../store/hooks/hooks";
 
-import { setCartItems } from "../../store/cart/cart.slice";
 import Modal from "../../components/modal/modal.component";
-import Button from "../button/button.component";
 
 import {
   ShopRow,
@@ -22,11 +20,6 @@ export interface SeriesRowProps {
 export const SeriesRow: FC<SeriesRowProps> = ({ series }) => {
   const dispatch = useAppDispatch();
 
-  // const addPrintHandler = (piece: Piece) => {
-  //   const cartItemToAdd = { ...piece, quantity: 1 };
-  //   return dispatch(setCartItems(cartItemToAdd));
-  // };
-
   return (
     <>
       <h3>{series.title}</h3>
@@ -35,9 +28,6 @@ export const SeriesRow: FC<SeriesRowProps> = ({ series }) => {
           <ShopRowItemContainer key={"shop_row_key" + piece.title}>
             <ShopRowItem src={piece.smallImageUrl} alt={piece.title} />
             <ButtonContainer>
-              {/* <Button onClick={() => addPrintHandler(piece)}>
-                Order Print
-              </Button> */}
               <Modal piece={piece} />
             </ButtonContainer>
           </ShopRowItemContainer>
@@ -48,3 +38,13 @@ export const SeriesRow: FC<SeriesRowProps> = ({ series }) => {
 };
 
 export default SeriesRow;
+
+///// OLD ADD TO CART BUTTON
+// const addPrintHandler = (piece: Piece) => {
+//   const cartItemToAdd = { ...piece, quantity: 1 };
+//   return dispatch(setCartItems(cartItemToAdd));
+// };
+
+/* <Button onClick={() => addPrintHandler(piece)}>
+                Order Print
+              </Button> */

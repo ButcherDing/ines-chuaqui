@@ -4,8 +4,17 @@ import { Link } from "react-router-dom";
 import { primaryShade } from "../../general.styles";
 
 export const NavigationContainer = styled.div`
-  /* display: flex; */
+  display: flex;
+  flex-direction: column;
   /* justify-content: center; */
+`;
+
+export const NameBox = styled.span`
+  text-align: center;
+  letter-spacing: 1.2rem;
+  font-weight: 200;
+
+  font-size: 2.4rem;
 `;
 
 export const NavBar = styled.div`
@@ -15,7 +24,7 @@ export const NavBar = styled.div`
   justify-content: space-between;
   align-items: center;
   margin-bottom: 2.5rem;
-  font-size: 2rem;
+  font-size: 1.4rem;
 `;
 
 export const LogoContainer = styled(Link)`
@@ -32,7 +41,7 @@ export const NavLinksContainer = styled.div`
   height: 100%;
   display: flex;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: center;
 `;
 
 export const NavLink = styled(Link)`

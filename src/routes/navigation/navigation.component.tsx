@@ -7,6 +7,7 @@ import { ReactComponent as Logo } from "../../assets/logos/skull-outline.svg";
 
 import {
   NavigationContainer,
+  NameBox,
   NavBar,
   NavLinksContainer,
   NavLink,
@@ -26,6 +27,7 @@ export const Navigation = () => {
   return (
     <Fragment>
       <NavigationContainer>
+        <NameBox>Ines Chuaqui</NameBox>
         <NavBar>
           <LogoContainer to="/">
             <Logo className="logo">Logo</Logo>
@@ -33,6 +35,8 @@ export const Navigation = () => {
           <NavLinksContainer>
             <NavLink to="/gallery">Gallery</NavLink>
             <NavLink to="/shop">Shop</NavLink>
+            <NavLink to="/about">About</NavLink>
+            <NavLink to="/contact">Contact</NavLink>
             {currentUser ? (
               <NavLink as="span" onClick={signOutHandler}>
                 Sign Out

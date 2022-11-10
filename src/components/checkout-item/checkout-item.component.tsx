@@ -19,7 +19,7 @@ type CheckoutItemProps = {
 };
 
 const CheckoutItem: FC<CheckoutItemProps> = ({ cartItem }) => {
-  const { smallImageUrl, title, printPrices } = cartItem;
+  const { smallImageUrl, title, buyType } = cartItem;
   const dispatch = useDispatch();
 
   const removeItemHandler = () => {
@@ -33,10 +33,12 @@ const CheckoutItem: FC<CheckoutItemProps> = ({ cartItem }) => {
       </CheckoutImageContainer>
 
       <CheckoutItemDetail>{title}</CheckoutItemDetail>
-      {/* // I want to style this directly instead of having to stick it in a div like a divhead. */}
+      <CheckoutItemDetail>{buyType.size}</CheckoutItemDetail>
       <Quantity>
         <QuantityButton cartItem={cartItem} />
       </Quantity>
+      <CheckoutItemDetail>{buyType.price}</CheckoutItemDetail>
+      {/* // I want to style this directly instead of having to stick it in a div like a divhead. */}
 
       <RemoveButton onClick={removeItemHandler}>&#10005;</RemoveButton>
     </CheckoutItemContainer>

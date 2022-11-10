@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { primaryShade } from "../../general.styles";
 
 export const CheckoutContainer = styled.div`
   width: 55%;
@@ -6,24 +7,24 @@ export const CheckoutContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 50px auto 0;
+  margin: 5rem auto 0;
 `;
 
 export const CheckoutHeaders = styled.div`
   width: 100%;
-  padding: 10px 0;
-  display: flex;
-  justify-content: space-between;
-  border-bottom: 1px solid darkgrey;
+  padding: 1.5rem 0;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  justify-items: center;
+  border-bottom: 1px solid ${primaryShade};
 `;
 
-export const HeaderBlock = styled.div`
-  text-transform: capitalize;
-  width: 23%;
+export const HeaderBlock = styled.span`
+  /* width: 16.66%; */
 
-  &:last-child {
-    width: 8%;
-  }
+  /* &:last-child {
+    padding-left: 5rem;
+  } */
 `;
 
 export const Total = styled.span`

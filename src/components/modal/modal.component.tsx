@@ -1,7 +1,9 @@
 import { ChangeEvent, FC, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../store/hooks/hooks";
 
-import { Piece, setShowModal } from "../../store/gallery/gallery.slice";
+import { Piece } from "../../store/gallery/gallery.slice";
+
+import { Print } from "../../store/cart/cart.slice";
 
 import { useKeyPress } from "../../store/hooks/useKeyPress.hook";
 
@@ -15,33 +17,33 @@ import {
 } from "./modal.styles";
 import Button from "../button/button.component";
 
-import { CartItem, setCartItems } from "../../store/cart/cart.slice";
-
-import { Print } from "../../store/cart/cart.slice";
+import { setCartItems } from "../../store/cart/cart.slice";
 
 export type ModalProps = {
   piece: Piece;
 };
-// not ideal having all this below - the actual modal should be factored out? or at least styles built on a single modal component type.
+// Problems -
 export const Modal: FC<ModalProps> = ({ piece }) => {
-  const { title, description, printPrices } = piece;
-  const [printType, setPrintType] = useState(piece.printPrices[0]);
+  // const handleKeyPress = (e: Event) => {};
+  const [printType, setPrintType] = useState({ size: "", price: -1 });
+  const [showModal, setShowModal] = useState(false);
 
   const dispatch = useAppDispatch();
-  const showModal = useAppSelector((state) => state.gallery.showModal);
-
-  const handleKeyPress = (e: Event) => {};
 
   const showModalHandler = () => {
-    dispatch(setShowModal(showModal ? false : true));
+    setShowModal(showModal ? false : true);
   };
   const addItemHandler = (cartItemToAdd: Piece) => {
-    if (printType === null) return;
-    const newCartItem = { ...cartItemToAdd, buyType: printType, quantity: 1 };
+    if (printType.size === "" || printType.price === -1) return;
+    const newCartItem = {
+      ...cartItemToAdd,
+      buyType: printType,
+      quantity: 1,
+      cartId: `${cartItemToAdd.id + printType.size}`,
+    };
 
-    console.log("newCartItem" + newCartItem);
     dispatch(setCartItems(newCartItem));
-    showModalHandler();
+    // showModalHandler();
   };
   // TODO solve no objects as values problem
   const handleChange = (event: ChangeEvent<HTMLSelectElement>) => {
@@ -54,7 +56,7 @@ export const Modal: FC<ModalProps> = ({ piece }) => {
   if (useKeyPress("Escape") && showModal) showModalHandler();
   return (
     <>
-      <Button onClick={showModalHandler}>Details</Button>
+      <Button onClick={showModalHandler}>{piece.title}</Button>
       {showModal && (
         <ModalContainer
           onClick={showModalHandler}
@@ -62,16 +64,16 @@ export const Modal: FC<ModalProps> = ({ piece }) => {
         >
           <ModalContent onClick={(e) => e.stopPropagation()}>
             <ModalHeader>
-              <h3>{title}</h3>
+              <h3>{piece.title}</h3>
             </ModalHeader>
             <ModalBody>
-              <p>{description}</p>
+              <p>{piece.description}</p>
             </ModalBody>
             <ModalFooter>
               <p>Select Print Size</p>
               <form>
                 <select
-                  defaultValue={"0"}
+                  defaultValue={"default"}
                   onChange={handleChange}
                   name="dropdown"
                 >
@@ -79,12 +81,9 @@ export const Modal: FC<ModalProps> = ({ piece }) => {
                   <option disabled value={"default"}>
                     Select a print size:
                   </option>
-                  {printPrices.map((print, index: number) => (
-                    <option
-                      key={piece.id + print.price + print.size}
-                      value={index}
-                    >
-                      {print.size} --- ${print.price}
+                  {piece.printPrices.map((printType, index: number) => (
+                    <option key={piece.id + printType.size} value={index}>
+                      {printType.size} --- ${printType.price}
                     </option>
                   ))}
                 </select>

@@ -8,6 +8,7 @@ import type { PayloadAction } from "@reduxjs/toolkit";
 import { Piece } from "../gallery/gallery.slice";
 import { PaymentIntentResult } from "@stripe/stripe-js";
 import { addDocumentToCollection } from "../../utils/firebase/firebase.utils";
+import { current } from "immer";
 
 ///////// SELECTORS
 
@@ -43,13 +44,12 @@ const findCartItemIndex = (state: CartState, cartItemToFind: CartItem) =>
   state.cartItems.findIndex(
     (cartItem) =>
       cartItem.id === cartItemToFind.id &&
-      cartItem.buyType === cartItemToFind.buyType
+      cartItem.buyType.size === cartItemToFind.buyType.size
   );
-const findCartItemObj = (state: CartState, cartItemToFind: CartItem) =>
-  state.cartItems.find(
-    (cartItem) =>
-      cartItem.id === cartItemToFind.id &&
-      cartItem.buyType === cartItemToFind.buyType
+
+const findSameItem = (itemArr: CartItem[], itemToFind: CartItem) =>
+  itemArr.find(
+    (item) => item.id === itemToFind.id && item.buyType === itemToFind.buyType
   );
 
 /////////// TYPES
@@ -63,6 +63,7 @@ export interface CartState {
 export type CartItem = {
   quantity: number;
   buyType: Print;
+  cartId: string;
 } & Piece;
 
 export type Print = { size: string; price: number };
@@ -107,16 +108,14 @@ export const cartSlice = createSlice({
   reducers: {
     // consider making the payload a new type, is this a bit confusing to read?
     setCartItems: (state, action: PayloadAction<CartItem>) => {
-      const { payload: cartItemToAdd } = action;
-      if (!cartItemToAdd.quantity || !cartItemToAdd.buyType) return;
-      const existingItem = state.cartItems.find(
-        (cartItem) =>
-          cartItem.id === cartItemToAdd.id &&
-          cartItem.buyType === cartItemToAdd.buyType
+      const oldCartItems = state.cartItems;
+      const newCartItem = action.payload;
+      const sameItem = oldCartItems.find(
+        (oldItem) => newCartItem.cartId === oldItem.cartId
       );
-      existingItem
-        ? (existingItem.quantity += cartItemToAdd.quantity)
-        : state.cartItems.push(cartItemToAdd);
+      sameItem
+        ? (sameItem.quantity += newCartItem.quantity)
+        : state.cartItems.push(newCartItem);
     },
     setIsCartOpen: (state, action: PayloadAction<boolean>) => {
       state.isCartOpen = action.payload;
@@ -131,7 +130,7 @@ export const cartSlice = createSlice({
     },
     minusCartItem: (state, action: PayloadAction<CartItem>) => {
       const { payload: cartItemToDec } = action;
-      const existingItem = findCartItemObj(state, cartItemToDec);
+      const existingItem = findSameItem(state.cartItems, cartItemToDec);
       if (existingItem && existingItem.quantity <= 0) return;
       state.cartItems[findCartItemIndex(state, cartItemToDec)].quantity--;
     },
