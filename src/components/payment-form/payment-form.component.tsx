@@ -3,8 +3,11 @@ import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import { StripeCardElement } from "@stripe/stripe-js";
 import { useSelector } from "react-redux";
 
-import { selectCartTotal } from "../../store/cart/cart.selector";
-import { selectCurrentUser } from "../../store/user/user.selector";
+import {
+  selectCartTotal,
+  logTransactionToFirebase,
+} from "../../store/cart/cart.slice";
+import { selectCurrentUser } from "../../store/user/user-slice";
 
 import { BUTTON_TYPE_CLASSES } from "../button/button.component";
 
@@ -13,12 +16,14 @@ import {
   FormContainer,
   PaymentButton,
 } from "./payment-form.styles";
+import { useAppDispatch } from "../../store/hooks/hooks";
 
 const ifValidCardElement = (
   card: StripeCardElement | null
 ): card is StripeCardElement => card !== null;
 
 const PaymentForm = () => {
+  const dispatch = useAppDispatch();
   const stripe = useStripe();
   const elements = useElements();
   const amount = useSelector(selectCartTotal);
@@ -65,9 +70,14 @@ const PaymentForm = () => {
 
     if (paymentResult.error) {
       alert(paymentResult.error);
+      // needs to be logged as well, as an error
     } else {
       if (paymentResult.paymentIntent.status === "succeeded") {
         alert("Payment Successful");
+        // dispatch an action which tracks what was sold,
+        console.log(paymentResult);
+        dispatch(logTransactionToFirebase(paymentResult));
+        // TODO reset cart to initial state
       }
     }
   };

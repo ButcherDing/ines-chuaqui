@@ -12,7 +12,7 @@ type CartItemProps = {
 };
 
 const CartItem: FC<CartItemProps> = ({ cartItem }) => {
-  const { title, smallImageUrl, quantity, printPrice } = cartItem;
+  const { title, smallImageUrl, quantity, buyType } = cartItem;
 
   return (
     <CartItemContainer>
@@ -20,7 +20,7 @@ const CartItem: FC<CartItemProps> = ({ cartItem }) => {
       <ItemDetails>
         <span>{title}</span>
         <span>
-          {quantity} x ${printPrice}
+          {quantity} x ${buyType.price}
         </span>
       </ItemDetails>
     </CartItemContainer>

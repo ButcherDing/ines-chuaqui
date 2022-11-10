@@ -1,7 +1,10 @@
 import { useSelector } from "react-redux";
 
 import { selectCartItems, selectCartTotal } from "../../store/cart/cart.slice";
+import PaymentForm from "../../components/payment-form/payment-form.component";
 import CheckoutItem from "../../components/checkout-item/checkout-item.component";
+import { stripePromise } from "../../utils/stripe/stripe.utils";
+import { Elements } from "@stripe/react-stripe-js";
 
 // import PaymentForm from "../../components/payment-form/payment-form.component";
 
@@ -39,7 +42,10 @@ const Checkout = () => {
         <CheckoutItem cartItem={cartItem} key={cartItem.id} />
       ))}
       <Total>Total: $ {cartTotal}</Total>
-      {/* <PaymentForm /> */}
+
+      <Elements stripe={stripePromise}>
+        <PaymentForm />
+      </Elements>
     </CheckoutContainer>
   );
 };

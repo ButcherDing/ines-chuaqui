@@ -6,6 +6,7 @@ import {
   getCollectionAndDocuments,
   getFirebaseStorageUrl,
 } from "../../utils/firebase/firebase.utils";
+import { Print } from "../cart/cart.slice";
 
 export interface GalleryState {
   seriesData: Series[];
@@ -26,7 +27,7 @@ export type Piece = {
   smallImageUrl: string;
   id: number;
   title: string;
-  printPrice: number;
+  printPrices: Print[];
 };
 
 const initialState: GalleryState = {

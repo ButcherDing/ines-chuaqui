@@ -6,7 +6,7 @@ export const ModalContainer = styled.div`
   top: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.122);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -14,6 +14,7 @@ export const ModalContainer = styled.div`
 export const ModalContent = styled.div`
   width: 50rem;
   background-color: #fff;
+  padding: 2.5rem;
 `;
 export const ModalHeader = styled.div`
   padding: 1rem;
@@ -26,4 +27,10 @@ export const ModalBody = styled.div`
 
 export const ModalFooter = styled.div`
   padding: 1rem;
+`;
+
+export const ModalButtonContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin-top: 2.5rem;
 `;

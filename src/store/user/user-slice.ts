@@ -1,7 +1,12 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-
+import {
+  createSlice,
+  createAsyncThunk,
+  createSelector,
+} from "@reduxjs/toolkit";
+import { PaymentIntentResult } from "@stripe/stripe-js";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import {
+  addDocumentToCollection,
   createAuthUserWithEmailAndPassword,
   createUserDocumentFromAuth,
   getCurrentUser,
@@ -9,6 +14,9 @@ import {
   signInWithGooglePopup,
   signOutUser,
 } from "../../utils/firebase/firebase.utils";
+import { RootState } from "../store";
+
+//////// TYPES
 
 type FormInput = {
   email: string;
@@ -36,6 +44,17 @@ const initialState: UserState = {
   isLoading: false,
   error: null,
 };
+
+///// SELECTORS
+
+export const selectUserReducer = (state: RootState) => state.user;
+
+export const selectCurrentUser = createSelector(
+  [selectUserReducer],
+  (user) => user.currentUser
+);
+
+///////// THUNKS
 
 export const checkUserSession = createAsyncThunk(
   "authentication/checkUserSession",
@@ -104,6 +123,7 @@ export const signOut = createAsyncThunk(
   }
 );
 
+//////////////////////
 export const userSlice = createSlice({
   name: "user",
   initialState,
@@ -112,7 +132,7 @@ export const userSlice = createSlice({
       state.currentUser = action.payload;
     },
   },
-  /// TODO: this definitely smells like the wrong way to do this. Even though the doc seems to say like this. Repetitive.
+  /// TODO: this definitely smells like the wrong way to do this. Even though the doc seems to say like this. Repetitive. useQuery?
   extraReducers(builder) {
     ////////////////// Sign in with Google
     builder.addCase(signInGooglePopupAsync.pending, (state, action) => {

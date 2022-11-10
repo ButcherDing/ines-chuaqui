@@ -120,16 +120,16 @@ export const getCollectionAndDocuments = async (collectionName: string) => {
 
 ////////////////////////////////////////////////////////////////
 
-// export const addDocumentToCollection = async (
-//   collectionKey: string,
-//   documentName: string,
-//   document: object
-// ): Promise<void> => {
-//   await setDoc(doc(db, collectionKey, documentName), document);
-//   console.log("document added");
-// };
+export const addDocumentToCollection = async (
+  collectionKey: string,
+  documentName: string,
+  document: object
+): Promise<void> => {
+  await setDoc(doc(db, collectionKey, documentName), document);
+  console.log("document added");
+};
 
-// addDocumentToCollection("series", "skulls", skullsJson);
+// addDocumentToCollection("banana", "section", { name: "Guy" });
 
 ///////////////// Sign in methods
 

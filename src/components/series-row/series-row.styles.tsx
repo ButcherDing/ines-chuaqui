@@ -17,6 +17,10 @@ export const ShopRowItemContainer = styled.div`
   width: 15%;
 `;
 
+export const ButtonContainer = styled.div`
+  max-width: 75%;
+`;
+
 export const ShopRowItem = styled.img`
   max-width: 100%;
   /* height: 100%; */

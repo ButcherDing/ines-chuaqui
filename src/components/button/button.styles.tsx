@@ -21,6 +21,7 @@ export const BaseButton = styled.button`
   line-height: 1.4;
   letter-spacing: 0.05rem;
   padding: 0 3.5rem 0 3.5rem;
+  margin-bottom: 2.5rem;
   font-size: 1.4rem;
   font-weight: 600;
   border: none;

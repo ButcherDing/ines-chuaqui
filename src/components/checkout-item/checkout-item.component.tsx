@@ -19,7 +19,7 @@ type CheckoutItemProps = {
 };
 
 const CheckoutItem: FC<CheckoutItemProps> = ({ cartItem }) => {
-  const { smallImageUrl, title, printPrice } = cartItem;
+  const { smallImageUrl, title, printPrices } = cartItem;
   const dispatch = useDispatch();
 
   const removeItemHandler = () => {
@@ -37,8 +37,6 @@ const CheckoutItem: FC<CheckoutItemProps> = ({ cartItem }) => {
       <Quantity>
         <QuantityButton cartItem={cartItem} />
       </Quantity>
-
-      <CheckoutItemDetail>{printPrice}</CheckoutItemDetail>
 
       <RemoveButton onClick={removeItemHandler}>&#10005;</RemoveButton>
     </CheckoutItemContainer>

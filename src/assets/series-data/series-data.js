@@ -9,7 +9,11 @@ export const SERIES_DATA = [
         smallImageUrl: "https://i.ibb.co/CKmZh2Z/skull-1.jpg",
         id: 0,
         title: "Skull-1",
-        printPrice: 30,
+        printPricess: [
+          { size: "3x5", price: 10 },
+          { size: "8.5x11", price: 20 },
+          { size: "16x20", price: 40 },
+        ],
       },
       {
         description: "Lorem ipsum...",
@@ -18,7 +22,11 @@ export const SERIES_DATA = [
         smallImageUrl: "https://i.ibb.co/pJ435cL/skull-2.jpg",
         id: 1,
         title: "Skull-2",
-        printPrice: 30,
+        printPricess: [
+          { size: "3x5", price: 10 },
+          { size: "8.5x11", price: 20 },
+          { size: "16x20", price: 40 },
+        ],
       },
       {
         description: "Lorem ipsum...",
@@ -27,7 +35,11 @@ export const SERIES_DATA = [
         smallImageUrl: "https://i.ibb.co/XbFsSHY/skull-3.jpg",
         id: 2,
         title: "Skull-3",
-        printPrice: 30,
+        printPricess: [
+          { size: "3x5", price: 10 },
+          { size: "8.5x11", price: 20 },
+          { size: "16x20", price: 40 },
+        ],
       },
       {
         description: "Lorem ipsum...",
@@ -36,7 +48,11 @@ export const SERIES_DATA = [
         smallImageUrl: "https://i.ibb.co/DtNGvhW/skull-4.jpg",
         id: 3,
         title: "Skull-4",
-        printPrice: 30,
+        printPricess: [
+          { size: "3x5", price: 10 },
+          { size: "8.5x11", price: 20 },
+          { size: "16x20", price: 40 },
+        ],
       },
       {
         description: "Lorem ipsum...",
@@ -45,7 +61,11 @@ export const SERIES_DATA = [
         smallImageUrl: "https://i.ibb.co/6t8DqWq/skull-5.jpg",
         id: 4,
         title: "Skull-5",
-        printPrice: 30,
+        printPricess: [
+          { size: "3x5", price: 10 },
+          { size: "8.5x11", price: 20 },
+          { size: "16x20", price: 40 },
+        ],
       },
     ],
   },
@@ -59,7 +79,11 @@ export const SERIES_DATA = [
         smallImageUrl: "https://i.ibb.co/B4HrhYg/suspended-ani-1.jpg",
         id: 5,
         title: "Suspended-Animation-1",
-        printPrice: 30,
+        printPricess: [
+          { size: "3x5", price: 10 },
+          { size: "8.5x11", price: 20 },
+          { size: "16x20", price: 40 },
+        ],
       },
       {
         description: "Lorem ipsum...",
@@ -68,7 +92,11 @@ export const SERIES_DATA = [
         smallImageUrl: "https://i.ibb.co/M2X35VN/suspended-ani-2.jpg",
         id: 6,
         title: "Suspended-Animation-2",
-        printPrice: 30,
+        printPricess: [
+          { size: "3x5", price: 10 },
+          { size: "8.5x11", price: 20 },
+          { size: "16x20", price: 40 },
+        ],
       },
       {
         description: "Lorem ipsum...",
@@ -77,7 +105,11 @@ export const SERIES_DATA = [
         smallImageUrl: "https://i.ibb.co/xDGZVM6/suspended-ani-4.jpg",
         id: 7,
         title: "Suspended-Animation-4",
-        printPrice: 30,
+        printPricess: [
+          { size: "3x5", price: 10 },
+          { size: "8.5x11", price: 20 },
+          { size: "16x20", price: 40 },
+        ],
       },
     ],
   },

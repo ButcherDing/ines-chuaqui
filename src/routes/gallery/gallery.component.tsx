@@ -1,10 +1,5 @@
-import Button from "../../components/button/button.component";
-import Modal from "../../components/modal/modal.component";
 import { useAppDispatch, useAppSelector } from "../../store/hooks/hooks";
-import {
-  setShowModal,
-  setCurSeriesIndex,
-} from "../../store/gallery/gallery.slice";
+import { setCurSeriesIndex } from "../../store/gallery/gallery.slice";
 
 import { Lightbox } from "../../components/lightbox/lightbox.component";
 
@@ -39,7 +34,6 @@ export const Gallery = () => {
           </SeriesContainer>
         ))}
 
-        <Modal />
         {/* <GallerySlider /> */}
       </GalleryContainer>
     </>
