@@ -2,11 +2,9 @@ import styled from "styled-components";
 
 export const ShopRow = styled.div`
   display: flex;
-
   width: 95%;
   justify-content: space-around;
-  /* align-items: flex-end; */
-  /* justify-items: space-around; */
+  margin-bottom: 5rem;
 `;
 
 export const ShopRowItemContainer = styled.div`

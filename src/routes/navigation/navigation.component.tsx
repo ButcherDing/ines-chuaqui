@@ -42,7 +42,7 @@ export const Navigation = () => {
                 Sign Out
               </NavLink>
             ) : (
-              <NavLink to="/auth">Sign In</NavLink>
+              <NavLink to="/auth">Account</NavLink>
             )}
           </NavLinksContainer>
           <CartIcon />

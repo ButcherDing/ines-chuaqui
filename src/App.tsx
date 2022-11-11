@@ -39,8 +39,8 @@ function App() {
     <Fragment>
       <GlobalStyle />
       <Routes>
+        <Route index element={<Home />} />
         <Route path="/" element={<Navigation />}>
-          <Route index element={<Home />} />
           <Route path="gallery" element={<Gallery />} />
           <Route path="shop" element={<Shop />} />
           <Route path="auth" element={<Authentication />} />

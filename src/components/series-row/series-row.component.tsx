@@ -27,9 +27,7 @@ export const SeriesRow: FC<SeriesRowProps> = ({ series }) => {
         {series.pieces.map((piece) => (
           <ShopRowItemContainer key={"shop_row_key" + piece.title}>
             <ShopRowItem src={piece.smallImageUrl} alt={piece.title} />
-            <ButtonContainer>
-              <Modal piece={piece} />
-            </ButtonContainer>
+            <Modal piece={piece} />
           </ShopRowItemContainer>
         ))}
       </ShopRow>
