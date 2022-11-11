@@ -12,6 +12,7 @@ import {
   NavLinksContainer,
   NavLink,
   LogoContainer,
+  BannerLine,
 } from "./navigation.styles";
 import { useAppDispatch, useAppSelector } from "../../store/hooks/hooks";
 import { signOut } from "../../store/user/user-slice";
@@ -28,6 +29,7 @@ export const Navigation = () => {
     <Fragment>
       <NavigationContainer>
         <NameBox>Ines Chuaqui</NameBox>
+        <BannerLine />
         <NavBar>
           <LogoContainer to="/">
             <Logo className="logo">Logo</Logo>

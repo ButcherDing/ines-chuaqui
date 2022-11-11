@@ -16,7 +16,7 @@ export const BaseButton = styled.button`
   justify-content: center;
   align-items: center;
   color: ${primaryShade};
-  background-color: white;
+  background-color: ${secondaryTint}77;
   min-width: 2.5rem;
   line-height: 1.4;
   letter-spacing: 0.05rem;
@@ -25,7 +25,7 @@ export const BaseButton = styled.button`
   font-weight: 600;
   border: none;
   border-radius: 0.3rem 1.2rem;
-  outline: ${primaryShade} solid 0.15rem;
+  /* outline: ${primaryShade} solid 0.15rem; */
   /* text-transform: uppercase; */
   cursor: pointer;
   transition: all 0.4s;
@@ -33,17 +33,17 @@ export const BaseButton = styled.button`
   &:hover {
     background-color: ${secondaryTint};
     color: ${primaryShade};
-    outline: ${primaryShade} solid 0.15rem;
+    /* outline: ${primaryShade} solid 0.15rem; */
   }
 `;
 
 export const GoogleSignInButton = styled(BaseButton)`
-  background-color: #3cd7e7;
+  background-color: #2a96a286;
   color: ${primaryShade};
   transition: all 0.3s;
 
   &:hover {
-    background-color: #2a97a2;
+    background-color: #2a96a27e;
     color: white;
     border: none;
   }
@@ -71,27 +71,27 @@ export const NavLinkButton = styled(NavLink)`
   display: flex;
   justify-content: center;
   align-items: center;
-  color: ${primaryShade};
-  background-color: ${secondaryTint}88;
+  color: ${primaryShade}ee;
+  background-color: ${secondaryTint}55;
   min-width: 9rem;
   height: 4rem;
   line-height: 1.4;
   letter-spacing: 0.05rem;
-  padding: 1.5rem 2.5rem;
+  padding: 2.5rem 2.5rem;
   margin-bottom: 2.5rem;
   font-size: 1.8rem;
   font-weight: 600;
   border: none;
   border-radius: 0.3rem 1.2rem;
-  outline: ${primaryShade} solid 0.15rem;
+  outline: ${primaryShade}22 solid 0.2rem;
   text-decoration-line: none;
   cursor: pointer;
   transition: all 0.4s;
   /* text-transform: uppercase; */
 
   &:hover {
-    background-color: ${secondaryTint};
+    background-color: ${secondaryTint}cc;
     color: ${primaryShade};
-    outline: ${primaryShade} solid 0.15rem;
+    /* outline: ${primaryShade} solid 0.15rem; */
   }
 `;

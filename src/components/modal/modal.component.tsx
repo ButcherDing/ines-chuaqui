@@ -3,8 +3,6 @@ import { useAppDispatch, useAppSelector } from "../../store/hooks/hooks";
 
 import { Piece } from "../../store/gallery/gallery.slice";
 
-import { Print } from "../../store/cart/cart.slice";
-
 import { useKeyPress } from "../../store/hooks/useKeyPress.hook";
 
 import {

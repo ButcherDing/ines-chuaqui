@@ -29,7 +29,7 @@ Large: 1.8
 
 - Primary: #e74c3c
 - Tints: #ec7063, #f3a69e, #fadbd8
-- Shades: #451712, #5c1e18, #8b2e24;
+- Shades: #451712, #5c1e18, #b93d30;
 
 - Secondary: #3cd6e7
 - Tints: #c5f3f8, #d8f7fa, #ecfbfd
@@ -69,13 +69,20 @@ Medium: 11px
 import { createGlobalStyle } from "styled-components";
 import styled from "styled-components";
 
+// export const primaryColor = "#e74c3c";
 export const primaryColor = "#e74c3c";
-export const primaryShade = "#8b2e24";
+export const primaryShade2 = "#8b2e24";
+export const primaryShade = "#b93d30";
+
 export const primaryTint = "#fadbd8";
 
 export const secondaryColor = "#3cd7e7";
 export const secondaryShade = "#2a97a2";
-export const secondaryTint = "#ecfbfdc0";
+export const secondaryTint = "#ecfbfd";
+export const secondaryTintTransparent = secondaryTint + "cc";
+
+export const mainTextColor = primaryShade;
+export const titleTextColor = primaryShade;
 
 export const GlobalStyle = createGlobalStyle`
 * {
@@ -90,7 +97,7 @@ html {
 
 body {
   margin: 0;
-  padding: 2rem;
+  padding: 0rem 2rem 2rem 2rem;
   line-height: 1;
   font-weight: 300;
   color: ${primaryShade};
