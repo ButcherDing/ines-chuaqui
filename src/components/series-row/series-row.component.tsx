@@ -6,9 +6,8 @@ import Modal from "../../components/modal/modal.component";
 
 import {
   ShopRow,
-  ShopRowItem,
+  ShopRowImage,
   ShopRowItemContainer,
-  ButtonContainer,
 } from "./series-row.styles";
 
 export interface SeriesRowProps {
@@ -26,7 +25,7 @@ export const SeriesRow: FC<SeriesRowProps> = ({ series }) => {
       <ShopRow>
         {series.pieces.map((piece) => (
           <ShopRowItemContainer key={"shop_row_key" + piece.title}>
-            <ShopRowItem src={piece.smallImageUrl} alt={piece.title} />
+            <ShopRowImage src={piece.smallImageUrl} alt={piece.title} />
             <Modal piece={piece} />
           </ShopRowItemContainer>
         ))}

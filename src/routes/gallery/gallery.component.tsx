@@ -4,36 +4,34 @@ import { setCurSeriesIndex } from "../../store/gallery/gallery.slice";
 import { Lightbox } from "../../components/lightbox/lightbox.component";
 
 import {
-  SeriesTitle,
   SeriesContainer,
   GalleryContainer,
   RouteTitle,
+  SeriesDescription,
+  SeriesDescriptionContainer,
+  SeriesBlurbHeading,
+  SeriesBlurb,
 } from "../../routes/gallery/gallery.styles";
-
-import { Line } from "../../routes/gallery/gallery.styles";
 
 export const Gallery = () => {
   const dispatch = useAppDispatch();
   const seriesData = useAppSelector((state) => state.gallery.seriesData);
-  const curSeriesIndex = useAppSelector(
-    (state) => state.gallery.curSeriesIndex
-  );
 
-  const setCurSeriesHandler = (seriesTitle: string) => {
-    dispatch(setCurSeriesIndex(seriesTitle));
-  };
+  // const setCurSeriesHandler = (seriesTitle: string) => {
+  //   dispatch(setCurSeriesIndex(seriesTitle));
+  // };
 
   return (
     <>
       <GalleryContainer>
-        <RouteTitle>Collections</RouteTitle>
+        <RouteTitle>Gallery</RouteTitle>
         {seriesData.map((series) => (
           <SeriesContainer key={`gallery` + series.title}>
-            <Line />
-            <SeriesTitle onClick={() => setCurSeriesHandler(series.title)}>
-              {series.title}
-            </SeriesTitle>
-            <Lightbox series={series} />
+            <h3>{series.title}</h3>
+            <SeriesDescriptionContainer>
+              <SeriesDescription>{series.blurb}</SeriesDescription>
+              <Lightbox series={series} />
+            </SeriesDescriptionContainer>
           </SeriesContainer>
         ))}
 

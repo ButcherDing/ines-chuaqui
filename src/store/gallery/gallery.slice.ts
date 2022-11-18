@@ -17,6 +17,7 @@ export interface GalleryState {
 }
 
 export type Series = {
+  blurb: string;
   title: string;
   pieces: Piece[];
 };

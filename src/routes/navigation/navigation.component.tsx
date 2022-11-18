@@ -12,7 +12,6 @@ import {
   NavLinksContainer,
   NavLink,
   LogoContainer,
-  BannerLine,
 } from "./navigation.styles";
 import { useAppDispatch, useAppSelector } from "../../store/hooks/hooks";
 import { signOut } from "../../store/user/user-slice";
@@ -29,7 +28,7 @@ export const Navigation = () => {
     <Fragment>
       <NavigationContainer>
         <NameBox>Ines Chuaqui</NameBox>
-        <BannerLine />
+        {/* <BannerLine /> */}
         <NavBar>
           <LogoContainer to="/">
             <Logo className="logo">Logo</Logo>
@@ -40,9 +39,7 @@ export const Navigation = () => {
             <NavLink to="/about">About</NavLink>
             <NavLink to="/contact">Contact</NavLink>
             {currentUser ? (
-              <NavLink as="span" onClick={signOutHandler}>
-                Sign Out
-              </NavLink>
+              <NavLink as="span">Account</NavLink>
             ) : (
               <NavLink to="/auth">Account</NavLink>
             )}

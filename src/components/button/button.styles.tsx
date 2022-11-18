@@ -16,15 +16,16 @@ export const BaseButton = styled.button`
   justify-content: center;
   align-items: center;
   color: ${primaryShade};
-  background-color: ${secondaryTint}77;
+  background-color: #eeeeee;
   min-width: 2.5rem;
   line-height: 1.4;
   letter-spacing: 0.05rem;
   padding: 1.5rem 3rem;
   font-size: 1.4rem;
-  font-weight: 600;
+  font-weight: 400;
   border: none;
   border-radius: 0.3rem 1.2rem;
+  outline: 1px solid ${primaryTint};
   /* outline: ${primaryShade} solid 0.15rem; */
   /* text-transform: uppercase; */
   cursor: pointer;
@@ -35,6 +36,12 @@ export const BaseButton = styled.button`
     color: ${primaryShade};
     /* outline: ${primaryShade} solid 0.15rem; */
   }
+`;
+
+export const SmallTagButton = styled(BaseButton)`
+  padding: 0.5rem 1.5rem;
+  min-width: auto;
+  border-radius: 0.3rem;
 `;
 
 export const GoogleSignInButton = styled(BaseButton)`
@@ -72,26 +79,25 @@ export const NavLinkButton = styled(NavLink)`
   justify-content: center;
   align-items: center;
   color: ${primaryShade}ee;
-  background-color: ${secondaryTint}55;
+  background-color: ${secondaryTint}99;
   min-width: 9rem;
   height: 4rem;
-  line-height: 1.4;
   letter-spacing: 0.05rem;
   padding: 2.5rem 2.5rem;
   margin-bottom: 2.5rem;
   font-size: 1.8rem;
   font-weight: 600;
-  border: none;
+  /* border: solid 1rem ${primaryColor}; */
   border-radius: 0.3rem 1.2rem;
-  outline: ${primaryShade}22 solid 0.2rem;
   text-decoration-line: none;
   cursor: pointer;
   transition: all 0.4s;
   /* text-transform: uppercase; */
 
   &:hover {
-    background-color: ${secondaryTint}cc;
+    background-color: ${secondaryTint};
     color: ${primaryShade};
-    /* outline: ${primaryShade} solid 0.15rem; */
   }
 `;
+
+// note to self - text-decoration:underline looks awful in many instances awful.

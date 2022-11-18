@@ -12,10 +12,12 @@ import {
   ModalHeader,
   ModalContent,
   ModalFooter,
+  ModalForm,
 } from "./modal.styles";
 import Button from "../button/button.component";
 
 import { setCartItems } from "../../store/cart/cart.slice";
+import { SmallTagButton } from "../button/button.styles";
 
 export type ModalProps = {
   piece: Piece;
@@ -54,7 +56,7 @@ export const Modal: FC<ModalProps> = ({ piece }) => {
   if (useKeyPress("Escape") && showModal) showModalHandler();
   return (
     <>
-      <Button onClick={showModalHandler}>{piece.title}</Button>
+      <SmallTagButton onClick={showModalHandler}>{piece.title}</SmallTagButton>
       {showModal && (
         <ModalContainer
           onClick={showModalHandler}
@@ -62,22 +64,20 @@ export const Modal: FC<ModalProps> = ({ piece }) => {
         >
           <ModalContent onClick={(e) => e.stopPropagation()}>
             <ModalHeader>
-              <h3>{piece.title}</h3>
+              <h2>{piece.title}</h2>
             </ModalHeader>
             <ModalBody>
               <p>{piece.description}</p>
             </ModalBody>
             <ModalFooter>
-              <p>Select Print Size</p>
-              <form>
+              <ModalForm>
                 <select
                   defaultValue={"default"}
                   onChange={handleChange}
-                  name="dropdown"
+                  name="slct"
                 >
-                  {/* TODO insert dynamic print sizes */}
                   <option disabled value={"default"}>
-                    Select a print size:
+                    Select print size:
                   </option>
                   {piece.printPrices.map((printType, index: number) => (
                     <option key={piece.id + printType.size} value={index}>
@@ -85,7 +85,8 @@ export const Modal: FC<ModalProps> = ({ piece }) => {
                     </option>
                   ))}
                 </select>
-              </form>
+              </ModalForm>
+
               <ModalButtonContainer>
                 <Button onClick={() => addItemHandler(piece)}>
                   Add Print to Cart

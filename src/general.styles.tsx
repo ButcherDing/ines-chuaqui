@@ -45,7 +45,7 @@ https://maketintsandshades.com/
 
 #888
 #767676 (lightest grey allowed on #fff)
-#6f6f6f (lightest grey allowed on #fdf2e9)
+#6f6f6f 
 #555
 #333
 
@@ -78,7 +78,7 @@ export const primaryTint = "#fadbd8";
 
 export const secondaryColor = "#3cd7e7";
 export const secondaryShade = "#2a97a2";
-export const secondaryTint = "#ecfbfd";
+export const secondaryTint = "#d8f7fa";
 export const secondaryTintTransparent = secondaryTint + "cc";
 
 export const mainTextColor = primaryShade;
@@ -97,11 +97,11 @@ html {
 
 body {
   margin: 0;
-  padding: 0rem 2rem 2rem 2rem;
+  padding: 0rem 2rem 0rem 2rem;
   line-height: 1;
   font-weight: 300;
   color: ${primaryShade};
-  font-size: 1.4rem;
+  font-size: 2rem;
 }
 
 code {
@@ -109,8 +109,41 @@ code {
 }
 
 h1 {
-  font-weight: 300;
+  font-weight: 200;
+  padding: 2rem 0rem 2rem 0rem;
 }
+
+p {
+  line-height: 1.5;
+}
+
+h3 {
+  color: ${primaryShade};
+  letter-spacing: 0.8rem;
+  font-size: 2rem;
+  text-transform: uppercase;
+  font-weight: 300;
+  padding-bottom: .1rem;
+  margin-bottom: 3rem;
+  width: 100%;
+
+  position: relative;
+  
+  &::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    width: 100%;
+    left: 0;
+    height: 1px;
+    border-radius: 2rem;
+    background: linear-gradient(90deg, ${primaryShade}, transparent 80%);
+  }
+}
+`;
+
+export const RouteContainer = styled.div`
+  padding: 2rem 10rem 2rem 10rem;
 `;
 
 export default GlobalStyle;

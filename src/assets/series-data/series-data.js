@@ -1,6 +1,8 @@
 export const SERIES_DATA = [
   {
-    title: "Skulls",
+    title: "Skull Series",
+    blurb:
+      "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Officiis libero rem ipsam eos architecto ipsa aut. Cupiditate, libero repudiandae earum accusantium obcaecati autem quaerat voluptate, vitae perspiciatis, perferendis quam? Esse!",
     pieces: [
       {
         description: "Lorem ipsum...",
@@ -71,6 +73,8 @@ export const SERIES_DATA = [
   },
   {
     title: "Suspended Animation",
+    blurb:
+      "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Officiis libero rem ipsam eos architecto ipsa aut. Cupiditate, libero repudiandae earum accusantium obcaecati autem quaerat voluptate, vitae perspiciatis, perferendis quam? Esse!",
     pieces: [
       {
         description: "Lorem ipsum...",

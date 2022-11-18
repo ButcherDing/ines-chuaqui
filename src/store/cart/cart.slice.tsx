@@ -7,8 +7,12 @@ import {
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { Piece } from "../gallery/gallery.slice";
 import { PaymentIntentResult } from "@stripe/stripe-js";
-import { addDocumentToCollection } from "../../utils/firebase/firebase.utils";
+import {
+  addDocumentToCollection,
+  getCurrentUser,
+} from "../../utils/firebase/firebase.utils";
 import { current } from "immer";
+import { getCurrentScope } from "immer/dist/internal";
 
 ///////// SELECTORS
 
@@ -94,7 +98,15 @@ export const logTransactionToFirebase = createAsyncThunk(
       paymentResult.paymentIntent.id,
       orderDoc
     );
-    return fbRes;
+    const userRes = await getCurrentUser();
+    if (!userRes) return;
+    const updateUserHistoryRes = await addDocumentToCollection(
+      "users",
+      userRes.uid,
+      { orders: orderDoc }
+    );
+    // we need to sift the data a bit more, the whole object ends up in fb users (but now being )
+    return;
   }
 );
 
@@ -145,7 +157,6 @@ export const cartSlice = createSlice({
       state.isLoading = false;
       state.cartItems = [];
       state.isCartOpen = false;
-      console.log(state);
     });
     builder.addCase(logTransactionToFirebase.rejected, (state) => {
       state.isLoading = false;

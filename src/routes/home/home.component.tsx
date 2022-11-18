@@ -2,15 +2,21 @@ import { Fragment } from "react";
 import { Outlet } from "react-router-dom";
 
 import Hero from "../../components/hero/hero.component";
-import { HomeContainer, Name } from "./home.styles";
+import { HomeContainer } from "./home.styles";
+
+// contains our sections on the main page
 
 const Home = () => {
   return (
     <Fragment>
-      <Outlet />
+      {/* <Outlet /> */}
       <HomeContainer>
-        <Name>Ines Chuaqui</Name>
         <Hero />
+        {/* about the artist */}
+        {/* gallery */}
+        {/* stuff she's done */}
+        {/* get in touch */}
+        {/* buy stuff */}
       </HomeContainer>
     </Fragment>
   );

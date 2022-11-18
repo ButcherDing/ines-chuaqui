@@ -4,7 +4,6 @@ import { ReactComponent as ShoppingBag } from "../../assets/logos/shopping-bag.s
 export const CartIconContainer = styled.div`
   width: 6rem;
   height: 6rem;
-  margin-bottom: 5rem;
   position: relative;
   display: flex;
   align-items: center;
@@ -15,7 +14,6 @@ export const CartIconContainer = styled.div`
 export const ShoppingIcon = styled(ShoppingBag)`
   width: 60%;
   margin-bottom: 1rem;
-  color
 `;
 export const ItemCount = styled.span`
   font-size: 1.4rem;

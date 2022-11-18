@@ -23,6 +23,8 @@ import {
   QueryDocumentSnapshot,
 } from "firebase/firestore";
 
+import { UserData } from "../../store/user/user-slice";
+
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
 import { SERIES_DATA } from "../../assets/series-data/series-data";
 
@@ -108,8 +110,9 @@ export const addCollectionAndDocuments = async <T extends ObjectToAdd>(
   console.log("batch committed");
 };
 
-//// example call
+//// example call, or FOR FIRING ONCE ONLY TO UPDATE DB, then TURN OFF
 // addCollectionAndDocuments("series", SERIES_DATA);
+////////////////////
 
 export const getCollectionAndDocuments = async (collectionName: string) => {
   const collectionRef = collection(db, collectionName);
@@ -125,7 +128,8 @@ export const addDocumentToCollection = async (
   documentName: string,
   document: object
 ): Promise<void> => {
-  await setDoc(doc(db, collectionKey, documentName), document);
+  const docRef = doc(db, collectionKey, documentName);
+  await setDoc(docRef, document, { merge: true });
   console.log("document added");
 };
 
@@ -147,13 +151,7 @@ export type AdditionalInformation = {
   displayName?: string;
 };
 
-export type UserData = {
-  createdAt: Date;
-  displayName: string;
-  email: string;
-};
-
-// smells bad
+// SMELLS BAD - seems sloppy just to return a void/undefined thing in the case of a sign up, what will our thunk return?
 export const createUserDocumentFromAuth = async (
   userAuth: User,
   additionalInformation = {} as AdditionalInformation
@@ -164,11 +162,10 @@ export const createUserDocumentFromAuth = async (
   if (!userSnapshot.exists()) {
     // can add other properties below
     const { displayName, email } = userAuth;
-    const createdAt = new Date();
+    const createdAt = JSON.stringify(new Date());
 
     try {
       await setDoc(userDocRef, {
-        displayName,
         email,
         createdAt,
         ...additionalInformation,
@@ -180,6 +177,7 @@ export const createUserDocumentFromAuth = async (
   // does this make sense here? what if no userSnapshot? error handling...
   return userSnapshot as QueryDocumentSnapshot<UserData>;
 };
+
 //// sign up
 export const createAuthUserWithEmailAndPassword = async (
   email: string,
@@ -190,6 +188,7 @@ export const createAuthUserWithEmailAndPassword = async (
   const res = await createUserWithEmailAndPassword(auth, email, password);
   return res;
 };
+
 //// sign out
 export const signOutUser = async () => {
   await signOut(auth);

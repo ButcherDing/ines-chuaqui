@@ -2,6 +2,7 @@ import { Fragment, useEffect, Suspense, lazy } from "react";
 import { useAppDispatch, useAppSelector } from "../../store/hooks/hooks";
 
 import Spinner from "../../components/spinner/spinner.component";
+import ShopContainer from "./shop.styles";
 // import { getImagesAsync } from "../../store/gallery/gallery.slice";
 
 const ShopDisplay = lazy(
@@ -16,12 +17,12 @@ export const Shop = () => {
   // do a useEffect that generates a number of imgs from the url
 
   return (
-    <Fragment>
-      <h1>Print Shop</h1>
+    <ShopContainer>
+      <h1>Shop</h1>
       <Suspense fallback={<Spinner />}>
         <ShopDisplay />
       </Suspense>
-    </Fragment>
+    </ShopContainer>
   );
 };
 

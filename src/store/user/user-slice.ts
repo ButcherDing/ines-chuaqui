@@ -15,6 +15,9 @@ import {
   signOutUser,
 } from "../../utils/firebase/firebase.utils";
 import { RootState } from "../store";
+import { useAppDispatch } from "../hooks/hooks";
+import { FirebaseError } from "firebase/app";
+import { CartItem } from "../cart/cart.slice";
 
 //////// TYPES
 
@@ -27,16 +30,31 @@ interface SignUpFormInput extends FormInput {
   displayName: string;
 }
 
-export type UserData = {
-  createdAt: Date; // |  {seconds: number, nanoseconds: number};
-  displayName: string;
-  email: string;
-};
+// export type UserData = {
+//   createdAt: Date; // |  {seconds: number, nanoseconds: number};
+//   displayName: string;
+//   email: string;
+// };
 
 type UserState = {
   readonly currentUser: UserData | null;
   readonly isLoading: boolean;
   readonly error: Error | null;
+};
+
+export type UserData = {
+  createdAt: Date;
+  displayName: string;
+  email: string;
+  orderHistory: Order[];
+};
+
+export type Order = {
+  itemsBought: CartItem[];
+  totalPaid: number;
+  datePurchased: Date;
+  // orderDoc.paymentResult.paymentIntent: amount, created
+  // date = new Date(created * 1000)
 };
 
 const initialState: UserState = {
@@ -54,6 +72,7 @@ export const selectCurrentUser = createSelector(
   (user) => user.currentUser
 );
 
+// TODO research error handling in thunks (best practices in docs)
 ///////// THUNKS
 
 export const checkUserSession = createAsyncThunk(
@@ -61,13 +80,12 @@ export const checkUserSession = createAsyncThunk(
   async (_, thunkAPI) => {
     try {
       const res = await getCurrentUser();
-      console.log(res);
       if (!res || res === null) return;
       const userData = await createUserDocumentFromAuth(res);
       if (!userData) return;
       return userData.data();
     } catch (error) {
-      console.log("error checking user", error);
+      console.log("error checking current user", error);
     }
   }
 );
@@ -81,6 +99,7 @@ export const signInEmailPassAsync = createAsyncThunk(
       if (!res) return;
       const userSnapshot = await createUserDocumentFromAuth(res.user);
       if (!userSnapshot) return;
+      console.log(userSnapshot);
       return userSnapshot.data();
     } catch (error) {
       console.log("user sign in failed", error);
@@ -91,28 +110,35 @@ export const signInEmailPassAsync = createAsyncThunk(
 export const signInGooglePopupAsync = createAsyncThunk(
   "authentication/signInWithGoogle",
   async (thunkAPI) => {
-    const res = await signInWithGooglePopup();
+    try {
+      const res = await signInWithGooglePopup();
 
-    const userSnapshot = await createUserDocumentFromAuth(res.user);
+      const userSnapshot = await createUserDocumentFromAuth(res.user);
 
-    if (!userSnapshot) return;
-    return userSnapshot.data();
+      // throw error?
+      if (!userSnapshot) return;
+      return userSnapshot.data();
+    } catch (error) {
+      console.log("error signing in with google", error);
+    }
   }
 );
 
 export const signUpWithEmailPassAsync = createAsyncThunk(
   "authentication/signUpWithEmailPass",
-  async (signUpFormInput: SignUpFormInput, thunkAPI) => {
-    const { email, password, displayName } = signUpFormInput;
-    const res = await createAuthUserWithEmailAndPassword(email, password);
+  async (signUpFormInput: SignUpFormInput, { dispatch }) => {
+    try {
+      const { email, password, displayName } = signUpFormInput;
+      const res = await createAuthUserWithEmailAndPassword(email, password);
 
-    if (!res) return;
-    const userSnapshot = await createUserDocumentFromAuth(res.user, {
-      displayName,
-    });
-    if (!userSnapshot) return;
-    // should this check be in our utils?
-    return userSnapshot.data();
+      if (!res) return;
+      const notSnapshot = await createUserDocumentFromAuth(res.user, {
+        displayName,
+      });
+      dispatch(signInEmailPassAsync({ email, password }));
+    } catch (error) {
+      console.log("sign up failed", error);
+    }
   }
 );
 
@@ -132,10 +158,20 @@ export const userSlice = createSlice({
       state.currentUser = action.payload;
     },
   },
-  /// TODO: this definitely smells like the wrong way to do this. Even though the doc seems to say like this. Repetitive. useQuery?
+  /// TODO: wrong way to do this? Even though the doc seems to say like this. Repetitive. Learn about useQuery?
   extraReducers(builder) {
+    ////////////////// Sign up
+    builder.addCase(signUpWithEmailPassAsync.pending, (state) => {
+      state.isLoading = true;
+    });
+    builder.addCase(signUpWithEmailPassAsync.fulfilled, (state) => {
+      state.isLoading = false;
+    });
+    builder.addCase(signUpWithEmailPassAsync.rejected, (state) => {
+      state.isLoading = false;
+    });
     ////////////////// Sign in with Google
-    builder.addCase(signInGooglePopupAsync.pending, (state, action) => {
+    builder.addCase(signInGooglePopupAsync.pending, (state) => {
       state.isLoading = true;
     });
     builder.addCase(signInGooglePopupAsync.fulfilled, (state, { payload }) => {
@@ -148,7 +184,7 @@ export const userSlice = createSlice({
     });
 
     ///////////////// Sign in with Email
-    builder.addCase(signInEmailPassAsync.pending, (state, action) => {
+    builder.addCase(signInEmailPassAsync.pending, (state) => {
       state.isLoading = true;
     });
     builder.addCase(signInEmailPassAsync.fulfilled, (state, { payload }) => {
@@ -157,7 +193,9 @@ export const userSlice = createSlice({
       state.currentUser = payload;
     });
     builder.addCase(signInEmailPassAsync.rejected, (state, { payload }) => {
+      if (!payload) return;
       state.isLoading = false;
+      // state.error = payload;
     });
 
     /////////////// Check User Session

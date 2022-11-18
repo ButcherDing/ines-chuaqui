@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { primaryShade, secondaryTint } from "../../general.styles";
 
 export const ModalContainer = styled.div`
   position: fixed;
@@ -10,6 +11,7 @@ export const ModalContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  z-index: 5;
 `;
 export const ModalContent = styled.div`
   width: 50rem;
@@ -33,4 +35,26 @@ export const ModalButtonContainer = styled.div`
   display: flex;
   justify-content: space-between;
   margin-top: 2.5rem;
+`;
+
+export const ModalForm = styled.form`
+  legend,
+  fieldset,
+  select,
+  textarea,
+  input,
+  button,
+  option {
+    color: ${primaryShade};
+    background-color: white;
+    height: 3rem;
+    font-size: 1.4rem;
+    border: 1px solid #aaaaaa;
+    &:hover,
+    :focus,
+    :active,
+    :checked {
+      background-color: white;
+    }
+  }
 `;
