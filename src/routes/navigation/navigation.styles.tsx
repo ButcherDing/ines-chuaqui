@@ -50,7 +50,8 @@ export const LogoContainer = styled(Link)`
   display: flex;
   color: ${primaryShade};
   height: 100%;
-  width: 4rem;
+  width: 5rem;
+
   justify-content: center;
 `;
 

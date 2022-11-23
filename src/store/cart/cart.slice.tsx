@@ -98,14 +98,18 @@ export const logTransactionToFirebase = createAsyncThunk(
       paymentResult.paymentIntent.id,
       orderDoc
     );
+
+    const paymentId = paymentResult.paymentIntent.id;
+    const userOrderDoc = { [paymentId]: orderDoc };
+    // overwrites, convert back to object
     const userRes = await getCurrentUser();
     if (!userRes) return;
     const updateUserHistoryRes = await addDocumentToCollection(
       "users",
       userRes.uid,
-      { orders: orderDoc }
+      { orders: userOrderDoc }
     );
-    // we need to sift the data a bit more, the whole object ends up in fb users (but now being )
+
     return;
   }
 );

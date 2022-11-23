@@ -3,7 +3,7 @@ import { Outlet } from "react-router-dom";
 
 import CartIcon from "../../components/cart-icon/cart-icon.component";
 
-import { ReactComponent as Logo } from "../../assets/logos/skull-outline.svg";
+import { ReactComponent as Logo } from "../../assets/logos/crow-solid.svg";
 
 import {
   NavigationContainer,

@@ -38,7 +38,6 @@ const CheckoutItem: FC<CheckoutItemProps> = ({ cartItem }) => {
         <QuantityButton cartItem={cartItem} />
       </Quantity>
       <CheckoutItemDetail>{buyType.price}</CheckoutItemDetail>
-      {/* // I want to style this directly instead of having to stick it in a div like a divhead. */}
 
       <RemoveButton onClick={removeItemHandler}>&#10005;</RemoveButton>
     </CheckoutItemContainer>
