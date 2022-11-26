@@ -9,15 +9,19 @@ import {
   addDocumentToCollection,
   createAuthUserWithEmailAndPassword,
   createUserDocumentFromAuth,
+  deleteAccountFromFb,
   getCurrentUser,
   signInEmailPass,
   signInWithGooglePopup,
   signOutUser,
+  updateDisplayName,
+  updateFbAuthEmail,
+  updateFbPassword,
 } from "../../utils/firebase/firebase.utils";
 import { RootState } from "../store";
 import { useAppDispatch } from "../hooks/hooks";
 import { FirebaseError } from "firebase/app";
-import { CartItem } from "../cart/cart.slice";
+import { CartItem, logTransactionToFirebase } from "../cart/cart.slice";
 
 //////// TYPES
 
@@ -30,12 +34,6 @@ interface SignUpFormInput extends FormInput {
   displayName: string;
 }
 
-// export type UserData = {
-//   createdAt: Date; // |  {seconds: number, nanoseconds: number};
-//   displayName: string;
-//   email: string;
-// };
-
 type UserState = {
   readonly currentUser: UserData | null;
   readonly isLoading: boolean;
@@ -46,21 +44,31 @@ export type UserData = {
   createdAt: Date;
   displayName: string;
   email: string;
-  orderHistory: Order[];
+  orders: Order[];
 };
 
 export type Order = {
-  itemsBought: CartItem[];
-  totalPaid: number;
-  datePurchased: Date;
-  // orderDoc.paymentResult.paymentIntent: amount, created
-  // date = new Date(created * 1000)
+  formattedBoughtItems: FormattedOrderItem[];
+  currentUser: UserData;
+  orderId: string;
+  paymentResult: PaymentIntentResult;
 };
+// orderDoc.paymentResult.paymentIntent: amount, created
+// date = new Date(created * 1000)
 
 const initialState: UserState = {
   currentUser: null,
   isLoading: false,
   error: null,
+};
+
+export type FormattedOrderItem = {
+  title: string;
+  size: string;
+  price: number;
+  quantity: number;
+  orderId: number;
+  date: string;
 };
 
 ///// SELECTORS
@@ -145,9 +153,64 @@ export const signUpWithEmailPassAsync = createAsyncThunk(
 export const signOut = createAsyncThunk(
   "authentication/signOut",
   async (_, thunkAPI) => {
-    await signOutUser();
+    try {
+      await signOutUser();
+    } catch (error) {
+      console.log("error changing signing out:" + error);
+    }
   }
 );
+
+export const changeEmail = createAsyncThunk(
+  "authentication/changeEmail",
+  async (newEmail: string, thunkAPI) => {
+    try {
+      updateFbAuthEmail(newEmail);
+      checkUserSession();
+    } catch (error) {
+      console.log("error changing email:" + error);
+    }
+  }
+);
+export const changePassword = createAsyncThunk(
+  "authentication/changePassword",
+  async (newPassword: string, thunkAPI) => {
+    try {
+      updateFbPassword(newPassword);
+      // standard to log user out after change?
+      checkUserSession();
+    } catch (error) {
+      console.log("error changing password:" + error);
+    }
+  }
+);
+export const changeDisplayName = createAsyncThunk(
+  "authentication/changeDisplayName",
+  async (newDisplayName: string, thunkAPI) => {
+    try {
+      updateDisplayName(newDisplayName);
+      console.log("display name updated");
+      checkUserSession();
+    } catch (error) {
+      console.log("error changing display name:" + error);
+    }
+  }
+);
+
+export const deleteUser = createAsyncThunk(
+  "authentication/changeDisplayName",
+  async (_, { dispatch }) => {
+    try {
+      deleteAccountFromFb();
+      console.log("account deleted");
+      dispatch(signOut());
+    } catch (error) {
+      console.log("error deleting user:" + error);
+    }
+  }
+);
+
+///////////
 
 //////////////////////
 export const userSlice = createSlice({
@@ -222,6 +285,18 @@ export const userSlice = createSlice({
       state.currentUser = null;
     });
     builder.addCase(signOut.rejected, (state) => {
+      state.isLoading = false;
+    });
+    // TODO consider isLoaded...
+    //////////////// Log transaction
+    builder.addCase(logTransactionToFirebase.pending, (state) => {
+      state.isLoading = true;
+    });
+
+    builder.addCase(logTransactionToFirebase.fulfilled, (state) => {
+      state.isLoading = false;
+    });
+    builder.addCase(logTransactionToFirebase.rejected, (state) => {
       state.isLoading = false;
     });
   },

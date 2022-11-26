@@ -1,16 +1,14 @@
 import { useState } from "react";
 
 import FormInput from "../form-input/form-input.component";
-import Button from "../button/button.component";
 
-import {
-  createAuthUserWithEmailAndPassword,
-  createUserDocumentFromAuth,
-} from "../../utils/firebase/firebase.utils";
+import {} from "../../utils/firebase/firebase.utils";
 
 import { SignUpContainer } from "./sign-up-form.styles";
 import { useDispatch } from "react-redux";
 import { signUpWithEmailPassAsync } from "../../store/user/user-slice";
+import { LeafButton } from "../button/button.styles";
+import { ButtonsContainer } from "../sign-in-form/sign-in-form.styles";
 
 const defaultFormFields = {
   displayName: "",
@@ -80,7 +78,9 @@ const SignUpForm = () => {
           name="confirmPassword"
           value={confirmPassword}
         />
-        <Button type="submit">Sign Up</Button>
+        <ButtonsContainer>
+          <LeafButton type="submit">Sign Up</LeafButton>
+        </ButtonsContainer>
       </form>
     </SignUpContainer>
   );

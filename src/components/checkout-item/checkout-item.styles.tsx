@@ -1,11 +1,12 @@
 import styled from "styled-components";
+import { primaryShade } from "../../general.styles";
 
 export const CheckoutItemContainer = styled.div`
   width: 100%;
   display: grid;
   grid-template-columns: repeat(6, 1fr);
   min-height: 100px;
-  border-bottom: 1px solid darkgrey;
+  border-bottom: 1px solid ${primaryShade};
   padding: 1.5rem 0rem;
   font-size: 1.8rem;
   align-items: center;

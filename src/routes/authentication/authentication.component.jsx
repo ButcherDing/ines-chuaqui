@@ -1,12 +1,15 @@
-import { Fragment } from "react";
 import { useAppDispatch, useAppSelector } from "../../store/hooks/hooks";
 import { signOut } from "../../store/user/user-slice";
 
 import SignInForm from "../../components/sign-in-form/sign-in-form.component";
 import SignUpForm from "../../components/sign-up-form/sign-up-form.component";
 import Button from "../../components/button/button.component";
-import { AuthenticationContainer, OrderHistory } from "./authentication.styles";
-import { SignedInDisplay } from "../../components/auth-signedin-display/auth-signedin-display.component";
+import {
+  AuthenticationContainer,
+  NotSignedIn,
+  OrderHistory,
+} from "./authentication.styles";
+import { UserDashboard } from "../../components/user-dashboard/user-dashboard.component";
 
 const Authentication = () => {
   const dispatch = useAppDispatch();
@@ -18,12 +21,12 @@ const Authentication = () => {
   return (
     <AuthenticationContainer>
       {currentUser ? (
-        <SignedInDisplay />
+        <UserDashboard />
       ) : (
-        <Fragment>
+        <NotSignedIn>
           <SignInForm />
           <SignUpForm />
-        </Fragment>
+        </NotSignedIn>
       )}
     </AuthenticationContainer>
   );

@@ -28,7 +28,7 @@ Large: 1.8
 --- 02 COLORS
 
 - Primary: #e74c3c
-- Tints: #ec7063, #f3a69e, #fadbd8
+- Tints: #ec7063, #f3a69e, #fadbd8, #fdedec
 - Shades: #451712, #5c1e18, #b93d30;
 
 - Secondary: #3cd6e7
@@ -75,10 +75,12 @@ export const primaryShade2 = "#8b2e24";
 export const primaryShade = "#b93d30";
 
 export const primaryTint = "#fadbd8";
+export const primaryTint2 = "#fff1f1";
 
 export const secondaryColor = "#3cd7e7";
 export const secondaryShade = "#2a97a2";
 export const secondaryTint = "#d8f7fa";
+export const secondaryTint2 = "#ecfbfd";
 export const secondaryTintTransparent = secondaryTint + "cc";
 
 export const mainTextColor = primaryShade;

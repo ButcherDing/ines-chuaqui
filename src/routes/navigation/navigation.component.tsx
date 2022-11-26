@@ -36,12 +36,11 @@ export const Navigation = () => {
           <NavLinksContainer>
             <NavLink to="/gallery">Gallery</NavLink>
             <NavLink to="/shop">Shop</NavLink>
-            <NavLink to="/about">About</NavLink>
             <NavLink to="/contact">Contact</NavLink>
             {currentUser ? (
-              <NavLink as="span">Account</NavLink>
-            ) : (
               <NavLink to="/auth">Account</NavLink>
+            ) : (
+              <NavLink to="/auth">Sign In</NavLink>
             )}
           </NavLinksContainer>
           <CartIcon />

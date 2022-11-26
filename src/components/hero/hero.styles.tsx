@@ -62,18 +62,18 @@ export const ArtistDescription = styled.p`
   width: 100%;
   font-size: 2rem;
   line-height: 2;
-  /* margin-bottom: 3rem; */
+  margin-bottom: 3rem;
 `;
 
-export const HeroNavLinkButton = styled(NavLinkButton)`
-  align-self: center;
-  line-height: 3rem;
-  width: 45%;
-  max-width: 20rem;
-  margin-top: 4rem;
-  padding: 4rem;
-  font-weight: 300;
-  letter-spacing: 0.6rem;
-  text-align: center;
-  /* text-transform: uppercase; */
-`;
+// export const HeroNavLinkButton = styled(NavLinkButton)`
+//   align-self: center;
+//   line-height: 3rem;
+//   width: 45%;
+//   max-width: 20rem;
+//   margin-top: 4rem;
+//   padding: 4rem;
+//   font-weight: 300;
+//   letter-spacing: 0.6rem;
+//   text-align: center;
+//   /* text-transform: uppercase; */
+// `;

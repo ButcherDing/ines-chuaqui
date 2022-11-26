@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import {
-  BaseButton,
+  LeafButton,
   GoogleSignInButton,
   InvertedButton,
 } from "../button/button.styles";
@@ -19,7 +19,7 @@ export const CartDropdownContainer = styled.div`
   z-index: 5;
 
   /* Nesting Example */
-  /* ${BaseButton},
+  /* ${LeafButton},
   ${GoogleSignInButton},
   ${InvertedButton} {
     color: orangered;

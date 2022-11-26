@@ -1,5 +1,5 @@
-import { NavLink } from "react-router-dom";
-import { BlurbHeading, HeroNavLinkButton } from "./hero.styles";
+import { Link, NavLink } from "react-router-dom";
+import { BlurbHeading } from "./hero.styles";
 import {
   ArtistDescriptionContainer,
   ArtistDescription,
@@ -8,6 +8,7 @@ import {
   NameTitle,
 } from "./hero.styles";
 import "./hero.styles";
+import { LeafButton } from "../button/button.styles";
 
 const Hero = () => {
   return (
@@ -25,7 +26,9 @@ const Hero = () => {
           doloremque. Sed, eum quisquam quas accusamus libero iste molestiae
           quibusdam voluptas odio?
         </ArtistDescription>
-        <HeroNavLinkButton to="/gallery">Explore Work</HeroNavLinkButton>
+        <Link to="/gallery">
+          <LeafButton>Explore Work</LeafButton>
+        </Link>
       </ArtistDescriptionContainer>
     </HeroImage>
   );

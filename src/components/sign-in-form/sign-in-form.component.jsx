@@ -11,7 +11,8 @@ import {
   signInGooglePopupAsync,
   signInEmailPassAsync,
 } from "../../store/user/user-slice";
-
+import { GoogleLeafButton, LeafButton } from "../button/button.styles";
+//TODO: TYPESCRIPT
 const defaultFormFields = {
   email: "",
   password: "",
@@ -68,14 +69,14 @@ const SignInForm = () => {
           value={password}
         />
         <ButtonsContainer>
-          <Button type="submit">Sign in</Button>
-          <Button
+          <LeafButton type="submit">Sign in</LeafButton>
+          <GoogleLeafButton
             buttonType={BUTTON_TYPE_CLASSES.google}
             type="button"
             onClick={signInWithGoogle}
           >
             Sign In With Google
-          </Button>
+          </GoogleLeafButton>
         </ButtonsContainer>
       </form>
     </SignInContainer>

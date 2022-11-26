@@ -6,9 +6,12 @@ import {
   signOut,
   GoogleAuthProvider,
   createUserWithEmailAndPassword,
+  updateEmail,
   onAuthStateChanged,
   NextOrObserver,
   User,
+  updatePassword,
+  deleteUser,
 } from "firebase/auth";
 
 import {
@@ -17,13 +20,15 @@ import {
   getDoc,
   getDocs,
   setDoc,
+  updateDoc,
+  arrayUnion,
   query,
   collection,
   writeBatch,
   QueryDocumentSnapshot,
 } from "firebase/firestore";
 
-import { UserData } from "../../store/user/user-slice";
+import { Order, UserData } from "../../store/user/user-slice";
 
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
 import { SERIES_DATA } from "../../assets/series-data/series-data";
@@ -133,6 +138,29 @@ export const addDocumentToCollection = async (
   console.log("document added");
 };
 
+export const updateDocumentArrayInCollection = async (
+  collectionKey: string,
+  documentName: string,
+  updateKey: string,
+  updateValue: object | string
+): Promise<void> => {
+  const docRef = doc(db, collectionKey, documentName);
+  await updateDoc(docRef, {
+    [updateKey]: arrayUnion(updateValue),
+  });
+  console.log("document updated");
+};
+
+export const updateDocumentInCollection = async (
+  collectionKey: string,
+  documentName: string,
+  updateObj: object
+): Promise<void> => {
+  const docRef = doc(db, collectionKey, documentName);
+  await updateDoc(docRef, updateObj);
+  console.log("document updated");
+};
+
 // addDocumentToCollection("banana", "section", { name: "Guy" });
 
 ///////////////// Sign in methods
@@ -163,11 +191,13 @@ export const createUserDocumentFromAuth = async (
     // can add other properties below
     const { displayName, email } = userAuth;
     const createdAt = JSON.stringify(new Date());
+    const orders: Order[] = [];
 
     try {
       await setDoc(userDocRef, {
         email,
         createdAt,
+        orders,
         ...additionalInformation,
       });
     } catch (err) {
@@ -187,6 +217,58 @@ export const createAuthUserWithEmailAndPassword = async (
 
   const res = await createUserWithEmailAndPassword(auth, email, password);
   return res;
+};
+
+// manage account methods
+export const updateFbAuthEmail = async (newEmail: string) => {
+  try {
+    if (!auth.currentUser) return;
+    const res = await updateEmail(auth.currentUser, newEmail);
+    console.log("email updated");
+    // update email in database
+    await updateDocumentInCollection("users", auth.currentUser.uid, {
+      email: newEmail,
+    });
+    return res;
+  } catch (error) {
+    console.error("error changing email" + error);
+  }
+};
+export const updateFbPassword = async (newPassword: string) => {
+  try {
+    if (!auth.currentUser) return;
+    const res = await updatePassword(auth.currentUser, newPassword);
+    console.log("password updated");
+    return res;
+  } catch (error) {
+    console.error("error changing password" + error);
+  }
+};
+
+export const updateDisplayName = async (newDisplayName: string) => {
+  try {
+    if (!auth.currentUser) return;
+    const res = await updateDocumentInCollection(
+      "users",
+      auth.currentUser.uid,
+      {
+        displayName: newDisplayName,
+      }
+    );
+    return res;
+  } catch (error) {
+    console.error("error changing display name" + error);
+  }
+};
+
+export const deleteAccountFromFb = async () => {
+  try {
+    if (!auth.currentUser) return;
+    const res = await deleteUser(auth.currentUser);
+    console.log("user deleted");
+  } catch (error) {
+    console.error("error deleting user" + error);
+  }
 };
 
 //// sign out

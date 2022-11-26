@@ -17,7 +17,12 @@ import {
 import Button from "../button/button.component";
 
 import { setCartItems } from "../../store/cart/cart.slice";
-import { SmallTagButton } from "../button/button.styles";
+import {
+  SmallInvertedLeafButton,
+  LeafButton,
+  SmallTagButton,
+  InvertedLeafButton,
+} from "../button/button.styles";
 
 export type ModalProps = {
   piece: Piece;
@@ -56,7 +61,9 @@ export const Modal: FC<ModalProps> = ({ piece }) => {
   if (useKeyPress("Escape") && showModal) showModalHandler();
   return (
     <>
-      <SmallTagButton onClick={showModalHandler}>{piece.title}</SmallTagButton>
+      <SmallInvertedLeafButton onClick={showModalHandler}>
+        {piece.title}
+      </SmallInvertedLeafButton>
       {showModal && (
         <ModalContainer
           onClick={showModalHandler}
@@ -88,10 +95,12 @@ export const Modal: FC<ModalProps> = ({ piece }) => {
               </ModalForm>
 
               <ModalButtonContainer>
-                <Button onClick={() => addItemHandler(piece)}>
+                <InvertedLeafButton onClick={() => addItemHandler(piece)}>
                   Add Print to Cart
-                </Button>
-                <Button onClick={showModalHandler}>Close</Button>
+                </InvertedLeafButton>
+                <InvertedLeafButton onClick={showModalHandler}>
+                  Close
+                </InvertedLeafButton>
               </ModalButtonContainer>
             </ModalFooter>
           </ModalContent>

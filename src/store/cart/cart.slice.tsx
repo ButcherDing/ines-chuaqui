@@ -10,9 +10,11 @@ import { PaymentIntentResult } from "@stripe/stripe-js";
 import {
   addDocumentToCollection,
   getCurrentUser,
+  updateDocumentArrayInCollection,
 } from "../../utils/firebase/firebase.utils";
 import { current } from "immer";
 import { getCurrentScope } from "immer/dist/internal";
+import { checkUserSession } from "../user/user-slice";
 
 ///////// SELECTORS
 
@@ -56,6 +58,15 @@ const findSameItem = (itemArr: CartItem[], itemToFind: CartItem) =>
     (item) => item.id === itemToFind.id && item.buyType === itemToFind.buyType
   );
 
+export const unixToDate = (unixStamp: number | undefined) => {
+  if (!unixStamp) return "invalid date";
+  return (
+    new Date(unixStamp * 1000).toLocaleDateString() +
+    " - " +
+    new Date(unixStamp * 1000).toLocaleTimeString().slice(0, -3)
+  );
+};
+
 /////////// TYPES
 
 export interface CartState {
@@ -83,34 +94,75 @@ const initialState: CartState = {
 export const logTransactionToFirebase = createAsyncThunk(
   "checkout/logTransactionToFirebase",
   async (paymentResult: PaymentIntentResult, thunkAPI) => {
-    const state = thunkAPI.getState() as RootState;
-    console.log(state);
-    const { currentUser } = state.user;
-    const { cartItems } = state.cart;
-    const orderDoc = {
-      currentUser,
-      cartItems,
-      paymentResult,
-    };
-    if (!paymentResult.paymentIntent) return console.error("no payment token");
-    const fbRes = await addDocumentToCollection(
-      "transactions",
-      paymentResult.paymentIntent.id,
-      orderDoc
-    );
+    try {
+      // update our transaction records in fb
+      const state = thunkAPI.getState() as RootState;
+      const { currentUser } = state.user;
+      const { cartItems } = state.cart;
 
-    const paymentId = paymentResult.paymentIntent.id;
-    const userOrderDoc = { [paymentId]: orderDoc };
-    // overwrites, convert back to object
-    const userRes = await getCurrentUser();
-    if (!userRes) return;
-    const updateUserHistoryRes = await addDocumentToCollection(
-      "users",
-      userRes.uid,
-      { orders: userOrderDoc }
-    );
+      if (!paymentResult.paymentIntent)
+        return console.error("no payment intent token received from stripe");
 
-    return;
+      const orderId = paymentResult.paymentIntent.id;
+
+      const orderDoc = {
+        currentUser,
+        cartItems,
+        paymentResult,
+        orderId,
+      };
+
+      const fbRes = await addDocumentToCollection(
+        "transactions",
+        paymentResult.paymentIntent.id,
+        orderDoc
+      );
+
+      // update the user object in fb
+      // create our orderHistory object - we want a different, simpler object to work with when we pull it off of user
+
+      const formattedDate = paymentResult.paymentIntent
+        ? String(
+            new Date(
+              paymentResult.paymentIntent.created * 1000
+            ).toLocaleDateString()
+          )
+        : "no date";
+
+      const formattedBoughtItems = cartItems.map((cartItem) => {
+        const orderItem = {
+          title: cartItem.title,
+          size: cartItem.buyType.size,
+          price: cartItem.buyType.price,
+          quantity: cartItem.quantity,
+          orderId: paymentResult.paymentIntent.id,
+          date: formattedDate,
+        };
+        return orderItem;
+      });
+
+      const userOrderDoc = {
+        currentUser,
+        formattedBoughtItems,
+        paymentResult,
+        orderId,
+      };
+
+      console.log(formattedBoughtItems);
+
+      const userRes = await getCurrentUser();
+      if (!userRes) return;
+      const updateUserHistoryRes = await updateDocumentArrayInCollection(
+        "users",
+        userRes.uid,
+        "orders",
+        userOrderDoc
+      );
+      thunkAPI.dispatch(checkUserSession());
+      return orderDoc;
+    } catch (error) {
+      console.error(error);
+    }
   }
 );
 

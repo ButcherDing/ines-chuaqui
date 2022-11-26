@@ -13,7 +13,6 @@ export enum BUTTON_TYPE_CLASSES {
   inverted = "inverted",
 }
 
-// not familiar with this syntax
 const getButton = (buttonType = BUTTON_TYPE_CLASSES.base): typeof BaseButton =>
   ({
     [BUTTON_TYPE_CLASSES.base]: BaseButton,

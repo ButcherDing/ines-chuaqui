@@ -11,6 +11,7 @@ import Gallery from "./routes/gallery/gallery.component";
 import Shop from "./routes/shop/shop.component";
 import Authentication from "./routes/authentication/authentication.component";
 import Checkout from "./routes/checkout/checkout.component";
+import Contact from "./routes/contact/contact.component";
 
 import { checkUserSession } from "./store/user/user-slice";
 
@@ -43,6 +44,7 @@ function App() {
         <Route path="/" element={<Navigation />}>
           <Route path="gallery" element={<Gallery />} />
           <Route path="shop" element={<Shop />} />
+          <Route path="contact" element={<Contact />} />
           <Route path="auth" element={<Authentication />} />
           <Route path="checkout" element={<Checkout />} />
         </Route>

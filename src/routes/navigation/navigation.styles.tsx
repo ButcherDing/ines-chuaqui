@@ -35,7 +35,7 @@ export const NameBox = styled.span`
   letter-spacing: 1.2rem;
   font-weight: 200;
   font-size: 5rem;
-  margin: 3rem 5rem 1rem 0rem;
+  margin: 3rem 0rem 1rem 0rem;
 `;
 
 export const NavBar = styled.div`
@@ -56,7 +56,7 @@ export const LogoContainer = styled(Link)`
 `;
 
 export const NavLinksContainer = styled.div`
-  width: 70%;
+  width: 50%;
   height: 100%;
   display: flex;
   align-items: center;
