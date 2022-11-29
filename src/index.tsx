@@ -4,8 +4,11 @@ import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 import reportWebVitals from "./reportWebVitals";
 
-import { store } from "./store/store";
 import App from "./App";
+
+import { persistor, store } from "./store/store";
+import { PersistGate } from "redux-persist/lib/integration/react";
+import Spinner from "./components/spinner/spinner.component";
 
 const container = document.getElementById("root")!;
 const root = createRoot(container);
@@ -14,7 +17,9 @@ root.render(
   <React.StrictMode>
     <Provider store={store}>
       <BrowserRouter>
-        <App />
+        <PersistGate persistor={persistor} loading={<Spinner />}>
+          <App />
+        </PersistGate>
       </BrowserRouter>
     </Provider>
   </React.StrictMode>

@@ -2,7 +2,9 @@ import styled from "styled-components";
 import { primaryShade } from "../../general.styles";
 import { CheckoutHeaders } from "../../routes/checkout/checkout.styles";
 
-export const OrderHistoryContainer = styled.div``;
+export const OrderHistoryContainer = styled.div`
+  width: 100%;
+`;
 
 export const OrderDateIdContainer = styled.div`
   font-size: 1.8rem;

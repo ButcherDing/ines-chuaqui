@@ -58,3 +58,10 @@ export const ModalForm = styled.form`
     }
   }
 `;
+
+export const ModalMessage = styled.div`
+  /* display: none; */
+  height: 2rem;
+  animation: fadeIn;
+  transition: all 2s;
+`;

@@ -14,8 +14,8 @@ export const CartDropdownContainer = styled.div`
   padding: 20px;
   border: 1px solid #aaaaaa;
   background-color: white;
-  top: 140px;
-  right: 35px;
+  top: 50px;
+  right: 15px;
   z-index: 5;
 
   /* Nesting Example */

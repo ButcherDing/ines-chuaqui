@@ -1,6 +1,7 @@
 import { Fragment } from "react";
 import Button from "../../components/button/button.component";
 import { LeafButton } from "../../components/button/button.styles";
+import TextboxFadeIn from "../../components/textbox-fade-in/textbox-fade-in.component";
 
 import {
   ContactContainer,
@@ -19,13 +20,20 @@ export const Contact = () => {
         <ContactTextBox className="cta-text-box">
           <h2>Get in touch</h2>
           <ContactText>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Non ratione
-            tempore, cum illo corrupti, veniam similique iusto sapiente quia
-            corporis quos, nemo ab sequi ullam animi officia quas? Vero,
-            consequuntur?
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet
+            aspernatur consequatur dolore voluptatem ad nemo molestiae nihil
+            ducimus natus necessitatibus praesentium, nisi architecto harum fuga
+            temporibus nesciunt voluptatum. Omnis, reprehenderit.
           </ContactText>
+          {/* Alternative Sweeping-in text animation
+          <TextboxFadeIn
+            text={`Lorem ipsum dolor sit amet, consectetur adipisicing elit. Numquam
+  minima voluptatum unde corporis, dolorum eaque hic praesentium ut
+  reiciendis vero! Nulla ea debitis consequuntur vitae, hic
+  perspiciatis beatae illo non.`}
+          ></TextboxFadeIn> */}
 
-          <ContactForm className="cta-form" action="#">
+          <ContactForm className="cta-form" action="#" data-netlify="true">
             <div>
               <ContactFormLabel htmlFor="full-name">Full Name</ContactFormLabel>
               <input

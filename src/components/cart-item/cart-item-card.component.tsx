@@ -5,7 +5,7 @@ import {
   CartItemContainer,
   CartItemImage,
   ItemDetails,
-} from "./cart-item.styles";
+} from "./cart-item-card.styles";
 
 type CartItemProps = {
   cartItem: TCartItem;

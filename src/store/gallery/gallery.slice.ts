@@ -1,12 +1,15 @@
 import { RootState } from "../store";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import type { PayloadAction } from "@reduxjs/toolkit";
+// import type { PayloadAction } from "@reduxjs/toolkit"
 
 import {
   getCollectionAndDocuments,
-  getFirebaseStorageUrl,
+  // getFirebaseStorageUrl,
 } from "../../utils/firebase/firebase.utils";
 import { Print } from "../cart/cart.slice";
+
+////////////////
+// TODO consider an api slice instead, useQuery etc.
 
 export interface GalleryState {
   seriesData: Series[];
@@ -56,19 +59,14 @@ export const gallerySlice = createSlice({
   name: "gallery",
   initialState,
   reducers: {
-    setCurSeriesIndex: (state, action: PayloadAction<string>) => {
-      const newSeriesIndex = state.seriesData
-        .map((series) => series.title)
-        .indexOf(action.payload);
-
-      state.curSeriesIndex = newSeriesIndex;
-    },
-
-    setShowModal: (state, action: PayloadAction<boolean>) => {
-      state.showModal = action.payload;
-    },
+    // setCurSeriesIndex: (state, action: PayloadAction<string>) => {
+    //   const newSeriesIndex = state.seriesData
+    //     .map((series) => series.title)
+    //     .indexOf(action.payload);
+    //   state.curSeriesIndex = newSeriesIndex;
+    // },
   },
-
+  // TODO - don't need this
   extraReducers: (builder) => {
     builder.addCase(getSeriesDataAsync.pending, (state, action) => {
       state.isLoading = true;
@@ -84,8 +82,9 @@ export const gallerySlice = createSlice({
   },
 });
 
-export const { /*setCurSlideIndex,*/ setCurSeriesIndex, setShowModal } =
-  gallerySlice.actions;
+export const {
+  /*setCurSlideIndex, setCurSeriesIndex */
+} = gallerySlice.actions;
 // export const selectCount = (state: RootState) => state.gallery.curSlideIndex
 
 export default gallerySlice.reducer;

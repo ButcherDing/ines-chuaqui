@@ -3,7 +3,7 @@ import { useAppDispatch, useAppSelector } from "../../store/hooks/hooks";
 
 import { Piece } from "../../store/gallery/gallery.slice";
 
-import { useKeyPress } from "../../store/hooks/useKeyPress.hook";
+import { useKeyPress } from "../../store/hooks/event-listeners";
 
 import {
   ModalBody,
@@ -13,6 +13,7 @@ import {
   ModalContent,
   ModalFooter,
   ModalForm,
+  ModalMessage,
 } from "./modal.styles";
 import Button from "../button/button.component";
 
@@ -23,6 +24,7 @@ import {
   SmallTagButton,
   InvertedLeafButton,
 } from "../button/button.styles";
+import { Fader } from "../fader/fader.component";
 
 export type ModalProps = {
   piece: Piece;
@@ -30,10 +32,10 @@ export type ModalProps = {
 // Problems -
 export const Modal: FC<ModalProps> = ({ piece }) => {
   // const handleKeyPress = (e: Event) => {};
+  const dispatch = useAppDispatch();
   const [printType, setPrintType] = useState({ size: "", price: -1 });
   const [showModal, setShowModal] = useState(false);
-
-  const dispatch = useAppDispatch();
+  const [showMsg, setShowMsg] = useState(false);
 
   const showModalHandler = () => {
     setShowModal(showModal ? false : true);
@@ -46,11 +48,12 @@ export const Modal: FC<ModalProps> = ({ piece }) => {
       quantity: 1,
       cartId: `${cartItemToAdd.id + printType.size}`,
     };
-
+    setShowMsg(true);
     dispatch(setCartItems(newCartItem));
-    // showModalHandler();
   };
-  // TODO solve no objects as values problem
+
+  // TODO fader
+
   const handleChange = (event: ChangeEvent<HTMLSelectElement>) => {
     if (!event.target.value) return;
     const selectedPrintType = piece.printPrices[+event.target.value];
@@ -93,7 +96,7 @@ export const Modal: FC<ModalProps> = ({ piece }) => {
                   ))}
                 </select>
               </ModalForm>
-
+              <Fader text={showMsg ? "Added to cart" : "choose a size"} />
               <ModalButtonContainer>
                 <InvertedLeafButton onClick={() => addItemHandler(piece)}>
                   Add Print to Cart

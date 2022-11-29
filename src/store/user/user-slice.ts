@@ -198,7 +198,7 @@ export const changeDisplayName = createAsyncThunk(
 );
 
 export const deleteUser = createAsyncThunk(
-  "authentication/changeDisplayName",
+  "authentication/deleteUser",
   async (_, { dispatch }) => {
     try {
       deleteAccountFromFb();
@@ -297,6 +297,50 @@ export const userSlice = createSlice({
       state.isLoading = false;
     });
     builder.addCase(logTransactionToFirebase.rejected, (state) => {
+      state.isLoading = false;
+    });
+    //////////////// Change Email
+    builder.addCase(changeEmail.pending, (state) => {
+      state.isLoading = true;
+    });
+
+    builder.addCase(changeEmail.fulfilled, (state) => {
+      state.isLoading = false;
+    });
+    builder.addCase(changeEmail.rejected, (state) => {
+      state.isLoading = false;
+    });
+    //////////////// Change Display Name
+    builder.addCase(changeDisplayName.pending, (state) => {
+      state.isLoading = true;
+    });
+
+    builder.addCase(changeDisplayName.fulfilled, (state) => {
+      state.isLoading = false;
+    });
+    builder.addCase(changeDisplayName.rejected, (state) => {
+      state.isLoading = false;
+    });
+    //////////////// Change Password
+    builder.addCase(changePassword.pending, (state) => {
+      state.isLoading = true;
+    });
+
+    builder.addCase(changePassword.fulfilled, (state) => {
+      state.isLoading = false;
+    });
+    builder.addCase(changePassword.rejected, (state) => {
+      state.isLoading = false;
+    });
+    //////////////// Delete Account
+    builder.addCase(deleteUser.pending, (state) => {
+      state.isLoading = true;
+    });
+
+    builder.addCase(deleteUser.fulfilled, (state) => {
+      state.isLoading = false;
+    });
+    builder.addCase(deleteUser.rejected, (state) => {
       state.isLoading = false;
     });
   },

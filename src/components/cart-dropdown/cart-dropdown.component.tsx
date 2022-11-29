@@ -1,16 +1,19 @@
+import { useEffect, useRef, FC } from "react";
+
 import "./cart-dropdown.styles";
 import Button from "../button/button.component";
 
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
-import { selectCartItems } from "../../store/cart/cart.slice";
-import CartItem from "../cart-item/cart-item.component";
+import { CartItem, selectCartItems } from "../../store/cart/cart.slice";
+import CartItemCard from "../cart-item/cart-item-card.component";
 import {
   CartDropdownContainer,
   CartItems,
   EmptyMessage,
 } from "./cart-dropdown.styles";
+import { LeafButton } from "../button/button.styles";
 
 const CartDropdown = () => {
   const cartItems = useSelector(selectCartItems);
@@ -22,18 +25,18 @@ const CartDropdown = () => {
     <CartDropdownContainer>
       <CartItems>
         {cartItems.length ? (
-          cartItems.map((cartItem) => (
-            <CartItem
+          cartItems.map((cartItem: CartItem) => (
+            <CartItemCard
               cartItem={cartItem}
               key={cartItem.title + " cart " + cartItem.buyType.size}
-            ></CartItem>
+            ></CartItemCard>
           ))
         ) : (
           <EmptyMessage>No items in cart</EmptyMessage>
         )}
       </CartItems>
 
-      <Button onClick={goToCheckoutHandler}>GO TO CHECKOUT</Button>
+      <LeafButton onClick={goToCheckoutHandler}>GO TO CHECKOUT</LeafButton>
     </CartDropdownContainer>
   );
 };

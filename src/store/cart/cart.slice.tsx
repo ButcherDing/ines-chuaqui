@@ -24,10 +24,10 @@ export const selectCartItems = createSelector(
   [selectCartReducer],
   (cart) => cart.cartItems
 );
-export const selectIsCartOpen = createSelector(
-  [selectCartReducer],
-  (cart) => cart.isCartOpen
-);
+// export const selectIsCartOpen = createSelector(
+//   [selectCartReducer],
+//   (cart) => cart.isCartOpen
+// );
 
 export const selectCartCount = createSelector([selectCartItems], (cartItems) =>
   cartItems.reduce(
@@ -70,7 +70,7 @@ export const unixToDate = (unixStamp: number | undefined) => {
 /////////// TYPES
 
 export interface CartState {
-  isCartOpen: boolean;
+  // isCartOpen: boolean;
   cartItems: CartItem[];
   isLoading: boolean;
 }
@@ -84,7 +84,7 @@ export type CartItem = {
 export type Print = { size: string; price: number };
 
 const initialState: CartState = {
-  isCartOpen: false,
+  // isCartOpen: false,
   cartItems: [],
   isLoading: false,
 };
@@ -166,15 +166,12 @@ export const logTransactionToFirebase = createAsyncThunk(
   }
 );
 
-////////////
-
-// TODO Names need rethinking too.
+//////////// REDUCER SLICE
 
 export const cartSlice = createSlice({
   name: "cart",
   initialState,
   reducers: {
-    // consider making the payload a new type, is this a bit confusing to read?
     setCartItems: (state, action: PayloadAction<CartItem>) => {
       const oldCartItems = state.cartItems;
       const newCartItem = action.payload;
@@ -185,9 +182,9 @@ export const cartSlice = createSlice({
         ? (sameItem.quantity += newCartItem.quantity)
         : state.cartItems.push(newCartItem);
     },
-    setIsCartOpen: (state, action: PayloadAction<boolean>) => {
-      state.isCartOpen = action.payload;
-    },
+    // setIsCartOpen: (state, action: PayloadAction<boolean>) => {
+    //   state.isCartOpen = action.payload;
+    // },
     removeCartItem: (state, action: PayloadAction<CartItem>) => {
       const { payload: cartItemToRemove } = action;
       state.cartItems.splice(findCartItemIndex(state, cartItemToRemove), 1);
@@ -212,7 +209,7 @@ export const cartSlice = createSlice({
     builder.addCase(logTransactionToFirebase.fulfilled, (state) => {
       state.isLoading = false;
       state.cartItems = [];
-      state.isCartOpen = false;
+      // state.isCartOpen = false;
     });
     builder.addCase(logTransactionToFirebase.rejected, (state) => {
       state.isLoading = false;
@@ -222,7 +219,7 @@ export const cartSlice = createSlice({
 
 export const {
   setCartItems,
-  setIsCartOpen,
+  // setIsCartOpen,
   removeCartItem,
   minusCartItem,
   plusCartItem,

@@ -3,6 +3,7 @@ import FormInput from "../form-input/form-input.component";
 
 export const UserSettingsContainer = styled.div`
   display: grid;
+  width: 100%;
   grid-template-columns: 2fr 1fr;
   /* justify-content: space-between; */
   align-items: center;

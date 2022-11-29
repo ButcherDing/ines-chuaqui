@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import { Route, Routes } from "react-router-dom";
 import { Fragment } from "react";
 import { useDispatch } from "react-redux";
@@ -21,10 +21,12 @@ import {
 } from "./store/gallery/gallery.slice";
 
 import { useAppDispatch, useAppSelector } from "./store/hooks/hooks";
+import CartDropdown from "./components/cart-dropdown/cart-dropdown.component";
 
 function App() {
   const dispatch = useAppDispatch();
   const seriesData = useAppSelector((state) => state.gallery.seriesData);
+
   // const storeUrls = useAppSelector((state) => state.gallery.storeUrls);
 
   useEffect(() => {

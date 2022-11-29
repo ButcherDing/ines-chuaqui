@@ -1,5 +1,5 @@
 import { useAppDispatch, useAppSelector } from "../../store/hooks/hooks";
-import { setCurSeriesIndex } from "../../store/gallery/gallery.slice";
+// import { setCurSeriesIndex } from "../../store/gallery/gallery.slice";
 
 import { Lightbox } from "../../components/lightbox/lightbox.component";
 
@@ -25,6 +25,7 @@ export const Gallery = () => {
     <>
       <GalleryContainer>
         <RouteTitle>Gallery</RouteTitle>
+        <span>(click images to see in lightbox)</span>
         {seriesData.map((series) => (
           <SeriesContainer key={`gallery` + series.title}>
             <h3>{series.title}</h3>
