@@ -33,11 +33,12 @@ export const Contact = () => {
   perspiciatis beatae illo non.`}
           ></TextboxFadeIn> */}
 
-          <ContactForm className="cta-form" action="#" data-netlify="true">
+          <ContactForm action="#" name="contact-form" data-netlify="true">
             <div>
-              <ContactFormLabel htmlFor="full-name">Full Name</ContactFormLabel>
+              <ContactFormLabel htmlFor="name">Name</ContactFormLabel>
               <input
-                id="full-name"
+                name="name"
+                id="name"
                 type="text"
                 placeholder="John Smith"
                 required
@@ -47,6 +48,7 @@ export const Contact = () => {
             <div>
               <ContactFormLabel htmlFor="email">Email address</ContactFormLabel>
               <input
+                name="email"
                 id="email"
                 type="email"
                 placeholder="me@example.com"
@@ -56,14 +58,19 @@ export const Contact = () => {
 
             <div>
               <ContactFormLabel htmlFor="message">Message:</ContactFormLabel>
-              <textarea id="message" placeholder="hello" required />
+              <textarea
+                name="message"
+                id="message"
+                placeholder="hello"
+                required
+              />
             </div>
 
             <div>
               <ContactFormLabel htmlFor="select-where">
                 Where did you hear about this site?
               </ContactFormLabel>
-              <select id="select-where" required>
+              <select name="select-where" id="select-where" required>
                 <option value="">Please choose one option:</option>
                 <option value="family">Friends or family</option>
                 <option value="show">Art show</option>
