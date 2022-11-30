@@ -36,10 +36,23 @@ export const ContactTextBox = styled.div`
   padding: 4.8rem 6.4rem 6.4rem 6.4rem;
   color: ${primaryShade};
 `;
+
 export const ContactText = styled.p`
   font-size: 1.8rem;
   line-height: 1.8;
   margin-bottom: 4.8rem;
+`;
+
+export const ContactImageBox = styled.div`
+  background-image: linear-gradient(
+      to right bottom,
+      ${primaryShade}00,
+      ${primaryShade2}00
+    ),
+    url("https://i.ibb.co/smjshWG/the-dawning.jpg");
+  background-size: cover;
+  background-position: center;
+  box-shadow: 0 20px 30px rgba(0, 0, 0, 0.2);
 `;
 
 export const ContactForm = styled.form`
@@ -73,16 +86,4 @@ export const ContactFormLabel = styled.label`
   font-size: 1.6rem;
   font-weight: 500;
   margin-bottom: 1.2rem;
-`;
-
-export const ContactImageBox = styled.div`
-  background-image: linear-gradient(
-      to right bottom,
-      ${primaryShade}00,
-      ${primaryShade2}00
-    ),
-    url("https://i.ibb.co/smjshWG/the-dawning.jpg");
-  background-size: cover;
-  background-position: center;
-  box-shadow: 0 20px 30px rgba(0, 0, 0, 0.2);
 `;

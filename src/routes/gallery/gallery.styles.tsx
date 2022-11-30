@@ -38,3 +38,7 @@ export const SeriesBlurbHeading = styled(BlurbHeading)`
 `;
 
 export const SeriesBlurb = styled(ArtistDescription)``;
+
+export const LilCaption = styled.span`
+  padding-left: 30rem;
+`;

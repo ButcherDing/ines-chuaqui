@@ -95,6 +95,8 @@ export const GlobalStyle = createGlobalStyle`
 html {
   font-size: 62.5%;
   overflow-x: hidden;
+  width: 100vw;
+  padding-right: 15px;
 }
 
 body {
@@ -117,6 +119,10 @@ h1 {
 
 p {
   line-height: 1.5;
+}
+
+span {
+  font-size: 1.6rem;
 }
 
 h3 {

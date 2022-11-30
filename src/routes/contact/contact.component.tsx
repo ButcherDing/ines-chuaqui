@@ -33,7 +33,9 @@ export const Contact = () => {
   perspiciatis beatae illo non.`}
           ></TextboxFadeIn> */}
 
-          <ContactForm action="#" name="contact-form" data-netlify="true">
+          <ContactForm method="post" name="contact" data-netlify="true">
+            <input type="hidden" name="form-name" value="contact" />
+
             <div>
               <ContactFormLabel htmlFor="name">Name</ContactFormLabel>
               <input

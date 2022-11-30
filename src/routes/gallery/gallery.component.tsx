@@ -11,6 +11,7 @@ import {
   SeriesDescriptionContainer,
   SeriesBlurbHeading,
   SeriesBlurb,
+  LilCaption,
 } from "../../routes/gallery/gallery.styles";
 
 export const Gallery = () => {
@@ -25,14 +26,14 @@ export const Gallery = () => {
     <>
       <GalleryContainer>
         <RouteTitle>Gallery</RouteTitle>
-        <span>(click images to see in lightbox)</span>
-        {seriesData.map((series) => (
+        {seriesData.map((series, i) => (
           <SeriesContainer key={`gallery` + series.title}>
             <h3>{series.title}</h3>
             <SeriesDescriptionContainer>
               <SeriesDescription>{series.blurb}</SeriesDescription>
               <Lightbox series={series} />
             </SeriesDescriptionContainer>
+            {i === 0 && <LilCaption>Click an image to expand</LilCaption>}
           </SeriesContainer>
         ))}
 

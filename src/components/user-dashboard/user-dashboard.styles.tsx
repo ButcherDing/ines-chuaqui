@@ -28,4 +28,5 @@ export const HeaderContainer = styled.div``;
 
 export const Underlined = styled.span`
   text-decoration: underline;
+  font-size: 3rem;
 `;

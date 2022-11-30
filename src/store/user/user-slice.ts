@@ -45,6 +45,8 @@ export type UserData = {
   displayName: string;
   email: string;
   orders: Order[];
+  cartItems: CartItem[];
+  favorites: CartItem[];
 };
 
 export type Order = {
