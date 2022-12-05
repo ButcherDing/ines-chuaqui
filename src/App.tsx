@@ -1,7 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import { Route, Routes } from "react-router-dom";
 import { Fragment } from "react";
-import { useDispatch } from "react-redux";
 
 import GlobalStyle from "./general.styles";
 
@@ -21,11 +20,11 @@ import {
 } from "./store/gallery/gallery.slice";
 
 import { useAppDispatch, useAppSelector } from "./store/hooks/hooks";
-import CartDropdown from "./components/cart-dropdown/cart-dropdown.component";
+
+import ContactSuccess from "./routes/contact-success/contact-success.component";
 
 function App() {
   const dispatch = useAppDispatch();
-  const seriesData = useAppSelector((state) => state.gallery.seriesData);
 
   // const storeUrls = useAppSelector((state) => state.gallery.storeUrls);
 
@@ -47,6 +46,7 @@ function App() {
           <Route path="gallery" element={<Gallery />} />
           <Route path="shop" element={<Shop />} />
           <Route path="contact" element={<Contact />} />
+          <Route path="contact/success" element={<ContactSuccess />} />
           <Route path="auth" element={<Authentication />} />
           <Route path="checkout" element={<Checkout />} />
         </Route>
@@ -56,5 +56,3 @@ function App() {
 }
 
 export default App;
-
-// TODO - fix shop-display component, shrink and store images elsewhere (wix?) and refer to these stable urls in your db. Then go back and figure out if there is some way to actually store our cached images in shop-display.

@@ -6,7 +6,7 @@ import {
   getCollectionAndDocuments,
   // getFirebaseStorageUrl,
 } from "../../utils/firebase/firebase.utils";
-import { Print } from "../cart/cart.slice";
+import { PrintType } from "../cart/cart.slice";
 
 ////////////////
 // TODO consider an api slice instead, useQuery etc.
@@ -29,9 +29,9 @@ export type Piece = {
   description: string;
   largeImageUrl: string;
   smallImageUrl: string;
-  id: number;
+  pieceId: number;
   title: string;
-  printPrices: Print[];
+  prints: PrintType[];
 };
 
 const initialState: GalleryState = {

@@ -11,19 +11,16 @@ const CartIcon = () => {
   const cartCount = useAppSelector(selectCartCount);
 
   const handleClickOutside = () => {
-    console.log("clicked outside container");
     setIsCartOpen(false);
   };
   const ref = useOutsideClick(handleClickOutside);
 
   const handleContainerClick = (event: React.MouseEvent<HTMLElement>) => {
-    console.log("I am clicking on the container");
     // cartToggler();
     event.stopPropagation();
   };
   const iconClickHandler = (event: React.MouseEvent<HTMLElement>) => {
     const cartToggler = () => {
-      console.log("clicked icon", setIsCartOpen);
       setIsCartOpen(!isCartOpen);
     };
     cartToggler();

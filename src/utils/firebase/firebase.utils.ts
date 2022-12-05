@@ -12,6 +12,7 @@ import {
   User,
   updatePassword,
   deleteUser,
+  Auth,
 } from "firebase/auth";
 
 import {
@@ -26,6 +27,8 @@ import {
   collection,
   writeBatch,
   QueryDocumentSnapshot,
+  deleteDoc,
+  deleteField,
 } from "firebase/firestore";
 
 import { Order, UserData } from "../../store/user/user-slice";
@@ -93,6 +96,7 @@ export const getDocumentFromFirebase = async (
 export type ObjectToAdd = {
   title: string;
 };
+// Object.keys(DocFieldsObj).forEach(v => DocFieldsObj[v]= deleteField())
 
 // note: extends, not 'is'.
 export const addCollectionAndDocuments = async <T extends ObjectToAdd>(
@@ -141,6 +145,7 @@ export const addDocumentToCollection = async (
 export const updateDocumentArrayInCollection = async (
   collectionKey: string,
   documentName: string,
+  // too many args, reduce pls
   updateKey: string,
   updateValue: object | string
 ): Promise<void> => {
@@ -157,10 +162,25 @@ export const updateDocumentInCollection = async (
   updateObj: object
 ): Promise<void> => {
   const docRef = doc(db, collectionKey, documentName);
-  await updateDoc(docRef, updateObj);
-  console.log("document updated");
+  const res = await updateDoc(docRef, updateObj);
+  console.log("document updated", res);
 };
 
+//// HELPER TO DELETE A WHOLE DOC
+export const objectFieldReplacer = (docObject: any, value: any) => {
+  Object.keys(docObject).forEach((v) => (docObject[v] = deleteField()));
+};
+
+export const deleteDocumentInCollection = async (
+  collectionKey: string,
+  documentName: string,
+  fieldsObject: {}
+): Promise<void> => {
+  const docRef = doc(db, collectionKey, documentName);
+  const fieldDelRes = await updateDoc(docRef, fieldsObject);
+  const res = await deleteDoc(docRef);
+  console.log("document deleted", res);
+};
 // addDocumentToCollection("banana", "section", { name: "Guy" });
 
 ///////////////// Sign in methods
@@ -261,18 +281,27 @@ export const updateDisplayName = async (newDisplayName: string) => {
   }
 };
 
-export const deleteAccountFromFb = async () => {
+export const deleteAccountFromFbAuth = async (dummyCurrentUser: {}) => {
   try {
     if (!auth.currentUser) return;
-    const res = await deleteUser(auth.currentUser);
+    // delete from firestore database
+    objectFieldReplacer(dummyCurrentUser, deleteField);
+    await deleteDocumentInCollection(
+      "users",
+      auth.currentUser.uid,
+      dummyCurrentUser
+    );
+    // delete from fb auth
+    await deleteUser(auth.currentUser);
     console.log("user deleted");
   } catch (error) {
-    console.error("error deleting user" + error);
+    console.error("error deleting user", error);
   }
 };
 
 //// sign out
 export const signOutUser = async () => {
+  const juju = {};
   await signOut(auth);
 };
 // not sure how this works anymore

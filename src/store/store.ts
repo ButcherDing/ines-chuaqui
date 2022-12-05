@@ -45,13 +45,13 @@ const persistedGalleryReducer = persistReducer(
   persistStandardConfig,
   galleryReducer
 );
-const persistedUserReducer = persistReducer(persistStandardConfig, userReducer);
+// const persistedUserReducer = persistReducer(persistStandardConfig, userReducer);
 
 export const store = configureStore({
   reducer: {
     gallery: persistedGalleryReducer,
     cart: persistedCartReducer,
-    user: persistedUserReducer,
+    user: userReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
@@ -73,3 +73,7 @@ export type AppThunk<ReturnType = void> = ThunkAction<
   unknown,
   Action<string>
 >;
+
+// EMERGE PURGE (FOR DEV)
+const toPurge: any = persistor.purge();
+console.log(toPurge);

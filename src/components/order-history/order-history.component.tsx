@@ -1,9 +1,7 @@
-import { FC } from "react";
-import { useSelector } from "react-redux";
 import { unixToDate } from "../../store/cart/cart.slice";
 import { useAppSelector } from "../../store/hooks/hooks";
 
-import { FormattedOrderItem, Order } from "../../store/user/user-slice";
+import { selectOrders } from "../../store/user/user-slice";
 import {
   OrderHeaders,
   OrderHeader,
@@ -15,7 +13,7 @@ import {
 } from "./order-history.styles";
 
 export const OrderHistory = () => {
-  const orders = useAppSelector((state) => state.user.currentUser?.orders);
+  const orders = useAppSelector(selectOrders);
 
   return (
     <OrderHistoryContainer>
@@ -33,15 +31,15 @@ export const OrderHistory = () => {
               <div>Order Id: ...{order.orderId.slice(-8)}</div>
             </OrderDateIdContainer>
             <OrderHeaders>
+              {/* make dynamic - variables at top - could be reusable table */}
               <OrderHeader>Item</OrderHeader>
               <OrderHeader>Size</OrderHeader>
               <OrderHeader>Quantity</OrderHeader>
               <OrderHeader>Price each</OrderHeader>
-              {/* <span>Order Id</span> */}
-              {/* <span>Date Ordered</span> */}
             </OrderHeaders>
+            {/* separate this component out passing in boughtItem*/}
             <SingleOrder>
-              {order.formattedBoughtItems.map((boughtItem) => (
+              {order.formattedBoughtItems?.map((boughtItem) => (
                 <BoughtItem>
                   <ItemDetail>{boughtItem.title} </ItemDetail>
 
@@ -49,9 +47,6 @@ export const OrderHistory = () => {
                   <ItemDetail>{boughtItem.quantity} </ItemDetail>
 
                   <ItemDetail>{boughtItem.price} </ItemDetail>
-
-                  {/* <span>{boughtItem.orderId}</span> */}
-                  {/* <span>{boughtItem.date}</span> */}
                 </BoughtItem>
               ))}
             </SingleOrder>

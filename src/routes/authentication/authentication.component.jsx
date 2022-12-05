@@ -1,5 +1,5 @@
 import { useAppDispatch, useAppSelector } from "../../store/hooks/hooks";
-import { signOut } from "../../store/user/user-slice";
+import { selectCurrentUser, signOut } from "../../store/user/user-slice";
 
 import SignInForm from "../../components/sign-in-form/sign-in-form.component";
 import SignUpForm from "../../components/sign-up-form/sign-up-form.component";
@@ -13,7 +13,7 @@ import { UserDashboard } from "../../components/user-dashboard/user-dashboard.co
 
 const Authentication = () => {
   const dispatch = useAppDispatch();
-  const currentUser = useAppSelector((state) => state.user.currentUser);
+  const currentUser = useAppSelector(selectCurrentUser);
 
   const signOutHandler = () => {
     dispatch(signOut());

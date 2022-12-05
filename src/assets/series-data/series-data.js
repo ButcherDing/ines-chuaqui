@@ -9,9 +9,9 @@ export const SERIES_DATA = [
         fetchPath: "/pieces/skull-1.jpg",
         largeImageUrl: "https://i.ibb.co/tmCZ3k6/skull-1.jpg",
         smallImageUrl: "https://i.ibb.co/CKmZh2Z/skull-1.jpg",
-        id: 0,
+        pieceId: "00-000",
         title: "Skull 1",
-        printPrices: [
+        prints: [
           { size: "3 x 5", price: 10 },
           { size: "8.5 x 11", price: 20 },
           { size: "16 x 20", price: 40 },
@@ -22,9 +22,9 @@ export const SERIES_DATA = [
         fetchPath: "/pieces/skull-2.jpg",
         largeImageUrl: "https://i.ibb.co/Z6Gt1ff/skull-2.jpg",
         smallImageUrl: "https://i.ibb.co/pJ435cL/skull-2.jpg",
-        id: 1,
+        pieceId: "00-001",
         title: "Skull 2",
-        printPrices: [
+        prints: [
           { size: "3 x 5", price: 10 },
           { size: "8.5 x 11", price: 20 },
           { size: "16 x 20", price: 40 },
@@ -35,9 +35,9 @@ export const SERIES_DATA = [
         fetchPath: "/pieces/skull-3.jpg",
         largeImageUrl: "https://i.ibb.co/Smm5bm1/skull-3.jpg",
         smallImageUrl: "https://i.ibb.co/XbFsSHY/skull-3.jpg",
-        id: 2,
+        pieceId: "00-002",
         title: "Skull 3",
-        printPrices: [
+        prints: [
           { size: "3 x 5", price: 10 },
           { size: "8.5 x 11", price: 20 },
           { size: "16 x 20", price: 40 },
@@ -48,9 +48,9 @@ export const SERIES_DATA = [
         fetchPath: "/pieces/skull-4.jpg",
         largeImageUrl: "https://i.ibb.co/Wt9Lt3R/skull-4.jpg",
         smallImageUrl: "https://i.ibb.co/DtNGvhW/skull-4.jpg",
-        id: 3,
+        pieceId: "00-003",
         title: "Skull 4",
-        printPrices: [
+        prints: [
           { size: "3 x 5", price: 10 },
           { size: "8.5 x 11", price: 20 },
           { size: "16 x 20", price: 40 },
@@ -61,9 +61,9 @@ export const SERIES_DATA = [
         fetchPath: "/pieces/skull-5.jpg",
         largeImageUrl: "https://i.ibb.co/D726CRv/skull-5.jpg",
         smallImageUrl: "https://i.ibb.co/6t8DqWq/skull-5.jpg",
-        id: 4,
+        pieceId: "00-004",
         title: "Skull 5",
-        printPrices: [
+        prints: [
           { size: "3 x 5", price: 10 },
           { size: "8.5 x 11", price: 20 },
           { size: "16 x 20", price: 40 },
@@ -74,16 +74,16 @@ export const SERIES_DATA = [
   {
     title: "Suspended Animation",
     blurb:
-      "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Officiis libero rem ipsam eos architecto ipsa aut. Cupiditate, libero repudiandae earum accusantium obcaecati autem quaerat voluptate, vitae perspiciatis, perferendis quam? Esse!",
+      "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Officiis libero rem ipsam eos architecto ipsa aut. CuppieceIditate, libero repudiandae earum accusantium obcaecati autem quaerat voluptate, vitae perspiciatis, perferendis quam? Esse!",
     pieces: [
       {
         description: "Lorem ipsum...",
         fetchPath: "/pieces/suspended-ani-1.jpg",
         largeImageUrl: "https://i.ibb.co/ZYbMftg/suspended-ani-1.jpg",
         smallImageUrl: "https://i.ibb.co/B4HrhYg/suspended-ani-1.jpg",
-        id: 5,
+        pieceId: "01-005",
         title: "Suspended Animation 1",
-        printPrices: [
+        prints: [
           { size: "3 x 5", price: 10 },
           { size: "8.5 x 11", price: 20 },
           { size: "16 x 20", price: 40 },
@@ -94,9 +94,9 @@ export const SERIES_DATA = [
         fetchPath: "/pieces/suspended-ani-2.jpg",
         largeImageUrl: "https://i.ibb.co/hZGwHF1/suspended-ani-2.jpg",
         smallImageUrl: "https://i.ibb.co/M2X35VN/suspended-ani-2.jpg",
-        id: 6,
+        pieceId: "01-006",
         title: "Suspended Animation 2",
-        printPrices: [
+        prints: [
           { size: "3 x 5", price: 10 },
           { size: "8.5 x 11", price: 20 },
           { size: "16 x 20", price: 40 },
@@ -107,9 +107,9 @@ export const SERIES_DATA = [
         fetchPath: "/pieces/suspended-ani-4.jpg",
         largeImageUrl: "https://i.ibb.co/9cnyv7d/suspended-ani-4.jpg",
         smallImageUrl: "https://i.ibb.co/xDGZVM6/suspended-ani-4.jpg",
-        id: 7,
+        pieceId: "01-007",
         title: "Suspended Animation 4",
-        printPrices: [
+        prints: [
           { size: "3 x 5", price: 10 },
           { size: "8.5 x 11", price: 20 },
           { size: "16 x 20", price: 40 },

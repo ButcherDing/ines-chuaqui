@@ -1,4 +1,5 @@
 import { Fragment } from "react";
+import { useNavigate } from "react-router-dom";
 import Button from "../../components/button/button.component";
 import { LeafButton } from "../../components/button/button.styles";
 import TextboxFadeIn from "../../components/textbox-fade-in/textbox-fade-in.component";
@@ -14,6 +15,14 @@ import {
 } from "./contact.styles";
 
 export const Contact = () => {
+  const navigate = useNavigate();
+
+  const onSubmitHandler = (event: React.FormEvent) => {
+    event.preventDefault();
+
+    navigate("/contact/success");
+  };
+
   return (
     <ContactContainer>
       <ContactBox>
@@ -33,7 +42,12 @@ export const Contact = () => {
   perspiciatis beatae illo non.`}
           ></TextboxFadeIn> */}
 
-          <ContactForm method="post" name="contact" data-netlify="true">
+          <ContactForm
+            onSubmit={onSubmitHandler}
+            method="post"
+            name="contact"
+            data-netlify="true"
+          >
             <input type="hidden" name="form-name" value="contact" />
 
             <div>

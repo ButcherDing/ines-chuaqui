@@ -7,6 +7,6 @@ export const QuantityContainer = styled.div`
 export const Arrow = styled.span`
   cursor: pointer;
 `;
-export const Value = styled.span`
+export const ItemCount = styled.span`
   margin: 0 10px;
 `;

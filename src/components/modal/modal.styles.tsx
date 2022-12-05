@@ -31,32 +31,11 @@ export const ModalFooter = styled.div`
   padding: 1rem;
 `;
 
-export const ModalButtonContainer = styled.div`
+export const ModalButtons = styled.div`
   display: flex;
   justify-content: space-between;
+  align-items: center;
   margin-top: 2.5rem;
-`;
-
-export const ModalForm = styled.form`
-  legend,
-  fieldset,
-  select,
-  textarea,
-  input,
-  button,
-  option {
-    color: ${primaryShade};
-    background-color: white;
-    height: 3rem;
-    font-size: 1.4rem;
-    border: 1px solid #aaaaaa;
-    &:hover,
-    :focus,
-    :active,
-    :checked {
-      background-color: white;
-    }
-  }
 `;
 
 export const ModalMessage = styled.div`
