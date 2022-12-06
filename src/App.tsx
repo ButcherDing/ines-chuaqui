@@ -1,27 +1,30 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, lazy, Suspense } from "react";
 import { Route, Routes } from "react-router-dom";
 import { Fragment } from "react";
 
 import GlobalStyle from "./general.styles";
+import ContactSuccess from "./routes/contact-success/contact-success.component";
 
-import Home from "./routes/home/home.component";
-import Navigation from "./routes/navigation/navigation.component";
-import Gallery from "./routes/gallery/gallery.component";
-import Shop from "./routes/shop/shop.component";
-import Authentication from "./routes/authentication/authentication.component";
-import Checkout from "./routes/checkout/checkout.component";
-import Contact from "./routes/contact/contact.component";
+import Spinner from "./components/spinner/spinner.component";
 
-import { checkUserSession } from "./store/user/user-slice";
+import { checkUserSessionAsync } from "./store/user/user-slice";
 
 import {
   getSeriesDataAsync,
   // getFirestoreUrlsAsync,
 } from "./store/gallery/gallery.slice";
 
-import { useAppDispatch, useAppSelector } from "./store/hooks/hooks";
+import { useAppDispatch } from "./store/hooks/hooks";
+import Navigation from "./routes/navigation/navigation.component";
 
-import ContactSuccess from "./routes/contact-success/contact-success.component";
+const Home = lazy(() => import("./routes/home/home.component"));
+const Gallery = lazy(() => import("./routes/gallery/gallery.component"));
+const Shop = lazy(() => import("./routes/shop/shop.component"));
+const Authentication = lazy(
+  () => import("./routes/authentication/authentication.component")
+);
+const Checkout = lazy(() => import("./routes/checkout/checkout.component"));
+const Contact = lazy(() => import("./routes/contact/contact.component"));
 
 function App() {
   const dispatch = useAppDispatch();
@@ -29,7 +32,7 @@ function App() {
   // const storeUrls = useAppSelector((state) => state.gallery.storeUrls);
 
   useEffect(() => {
-    dispatch(checkUserSession());
+    dispatch(checkUserSessionAsync());
     dispatch(getSeriesDataAsync());
   }, []);
 
@@ -40,17 +43,19 @@ function App() {
   return (
     <Fragment>
       <GlobalStyle />
-      <Routes>
-        <Route index element={<Home />} />
-        <Route path="/" element={<Navigation />}>
-          <Route path="gallery" element={<Gallery />} />
-          <Route path="shop" element={<Shop />} />
-          <Route path="contact" element={<Contact />} />
-          <Route path="contact/success" element={<ContactSuccess />} />
-          <Route path="auth" element={<Authentication />} />
-          <Route path="checkout" element={<Checkout />} />
-        </Route>
-      </Routes>
+      <Suspense fallback={<Spinner />}>
+        <Routes>
+          <Route index element={<Home />} />
+          <Route path="/" element={<Navigation />}>
+            <Route path="gallery" element={<Gallery />} />
+            <Route path="shop" element={<Shop />} />
+            <Route path="contact" element={<Contact />} />
+            <Route path="contact/success" element={<ContactSuccess />} />
+            <Route path="auth" element={<Authentication />} />
+            <Route path="checkout" element={<Checkout />} />
+          </Route>
+        </Routes>
+      </Suspense>
     </Fragment>
   );
 }

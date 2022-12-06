@@ -12,7 +12,6 @@ import {
   User,
   updatePassword,
   deleteUser,
-  Auth,
 } from "firebase/auth";
 
 import {
@@ -34,7 +33,6 @@ import {
 import { Order, UserData } from "../../store/user/user-slice";
 
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
-import { SERIES_DATA } from "../../assets/series-data/series-data";
 
 //////////////////////////
 
@@ -71,8 +69,9 @@ export const getFirebaseStorageUrl = async (path: string) => {
     .then((url) => {
       return url;
     })
-    .catch((err) => {
-      console.log(err);
+    .catch((error) => {
+      console.log(error);
+      throw error;
       // Handle any errors
     });
 };
@@ -84,12 +83,12 @@ export const getDocumentFromFirebase = async (
   documentName: string
 ) => {
   const docRef = doc(db, collectionName, documentName);
-  const docSnap = await getDoc(docRef);
+  const docSnapshot = await getDoc(docRef);
 
-  if (docSnap.exists()) {
+  if (docSnapshot.exists()) {
   } else {
     // doc.data() will be undefined in this case
-    console.error("No such document!");
+    throw new Error("No such document found");
   }
 };
 
@@ -159,6 +158,7 @@ export const updateDocumentArrayInCollection = async (
 export const updateDocumentInCollection = async (
   collectionKey: string,
   documentName: string,
+  // could include the various different docs we can update, more type safety
   updateObj: object
 ): Promise<void> => {
   const docRef = doc(db, collectionKey, documentName);
@@ -166,20 +166,19 @@ export const updateDocumentInCollection = async (
   console.log("document updated", res);
 };
 
-//// HELPER TO DELETE A WHOLE DOC
-export const objectFieldReplacer = (docObject: any, value: any) => {
-  Object.keys(docObject).forEach((v) => (docObject[v] = deleteField()));
-};
-
 export const deleteDocumentInCollection = async (
   collectionKey: string,
   documentName: string,
-  fieldsObject: {}
+  objectToDelete: any
 ): Promise<void> => {
   const docRef = doc(db, collectionKey, documentName);
-  const fieldDelRes = await updateDoc(docRef, fieldsObject);
+  Object.keys(objectToDelete).forEach(
+    (key) => (objectToDelete[key] = deleteField())
+  );
+  console.log(objectToDelete);
+  const fieldDelRes = await updateDoc(docRef, objectToDelete);
   const res = await deleteDoc(docRef);
-  console.log("document deleted", res);
+  console.log("document deleted", res, fieldDelRes);
 };
 // addDocumentToCollection("banana", "section", { name: "Guy" });
 
@@ -206,7 +205,7 @@ export const createUserDocumentFromAuth = async (
 ): Promise<void | QueryDocumentSnapshot<UserData>> => {
   if (!userAuth) return;
   const userDocRef = doc(db, "users", userAuth.uid);
-  const userSnapshot = await getDoc(userDocRef);
+  let userSnapshot = await getDoc(userDocRef);
   if (!userSnapshot.exists()) {
     // can add other properties below
     const { displayName, email } = userAuth;
@@ -214,17 +213,21 @@ export const createUserDocumentFromAuth = async (
     const orders: Order[] = [];
 
     try {
-      await setDoc(userDocRef, {
+      const newUserDoc = {
         email,
         createdAt,
         orders,
+        displayName,
         ...additionalInformation,
-      });
-    } catch (err) {
-      console.log("error creating user", err);
+      };
+      await setDoc(userDocRef, newUserDoc);
+      // only gives a void return, hence fetching again.
+      userSnapshot = await getDoc(userDocRef);
+    } catch (error) {
+      console.log("error creating user document", error);
+      throw error;
     }
   }
-  // does this make sense here? what if no userSnapshot? error handling...
   return userSnapshot as QueryDocumentSnapshot<UserData>;
 };
 
@@ -233,10 +236,15 @@ export const createAuthUserWithEmailAndPassword = async (
   email: string,
   password: string
 ) => {
-  if (!email || !password) return;
+  try {
+    if (!email || !password)
+      throw new Error("please enter both username and password");
 
-  const res = await createUserWithEmailAndPassword(auth, email, password);
-  return res;
+    const res = await createUserWithEmailAndPassword(auth, email, password);
+    return res;
+  } catch (error) {
+    throw error;
+  }
 };
 
 // manage account methods
@@ -252,6 +260,7 @@ export const updateFbAuthEmail = async (newEmail: string) => {
     return res;
   } catch (error) {
     console.error("error changing email" + error);
+    throw error;
   }
 };
 export const updateFbPassword = async (newPassword: string) => {
@@ -262,6 +271,7 @@ export const updateFbPassword = async (newPassword: string) => {
     return res;
   } catch (error) {
     console.error("error changing password" + error);
+    throw error;
   }
 };
 
@@ -278,14 +288,15 @@ export const updateDisplayName = async (newDisplayName: string) => {
     return res;
   } catch (error) {
     console.error("error changing display name" + error);
+    throw error;
   }
 };
 
-export const deleteAccountFromFbAuth = async (dummyCurrentUser: {}) => {
+export const deleteAccountFromFbAuth = async (dummyCurrentUser: any) => {
   try {
-    if (!auth.currentUser) return;
+    if (!auth.currentUser) throw new Error("No user currently logged in");
     // delete from firestore database
-    objectFieldReplacer(dummyCurrentUser, deleteField);
+
     await deleteDocumentInCollection(
       "users",
       auth.currentUser.uid,
@@ -296,13 +307,17 @@ export const deleteAccountFromFbAuth = async (dummyCurrentUser: {}) => {
     console.log("user deleted");
   } catch (error) {
     console.error("error deleting user", error);
+    throw error;
   }
 };
 
 //// sign out
 export const signOutUser = async () => {
-  const juju = {};
-  await signOut(auth);
+  try {
+    await signOut(auth);
+  } catch (error) {
+    throw error;
+  }
 };
 // not sure how this works anymore
 export const onAuthStateChangedListener = (callback: NextOrObserver<User>) =>

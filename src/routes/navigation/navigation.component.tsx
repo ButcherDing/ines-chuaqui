@@ -13,16 +13,10 @@ import {
   NavLink,
   LogoContainer,
 } from "./navigation.styles";
-import { useAppDispatch, useAppSelector } from "../../store/hooks/hooks";
-import { signOut } from "../../store/user/user-slice";
+import { useAppSelector } from "../../store/hooks/hooks";
 
 export const Navigation = () => {
-  const dispatch = useAppDispatch();
   const currentUser = useAppSelector((state) => state.user.currentUser);
-
-  const signOutHandler = () => {
-    dispatch(signOut());
-  };
 
   return (
     <Fragment>

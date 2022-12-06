@@ -2,11 +2,10 @@ import {
   createSlice,
   createAsyncThunk,
   createSelector,
+  SerializedError,
 } from "@reduxjs/toolkit";
 import { PaymentIntentResult } from "@stripe/stripe-js";
-import type { PayloadAction } from "@reduxjs/toolkit";
 import {
-  addDocumentToCollection,
   createAuthUserWithEmailAndPassword,
   createUserDocumentFromAuth,
   deleteAccountFromFbAuth,
@@ -19,8 +18,13 @@ import {
   updateFbPassword,
 } from "../../utils/firebase/firebase.utils";
 import { RootState } from "../store";
-import { CartItem, logTransactionToFirebase } from "../cart/cart.slice";
-import { useAppSelector } from "../hooks/hooks";
+import { logTransactionToFirebase } from "../cart/cart.slice";
+
+//  For debugging reducers - use current to console.log a value inside reducer
+import { current } from "immer";
+// import { getCurrentScope } from "immer/dist/internal";
+
+//
 
 //////// TYPES
 
@@ -34,25 +38,24 @@ interface SignUpFormInput extends FormInput {
 }
 
 type UserState = {
+  readonly changedMsg: boolean;
   readonly currentUser: UserData | null;
   readonly isLoading: boolean;
-  readonly error: Error | null | unknown;
+  readonly error: SerializedError | null;
 };
 
 export type UserData = {
-  createdAt: Date;
+  createdAt: string;
   displayName: string;
   email: string;
   orders: Order[];
-
-  //???? new features?
   // cartItems: CartItem[];
   // favorites: CartItem[];
 };
 
 export type Order = {
   formattedBoughtItems: FormattedOrderedItem[];
-  currentUser: UserData;
+  currentUser: UserData | null;
   orderId: string;
   paymentResult: PaymentIntentResult;
 };
@@ -60,6 +63,7 @@ export type Order = {
 // date = new Date(created * 1000)
 
 const initialState: UserState = {
+  changedMsg: false,
   currentUser: null,
   isLoading: false,
   error: null,
@@ -70,7 +74,7 @@ export type FormattedOrderedItem = {
   size: string;
   price: number;
   quantity: number;
-  orderId: number;
+  orderId: string;
   date: string;
 };
 
@@ -95,12 +99,21 @@ export const selectOrders = createSelector(
     return currentUser.orders;
   }
 );
+export const selectErrorMessage = createSelector(
+  [selectUserReducer],
+  (user) => {
+    if (!user.error) return;
+    if (!user.error.message) return "";
+    return user.error.message;
+  }
+);
 
-// TODO research error handling in thunks (best practices in docs)
+// TODO research error handling in thunks (best practices in docs?)
+
 ///////// THUNKS
 
-export const checkUserSession = createAsyncThunk(
-  "authentication/checkUserSession",
+export const checkUserSessionAsync = createAsyncThunk(
+  "authentication/checkUserSessionAsync",
   async (_, thunkAPI) => {
     try {
       const res = await getCurrentUser();
@@ -110,6 +123,7 @@ export const checkUserSession = createAsyncThunk(
       return userData.data();
     } catch (error) {
       console.log("error checking current user", error);
+      throw error;
     }
   }
 );
@@ -123,27 +137,28 @@ export const signInEmailPassAsync = createAsyncThunk(
       if (!res) return;
       const userSnapshot = await createUserDocumentFromAuth(res.user);
       if (!userSnapshot) return;
-      console.log(userSnapshot);
       return userSnapshot.data();
     } catch (error) {
       console.log("user sign in failed", error);
+      throw error;
     }
   }
 );
 
 export const signInGooglePopupAsync = createAsyncThunk(
   "authentication/signInWithGoogle",
-  async (thunkAPI) => {
+  async (_, thunkAPI) => {
     try {
       const res = await signInWithGooglePopup();
-
+      console.log(res);
       const userSnapshot = await createUserDocumentFromAuth(res.user);
 
       // throw error?
-      if (!userSnapshot) return;
+      if (!userSnapshot) throw new Error("could not find user data");
       return userSnapshot.data();
     } catch (error) {
       console.log("error signing in with google", error);
+      throw error;
     }
   }
 );
@@ -156,88 +171,86 @@ export const signUpWithEmailPassAsync = createAsyncThunk(
       const res = await createAuthUserWithEmailAndPassword(email, password);
 
       if (!res) return;
-      const notSnapshot = await createUserDocumentFromAuth(res.user, {
+      const userSnapshot = await createUserDocumentFromAuth(res.user, {
         displayName,
       });
+      if (!userSnapshot) return;
       dispatch(signInEmailPassAsync({ email, password }));
     } catch (error) {
       console.log("sign up failed", error);
+      throw error;
     }
   }
 );
 
-export const signOut = createAsyncThunk(
+export const signOutAsync = createAsyncThunk(
   "authentication/signOut",
-  async (_, { dispatch }) => {
+  async (_, thunkAPI) => {
     try {
       await signOutUser();
     } catch (error) {
       console.log("error changing signing out:", error);
+      throw error;
     }
   }
 );
 
-export const changeEmail = createAsyncThunk(
-  "authentication/changeEmail",
+export const changeEmailAsync = createAsyncThunk(
+  "authentication/changeEmailAsync",
   async (newEmail: string, thunkAPI) => {
     try {
-      updateFbAuthEmail(newEmail);
-      checkUserSession();
+      await updateFbAuthEmail(newEmail);
+      return newEmail;
     } catch (error) {
       console.log("error changing email:", error);
+      throw error;
     }
   }
 );
-export const changePassword = createAsyncThunk(
-  "authentication/changePassword",
+
+export const changePasswordAsync = createAsyncThunk(
+  "authentication/changePasswordAsync",
   async (newPassword: string, thunkAPI) => {
     try {
-      updateFbPassword(newPassword);
+      await updateFbPassword(newPassword);
       // standard to log user out after change?
-      checkUserSession();
+      // display confimation message
     } catch (error) {
       console.log("error changing password:", error);
+      throw error;
     }
   }
 );
-export const changeDisplayName = createAsyncThunk(
-  "authentication/changeDisplayName",
+
+export const changeDisplayNameAsync = createAsyncThunk(
+  "authentication/changeDisplayNameAsync",
   async (newDisplayName: string, thunkAPI) => {
     try {
-      updateDisplayName(newDisplayName);
+      await updateDisplayName(newDisplayName);
       console.log("display name updated");
-      checkUserSession();
+      return newDisplayName;
     } catch (error) {
       console.log("error changing display name:", error);
+      throw error;
     }
   }
 );
 
-deleteAccountFromFbAuth(dummyCurrentUser);
-
-export const deleteUser = createAsyncThunk(
-  "authentication/deleteUser",
-  async (_, { dispatch }) => {
+export const deleteAccountAsync = createAsyncThunk(
+  "authentication/deleteAccountAsync",
+  async (_, { dispatch, getState }) => {
     try {
-      deleteAccountFromFbAuth(dummyCurrentUser);
+      const state = getState() as RootState;
+      const currentUser = state.user.currentUser;
+      await deleteAccountFromFbAuth({ ...currentUser });
       console.log("account deleted from firebase");
-      dispatch(signOut());
+      await dispatch(signOutAsync());
     } catch (error) {
       console.log("error deleting user:", error);
+      throw error;
     }
   }
 );
-
-const DocFieldsObj: any = {
-  banana: ";fl",
-  pineapple: ";fl",
-  zig: ";fl",
-  apple: ";fl",
-};
-
-Object.keys(DocFieldsObj).forEach((v) => (DocFieldsObj[v] = "deleteField()"));
-
-console.log(DocFieldsObj);
 
 ///////////
 
@@ -258,6 +271,7 @@ export const userSlice = createSlice({
     });
     builder.addCase(signUpWithEmailPassAsync.fulfilled, (state) => {
       state.isLoading = false;
+      // state is updated by sign in thunk at end of this thunk
     });
     builder.addCase(signUpWithEmailPassAsync.rejected, (state, { error }) => {
       state.isLoading = false;
@@ -270,6 +284,7 @@ export const userSlice = createSlice({
     builder.addCase(signInGooglePopupAsync.fulfilled, (state, { payload }) => {
       state.isLoading = false;
       if (!payload) return;
+      //// doesn't give us back an object that we can get our currentUser off of the first time, so checksession.
       state.currentUser = payload;
     });
     builder.addCase(signInGooglePopupAsync.rejected, (state, action) => {
@@ -289,34 +304,37 @@ export const userSlice = createSlice({
     });
     builder.addCase(signInEmailPassAsync.rejected, (state, { error }) => {
       state.isLoading = false;
+      console.log(error);
+      current(error);
+      // getCurrentScope(error);
       state.error = error;
     });
 
     /////////////// Check User Session
-    builder.addCase(checkUserSession.pending, (state) => {
+    builder.addCase(checkUserSessionAsync.pending, (state) => {
       state.isLoading = true;
     });
 
-    builder.addCase(checkUserSession.fulfilled, (state, { payload }) => {
+    builder.addCase(checkUserSessionAsync.fulfilled, (state, { payload }) => {
       if (!payload) return;
       state.currentUser = payload;
       state.isLoading = false;
     });
-    builder.addCase(checkUserSession.rejected, (state, { error }) => {
+    builder.addCase(checkUserSessionAsync.rejected, (state, { error }) => {
       state.isLoading = false;
       state.error = error;
     });
 
     //////////////// Sign Out
-    builder.addCase(signOut.pending, (state) => {
+    builder.addCase(signOutAsync.pending, (state) => {
       state.isLoading = true;
     });
 
-    builder.addCase(signOut.fulfilled, (state) => {
+    builder.addCase(signOutAsync.fulfilled, (state) => {
       state.isLoading = false;
       state.currentUser = null;
     });
-    builder.addCase(signOut.rejected, (state, { error }) => {
+    builder.addCase(signOutAsync.rejected, (state, { error }) => {
       state.isLoading = false;
       state.error = error;
     });
@@ -326,58 +344,80 @@ export const userSlice = createSlice({
       state.isLoading = true;
     });
 
-    builder.addCase(logTransactionToFirebase.fulfilled, (state) => {
-      state.isLoading = false;
-    });
+    builder.addCase(
+      logTransactionToFirebase.fulfilled,
+      (state, { payload }) => {
+        if (!payload) return;
+        if (!state.currentUser) return;
+        // because someone not logged in can still make a purchase - in this case there is no user to which to push an order record.
+        state.currentUser.orders.push(payload);
+        state.isLoading = false;
+      }
+    );
+    // order history updates
     builder.addCase(logTransactionToFirebase.rejected, (state, { error }) => {
       state.isLoading = false;
       state.error = error;
     });
+
     //////////////// Change Email
-    builder.addCase(changeEmail.pending, (state) => {
+    builder.addCase(changeEmailAsync.pending, (state) => {
       state.isLoading = true;
     });
 
-    builder.addCase(changeEmail.fulfilled, (state) => {
+    builder.addCase(changeEmailAsync.fulfilled, (state, { payload }) => {
+      if (!state.currentUser) return;
+      if (typeof payload !== "string") return;
+      state.currentUser.email = payload;
       state.isLoading = false;
     });
-    builder.addCase(changeEmail.rejected, (state, { error }) => {
-      state.isLoading = false;
+    // email updates in currentUser
+    builder.addCase(changeEmailAsync.rejected, (state, { error }) => {
       state.error = error;
+      console.log(error);
+      state.isLoading = false;
     });
     //////////////// Change Display Name
-    builder.addCase(changeDisplayName.pending, (state) => {
+    builder.addCase(changeDisplayNameAsync.pending, (state) => {
       state.isLoading = true;
     });
 
-    builder.addCase(changeDisplayName.fulfilled, (state) => {
+    builder.addCase(changeDisplayNameAsync.fulfilled, (state, { payload }) => {
       state.isLoading = false;
+      if (typeof payload !== "string") return;
+      if (!state.currentUser) return;
+      state.currentUser.displayName = payload;
     });
-    builder.addCase(changeDisplayName.rejected, (state, { error }) => {
+    builder.addCase(changeDisplayNameAsync.rejected, (state, { error }) => {
       state.isLoading = false;
       state.error = error;
     });
     //////////////// Change Password
-    builder.addCase(changePassword.pending, (state) => {
+    builder.addCase(changePasswordAsync.pending, (state) => {
       state.isLoading = true;
     });
 
-    builder.addCase(changePassword.fulfilled, (state) => {
+    builder.addCase(changePasswordAsync.fulfilled, (state) => {
+      // confirmation
       state.isLoading = false;
+      state.changedMsg = true;
     });
-    builder.addCase(changePassword.rejected, (state, { error }) => {
+    builder.addCase(changePasswordAsync.rejected, (state, { error }) => {
       state.isLoading = false;
+      console.log(error);
       state.error = error;
     });
     //////////////// Delete Account
-    builder.addCase(deleteUser.pending, (state) => {
+    builder.addCase(deleteAccountAsync.pending, (state) => {
       state.isLoading = true;
     });
 
-    builder.addCase(deleteUser.fulfilled, (state) => {
+    builder.addCase(deleteAccountAsync.fulfilled, (state) => {
       state.isLoading = false;
+      state = initialState;
+      // account deleted redirect?
     });
-    builder.addCase(deleteUser.rejected, (state, { error }) => {
+    builder.addCase(deleteAccountAsync.rejected, (state, { error }) => {
       state.isLoading = false;
       state.error = error;
     });

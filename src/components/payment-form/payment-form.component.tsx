@@ -18,6 +18,7 @@ import {
 } from "./payment-form.styles";
 import { useAppDispatch } from "../../store/hooks/hooks";
 
+// remember this pattern for type guarding.
 const ifValidCardElement = (
   card: StripeCardElement | null
 ): card is StripeCardElement => card !== null;

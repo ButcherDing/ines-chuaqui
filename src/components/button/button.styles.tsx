@@ -73,8 +73,9 @@ export const InvertedButton = styled(BaseButton)`
 `;
 
 export const ButtonSpinner = styled(SpinnerContainer)`
-  width: 30px;
-  height: 30px;
+  width: 2.3rem;
+  height: 2.3rem;
+  transition: all 0.3s;
 `;
 
 export const NavLinkButton = styled(NavLink)`

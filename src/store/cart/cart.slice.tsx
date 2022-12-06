@@ -12,16 +12,12 @@ import {
   getCurrentUser,
   updateDocumentArrayInCollection,
 } from "../../utils/firebase/firebase.utils";
-import { checkUserSession } from "../user/user-slice";
+import { checkUserSessionAsync } from "../user/user-slice";
 
 ////  For debugging reducers - use current to console.log a value inside reducer
-import { current } from "immer";
-import { getCurrentScope } from "immer/dist/internal";
+// import { current } from "immer";
+// import { getCurrentScope } from "immer/dist/internal";
 ////
-
-import { useAppSelector } from "../hooks/hooks";
-import { setIndexConfiguration } from "firebase/firestore";
-import { CartItems } from "../../components/cart-dropdown/cart-dropdown.styles";
 
 ///////// SELECTORS
 
@@ -133,7 +129,7 @@ export const logTransactionToFirebase = createAsyncThunk(
       };
 
       // write the TRANSACTION document to our transaction records in firebase
-      const fbRes = await addDocumentToCollection(
+      await addDocumentToCollection(
         "transactions",
         paymentResult.paymentIntent.id,
         orderDoc
@@ -169,17 +165,17 @@ export const logTransactionToFirebase = createAsyncThunk(
       };
 
       console.log(formattedBoughtItems);
-
+      // we don't have the uid anywhere in state unfortunately....
       const userRes = await getCurrentUser();
       if (!userRes) return;
-      const updateUserHistoryRes = await updateDocumentArrayInCollection(
+      await updateDocumentArrayInCollection(
         "users",
         userRes.uid,
         "orders",
         userOrderDoc
       );
-      thunkAPI.dispatch(checkUserSession());
-      return orderDoc;
+      thunkAPI.dispatch(checkUserSessionAsync());
+      return userOrderDoc;
     } catch (error) {
       console.error(error);
     }
@@ -203,10 +199,6 @@ const findCartItemIndex = (state: CartState, cartItemToFind: CartItem) =>
     (cartItem) => cartItem.cartId === cartItemToFind.cartId
   );
 
-const findCartItemById = (cartItems: CartItem[], searchId: CartId) => {
-  return cartItems.find((cartItem) => cartItem.cartId === searchId);
-};
-
 export const unixToDate = (unixStamp: number | undefined) => {
   if (!unixStamp) return "invalid date";
   return (
@@ -216,35 +208,12 @@ export const unixToDate = (unixStamp: number | undefined) => {
   );
 };
 
-// const findPieceById = (pieceId: string) => {
-//   const series = useAppSelector((state) => state.gallery.seriesData)[
-//     pieceId.slice(1)
-//   ].pieces[+pieceId.slice(-3)];
-// };
-
-// const convertToCartItem = (currentItemId: string): CartItem => {
-//   return draftCartItem;
-// };
-
 //////////// REDUCER SLICE
 
 export const cartSlice = createSlice({
   name: "cart",
   initialState,
   reducers: {
-    // setCartItems: (state, action: PayloadAction<CartItem>) => {
-    //   const newCartItem = action.payload;
-    //   const oldCartItems = state.cartItems;
-    //   const sameItem = oldCartItems.find(
-    //     (oldItem) => newCartItem.cartId === oldItem.cartId
-    //   );
-    //   sameItem
-    //     ? (sameItem.quantity += newCartItem.quantity)
-    //     : state.cartItems.push(newCartItem);
-    // },
-    // setIsCartOpen: (state, action: PayloadAction<boolean>) => {
-    //   state.isCartOpen = action.payload;
-    // },
     chooseItem: (state, action: PayloadAction<CartItem>) => {
       const cartItemToSelect = action.payload;
       console.log(cartItemToSelect);
@@ -307,14 +276,8 @@ export const cartSlice = createSlice({
   },
 });
 
-export const {
-  // setCartItems,
-  // setIsCartOpen,
-  removeCartItem,
-  minusCartItem,
-  addCartItem,
-  chooseItem,
-} = cartSlice.actions;
+export const { removeCartItem, minusCartItem, addCartItem, chooseItem } =
+  cartSlice.actions;
 
 export default cartSlice.reducer;
 

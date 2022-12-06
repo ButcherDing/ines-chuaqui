@@ -1,7 +1,6 @@
 import { useState } from "react";
-import { useSelector } from "react-redux";
 
-import { signOut, UserData } from "../../store/user/user-slice";
+import { signOutAsync, UserData } from "../../store/user/user-slice";
 
 import { useAppDispatch, useAppSelector } from "../../store/hooks/hooks";
 
@@ -27,8 +26,8 @@ export const UserDashboard = () => {
   const [showHistory, setShowHistory] = useState(false);
   const [showUserSettings, setShowUserSettings] = useState(false);
 
-  const signOutHandler = () => {
-    dispatch(signOut());
+  const signOutAsyncHandler = () => {
+    dispatch(signOutAsync());
   };
 
   const showHistoryToggler = () => setShowHistory(!showHistory);
@@ -41,13 +40,13 @@ export const UserDashboard = () => {
           Welcome back, <Underlined>{currentUser.displayName}</Underlined>.
         </h2>
         <h4>{currentUser.email}</h4>
-        <LeafButton onClick={signOutHandler}>Sign Out</LeafButton>
+        <LeafButton onClick={signOutAsyncHandler}>Sign Out</LeafButton>
       </HeaderContainer>
       <ButtonCol>
         <LeafButton onClick={showUserSettingsToggler}>
           {showUserSettings ? `Hide Settings` : `Change Account Settings`}
         </LeafButton>
-        {showUserSettings && <UserSettings />}
+        {showUserSettings && <UserSettings currentUser={currentUser} />}
 
         <LeafButton onClick={showHistoryToggler}>
           {showHistory ? `Hide History` : `Show Order History`}

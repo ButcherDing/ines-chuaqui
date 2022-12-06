@@ -1,12 +1,15 @@
-import { useState } from "react";
-import { useAppDispatch } from "../../store/hooks/hooks";
+import { useState, useEffect, FC } from "react";
+import { useAppDispatch, useAppSelector } from "../../store/hooks/hooks";
 
 import {
-  changeDisplayName,
-  changeEmail,
-  changePassword,
-  deleteUser,
+  changeDisplayNameAsync,
+  changeEmailAsync,
+  changePasswordAsync,
+  deleteAccountAsync,
+  selectErrorMessage,
+  UserData,
 } from "../../store/user/user-slice";
+import Button, { BUTTON_TYPE_CLASSES } from "../button/button.component";
 import { BlackLeafButton, LeafButton } from "../button/button.styles";
 import {
   UserSettingsContainer,
@@ -18,32 +21,45 @@ const defaultFormFields = {
   newPassword: "",
   confirmNewPassword: "",
   newDisplayName: "",
+  confirmDelete: "",
 };
 
-export const UserSettings = () => {
+export type UserSettingsProps = {
+  currentUser: UserData;
+};
+
+export const UserSettings: FC<UserSettingsProps> = ({ currentUser }) => {
   const [formFields, setFormFields] = useState(defaultFormFields);
+  // const [errorMessage, setErrorMessage] = useState("");
   const dispatch = useAppDispatch();
+  const { isLoading } = useAppSelector((state) => state.user);
+  const errorMessage = useAppSelector(selectErrorMessage);
 
-  const changeDisplayNameHandler = () => {
+  const [displayDeleteConfirm, setDisplayDeleteConfirm] = useState(false);
+
+  const changeDisplayNameAsyncHandler = () => {
     if (!formFields.newDisplayName) return;
-    dispatch(changeDisplayName(formFields.newDisplayName));
+    dispatch(changeDisplayNameAsync(formFields.newDisplayName));
   };
-  const changeEmailHandler = () => {
+  const changeEmailAsyncHandler = () => {
     if (!formFields.newEmail) return;
-    dispatch(changeEmail(formFields.newEmail));
+    dispatch(changeEmailAsync(formFields.newEmail));
   };
-  const changePasswordHandler = () => {
+  const changePasswordAsyncHandler = () => {
     if (!formFields.newPassword) return;
-    if (formFields.newPassword != formFields.confirmNewPassword) return;
-    dispatch(changePassword(formFields.newPassword));
+    if (formFields.newPassword !== formFields.confirmNewPassword) return;
+    dispatch(changePasswordAsync(formFields.newPassword));
   };
 
-  const deleteAccountHandler = () => {
-    dispatch(deleteUser());
+  const deleteAccountAsyncHandler = () => {
+    setDisplayDeleteConfirm(true);
+    if (formFields.confirmDelete === currentUser.email)
+      dispatch(deleteAccountAsync());
   };
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
+    let errorMessage = null;
     setFormFields({ ...formFields, [name]: value });
   };
 
@@ -56,9 +72,13 @@ export const UserSettings = () => {
         name="newDisplayName"
         value={formFields.newDisplayName}
       />
-      <LeafButton onClick={changeDisplayNameHandler}>
+      <Button
+        buttonType={BUTTON_TYPE_CLASSES.leaf}
+        isLoading={isLoading}
+        onClick={changeDisplayNameAsyncHandler}
+      >
         Change display name
-      </LeafButton>
+      </Button>
 
       <DashboardFormInput
         label="Change Email?"
@@ -67,7 +87,13 @@ export const UserSettings = () => {
         name="newEmail"
         value={formFields.newEmail}
       />
-      <LeafButton onClick={changeEmailHandler}>Change email address</LeafButton>
+      <Button
+        buttonType={BUTTON_TYPE_CLASSES.leaf}
+        isLoading={isLoading}
+        onClick={changeEmailAsyncHandler}
+      >
+        Change email address
+      </Button>
 
       <DashboardFormInput
         label="Change Password?"
@@ -85,10 +111,32 @@ export const UserSettings = () => {
         name="confirmNewPassword"
         value={formFields.confirmNewPassword}
       />
-      <LeafButton onClick={changePasswordHandler}>Change Password</LeafButton>
-      <BlackLeafButton onClick={deleteAccountHandler}>
-        Delete account
-      </BlackLeafButton>
+      <Button
+        buttonType={BUTTON_TYPE_CLASSES.leaf}
+        isLoading={isLoading}
+        onClick={changePasswordAsyncHandler}
+      >
+        Change Password
+      </Button>
+      <div>
+        <BlackLeafButton onClick={deleteAccountAsyncHandler}>
+          Delete account
+        </BlackLeafButton>
+        {displayDeleteConfirm && (
+          <DashboardFormInput
+            label="type your email to confirm delete"
+            type="text"
+            onChange={handleChange}
+            name="confirmDelete"
+            value={formFields.confirmDelete}
+          />
+        )}
+      </div>
+      <>
+        {errorMessage && (
+          <div style={{ color: "red" }}>{`error: ${errorMessage}`}</div>
+        )}
+      </>
     </UserSettingsContainer>
   );
 };
