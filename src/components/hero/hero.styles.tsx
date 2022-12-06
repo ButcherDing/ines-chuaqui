@@ -14,9 +14,6 @@ import { NavLinkButton } from "../button/button.styles";
 // `;
 
 export const HeroImage = styled.div`
-  display: flex;
-  justify-content: space-around;
-  flex-direction: column;
   width: 102vw;
   min-height: 100vh;
   background-image: linear-gradient(
@@ -29,51 +26,49 @@ export const HeroImage = styled.div`
       rgba(255, 255, 255, 0)
     ),
     url(${background});
+
   /* box-shadow: 0 0 0.2rem 0.2rem white inset; */
   background-size: cover;
   /* overflow: hidden; */
-  padding: 1rem 2rem 2rem 2rem;
+  padding: 1rem 2rem 4rem 2rem;
 `;
 
-export const NameTitle = styled.p`
+export const NameTitle = styled.h1`
   text-align: center;
   letter-spacing: 2.2rem;
-  font-size: 7.4rem;
+  line-height: 1.5;
   font-weight: 200;
-  margin: 2rem 4rem 0rem 0rem;
-
-  /* text-decoration: underline; */
+  /* padding: 1rem 6rem; */
 `;
 
 export const ArtistDescriptionContainer = styled.div`
-  width: 45%;
+  width: 50%;
   display: flex;
   flex-direction: column;
   margin-left: 4rem;
-  margin-top: 2rem;
+  /* margin-top: 2rem; */
+
+  @media (max-width: 50em) {
+    width: 80%;
+    align-items: center;
+    /* gap: 1rem */
+    margin-left: 2rem;
+  }
+
+  @media (max-width: 27em) {
+    margin-left: 1rem;
+  }
 `;
 export const BlurbHeading = styled.h3`
   padding-bottom: 0.2rem;
   /* text-decoration: underline; */
   border-bottom: 0.2rem solid ${primaryShade}22;
   width: 95%;
+  align-self: start;
 `;
 export const ArtistDescription = styled.p`
   width: 100%;
-  font-size: 2rem;
+
   line-height: 2;
   margin-bottom: 3rem;
 `;
-
-// export const HeroNavLinkButton = styled(NavLinkButton)`
-//   align-self: center;
-//   line-height: 3rem;
-//   width: 45%;
-//   max-width: 20rem;
-//   margin-top: 4rem;
-//   padding: 4rem;
-//   font-weight: 300;
-//   letter-spacing: 0.6rem;
-//   text-align: center;
-//   /* text-transform: uppercase; */
-// `;

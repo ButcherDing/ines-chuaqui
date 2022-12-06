@@ -11,7 +11,6 @@ import {
   SeriesDescriptionContainer,
   SeriesBlurbHeading,
   SeriesBlurb,
-  LilCaption,
 } from "../../routes/gallery/gallery.styles";
 
 export const Gallery = () => {
@@ -33,7 +32,6 @@ export const Gallery = () => {
               <SeriesDescription>{series.blurb}</SeriesDescription>
               <Lightbox series={series} />
             </SeriesDescriptionContainer>
-            {i === 0 && <LilCaption>Click an image to expand</LilCaption>}
           </SeriesContainer>
         ))}
 

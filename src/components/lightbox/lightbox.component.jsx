@@ -17,7 +17,7 @@ export const Lightbox = ({ series }) => {
       data-series={series.pieces.length}
       imgAnimation="fade"
       imgfullScreen={true}
-      className={`lightbox grid-3-columns`}
+      className={`lightbox grid`}
     >
       {series.pieces.map((piece) => (
         <img

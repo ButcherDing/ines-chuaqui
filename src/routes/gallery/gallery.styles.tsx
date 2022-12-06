@@ -24,13 +24,20 @@ export const Line = styled.div`
 `;
 
 export const SeriesDescription = styled.p`
-  width: 45%;
+  width: 100%;
+  padding-right: 3rem;
+  /* max-width: 42rem; */
 `;
 
 export const SeriesDescriptionContainer = styled.div`
   display: flex;
   flex-direction: row;
-  gap: 15rem;
+  gap: 5rem;
+
+  @media (max-width: 50em) {
+    flex-direction: column;
+    /* align-items: center; */
+  }
 `;
 
 export const SeriesBlurbHeading = styled(BlurbHeading)`
@@ -38,7 +45,3 @@ export const SeriesBlurbHeading = styled(BlurbHeading)`
 `;
 
 export const SeriesBlurb = styled(ArtistDescription)``;
-
-export const LilCaption = styled.span`
-  padding-left: 30rem;
-`;

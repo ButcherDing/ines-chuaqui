@@ -6,6 +6,11 @@
   grid-template-columns: repeat(3, 1fr);
   align-items: center;
   grid-gap: 1.5rem;
+
+  @media (max-width: 62.5em) {
+    font-size: 1.8rem;
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 .lightbox .lightbox-image {
@@ -14,6 +19,14 @@
   max-width: 95%;
 }
 
+.grid {
+  grid-template-columns: repeat(3, 1fr);
+
+  @media (max-width: 62.5em) {
+    font-size: 1.8rem;
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
 .grid-2-columns {
   grid-template-columns: repeat(2, 1fr);
 }

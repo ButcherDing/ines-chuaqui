@@ -97,6 +97,8 @@ html {
   overflow-x: hidden;
   width: 100vw;
   padding-right: 15px;
+
+
 }
 
 body {
@@ -115,10 +117,33 @@ code {
 h1 {
   font-weight: 200;
   padding: 2rem 0rem 2rem 0rem;
+  font-size: 7.4rem;
+
+
+  @media (max-width: 50em) {
+    font-size: 6.2rem;
+  }
+  @media (max-width: 34em) {
+    padding: 0;
+  }
+  @media (max-width: 27em) {
+    font-size: 4.4rem;
+  }
+  @media (max-width: 20em) {
+    font-size: 3rem;
+  }
 }
 
 p {
   line-height: 1.5;
+  font-size: 2rem;
+  @media (max-width: 50em) {
+    font-size: 1.8rem;
+  }
+
+  @media (max-width: 27em) {
+    font-size: 1.5rem;
+  }
 }
 
 span {
@@ -137,6 +162,7 @@ h3 {
 
   position: relative;
   
+  
   &::after {
     content: "";
     position: absolute;
@@ -147,11 +173,21 @@ h3 {
     border-radius: 2rem;
     background: linear-gradient(90deg, ${primaryShade}, transparent 80%);
   }
+
+  @media (max-width: 50em) {
+    font-size: 1.8rem;
+  }
+  
+  @media (max-width: 27em) {
+    font-size: 1.5rem;
+  }
 }
 `;
 
 export const RouteContainer = styled.div`
-  padding: 2rem 10rem 2rem 10rem;
+  padding: 2rem 5%;
 `;
+
+//////////////// MEDIA QUERIES
 
 export default GlobalStyle;
