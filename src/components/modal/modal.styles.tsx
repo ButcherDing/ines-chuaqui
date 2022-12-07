@@ -16,7 +16,8 @@ export const ModalContainer = styled.div`
 export const ModalContent = styled.div`
   width: 50rem;
   background-color: #fff;
-  padding: 2.5rem;
+  padding: 2.4rem;
+  margin: 2.4rem;
 `;
 export const ModalHeader = styled.div`
   padding: 1rem;

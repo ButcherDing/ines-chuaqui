@@ -21,7 +21,7 @@ export const BaseButton = styled.button`
   max-width: 20rem;
   line-height: 1.4;
   letter-spacing: 0.05rem;
-  padding: 1.5rem 2rem;
+  padding: 1.6rem 2.4rem;
   margin: 0.5rem 0rem;
   font-size: 1.8rem;
   font-weight: 400;
@@ -41,7 +41,7 @@ export const BaseButton = styled.button`
 `;
 
 export const SmallTagButton = styled(BaseButton)`
-  padding: 0.5rem 1.5rem;
+  padding: 0.4rem 1.6rem;
   /* max-height: 4rem; */
   /* min-width: auto; */
   border-radius: 0.3rem;

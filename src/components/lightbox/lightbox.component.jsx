@@ -4,13 +4,15 @@ import "../../index.css";
 import "./lightbox.styles.scss";
 import { SlideshowLightbox, initLightboxJS } from "lightbox.js-react";
 
-import { Series } from "../../store/gallery/gallery.slice";
-import { useAppSelector } from "../../store/hooks/hooks";
-
 // where should we use our selectors? best practices
 
 export const Lightbox = ({ series }) => {
   const numStyleCols = series.pieces.length;
+
+  //// INITIALIZER
+  useEffect(() => {
+    initLightboxJS("AEBD-F4A5-C371-3200", "Individual");
+  });
 
   return (
     <SlideshowLightbox
@@ -32,7 +34,3 @@ export const Lightbox = ({ series }) => {
 };
 
 ///////////////////
-
-// useEffect(() => {
-//   initLightboxJS("AEBD-F4A5-C371-3200", "Individual");
-// });

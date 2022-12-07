@@ -11,6 +11,7 @@ import {
   SeriesDescriptionContainer,
   SeriesBlurbHeading,
   SeriesBlurb,
+  SeriesTitle,
 } from "../../routes/gallery/gallery.styles";
 
 export const Gallery = () => {
@@ -27,7 +28,7 @@ export const Gallery = () => {
         <RouteTitle>Gallery</RouteTitle>
         {seriesData.map((series, i) => (
           <SeriesContainer key={`gallery` + series.title}>
-            <h3>{series.title}</h3>
+            <SeriesTitle>{series.title}</SeriesTitle>
             <SeriesDescriptionContainer>
               <SeriesDescription>{series.blurb}</SeriesDescription>
               <Lightbox series={series} />

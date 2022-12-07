@@ -30,7 +30,7 @@ export const HeroImage = styled.div`
   /* box-shadow: 0 0 0.2rem 0.2rem white inset; */
   background-size: cover;
   /* overflow: hidden; */
-  padding: 1rem 2rem 4rem 2rem;
+  padding: 1.2rem 2.4rem 2.4rem 2.4rem;
 `;
 
 export const NameTitle = styled.h1`
@@ -38,25 +38,25 @@ export const NameTitle = styled.h1`
   letter-spacing: 2.2rem;
   line-height: 1.5;
   font-weight: 200;
-  /* padding: 1rem 6rem; */
+  /* margin: 0.8rem; */
 `;
 
 export const ArtistDescriptionContainer = styled.div`
   width: 50%;
   display: flex;
   flex-direction: column;
-  margin-left: 4rem;
+  margin-left: 3.2rem;
   /* margin-top: 2rem; */
 
   @media (max-width: 50em) {
     width: 80%;
     align-items: center;
     /* gap: 1rem */
-    margin-left: 2rem;
+    margin-left: 2.4rem;
   }
 
   @media (max-width: 27em) {
-    margin-left: 1rem;
+    margin-left: 1.2rem;
   }
 `;
 export const BlurbHeading = styled.h3`
@@ -70,5 +70,5 @@ export const ArtistDescription = styled.p`
   width: 100%;
 
   line-height: 2;
-  margin-bottom: 3rem;
+  margin-bottom: 3.2rem;
 `;

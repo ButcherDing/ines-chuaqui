@@ -76,7 +76,7 @@ export const Modal: FC<ModalProps> = ({ piece }) => {
               <Fader text={showMessage ? "updated cart" : "choose a size"} />
               <ModalButtons>
                 <InvertedLeafButton onClick={() => addItemHandler()}>
-                  Add Print to Cart
+                  Add to cart
                 </InvertedLeafButton>
 
                 <InvertedLeafButton onClick={showModalHandler}>

@@ -14,9 +14,11 @@ export const GalleryContainer = styled(RouteContainer)``;
 export const SeriesContainer = styled.div`
   display: flex;
   flex-direction: column;
-  margin-bottom: 7rem;
+  margin-bottom: 6.4rem;
   align-items: center;
 `;
+
+export const SeriesTitle = styled.h3``;
 
 export const Line = styled.div`
   width: 85%;
@@ -32,7 +34,7 @@ export const SeriesDescription = styled.p`
 export const SeriesDescriptionContainer = styled.div`
   display: flex;
   flex-direction: row;
-  gap: 5rem;
+  gap: 7%;
 
   @media (max-width: 50em) {
     flex-direction: column;

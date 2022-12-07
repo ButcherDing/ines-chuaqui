@@ -5,10 +5,16 @@ export const CartIconContainer = styled.div`
   width: 6rem;
   height: 6rem;
   position: relative;
+  top: 0.4rem;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
+
+  @media (max-width: 22.813em) {
+    left: 1rem;
+    position: relative;
+  }
 `;
 
 export const ShoppingIcon = styled(ShoppingBag)`
@@ -19,6 +25,6 @@ export const ItemCount = styled.span`
   font-size: 1.4rem;
   position: absolute;
   font-weight: bold;
-  top: 2.5rem;
+  top: 2.4rem;
   color: #8b2e24;
 `;

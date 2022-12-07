@@ -2,7 +2,7 @@ import styled from "styled-components";
 import Button from "../button/button.component";
 
 export const PaymentFormContainer = styled.div`
-  height: 300px;
+  height: 30rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -10,11 +10,15 @@ export const PaymentFormContainer = styled.div`
 `;
 
 export const FormContainer = styled.form`
-  height: 100px;
-  min-width: 500px;
+  height: 10rem;
+  min-width: 30rem;
 `;
 
 export const PaymentButton = styled(Button)`
   margin-left: auto;
-  margin-top: 30px;
+  margin-top: 3.2rem;
+`;
+
+export const PaymentTitle = styled.h2`
+  font-size: 3.6rem;
 `;

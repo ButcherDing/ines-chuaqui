@@ -2,7 +2,8 @@ import styled from "styled-components";
 import { primaryShade } from "../../general.styles";
 
 export const CheckoutContainer = styled.div`
-  width: 55%;
+  width: 80%;
+  min-width: 30rem;
   min-height: 90vh;
   display: flex;
   flex-direction: column;
@@ -19,16 +20,11 @@ export const CheckoutHeaders = styled.div`
   border-bottom: 1px solid ${primaryShade};
 `;
 
-export const HeaderBlock = styled.span`
-  /* width: 16.66%; */
+export const HeaderBlock = styled.span``;
 
-  /* &:last-child {
-    padding-left: 5rem;
-  } */
-`;
-
-export const Total = styled.span`
-  margin-top: 30px;
+export const Total = styled.h2`
+  margin-top: 3.2rem;
+  font-weight: 400;
   margin-left: auto;
-  font-size: 36px;
+  /* font-size: 36px; */
 `;

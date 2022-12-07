@@ -98,7 +98,9 @@ html {
   width: 100vw;
   padding-right: 15px;
 
-
+  @media (max-width: 80em) {
+  padding-right: 0px;
+  }
 }
 
 body {
@@ -114,9 +116,40 @@ code {
   font-family: "Roboto Flex", sans-serif;
 }
 
+
+/* a {
+  @media (max-width: 34em) {
+    font-size: 1.8rem;
+  }
+} */
+
+p {
+  line-height: 1.5;
+  font-size: 2rem;
+  @media (max-width: 50em) {
+    font-size: 1.8rem;
+  }
+  
+  @media (max-width: 27em) {
+    font-size: 1.5rem;
+  }
+}
+
+
+span {
+  font-size: 1.8rem;
+  @media (max-width: 50em) {
+    font-size: 1.6rem;
+  }
+  
+  @media (max-width: 27em) {
+    font-size: 1.4rem;
+  }
+}
+
 h1 {
   font-weight: 200;
-  padding: 2rem 0rem 2rem 0rem;
+  /* padding: 2rem 0rem 2rem 0rem; */
   font-size: 7.4rem;
 
 
@@ -134,21 +167,29 @@ h1 {
   }
 }
 
-p {
-  line-height: 1.5;
-  font-size: 2rem;
+h2 {
+  font-size: 4.4rem;
+  /* text-align: center;
+  letter-spacing: 1.2rem;
+  font-weight: 200;
+  font-size: 5.2rem;
+  margin: 2.4rem 0rem 2.4rem 0rem; */
+
   @media (max-width: 50em) {
-    font-size: 1.8rem;
+    font-size: 4.4rem;
   }
-
+  @media (max-width: 34em) {
+    font-size: 3.6rem;
+  }
   @media (max-width: 27em) {
-    font-size: 1.5rem;
+    /* font-size: 3rem; */
+  }
+  @media (max-width: 20em) {
+    /* font-size: 2.4rem; */
   }
 }
 
-span {
-  font-size: 1.6rem;
-}
+
 
 h3 {
   color: ${primaryShade};
@@ -157,12 +198,37 @@ h3 {
   text-transform: uppercase;
   font-weight: 300;
   padding-bottom: .1rem;
-  margin-bottom: 3rem;
+  margin-bottom: 2rem;
   width: 100%;
 
   position: relative;
   
-  
+/* - Font sizes (px)
+10 / 12 / 14 / 16 / 18 / 20 / 24 / 30 / 36 / 44 / 52 / 62 / 74 / 86 / 98 */
+
+h4 {
+  font-size: 3.6rem;
+  /* text-align: center;
+  letter-spacing: 1.2rem;
+  font-weight: 200;
+  font-size: 5.2rem;
+  margin: 2.4rem 0rem 2.4rem 0rem; */
+
+  @media (max-width: 50em) {
+    font-size: 4.4rem;
+  }
+  @media (max-width: 34em) {
+    font-size: 3.6rem;
+  }
+  @media (max-width: 27em) {
+    font-size: 3rem;
+  }
+  @media (max-width: 20em) {
+    font-size: 2.4rem;
+  }
+}
+
+
   &::after {
     content: "";
     position: absolute;

@@ -15,6 +15,7 @@ import {
   PaymentFormContainer,
   FormContainer,
   PaymentButton,
+  PaymentTitle,
 } from "./payment-form.styles";
 import { useAppDispatch } from "../../store/hooks/hooks";
 
@@ -85,7 +86,7 @@ const PaymentForm = () => {
   return (
     <PaymentFormContainer>
       <FormContainer onSubmit={paymentHandler}>
-        <h2>Credit Card Payment: </h2>
+        <PaymentTitle>Credit Card Payment: </PaymentTitle>
         <CardElement />
         <PaymentButton
           isLoading={isProcessingPayment}

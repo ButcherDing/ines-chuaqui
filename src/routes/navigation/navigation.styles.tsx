@@ -9,17 +9,20 @@ import {
 } from "../../general.styles";
 
 export const NavigationContainer = styled.div`
+  position: sticky;
+  top: -90px;
   display: flex;
   align-content: center;
   flex-direction: column;
   /* transform: rotate(90deg); */
   /* justify-content: center; */
+  /* background-color: white; */
   background-image: linear-gradient(
       to right,
       #ffffff,
       #ffffffee,
       #ffffffee,
-      #fffffff0
+      #ffffff
     ),
     url(${background});
   background-size: 100%;
@@ -28,31 +31,59 @@ export const NavigationContainer = styled.div`
   background-size: cover;
   /* padding: 1.5rem; */
   border-bottom: 0.1rem solid #eee;
+  z-index: 4;
+
+  @media (max-width: 22.813em) {
+    top: -120px;
+  }
 `;
 
-export const NameBox = styled.span`
+export const NameBox = styled.h2`
   text-align: center;
   letter-spacing: 1.2rem;
   font-weight: 200;
-  font-size: 5rem;
-  margin: 3rem 0rem 1rem 0rem;
+  font-size: 5.2rem;
+  margin: 2.4rem 0rem 2.4rem 0rem;
 `;
 
 export const NavBar = styled.div`
-  height: 7rem;
+  height: 6.4rem;
   width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  @media (max-width: 22.813em) {
+    /* top: -8rem; */
+  }
 `;
 
 export const LogoContainer = styled(Link)`
   display: flex;
   color: ${primaryShade};
   height: 100%;
-  width: 5rem;
+  width: 4.8rem;
+  margin-left: 1rem;
 
   justify-content: center;
+  /* 
+  @media (max-width: 50em) {
+    width: 3.2rem;
+  } */
+
+  @media (max-width: 34em) {
+    width: 4rem;
+  }
+
+  @media (max-width: 22.813em) {
+    width: 3.2rem;
+    position: relative;
+    /* bottom: 10.75rem; */
+    right: 1.6rem;
+  }
+  /* @media (max-width: 20em) {
+    width: 3rem;
+  } */
 `;
 
 export const NavLinksContainer = styled.div`
@@ -61,23 +92,49 @@ export const NavLinksContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-around;
-  /* gap: rem; */
+  gap: 1.2rem;
+  min-width: 36rem;
+
+  @media (max-width: 34em) {
+    min-width: 24rem;
+  }
+
+  @media (max-width: 27em) {
+    min-width: 10rem;
+    gap: 0;
+  }
+  /* @media (max-width: 20em) {
+    min-width: 12rem;
+  } */
 `;
 
 export const NavLink = styled(Link)`
-  font-size: 2rem;
+  /* font-size: 2rem; */
   text-decoration: none;
   color: ${primaryShade};
   cursor: pointer;
   overflow: hidden;
   opacity: 1;
   transform: translate3d(0, 0, 0);
+  padding: 0.6rem;
+  white-space: nowrap;
+  min-width: max-content;
 
-  padding: 0.2em;
+  @media (max-width: 50em) {
+    font-size: 1.8rem;
+  }
+
+  @media (max-width: 34em) {
+    font-size: 1.6rem;
+  }
+  @media (max-width: 27em) {
+    font-size: 1.4rem;
+  }
+  /* @media (max-width: 20em) {
+    font-size: 1.2rem;
+  } */
 
   /* Slide in */
-  & {
-  }
 
   &::after {
     overflow: hidden;

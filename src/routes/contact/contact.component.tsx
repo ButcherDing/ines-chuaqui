@@ -12,6 +12,7 @@ import {
   ContactForm,
   ContactImageBox,
   ContactFormLabel,
+  ContactTitle,
 } from "./contact.styles";
 
 export const Contact = () => {
@@ -27,7 +28,7 @@ export const Contact = () => {
     <ContactContainer>
       <ContactBox>
         <ContactTextBox className="cta-text-box">
-          <h2>Get in touch</h2>
+          <ContactTitle>Get in touch</ContactTitle>
           <ContactText>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet
             aspernatur consequatur dolore voluptatem ad nemo molestiae nihil
@@ -82,7 +83,7 @@ export const Contact = () => {
               />
             </div>
 
-            <div>
+            {/* <div>
               <ContactFormLabel htmlFor="select-where">
                 Where did you hear about this site?
               </ContactFormLabel>
@@ -94,7 +95,7 @@ export const Contact = () => {
                 <option value="internet">Internet</option>
                 <option value="other">Other</option>
               </select>
-            </div>
+            </div> */}
 
             {/* <button className="btn btn--form">Send</button> */}
             <LeafButton>Send</LeafButton>

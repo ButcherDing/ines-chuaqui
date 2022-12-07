@@ -28,17 +28,11 @@ const CartIcon = () => {
   };
 
   return (
-    <Fragment>
-      <div>
-        <CartIconContainer onClick={iconClickHandler} ref={ref}>
-          <ShoppingIcon className="shopping-icon" />
-          <ItemCount className="item-count">{cartCount}</ItemCount>
-          <div onClick={handleContainerClick}>
-            {isCartOpen && <CartDropdown />}
-          </div>
-        </CartIconContainer>
-      </div>
-    </Fragment>
+    <CartIconContainer onClick={iconClickHandler} ref={ref}>
+      <ShoppingIcon className="shopping-icon" />
+      <ItemCount className="item-count">{cartCount}</ItemCount>
+      <div onClick={handleContainerClick}>{isCartOpen && <CartDropdown />}</div>
+    </CartIconContainer>
   );
 };
 
