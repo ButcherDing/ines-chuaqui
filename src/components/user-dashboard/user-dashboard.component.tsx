@@ -37,7 +37,7 @@ export const UserDashboard = () => {
     <DashboardContainer>
       <HeaderContainer>
         <h2>
-          Welcome back, <Underlined>{currentUser.displayName}</Underlined>.
+          Hi, <Underlined>{currentUser.displayName}</Underlined>.
         </h2>
         <h4>{currentUser.email}</h4>
         <LeafButton onClick={signOutAsyncHandler}>Sign Out</LeafButton>

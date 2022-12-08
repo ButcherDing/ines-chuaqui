@@ -28,12 +28,24 @@ export const CheckoutImageContainer = styled.div`
 `;
 
 export const CheckoutItemDetail = styled.span`
-  /* width: 16.66%; */
+  margin: 1rem;
+
+  @media (max-width: 50em) {
+    font-size: 1.8rem;
+  }
+
+  @media (max-width: 34em) {
+    font-size: 1.6rem;
+  }
+  @media (max-width: 27em) {
+    font-size: 1.6rem;
+  }
+  @media (max-width: 22.5em) {
+    font-size: 1.4rem;
+  }
 `;
-// Not ideal - I want to style quantity button directly instead of having to stick it in a div like a divhead.
-export const Quantity = styled.div`
-  /* width: 16.66%; */
-`;
+
+export const Quantity = styled.div``;
 
 export const RemoveButton = styled.span`
   /* padding-left: 5rem; */

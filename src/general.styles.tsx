@@ -86,6 +86,8 @@ export const secondaryTintTransparent = secondaryTint + "cc";
 export const mainTextColor = primaryShade;
 export const titleTextColor = primaryShade;
 
+export const globalPadding = 2.4;
+
 export const GlobalStyle = createGlobalStyle`
 * {
   box-sizing: border-box;
@@ -96,16 +98,18 @@ html {
   font-size: 62.5%;
   overflow-x: hidden;
   width: 100vw;
-  padding-right: 15px;
+  /* padding-right: 15px; */
 
-  @media (max-width: 80em) {
+  /* @media (max-width: 80em) {
   padding-right: 0px;
-  }
+  } */
 }
+
+
 
 body {
   margin: 0;
-  padding: 0rem 2rem 0rem 2rem;
+  padding: 0rem ${globalPadding}rem;
   line-height: 1;
   font-weight: 300;
   color: ${primaryShade};
@@ -131,19 +135,19 @@ p {
   }
   
   @media (max-width: 27em) {
-    font-size: 1.5rem;
+    font-size: 1.8rem;
   }
 }
 
 
 span {
-  font-size: 1.8rem;
+  font-size: 2rem;
   @media (max-width: 50em) {
-    font-size: 1.6rem;
+    font-size: 1.8rem;
   }
   
   @media (max-width: 27em) {
-    font-size: 1.4rem;
+    font-size: 1.8rem;
   }
 }
 
@@ -162,9 +166,9 @@ h1 {
   @media (max-width: 27em) {
     font-size: 4.4rem;
   }
-  @media (max-width: 20em) {
+  /* @media (max-width: 22.5em) {
     font-size: 3rem;
-  }
+  } */
 }
 
 h2 {
@@ -184,7 +188,7 @@ h2 {
   @media (max-width: 27em) {
     /* font-size: 3rem; */
   }
-  @media (max-width: 20em) {
+  @media (max-width: 22.5em) {
     /* font-size: 2.4rem; */
   }
 }
@@ -203,8 +207,29 @@ h3 {
 
   position: relative;
   
-/* - Font sizes (px)
-10 / 12 / 14 / 16 / 18 / 20 / 24 / 30 / 36 / 44 / 52 / 62 / 74 / 86 / 98 */
+
+
+
+
+&::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  width: 100%;
+  left: 0;
+  height: 1px;
+  border-radius: 2rem;
+  background: linear-gradient(90deg, ${primaryShade}, transparent 80%);
+}
+
+@media (max-width: 50em) {
+  font-size: 1.8rem;
+}
+
+@media (max-width: 27em) {
+  font-size: 1.5rem;
+}
+}
 
 h4 {
   font-size: 3.6rem;
@@ -215,40 +240,22 @@ h4 {
   margin: 2.4rem 0rem 2.4rem 0rem; */
 
   @media (max-width: 50em) {
-    font-size: 4.4rem;
-  }
-  @media (max-width: 34em) {
     font-size: 3.6rem;
   }
-  @media (max-width: 27em) {
+  @media (max-width: 34em) {
     font-size: 3rem;
   }
-  @media (max-width: 20em) {
+  @media (max-width: 27em) {
     font-size: 2.4rem;
   }
-}
-
-
-  &::after {
-    content: "";
-    position: absolute;
-    top: 100%;
-    width: 100%;
-    left: 0;
-    height: 1px;
-    border-radius: 2rem;
-    background: linear-gradient(90deg, ${primaryShade}, transparent 80%);
-  }
-
-  @media (max-width: 50em) {
-    font-size: 1.8rem;
-  }
-  
-  @media (max-width: 27em) {
-    font-size: 1.5rem;
+  @media (max-width: 22.5em) {
+    font-size: 2rem;
   }
 }
 `;
+
+/* - Font sizes (px)
+10 / 12 / 14 / 16 / 18 / 20 / 24 / 30 / 36 / 44 / 52 / 62 / 74 / 86 / 98 */
 
 export const RouteContainer = styled.div`
   padding: 2rem 5%;

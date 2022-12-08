@@ -12,10 +12,10 @@ export const ContactSuccess = () => {
 
   return (
     <>
-      <h4>
+      <h5>
         Your message was sent successfully. We'll get back to you as soon as we
         can.
-      </h4>
+      </h5>
     </>
   );
 };

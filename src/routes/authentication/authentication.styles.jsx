@@ -8,17 +8,13 @@ export const AuthenticationContainer = styled.div`
   justify-content: center;
   background-color: ${primaryTint2};
   border-radius: 9px;
-  padding: 5% 8%;
+  padding: 3% 8%;
   margin: 7% 4%;
   box-shadow: 0 2.4rem 4.8rem rgba(0, 0, 0, 0.15);
 
   @media (max-width: 50em) {
     flex-direction: column;
   }
-`;
-
-export const OrderHistory = styled.div`
-  display: flex;
 `;
 
 export const NotSignedIn = styled.div`

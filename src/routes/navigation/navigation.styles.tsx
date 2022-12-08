@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import background from "../../assets/img/Compressed/suspended-ani-1.jpg";
 
 import {
+  globalPadding,
   primaryShade,
   secondaryColor,
   secondaryShade,
@@ -10,10 +11,11 @@ import {
 
 export const NavigationContainer = styled.div`
   position: sticky;
-  top: -90px;
+  top: -10rem;
   display: flex;
   align-content: center;
   flex-direction: column;
+  margin: 0 ${-globalPadding}rem;
   /* transform: rotate(90deg); */
   /* justify-content: center; */
   /* background-color: white; */
@@ -33,17 +35,18 @@ export const NavigationContainer = styled.div`
   border-bottom: 0.1rem solid #eee;
   z-index: 4;
 
-  @media (max-width: 22.813em) {
-    top: -120px;
+  @media (max-width: 27.375em) {
+    top: -15.28rem;
   }
 `;
 
-export const NameBox = styled.h2`
+export const NavTitle = styled.h2`
   text-align: center;
   letter-spacing: 1.2rem;
   font-weight: 200;
   font-size: 5.2rem;
   margin: 2.4rem 0rem 2.4rem 0rem;
+  padding: 0rem 2rem;
 `;
 
 export const NavBar = styled.div`
@@ -52,10 +55,6 @@ export const NavBar = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-
-  @media (max-width: 22.813em) {
-    /* top: -8rem; */
-  }
 `;
 
 export const LogoContainer = styled(Link)`
@@ -63,27 +62,18 @@ export const LogoContainer = styled(Link)`
   color: ${primaryShade};
   height: 100%;
   width: 4.8rem;
-  margin-left: 1rem;
+  margin-left: 2.4rem;
 
   justify-content: center;
-  /* 
-  @media (max-width: 50em) {
-    width: 3.2rem;
-  } */
 
-  @media (max-width: 34em) {
+  @media (max-width: 27em) {
     width: 4rem;
+    margin-left: 1.2rem;
   }
-
-  @media (max-width: 22.813em) {
-    width: 3.2rem;
-    position: relative;
-    /* bottom: 10.75rem; */
-    right: 1.6rem;
-  }
-  /* @media (max-width: 20em) {
+  @media (max-width: 23em) {
+    margin-left: 0.8rem;
     width: 3rem;
-  } */
+  }
 `;
 
 export const NavLinksContainer = styled.div`
@@ -101,11 +91,10 @@ export const NavLinksContainer = styled.div`
 
   @media (max-width: 27em) {
     min-width: 10rem;
-    gap: 0;
   }
-  /* @media (max-width: 20em) {
-    min-width: 12rem;
-  } */
+  @media (max-width: 23em) {
+    gap: 0.8rem;
+  }
 `;
 
 export const NavLink = styled(Link)`
@@ -128,7 +117,7 @@ export const NavLink = styled(Link)`
     font-size: 1.6rem;
   }
   @media (max-width: 27em) {
-    font-size: 1.4rem;
+    font-size: 1.6rem;
   }
   /* @media (max-width: 20em) {
     font-size: 1.2rem;

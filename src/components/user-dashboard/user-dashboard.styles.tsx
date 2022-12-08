@@ -13,6 +13,8 @@ export const DashboardContainer = styled.div`
   justify-content: space-between;
   align-items: space-between;
   gap: 2rem;
+  width: 100%;
+  margin-bottom: 2rem;
 `;
 
 export const ButtonCol = styled.div`

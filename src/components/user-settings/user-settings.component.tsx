@@ -14,6 +14,7 @@ import { BlackLeafButton, LeafButton } from "../button/button.styles";
 import {
   UserSettingsContainer,
   DashboardFormInput,
+  UserSettingsButton,
 } from "./user-settings.styles";
 
 const defaultFormFields = {
@@ -72,13 +73,13 @@ export const UserSettings: FC<UserSettingsProps> = ({ currentUser }) => {
         name="newDisplayName"
         value={formFields.newDisplayName}
       />
-      <Button
+      <UserSettingsButton
         buttonType={BUTTON_TYPE_CLASSES.leaf}
         isLoading={isLoading}
         onClick={changeDisplayNameAsyncHandler}
       >
         Change display name
-      </Button>
+      </UserSettingsButton>
 
       <DashboardFormInput
         label="Change Email?"
@@ -87,13 +88,13 @@ export const UserSettings: FC<UserSettingsProps> = ({ currentUser }) => {
         name="newEmail"
         value={formFields.newEmail}
       />
-      <Button
+      <UserSettingsButton
         buttonType={BUTTON_TYPE_CLASSES.leaf}
         isLoading={isLoading}
         onClick={changeEmailAsyncHandler}
       >
         Change email address
-      </Button>
+      </UserSettingsButton>
 
       <DashboardFormInput
         label="Change Password?"
@@ -111,27 +112,25 @@ export const UserSettings: FC<UserSettingsProps> = ({ currentUser }) => {
         name="confirmNewPassword"
         value={formFields.confirmNewPassword}
       />
-      <Button
+      <UserSettingsButton
         buttonType={BUTTON_TYPE_CLASSES.leaf}
         isLoading={isLoading}
         onClick={changePasswordAsyncHandler}
       >
         Change Password
-      </Button>
-      <div>
-        <BlackLeafButton onClick={deleteAccountAsyncHandler}>
-          Delete account
-        </BlackLeafButton>
-        {displayDeleteConfirm && (
-          <DashboardFormInput
-            label="type your email to confirm delete"
-            type="text"
-            onChange={handleChange}
-            name="confirmDelete"
-            value={formFields.confirmDelete}
-          />
-        )}
-      </div>
+      </UserSettingsButton>
+      {displayDeleteConfirm && (
+        <DashboardFormInput
+          label="type your email to confirm delete"
+          type="text"
+          onChange={handleChange}
+          name="confirmDelete"
+          value={formFields.confirmDelete}
+        />
+      )}
+      <BlackLeafButton onClick={deleteAccountAsyncHandler}>
+        Delete account
+      </BlackLeafButton>
       <>
         {errorMessage && (
           <div style={{ color: "red" }}>{`error: ${errorMessage}`}</div>

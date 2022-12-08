@@ -7,7 +7,7 @@ import { ReactComponent as Logo } from "../../assets/logos/crow-solid.svg";
 
 import {
   NavigationContainer,
-  NameBox,
+  NavTitle,
   NavBar,
   NavLinksContainer,
   NavLink,
@@ -21,7 +21,7 @@ export const Navigation = () => {
   return (
     <Fragment>
       <NavigationContainer>
-        <NameBox>Ines Chuaqui</NameBox>
+        <NavTitle>Ines Chuaqui</NavTitle>
         {/* <BannerLine /> */}
         <NavBar>
           <LogoContainer to="/">

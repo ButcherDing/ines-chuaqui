@@ -2,8 +2,8 @@ import styled from "styled-components";
 import { primaryShade } from "../../general.styles";
 
 export const CheckoutContainer = styled.div`
-  width: 80%;
-  min-width: 30rem;
+  width: 90%;
+  min-width: 32rem;
   min-height: 90vh;
   display: flex;
   flex-direction: column;
@@ -20,9 +20,23 @@ export const CheckoutHeaders = styled.div`
   border-bottom: 1px solid ${primaryShade};
 `;
 
-export const HeaderBlock = styled.span``;
+export const HeaderBlock = styled.span`
+  @media (max-width: 50em) {
+    font-size: 1.8rem;
+  }
 
-export const Total = styled.h2`
+  @media (max-width: 34em) {
+    font-size: 1.6rem;
+  }
+  @media (max-width: 27em) {
+    font-size: 1.6rem;
+  }
+  @media (max-width: 22.5em) {
+    font-size: 1.4rem;
+  }
+`;
+
+export const Total = styled.h4`
   margin-top: 3.2rem;
   font-weight: 400;
   margin-left: auto;

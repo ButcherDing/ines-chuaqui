@@ -4,27 +4,35 @@ import { ReactComponent as ShoppingBag } from "../../assets/logos/shopping-bag.s
 export const CartIconContainer = styled.div`
   width: 6rem;
   height: 6rem;
-  position: relative;
+  margin-right: 1.5rem;
+  margin-bottom: 1rem;
+
   top: 0.4rem;
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
+
+  position: relative;
   cursor: pointer;
 
-  @media (max-width: 22.813em) {
-    left: 1rem;
-    position: relative;
+  @media (max-width: 27em) {
+    margin-right: 0rem;
   }
+
+  /* @media (max-width: 23em) {
+    margin-right: 0rem;
+  } */
 `;
 
 export const ShoppingIcon = styled(ShoppingBag)`
   width: 60%;
-  margin-bottom: 1rem;
 `;
 export const ItemCount = styled.span`
-  font-size: 1.4rem;
   position: absolute;
+  top: 2.8rem;
+  /* right: 3.8rem; */
+
   font-weight: bold;
-  top: 2.4rem;
+  font-size: 1.4rem;
   color: #8b2e24;
 `;
