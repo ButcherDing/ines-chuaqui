@@ -6,6 +6,7 @@ import {
   secondaryShade,
   secondaryColor,
   secondaryTint,
+  globalPadding,
 } from "../../general.styles";
 import { NavLinkButton } from "../button/button.styles";
 
@@ -14,7 +15,9 @@ import { NavLinkButton } from "../button/button.styles";
 // `;
 
 export const HeroImage = styled.div`
-  width: 102vw;
+  width: 100vw;
+  position: relative;
+  right: ${globalPadding}rem;
   min-height: 100vh;
   background-image: linear-gradient(
       to right,
@@ -27,10 +30,8 @@ export const HeroImage = styled.div`
     ),
     url(${background});
 
-  /* box-shadow: 0 0 0.2rem 0.2rem white inset; */
   background-size: cover;
-  /* overflow: hidden; */
-  padding: 1.2rem 2.4rem 2.4rem 2.4rem;
+  overflow: hidden;
 `;
 
 export const NameTitle = styled.h1`
@@ -45,13 +46,13 @@ export const ArtistDescriptionContainer = styled.div`
   width: 50%;
   display: flex;
   flex-direction: column;
-  margin-left: 3.2rem;
+  padding-bottom: 3.2rem;
+  align-items: center;
   /* margin-top: 2rem; */
+  margin-left: 3.2rem;
 
   @media (max-width: 50em) {
     width: 80%;
-    align-items: center;
-    /* gap: 1rem */
     margin-left: 2.4rem;
   }
 

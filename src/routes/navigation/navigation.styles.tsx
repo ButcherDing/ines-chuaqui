@@ -11,7 +11,7 @@ import {
 
 export const NavigationContainer = styled.div`
   position: sticky;
-  top: -10rem;
+  top: -10.9rem;
   display: flex;
   align-content: center;
   flex-direction: column;
@@ -36,7 +36,7 @@ export const NavigationContainer = styled.div`
   z-index: 4;
 
   @media (max-width: 27.375em) {
-    top: -15.28rem;
+    top: -17rem;
   }
 `;
 

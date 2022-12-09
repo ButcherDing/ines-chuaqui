@@ -2,13 +2,13 @@ import styled from "styled-components";
 import { primaryShade } from "../../general.styles";
 
 export const CheckoutContainer = styled.div`
-  width: 90%;
+  /* width: 90%; */
   min-width: 32rem;
   min-height: 90vh;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  margin: 5rem auto 0;
+  /* justify-items: center; */
+  margin: 5rem 0 0;
 `;
 
 export const CheckoutHeaders = styled.div`
@@ -17,6 +17,7 @@ export const CheckoutHeaders = styled.div`
   display: grid;
   grid-template-columns: repeat(6, 1fr);
   justify-items: center;
+  justify-self: center;
   border-bottom: 1px solid ${primaryShade};
 `;
 
@@ -40,5 +41,4 @@ export const Total = styled.h4`
   margin-top: 3.2rem;
   font-weight: 400;
   margin-left: auto;
-  /* font-size: 36px; */
 `;

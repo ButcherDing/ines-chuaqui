@@ -31,16 +31,16 @@ export const CheckoutItemDetail = styled.span`
   margin: 1rem;
 
   @media (max-width: 50em) {
-    font-size: 1.8rem;
+    font-size: 2rem;
   }
 
   @media (max-width: 34em) {
-    font-size: 1.6rem;
+    font-size: 1.8rem;
   }
   @media (max-width: 27em) {
     font-size: 1.6rem;
   }
-  @media (max-width: 22.5em) {
+  @media (max-width: 25em) {
     font-size: 1.4rem;
   }
 `;

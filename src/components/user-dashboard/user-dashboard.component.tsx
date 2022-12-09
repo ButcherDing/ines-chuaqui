@@ -39,7 +39,7 @@ export const UserDashboard = () => {
         <h2>
           Hi, <Underlined>{currentUser.displayName}</Underlined>.
         </h2>
-        <h4>{currentUser.email}</h4>
+        <h5>{currentUser.email}</h5>
         <LeafButton onClick={signOutAsyncHandler}>Sign Out</LeafButton>
       </HeaderContainer>
       <ButtonCol>

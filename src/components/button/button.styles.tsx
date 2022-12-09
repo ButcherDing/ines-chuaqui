@@ -195,7 +195,7 @@ export const BlackLeafButton = styled(LeafButton)`
   background-color: black;
   border: 1px solid black;
   padding: 1.2rem 3rem;
-  margin: 0rem 1.6rem;
+  margin: 2.4rem 1.6rem;
   /* width: 50%; */
   /* align-self: center; */
   :hover,

@@ -7,11 +7,9 @@ import { HomeContainer } from "./home.styles";
 
 const Home = () => {
   return (
-    <Fragment>
-      <HomeContainer>
-        <Hero />
-      </HomeContainer>
-    </Fragment>
+    <HomeContainer>
+      <Hero />
+    </HomeContainer>
   );
 };
 

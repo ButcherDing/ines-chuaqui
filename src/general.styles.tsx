@@ -96,22 +96,21 @@ export const GlobalStyle = createGlobalStyle`
 
 html {
   font-size: 62.5%;
-  overflow-x: hidden;
+  /* overflow-x: hidden; */
   width: 100vw;
-  /* padding-right: 15px; */
-
-  /* @media (max-width: 80em) {
-  padding-right: 0px;
-  } */
 }
 
 
 
 body {
-  margin: 0;
+  /* max-width: 140rem;
+  margin-left: 50vw;
+  transform: translateX(-50vw); */
+  //
+  width: 100vw;
   padding: 0rem ${globalPadding}rem;
-  line-height: 1;
-  font-weight: 300;
+  overflow-x: clip;
+  margin: 0;
   color: ${primaryShade};
   font-size: 2rem;
 }
@@ -240,19 +239,35 @@ h4 {
   margin: 2.4rem 0rem 2.4rem 0rem; */
 
   @media (max-width: 50em) {
-    font-size: 3.6rem;
-  }
-  @media (max-width: 34em) {
     font-size: 3rem;
   }
-  @media (max-width: 27em) {
+  @media (max-width: 34em) {
     font-size: 2.4rem;
   }
-  @media (max-width: 22.5em) {
+  @media (max-width: 27em) {
     font-size: 2rem;
   }
+  @media (max-width: 22.5em) {
+    font-size: 1.8rem;
+  }
 }
-`;
+h5 {
+  font-size: 2.4rem;
+
+  @media (max-width: 50em) {
+    font-size: 2rem;
+  }
+  /* @media (max-width: 34em) {
+    font-size: 2rem;
+  }
+  @media (max-width: 27em) {
+    font-size: 2rem;
+  }
+  @media (max-width: 22.5em) {
+    font-size: 1.8rem;
+  } */
+}
+  `;
 
 /* - Font sizes (px)
 10 / 12 / 14 / 16 / 18 / 20 / 24 / 30 / 36 / 44 / 52 / 62 / 74 / 86 / 98 */
