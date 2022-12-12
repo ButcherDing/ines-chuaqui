@@ -27,7 +27,7 @@ export const CartDropdownContainer = styled.div`
 `;
 
 export const EmptyMessage = styled.span`
-  font-size: 18px;
+  font-size: 1.8rem;
   margin: 50px auto;
 `;
 export const CartItems = styled.div`
@@ -36,4 +36,5 @@ export const CartItems = styled.div`
   flex-direction: column;
   overflow-y: scroll;
   margin-bottom: 15px;
+  font-size: 1.6rem;
 `;

@@ -40,7 +40,9 @@ export type ModalProps = {
 export const Modal: FC<ModalProps> = ({ piece }) => {
   // const handleKeyPress = (e: Event) => {};
   const dispatch = useAppDispatch();
-  const { currentItem } = useAppSelector((state) => state.cart);
+  const currentItem: CartItem = useAppSelector(
+    (state) => state.cart.currentItem
+  );
   const [showModal, setShowModal] = useState(false);
   const [showMessage, setShowMessage] = useState(false);
 

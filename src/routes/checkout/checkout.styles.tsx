@@ -3,25 +3,32 @@ import { primaryShade } from "../../general.styles";
 
 export const CheckoutContainer = styled.div`
   /* width: 90%; */
+
   min-width: 32rem;
   min-height: 90vh;
   display: flex;
   flex-direction: column;
   /* justify-items: center; */
-  margin: 5rem 0 0;
+  margin: 5rem 2.5rem;
+  @media (max-width: 75em) {
+    margin: 5rem 0rem;
+  }
 `;
 
 export const CheckoutHeaders = styled.div`
   width: 100%;
-  padding: 1.5rem 0;
+  padding: 1.5rem 0rem;
   display: grid;
   grid-template-columns: repeat(6, 1fr);
   justify-items: center;
   justify-self: center;
+  /* gap: 2.4rem; */
   border-bottom: 1px solid ${primaryShade};
 `;
 
 export const HeaderBlock = styled.span`
+  // TODO different colour
+  font-weight: 500;
   @media (max-width: 50em) {
     font-size: 1.8rem;
   }
@@ -38,7 +45,7 @@ export const HeaderBlock = styled.span`
 `;
 
 export const Total = styled.h4`
-  margin-top: 3.2rem;
+  margin: 3.2rem 0;
   font-weight: 400;
   margin-left: auto;
 `;

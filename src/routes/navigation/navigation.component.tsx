@@ -25,16 +25,28 @@ export const Navigation = () => {
         {/* <BannerLine /> */}
         <NavBar>
           <LogoContainer to="/">
-            <Logo className="logo">Logo</Logo>
+            <Logo className="logo">
+              <span>Logo</span>
+            </Logo>
           </LogoContainer>
           <NavLinksContainer>
-            <NavLink to="/gallery">Gallery</NavLink>
-            <NavLink to="/shop">Shop</NavLink>
-            <NavLink to="/contact">Contact</NavLink>
+            <NavLink to="/gallery">
+              <span>Gallery</span>
+            </NavLink>
+            <NavLink to="/shop">
+              <span>Shop</span>
+            </NavLink>
+            <NavLink to="/contact">
+              <span>Contact</span>
+            </NavLink>
             {currentUser ? (
-              <NavLink to="/auth">Account</NavLink>
+              <NavLink to="/auth">
+                <span>Account</span>
+              </NavLink>
             ) : (
-              <NavLink to="/auth">Sign In</NavLink>
+              <NavLink to="/auth">
+                <span>Sign In</span>
+              </NavLink>
             )}
           </NavLinksContainer>
           <CartIcon />

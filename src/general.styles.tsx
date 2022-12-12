@@ -120,11 +120,7 @@ code {
 }
 
 
-/* a {
-  @media (max-width: 34em) {
-    font-size: 1.8rem;
-  }
-} */
+
 
 p {
   line-height: 1.5;
@@ -140,6 +136,8 @@ p {
 
 
 span {
+
+  font-weight: 300;  
   font-size: 2rem;
   @media (max-width: 50em) {
     font-size: 1.8rem;

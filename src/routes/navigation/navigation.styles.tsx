@@ -70,9 +70,11 @@ export const LogoContainer = styled(Link)`
     width: 4rem;
     margin-left: 1.2rem;
   }
-  @media (max-width: 23em) {
+  @media (max-width: 25em) {
     margin-left: 0.8rem;
     width: 3rem;
+    position: relative;
+    top: -18rem;
   }
 `;
 
@@ -82,18 +84,20 @@ export const NavLinksContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-around;
-  gap: 1.2rem;
+  /* gap: 1.2rem; */
   min-width: 36rem;
 
-  @media (max-width: 34em) {
-    min-width: 24rem;
+  @media (max-width: 31.25em) {
+    min-width: 30rem;
   }
 
   @media (max-width: 27em) {
     min-width: 10rem;
   }
   @media (max-width: 23em) {
-    gap: 0.8rem;
+    font-size: 1.8rem;
+    min-width: 8rem;
+    /* gap: 0.8rem; */
   }
 `;
 
@@ -109,19 +113,21 @@ export const NavLink = styled(Link)`
   white-space: nowrap;
   min-width: max-content;
 
-  @media (max-width: 50em) {
-    font-size: 1.8rem;
-  }
+  span {
+    /* @media (max-width: 50em) {
+      font-size: 1.8rem;
+    } */
 
-  @media (max-width: 34em) {
-    font-size: 1.6rem;
+    /* @media (max-width: 34em) {
+      font-size: 1.8rem;
+    } */
+    @media (max-width: 27em) {
+      font-size: 1.8rem;
+    }
+    @media (max-width: 20em) {
+      font-size: 1.6rem;
+    }
   }
-  @media (max-width: 27em) {
-    font-size: 1.6rem;
-  }
-  /* @media (max-width: 20em) {
-    font-size: 1.2rem;
-  } */
 
   /* Slide in */
 

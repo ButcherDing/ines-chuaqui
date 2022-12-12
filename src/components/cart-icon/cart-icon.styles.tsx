@@ -4,19 +4,19 @@ import { ReactComponent as ShoppingBag } from "../../assets/logos/shopping-bag.s
 export const CartIconContainer = styled.div`
   width: 6rem;
   height: 6rem;
-  margin-right: 1.5rem;
+  /* margin-right: 1.5rem; */
   margin-bottom: 1rem;
 
   top: 0.4rem;
   display: flex;
   justify-content: center;
   align-items: center;
-
   position: relative;
+  right: 1rem;
   cursor: pointer;
 
   @media (max-width: 27em) {
-    margin-right: -0.6rem;
+    right: 0rem;
   }
 
   /* @media (max-width: 23em) {
