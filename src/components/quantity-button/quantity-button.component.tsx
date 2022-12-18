@@ -1,14 +1,11 @@
 import { FC } from "react";
-import { useSelector } from "react-redux";
 import {
   addCartItem,
   CartItem,
   minusCartItem,
-  selectCartItem,
 } from "../../store/cart/cart.slice";
-import { useAppDispatch, useAppSelector } from "../../store/hooks/hooks";
+import { useAppDispatch } from "../../store/hooks/hooks";
 
-// import { setCartItems } from "../../store/cart/cart.slice";
 import { QuantityContainer, Arrow, ItemCount } from "./quantity-button.styles";
 
 type QuantityButtonProps = {
@@ -17,7 +14,6 @@ type QuantityButtonProps = {
 
 export const QuantityButton: FC<QuantityButtonProps> = ({ cartItem }) => {
   const dispatch = useAppDispatch();
-  // const cartItem = useAppSelector(selectCartItem)
 
   const decrementHandler = () => {
     dispatch(minusCartItem(cartItem));
