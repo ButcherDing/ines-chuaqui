@@ -1,12 +1,10 @@
 import { useSelector } from "react-redux";
+import { Elements } from "@stripe/react-stripe-js";
 
 import { selectCartItems, selectCartTotal } from "../../store/cart/cart.slice";
 import PaymentForm from "../../components/payment-form/payment-form.component";
 import CheckoutItem from "../../components/checkout-item/checkout-item.component";
 import { stripePromise } from "../../utils/stripe/stripe.utils";
-import { Elements } from "@stripe/react-stripe-js";
-
-// import PaymentForm from "../../components/payment-form/payment-form.component";
 
 import {
   CheckoutContainer,

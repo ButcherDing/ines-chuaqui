@@ -105,10 +105,7 @@ html {
 
 
 body {
-  /* max-width: 140rem;
-  margin-left: 50vw;
-  transform: translateX(-50vw); */
-  //
+  box-sizing: border-box;
   width: 100vw;
   padding: 0rem ${globalPadding}rem;
   overflow-x: clip;
@@ -173,11 +170,6 @@ h1 {
 
 h2 {
   font-size: 4.4rem;
-  /* text-align: center;
-  letter-spacing: 1.2rem;
-  font-weight: 200;
-  font-size: 5.2rem;
-  margin: 2.4rem 0rem 2.4rem 0rem; */
 
   @media (max-width: 50em) {
     font-size: 4.4rem;
@@ -233,11 +225,6 @@ h3 {
 
 h4 {
   font-size: 3.6rem;
-  /* text-align: center;
-  letter-spacing: 1.2rem;
-  font-weight: 200;
-  font-size: 5.2rem;
-  margin: 2.4rem 0rem 2.4rem 0rem; */
 
   @media (max-width: 50em) {
     font-size: 3rem;

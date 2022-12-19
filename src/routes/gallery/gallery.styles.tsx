@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import {
   ArtistDescription,
-  ArtistDescriptionContainer,
   BlurbHeading,
 } from "../../components/hero/hero.styles";
 import { primaryShade, RouteContainer } from "../../general.styles";
@@ -28,7 +27,6 @@ export const Line = styled.div`
 export const SeriesDescription = styled.p`
   width: 100%;
   padding-right: 3rem;
-  /* max-width: 42rem; */
 `;
 
 export const SeriesDescriptionContainer = styled.div`
@@ -38,7 +36,6 @@ export const SeriesDescriptionContainer = styled.div`
 
   @media (max-width: 50em) {
     flex-direction: column;
-    /* align-items: center; */
   }
 `;
 
