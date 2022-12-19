@@ -32,13 +32,6 @@ export const Contact = () => {
             ducimus natus necessitatibus praesentium, nisi architecto harum fuga
             temporibus nesciunt voluptatum. Omnis, reprehenderit.
           </ContactText>
-          {/* Alternative Sweeping-in text animation
-          <TextboxFadeIn
-            text={`Lorem ipsum dolor sit amet, consectetur adipisicing elit. Numquam
-  minima voluptatum unde corporis, dolorum eaque hic praesentium ut
-  reiciendis vero! Nulla ea debitis consequuntur vitae, hic
-  perspiciatis beatae illo non.`}
-          ></TextboxFadeIn> */}
 
           <ContactForm
             onSubmit={onSubmitHandler}
@@ -54,7 +47,7 @@ export const Contact = () => {
                 name="name"
                 id="name"
                 type="text"
-                placeholder="John Smith"
+                placeholder="Harry Maclary"
                 required
               />
             </div>
@@ -65,7 +58,7 @@ export const Contact = () => {
                 name="email"
                 id="email"
                 type="email"
-                placeholder="me@example.com"
+                placeholder="hmaclary@example.com"
                 required
               />
             </div>
@@ -80,25 +73,7 @@ export const Contact = () => {
               />
             </div>
 
-            {/* <div>
-              <ContactFormLabel htmlFor="select-where">
-                Where did you hear about this site?
-              </ContactFormLabel>
-              <select name="select-where" id="select-where" required>
-                <option value="">Please choose one option:</option>
-                <option value="family">Friends or family</option>
-                <option value="show">Art show</option>
-                <option value="word of mouth">Word of mouth</option>
-                <option value="internet">Internet</option>
-                <option value="other">Other</option>
-              </select>
-            </div> */}
-
-            {/* <button className="btn btn--form">Send</button> */}
             <LeafButton>Send</LeafButton>
-
-            {/* <input type="checkbox" />
-                <input type="number" /> */}
           </ContactForm>
         </ContactTextBox>
       </ContactBox>

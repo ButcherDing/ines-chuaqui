@@ -1,5 +1,4 @@
-import { useAppDispatch, useAppSelector } from "../../store/hooks/hooks";
-// import { setCurSeriesIndex } from "../../store/gallery/gallery.slice";
+import { useAppSelector } from "../../store/hooks/hooks";
 
 import { Lightbox } from "../../components/lightbox/lightbox.component";
 
@@ -9,19 +8,12 @@ import {
   RouteTitle,
   SeriesDescription,
   SeriesDescriptionContainer,
-  SeriesBlurbHeading,
-  SeriesBlurb,
   SeriesTitle,
-  FlexColumn,
+  LightboxColumn,
 } from "../../routes/gallery/gallery.styles";
 
 export const Gallery = () => {
-  const dispatch = useAppDispatch();
   const seriesData = useAppSelector((state) => state.gallery.seriesData);
-
-  // const setCurSeriesHandler = (seriesTitle: string) => {
-  //   dispatch(setCurSeriesIndex(seriesTitle));
-  // };
 
   return (
     <>
@@ -32,15 +24,13 @@ export const Gallery = () => {
             <SeriesTitle>{series.title}</SeriesTitle>
             <SeriesDescriptionContainer>
               <SeriesDescription>{series.blurb}</SeriesDescription>
-              <FlexColumn>
+              <LightboxColumn>
                 <Lightbox series={series} />
                 <span>click image to enlarge</span>
-              </FlexColumn>
+              </LightboxColumn>
             </SeriesDescriptionContainer>
           </SeriesContainer>
         ))}
-
-        {/* <GallerySlider /> */}
       </GalleryContainer>
     </>
   );

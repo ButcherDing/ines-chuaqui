@@ -48,10 +48,10 @@ export const SeriesBlurbHeading = styled(BlurbHeading)`
 
 export const SeriesBlurb = styled(ArtistDescription)``;
 
-export const FlexColumn = styled.div`
+export const LightboxColumn = styled.div`
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
   gap: 1.6rem;
-  flex-direction: column;
   text-align: center;
 `;
