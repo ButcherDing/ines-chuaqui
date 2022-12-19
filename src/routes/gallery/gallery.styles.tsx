@@ -47,3 +47,11 @@ export const SeriesBlurbHeading = styled(BlurbHeading)`
 `;
 
 export const SeriesBlurb = styled(ArtistDescription)``;
+
+export const FlexColumn = styled.div`
+  display: flex;
+  justify-content: space-between;
+  gap: 1.6rem;
+  flex-direction: column;
+  text-align: center;
+`;

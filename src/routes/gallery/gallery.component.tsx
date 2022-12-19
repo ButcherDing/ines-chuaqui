@@ -12,6 +12,7 @@ import {
   SeriesBlurbHeading,
   SeriesBlurb,
   SeriesTitle,
+  FlexColumn,
 } from "../../routes/gallery/gallery.styles";
 
 export const Gallery = () => {
@@ -31,7 +32,10 @@ export const Gallery = () => {
             <SeriesTitle>{series.title}</SeriesTitle>
             <SeriesDescriptionContainer>
               <SeriesDescription>{series.blurb}</SeriesDescription>
-              <Lightbox series={series} />
+              <FlexColumn>
+                <Lightbox series={series} />
+                <span>click image to enlarge</span>
+              </FlexColumn>
             </SeriesDescriptionContainer>
           </SeriesContainer>
         ))}

@@ -1,4 +1,4 @@
-import { useEffect, Fragment } from "react";
+import { useEffect } from "react";
 
 import "../../index.css";
 import "./lightbox.styles.scss";
