@@ -1,5 +1,3 @@
-import { Fragment } from "react";
-
 import Hero from "../../components/hero/hero.component";
 import { HomeContainer } from "./home.styles";
 

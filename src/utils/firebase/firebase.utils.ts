@@ -144,7 +144,7 @@ export const addDocumentToCollection = async (
 export const updateDocumentArrayInCollection = async (
   collectionKey: string,
   documentName: string,
-  // too many args, reduce pls
+  // too many args, reduce
   updateKey: string,
   updateValue: object | string
 ): Promise<void> => {
@@ -198,7 +198,6 @@ export type AdditionalInformation = {
   displayName?: string;
 };
 
-// SMELLS BAD - seems sloppy just to return a void/undefined thing in the case of a sign up, what will our thunk return?
 export const createUserDocumentFromAuth = async (
   userAuth: User,
   additionalInformation = {} as AdditionalInformation

@@ -1,7 +1,4 @@
-import { assert } from "console";
-import { NoParamCallback } from "fs";
 import { useState, useEffect, useRef } from "react";
-import { useLinkClickHandler } from "react-router-dom";
 
 export const useKeyPress = (targetKey: string): boolean => {
   const [keyPressed, setKeyPressed] = useState(false);

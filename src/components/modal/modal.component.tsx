@@ -1,4 +1,4 @@
-import { ChangeEvent, FC, useEffect, useState } from "react";
+import { FC, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../store/hooks/hooks";
 
 import { Piece } from "../../store/gallery/gallery.slice";
@@ -12,83 +12,70 @@ import {
   ModalHeader,
   ModalContent,
   ModalFooter,
-  ModalMessage,
+  ProductThumbnail,
 } from "./modal.styles";
-import Button from "../button/button.component";
 
 import {
-  CartItem,
   addCartItem,
   initialState,
   chooseItem,
 } from "../../store/cart/cart.slice";
-import {
-  SmallInvertedLeafButton,
-  LeafButton,
-  SmallTagButton,
-  InvertedLeafButton,
-} from "../button/button.styles";
+import { InvertedLeafButton } from "../button/button.styles";
 import { Fader } from "../fader/fader.component";
-import QuantityButton from "../quantity-button/quantity-button.component";
 
 import ModalForm from "../modal-form/modal-form.component";
 
 export type ModalProps = {
   piece: Piece;
+  showModalHandler: () => void;
 };
-// Problems -
-export const Modal: FC<ModalProps> = ({ piece }) => {
-  // const handleKeyPress = (e: Event) => {};
+export const Modal: FC<ModalProps> = ({ piece, showModalHandler }) => {
   const dispatch = useAppDispatch();
-  const currentItem: CartItem = useAppSelector(
-    (state) => state.cart.currentItem
-  );
-  const [showModal, setShowModal] = useState(false);
-  const [showMessage, setShowMessage] = useState(false);
+  const currentItem = useAppSelector((state) => state.cart.currentItem);
 
-  const showModalHandler = () => {
-    dispatch(chooseItem(initialState.currentItem));
-    setShowModal(showModal ? false : true);
-  };
-  // console.log(currentItem);
   const addItemHandler = () => {
     dispatch(addCartItem(currentItem));
-    setShowMessage(true);
   };
 
-  // escape key from modal listener
-  if (useKeyPress("Escape") && showModal) showModalHandler();
+  const closeModalHandler = () => {
+    showModalHandler();
+    // set current item back to default when we close the modal
+    dispatch(chooseItem(initialState.currentItem));
+  };
+
+  if (useKeyPress("Escape")) showModalHandler();
+
   return (
     <>
-      <SmallInvertedLeafButton onClick={showModalHandler}>
-        {piece.title}
-      </SmallInvertedLeafButton>
-      {showModal && (
-        <ModalContainer onClick={showModalHandler}>
-          <ModalContent onClick={(e) => e.stopPropagation()}>
-            <ModalHeader>
-              <h2>{piece.title}</h2>
-            </ModalHeader>
-            <ModalBody>
-              <p>{piece.description}</p>
-            </ModalBody>
-            <ModalFooter>
-              <ModalForm piece={piece} />
+      <ModalContainer onClick={showModalHandler}>
+        <ModalContent onClick={(e) => e.stopPropagation()}>
+          <ModalHeader>
+            <h2>{piece.title}</h2>
+            <ProductThumbnail src={piece.smallImageUrl} />
+          </ModalHeader>
+          <ModalBody>
+            <p>{piece.description}</p>
+          </ModalBody>
+          <ModalFooter>
+            <ModalForm piece={piece} />
 
-              <Fader text={showMessage ? "updated cart" : "choose a size"} />
-              <ModalButtons>
-                <InvertedLeafButton onClick={() => addItemHandler()}>
-                  Add to cart
-                </InvertedLeafButton>
+            <Fader
+              faderMessage={
+                currentItem.pieceId === -1 ? "choose a size" : "updated cart"
+              }
+            />
+            <ModalButtons>
+              <InvertedLeafButton onClick={() => addItemHandler()}>
+                Add to cart
+              </InvertedLeafButton>
 
-                <InvertedLeafButton onClick={showModalHandler}>
-                  Close
-                </InvertedLeafButton>
-              </ModalButtons>
-            </ModalFooter>
-          </ModalContent>
-        </ModalContainer>
-      )}
+              <InvertedLeafButton onClick={() => closeModalHandler()}>
+                Close
+              </InvertedLeafButton>
+            </ModalButtons>
+          </ModalFooter>
+        </ModalContent>
+      </ModalContainer>
     </>
   );
 };

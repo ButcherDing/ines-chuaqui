@@ -1,4 +1,4 @@
-import { Fragment, useState } from "react";
+import { useState } from "react";
 
 import { CartIconContainer, ShoppingIcon, ItemCount } from "./cart-icon.styles";
 import { selectCartCount } from "../../store/cart/cart.slice";
@@ -31,7 +31,9 @@ const CartIcon = () => {
     <CartIconContainer onClick={iconClickHandler} ref={ref}>
       <ShoppingIcon className="shopping-icon" />
       <ItemCount className="item-count">{cartCount}</ItemCount>
-      <div onClick={handleContainerClick}>{isCartOpen && <CartDropdown />}</div>
+      <div onClick={handleContainerClick}>
+        {isCartOpen && <CartDropdown closeClickHandler={handleClickOutside} />}
+      </div>
     </CartIconContainer>
   );
 };

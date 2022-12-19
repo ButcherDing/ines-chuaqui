@@ -1,14 +1,8 @@
 import styled from "styled-components";
 import {
-  primaryColor,
   primaryShade,
   primaryShade2,
-  primaryTint,
   primaryTint2,
-  RouteContainer,
-  secondaryColor,
-  secondaryTint,
-  secondaryTint2,
 } from "../../general.styles";
 
 export const ContactContainer = styled.div`
@@ -57,7 +51,7 @@ export const ContactImageBox = styled.div`
   background-image: linear-gradient(
       to right bottom,
       ${primaryShade}00,
-      ${primaryShade2}00
+      ${primaryShade}00
     ),
     url("https://i.ibb.co/smjshWG/the-dawning.jpg");
   background-size: cover;

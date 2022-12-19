@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { primaryShade, secondaryTint } from "../../general.styles";
 
 export const ModalContainer = styled.div`
   position: fixed;
@@ -20,7 +19,15 @@ export const ModalContent = styled.div`
   margin: 2.4rem;
 `;
 export const ModalHeader = styled.div`
+  display: flex;
+  justify-content: space-between;
   padding: 1rem;
+`;
+
+export const ProductThumbnail = styled.img`
+  width: 20%;
+  height: 20%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 `;
 export const ModalBody = styled.div`
   padding: 1rem;

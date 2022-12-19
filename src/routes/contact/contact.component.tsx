@@ -1,8 +1,5 @@
-import { Fragment } from "react";
 import { useNavigate } from "react-router-dom";
-import Button from "../../components/button/button.component";
 import { LeafButton } from "../../components/button/button.styles";
-import TextboxFadeIn from "../../components/textbox-fade-in/textbox-fade-in.component";
 
 import {
   ContactContainer,

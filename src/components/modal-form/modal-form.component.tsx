@@ -8,7 +8,7 @@ import {
 import { Piece } from "../../store/gallery/gallery.slice";
 import { useAppDispatch, useAppSelector } from "../../store/hooks/hooks";
 import QuantityButton from "../quantity-button/quantity-button.component";
-import { ModalFormContainer, Spacer } from "./modal-form.styles";
+import { ModalFormContainer } from "./modal-form.styles";
 
 type ModalFormProps = {
   piece: Piece;
@@ -22,10 +22,7 @@ export const ModalForm: FC<ModalFormProps> = ({ piece }) => {
 
   const handleChange = (event: ChangeEvent<HTMLSelectElement>) => {
     const printType = piece.prints[+event.target.value];
-    console.log(printType);
-
     const draftCartItem = makeDraftCartItem(piece, printType);
-    console.log(draftCartItem);
     dispatch(chooseItem(draftCartItem));
   };
 

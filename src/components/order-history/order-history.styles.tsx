@@ -45,7 +45,7 @@ export const OrderHeader = styled.div`
 // `;
 export const SingleOrder = styled.div`
   border-bottom: 1px solid ${primaryShade};
-  margin-bottom: 3rem;
+  margin-bottom: 4.8rem;
 `;
 
 export const BoughtItem = styled.div`

@@ -15,7 +15,6 @@ import {
   REGISTER,
 } from "redux-persist";
 import logger from "redux-logger";
-import thunk from "redux-thunk";
 
 import storage from "redux-persist/lib/storage";
 import storageSession from "redux-persist/lib/storage/session";

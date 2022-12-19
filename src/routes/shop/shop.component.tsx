@@ -1,5 +1,4 @@
-import { Fragment, useEffect, Suspense, lazy } from "react";
-import { useAppDispatch, useAppSelector } from "../../store/hooks/hooks";
+import { Suspense, lazy } from "react";
 
 import Spinner from "../../components/spinner/spinner.component";
 import ShopContainer from "./shop.styles";

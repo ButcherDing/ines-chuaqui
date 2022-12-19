@@ -71,11 +71,13 @@ import styled from "styled-components";
 
 // export const primaryColor = "#e74c3c";
 export const primaryColor = "#e74c3c";
-export const primaryShade2 = "#8b2e24";
 export const primaryShade = "#b93d30";
+export const primaryShade2 = "#8b2e24";
 
 export const primaryTint = "#fadbd8";
 export const primaryTint2 = "#fff1f1";
+
+export const altPrimaryShade = "#701a75";
 
 export const secondaryColor = "#3cd7e7";
 export const secondaryShade = "#2a97a2";
@@ -123,6 +125,7 @@ code {
 
 
 p {
+  /* color: ${altPrimaryShade}; */
   line-height: 1.5;
   font-size: 2rem;
   @media (max-width: 50em) {

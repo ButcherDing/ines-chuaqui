@@ -24,7 +24,6 @@ export const OrderHistory = () => {
           <>
             <OrderDateIdContainer>
               <div>
-                Ordered:
                 {"      " +
                   unixToDate(order.paymentResult.paymentIntent?.created)}
               </div>
@@ -39,7 +38,7 @@ export const OrderHistory = () => {
             </OrderHeaders>
             {/* separate this component out passing in boughtItem*/}
             <SingleOrder>
-              {order.formattedBoughtItems?.map((boughtItem) => (
+              {order.orderedItems?.map((boughtItem) => (
                 <BoughtItem>
                   <ItemDetail>{boughtItem.title} </ItemDetail>
 

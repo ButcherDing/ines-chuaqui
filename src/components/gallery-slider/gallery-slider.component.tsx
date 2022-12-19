@@ -41,7 +41,7 @@ import React, { Fragment } from "react";
 //   };
 
 //   return (
-//     <Fragment>
+//     <>
 //       <SeriesTitleContainer>
 //         {seriesData.map((series) => (
 //           <SeriesTitle
@@ -60,7 +60,7 @@ import React, { Fragment } from "react";
 //         </Artwork>
 //         <NextButton onClick={goPrevSlide} />
 //       </SliderContainer>
-//     </Fragment>
+//     </>
 //   );
 // };
 // // BtnSlider needs stuff removed - do onClick to trigger the handlers, also move the logic to our slice.

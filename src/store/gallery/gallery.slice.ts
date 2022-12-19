@@ -58,17 +58,9 @@ export const getSeriesDataAsync = createAsyncThunk(
 export const gallerySlice = createSlice({
   name: "gallery",
   initialState,
-  reducers: {
-    // setCurSeriesIndex: (state, action: PayloadAction<string>) => {
-    //   const newSeriesIndex = state.seriesData
-    //     .map((series) => series.title)
-    //     .indexOf(action.payload);
-    //   state.curSeriesIndex = newSeriesIndex;
-    // },
-  },
-  // TODO - don't need this
+  reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(getSeriesDataAsync.pending, (state, action) => {
+    builder.addCase(getSeriesDataAsync.pending, (state) => {
       state.isLoading = true;
     });
     builder.addCase(getSeriesDataAsync.fulfilled, (state, { payload }) => {

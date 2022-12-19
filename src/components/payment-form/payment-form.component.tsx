@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 
 import {
   selectCartTotal,
-  logTransactionToFirebase,
+  logTransactionAsync,
 } from "../../store/cart/cart.slice";
 import { selectCurrentUser } from "../../store/user/user-slice";
 
@@ -71,13 +71,11 @@ const PaymentForm = () => {
 
     if (paymentResult.error) {
       alert(paymentResult.error);
-      // needs to be logged as well, as an error
     } else {
       if (paymentResult.paymentIntent.status === "succeeded") {
         alert("Payment Successful");
-        // dispatch an action which tracks what was sold,
         console.log(paymentResult);
-        dispatch(logTransactionToFirebase(paymentResult));
+        dispatch(logTransactionAsync(paymentResult));
         // TODO reset cart to initial state
       }
     }

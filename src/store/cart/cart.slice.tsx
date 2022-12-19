@@ -3,6 +3,7 @@ import {
   createAsyncThunk,
   createSelector,
   createSlice,
+  SerializedError,
 } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { Piece } from "../gallery/gallery.slice";
@@ -12,7 +13,7 @@ import {
   getCurrentUser,
   updateDocumentArrayInCollection,
 } from "../../utils/firebase/firebase.utils";
-import { checkUserSessionAsync } from "../user/user-slice";
+import { checkUserSessionAsync, OrderedItem } from "../user/user-slice";
 
 ////  For debugging reducers - use current to console.log a value inside reducer
 // import { current } from "immer";
@@ -75,6 +76,7 @@ export type CartState = {
   cartItems: CartItem[];
   isLoading: boolean;
   currentItem: CartItem;
+  error: SerializedError | null;
 };
 
 export type CartItem = {
@@ -91,7 +93,6 @@ export type PrintType = { size: string; price: number };
 ///////////// INITIAL STATE
 
 export const initialState: CartState = {
-  // isCartOpen: false,
   cartItems: [],
   isLoading: false,
   currentItem: {
@@ -105,12 +106,13 @@ export const initialState: CartState = {
     printType: { size: "", price: -1 },
     cartId: "draft",
   },
+  error: null,
 };
 //////////// THUNKS
 
 // this does a lot of things....
-export const logTransactionToFirebase = createAsyncThunk(
-  "checkout/logTransactionToFirebase",
+export const logTransactionAsync = createAsyncThunk(
+  "checkout/logTransactionAsync",
   async (paymentResult: PaymentIntentResult, thunkAPI) => {
     try {
       const state = thunkAPI.getState() as RootState;
@@ -118,9 +120,9 @@ export const logTransactionToFirebase = createAsyncThunk(
       const { cartItems } = state.cart;
 
       if (!paymentResult.paymentIntent)
-        return console.error("no payment intent token received from stripe");
+        return console.error("no payment result from service provider");
 
-      // Prepare a transaction document (consider function). This records the user, the items they purchased (cart items), and the payment result object. It also makes the orderId more accessible by copying it to the top level. (Rationale: as it is deeply nested - this deep nesting preserved because we don't want to start modifying the stripe payment result object, we want all these details to stay the same.)
+      // new order doc
       const orderDoc = {
         currentUser,
         cartItems,
@@ -128,14 +130,14 @@ export const logTransactionToFirebase = createAsyncThunk(
         orderId: paymentResult.paymentIntent.id,
       };
 
-      // write the TRANSACTION document to our transaction records in firebase
+      // write it to fb
       await addDocumentToCollection(
         "transactions",
         paymentResult.paymentIntent.id,
         orderDoc
       );
 
-      // create our orderHistory object - we want a different, simpler object to work with when we pull it off of user later
+      // create our orderHistory object to append to currentUser
 
       const formattedDate = paymentResult.paymentIntent
         ? String(
@@ -145,27 +147,31 @@ export const logTransactionToFirebase = createAsyncThunk(
           )
         : "no date";
 
-      const formattedBoughtItems = cartItems.map((cartItem) => {
-        const orderItem = {
-          title: cartItem.title,
-          size: cartItem.printType.size,
-          price: cartItem.printType.price,
-          quantity: cartItem.quantity,
-          orderId: paymentResult.paymentIntent.id,
-          date: formattedDate,
-        };
-        return orderItem;
-      });
+      // helper
+      const makeOrderedItems = (cartItems: CartItem[]): OrderedItem[] => {
+        const orderedItems = cartItems.map((cartItem) => {
+          const orderedItem = {
+            title: cartItem.title,
+            size: cartItem.printType.size,
+            price: cartItem.printType.price,
+            quantity: cartItem.quantity,
+            orderId: paymentResult.paymentIntent.id,
+            date: formattedDate,
+          };
+          return orderedItem;
+        });
+        return orderedItems;
+      };
+
+      const orderedItems = makeOrderedItems(cartItems);
 
       const userOrderDoc = {
         currentUser,
-        formattedBoughtItems,
+        orderedItems,
         paymentResult,
         orderId: paymentResult.paymentIntent.id,
       };
 
-      console.log(formattedBoughtItems);
-      // we don't have the uid anywhere in state unfortunately....
       const userRes = await getCurrentUser();
       if (!userRes) return;
       await updateDocumentArrayInCollection(
@@ -174,10 +180,10 @@ export const logTransactionToFirebase = createAsyncThunk(
         "orders",
         userOrderDoc
       );
-      thunkAPI.dispatch(checkUserSessionAsync());
       return userOrderDoc;
     } catch (error) {
       console.error(error);
+      throw error;
     }
   }
 );
@@ -204,7 +210,7 @@ export const unixToDate = (unixStamp: number | undefined) => {
   return (
     new Date(unixStamp * 1000).toLocaleDateString() +
     " - " +
-    new Date(unixStamp * 1000).toLocaleTimeString().slice(0, -3)
+    new Date(unixStamp * 1000).toLocaleTimeString()
   );
 };
 
@@ -261,17 +267,18 @@ export const cartSlice = createSlice({
 
   extraReducers: (builder) => {
     //////////////// Log Purchase
-    builder.addCase(logTransactionToFirebase.pending, (state) => {
+    builder.addCase(logTransactionAsync.pending, (state) => {
       state.isLoading = true;
     });
 
-    builder.addCase(logTransactionToFirebase.fulfilled, (state) => {
+    builder.addCase(logTransactionAsync.fulfilled, (state) => {
       state.isLoading = false;
       state.cartItems = [];
       // state.isCartOpen = false;
     });
-    builder.addCase(logTransactionToFirebase.rejected, (state) => {
+    builder.addCase(logTransactionAsync.rejected, (state, { error }) => {
       state.isLoading = false;
+      state.error = error;
     });
   },
 });

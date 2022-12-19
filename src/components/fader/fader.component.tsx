@@ -3,10 +3,10 @@ import { useAppSelector } from "../../store/hooks/hooks";
 import { FaderContainer } from "./fader.styles";
 
 type FaderProps = {
-  text: string;
+  faderMessage: string;
 };
 
-export const Fader: FC<FaderProps> = ({ text = "" }) => {
+export const Fader: FC<FaderProps> = ({ faderMessage = "" }) => {
   const [fade, setFade] = useState("");
   const cartItems = useAppSelector((state) => state.cart.cartItems);
 
@@ -29,7 +29,7 @@ export const Fader: FC<FaderProps> = ({ text = "" }) => {
 
   return (
     <>
-      <FaderContainer className={fade}>{text}</FaderContainer>
+      <FaderContainer className={fade}>{faderMessage}</FaderContainer>
     </>
   );
 };

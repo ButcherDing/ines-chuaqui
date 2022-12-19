@@ -1,4 +1,3 @@
-import { Fragment } from "react";
 import { Outlet } from "react-router-dom";
 
 import CartIcon from "../../components/cart-icon/cart-icon.component";
@@ -19,7 +18,7 @@ export const Navigation = () => {
   const currentUser = useAppSelector((state) => state.user.currentUser);
 
   return (
-    <Fragment>
+    <>
       <NavigationContainer>
         <NavTitle>Ines Chuaqui</NavTitle>
         {/* <BannerLine /> */}
@@ -53,7 +52,7 @@ export const Navigation = () => {
         </NavBar>
       </NavigationContainer>
       <Outlet />
-    </Fragment>
+    </>
   );
 };
 

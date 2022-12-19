@@ -1,6 +1,5 @@
 import React, { useEffect, lazy, Suspense } from "react";
 import { Route, Routes } from "react-router-dom";
-import { Fragment } from "react";
 
 import GlobalStyle from "./general.styles";
 import ContactSuccess from "./routes/contact-success/contact-success.component";
@@ -9,10 +8,7 @@ import Spinner from "./components/spinner/spinner.component";
 
 import { checkUserSessionAsync } from "./store/user/user-slice";
 
-import {
-  getSeriesDataAsync,
-  // getFirestoreUrlsAsync,
-} from "./store/gallery/gallery.slice";
+import { getSeriesDataAsync } from "./store/gallery/gallery.slice";
 
 import { useAppDispatch } from "./store/hooks/hooks";
 import Navigation from "./routes/navigation/navigation.component";
@@ -41,7 +37,7 @@ function App() {
   // }, [seriesData]);
 
   return (
-    <Fragment>
+    <>
       <GlobalStyle />
       <Suspense fallback={<Spinner />}>
         <Routes>
@@ -56,7 +52,7 @@ function App() {
           </Route>
         </Routes>
       </Suspense>
-    </Fragment>
+    </>
   );
 }
 

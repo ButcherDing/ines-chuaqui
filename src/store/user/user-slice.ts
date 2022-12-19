@@ -18,10 +18,10 @@ import {
   updateFbPassword,
 } from "../../utils/firebase/firebase.utils";
 import { RootState } from "../store";
-import { logTransactionToFirebase } from "../cart/cart.slice";
+import { logTransactionAsync } from "../cart/cart.slice";
 
 //  For debugging reducers - use current to console.log a value inside reducer
-import { current } from "immer";
+// import { current } from "immer";
 // import { getCurrentScope } from "immer/dist/internal";
 
 //
@@ -49,18 +49,14 @@ export type UserData = {
   displayName: string;
   email: string;
   orders: Order[];
-  // cartItems: CartItem[];
-  // favorites: CartItem[];
 };
 
 export type Order = {
-  formattedBoughtItems: FormattedOrderedItem[];
+  orderedItems: OrderedItem[];
   currentUser: UserData | null;
   orderId: string;
   paymentResult: PaymentIntentResult;
 };
-// orderDoc.paymentResult.paymentIntent: amount, created
-// date = new Date(created * 1000)
 
 const initialState: UserState = {
   changedMsg: false,
@@ -69,7 +65,7 @@ const initialState: UserState = {
   error: null,
 };
 
-export type FormattedOrderedItem = {
+export type OrderedItem = {
   title: string;
   size: string;
   price: number;
@@ -304,9 +300,6 @@ export const userSlice = createSlice({
     });
     builder.addCase(signInEmailPassAsync.rejected, (state, { error }) => {
       state.isLoading = false;
-      console.log(error);
-      current(error);
-      // getCurrentScope(error);
       state.error = error;
     });
 
@@ -340,22 +333,19 @@ export const userSlice = createSlice({
     });
     // TODO consider isLoaded...
     //////////////// Log transaction
-    builder.addCase(logTransactionToFirebase.pending, (state) => {
+    builder.addCase(logTransactionAsync.pending, (state) => {
       state.isLoading = true;
     });
 
-    builder.addCase(
-      logTransactionToFirebase.fulfilled,
-      (state, { payload }) => {
-        if (!payload) return;
-        if (!state.currentUser) return;
-        // because someone not logged in can still make a purchase - in this case there is no user to which to push an order record.
-        state.currentUser.orders.push(payload);
-        state.isLoading = false;
-      }
-    );
+    builder.addCase(logTransactionAsync.fulfilled, (state, { payload }) => {
+      if (!payload) return;
+      if (!state.currentUser) return;
+      // because someone not logged in can still make a purchase - in this case there is no user to which to push an order record.
+      state.currentUser.orders.push(payload);
+      state.isLoading = false;
+    });
     // order history updates
-    builder.addCase(logTransactionToFirebase.rejected, (state, { error }) => {
+    builder.addCase(logTransactionAsync.rejected, (state, { error }) => {
       state.isLoading = false;
       state.error = error;
     });

@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { ReactComponent as ShoppingBag } from "../../assets/logos/shopping-bag.svg";
+import { primaryShade } from "../../general.styles";
 
 export const CartIconContainer = styled.div`
   width: 6rem;
@@ -34,5 +35,5 @@ export const ItemCount = styled.span`
 
   font-weight: bold;
   font-size: 1.4rem;
-  color: #8b2e24;
+  color: ${primaryShade};
 `;

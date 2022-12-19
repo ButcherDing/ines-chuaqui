@@ -15,11 +15,18 @@ import {
 } from "./cart-dropdown.styles";
 import { LeafButton } from "../button/button.styles";
 
-const CartDropdown = () => {
+type CartDropdownProps = {
+  closeClickHandler: () => void;
+};
+
+const CartDropdown: FC<CartDropdownProps> = ({ closeClickHandler }) => {
   const cartItems = useSelector(selectCartItems);
   const navigate = useNavigate();
 
-  const goToCheckoutHandler = () => navigate("/checkout");
+  const goToCheckoutHandler = () => {
+    navigate("/checkout");
+    closeClickHandler();
+  };
 
   return (
     <CartDropdownContainer>
@@ -29,14 +36,14 @@ const CartDropdown = () => {
             <CartItemCard
               cartItem={cartItem}
               key={cartItem.title + " cart " + cartItem.printType.size}
-            ></CartItemCard>
+            />
           ))
         ) : (
           <EmptyMessage>No items in cart</EmptyMessage>
         )}
       </CartItems>
 
-      <LeafButton onClick={goToCheckoutHandler}>GO TO CHECKOUT</LeafButton>
+      <LeafButton onClick={goToCheckoutHandler}>Checkout</LeafButton>
     </CartDropdownContainer>
   );
 };

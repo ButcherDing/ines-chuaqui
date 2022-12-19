@@ -1,6 +1,5 @@
-import { FC } from "react";
+import { FC, useState } from "react";
 import { Series } from "../../store/gallery/gallery.slice";
-import { useAppDispatch } from "../../store/hooks/hooks";
 
 import Modal from "../../components/modal/modal.component";
 
@@ -9,6 +8,7 @@ import {
   ShopRowImage,
   ShopRowItemContainer,
 } from "./series-row.styles";
+import { SmallInvertedLeafButton } from "../button/button.styles";
 
 export interface SeriesRowProps {
   readonly series: Series;
@@ -17,7 +17,11 @@ export interface SeriesRowProps {
 }
 
 export const SeriesRow: FC<SeriesRowProps> = ({ series }) => {
-  const dispatch = useAppDispatch();
+  const [showModal, setShowModal] = useState(false);
+
+  const showModalHandler = () => {
+    setShowModal(showModal ? false : true);
+  };
 
   return (
     <>
@@ -26,7 +30,12 @@ export const SeriesRow: FC<SeriesRowProps> = ({ series }) => {
         {series.pieces.map((piece) => (
           <ShopRowItemContainer key={"shop_row_key" + piece.title}>
             <ShopRowImage src={piece.smallImageUrl} alt={piece.title} />
-            <Modal piece={piece} />
+            <SmallInvertedLeafButton onClick={showModalHandler}>
+              {piece.title}
+            </SmallInvertedLeafButton>
+            {showModal && (
+              <Modal piece={piece} showModalHandler={showModalHandler} />
+            )}
           </ShopRowItemContainer>
         ))}
       </ShopRow>
@@ -35,13 +44,3 @@ export const SeriesRow: FC<SeriesRowProps> = ({ series }) => {
 };
 
 export default SeriesRow;
-
-///// OLD ADD TO CART BUTTON
-// const addPrintHandler = (piece: Piece) => {
-//   const cartItemToAdd = { ...piece, quantity: 1 };
-//   return dispatch(setCartItems(cartItemToAdd));
-// };
-
-/* <Button onClick={() => addPrintHandler(piece)}>
-                Order Print
-              </Button> */
