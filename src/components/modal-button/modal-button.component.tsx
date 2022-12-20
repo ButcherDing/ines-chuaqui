@@ -50,7 +50,7 @@ export const ModalButton: FC<ModalProps> = ({ piece }) => {
     dispatch(chooseItem(initialState.currentItem));
   };
 
-  if (useKeyPress("Escape")) closeModalHandler();
+  if (useKeyPress("Escape") && showModal) closeModalHandler();
 
   return (
     <>

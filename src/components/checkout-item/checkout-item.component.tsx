@@ -1,13 +1,7 @@
 import { FC } from "react";
 import { useDispatch, useSelector } from "react-redux";
-// import QuantityButton from "../quantity-button/quantity-button.component";
 
-import {
-  addCartItem,
-  minusCartItem,
-  removeCartItem,
-} from "../../store/cart/cart.slice";
-// import { removeItemFromCart } from "../../store/cart/cart.action";
+import { removeCartItem } from "../../store/cart/cart.slice";
 import { CartItem } from "../../store/cart/cart.slice";
 import QuantityButton from "../quantity-button/quantity-button.component";
 import {
@@ -28,13 +22,6 @@ const CheckoutItem: FC<CheckoutItemProps> = ({ cartItem }) => {
 
   const removeItemHandler = () => {
     dispatch(removeCartItem(cartItem));
-  };
-
-  const addItemHandler = () => {
-    dispatch(addCartItem(cartItem));
-  };
-  const minusItemHandler = () => {
-    dispatch(minusCartItem(cartItem));
   };
 
   return (
