@@ -261,7 +261,7 @@ h5 {
 10 / 12 / 14 / 16 / 18 / 20 / 24 / 30 / 36 / 44 / 52 / 62 / 74 / 86 / 98 */
 
 export const RouteContainer = styled.div`
-  padding: 2rem 5%;
+  padding: 2rem 5% 0;
 `;
 
 //////////////// MEDIA QUERIES
