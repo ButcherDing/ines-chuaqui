@@ -8,7 +8,7 @@ export const AuthenticationContainer = styled.div`
   border-radius: 9px;
   padding: 3% 8%;
   margin: 7% 4%;
-  box-shadow: 0 2.4rem 4.8rem rgba(0, 0, 0, 0.15);
+  /* box-shadow: 0 2.4rem 4.8rem rgba(0, 0, 0, 0.15); */
   overflow: hidden;
 
   @media (max-width: 50em) {
