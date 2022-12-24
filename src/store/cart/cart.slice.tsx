@@ -13,7 +13,7 @@ import {
   getCurrentUser,
   updateDocumentArrayInCollection,
 } from "../../utils/firebase/firebase.utils";
-import { checkUserSessionAsync, OrderedItem } from "../user/user-slice";
+import { OrderedItem } from "../user/user-slice";
 
 ////  For debugging reducers - use current to console.log a value inside reducer
 // import { current } from "immer";
@@ -45,10 +45,6 @@ export const selectCartItem = createSelector(
     return matchedItem;
   }
 );
-// export const selectIsCartOpen = createSelector(
-//   [selectCartReducer],
-//   (cart) => cart.isCartOpen
-// );
 
 export const selectCartCount = createSelector([selectCartItems], (cartItems) =>
   cartItems.reduce(
@@ -65,14 +61,9 @@ export const selectCartTotal = createSelector([selectCartItems], (cartItems) =>
   )
 );
 
-// export const selectCartItem = createSelector([selectCartItems],
-//   (cartItems)=>
-//   cartItems
-
 /////////// TYPES
 
 export type CartState = {
-  // isCartOpen: boolean;
   cartItems: CartItem[];
   isLoading: boolean;
   currentItem: CartItem;
@@ -85,7 +76,6 @@ export type CartItem = {
   cartId: CartId;
 } & Piece;
 
-// make more strict?
 export type CartId = string;
 
 export type PrintType = { size: string; price: number };
@@ -138,7 +128,6 @@ export const logTransactionAsync = createAsyncThunk(
       );
 
       // create our orderHistory object to append to currentUser
-
       const formattedDate = paymentResult.paymentIntent
         ? String(
             new Date(
@@ -189,7 +178,6 @@ export const logTransactionAsync = createAsyncThunk(
 );
 
 //////////// COMPONENT HELPERS
-
 export const makeDraftCartItem = (piece: Piece, printType: PrintType) => {
   return {
     ...piece,
@@ -231,7 +219,6 @@ export const cartSlice = createSlice({
         : (state.currentItem = cartItemToSelect);
     },
 
-    // selectItem: (state, action: PayloadAction<CartId>) => {
     addCartItem: (state, action: PayloadAction<CartItem>) => {
       const itemToAdd = action.payload;
       if (itemToAdd.title === "draft") return;
@@ -251,7 +238,7 @@ export const cartSlice = createSlice({
         return;
       } else if (cartItemToMinus.quantity === -1) {
         return;
-        // UX-wise this one kind of jarring
+        // jarring UX
       } else if (cartItemToMinus.quantity === 1) {
         state.cartItems.splice(findCartItemIndex(state, cartItemToMinus), 1);
       } else {

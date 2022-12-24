@@ -1,13 +1,14 @@
 import styled from "styled-components";
 import { primaryShade } from "../../general.styles";
-import { CheckoutHeaders } from "../../routes/checkout/checkout.styles";
 
 export const OrderHistoryContainer = styled.div`
   width: 100%;
 `;
 
 export const OrderDateIdContainer = styled.div`
-  font-size: 1.8rem;
+  font-size: 1.6rem;
+  font-weight: 600;
+  gap: 1.6rem;
   display: flex;
   justify-content: space-between;
 `;
@@ -22,6 +23,7 @@ export const OrderHeaders = styled.div`
 `;
 export const OrderHeader = styled.div`
   flex: 1;
+  font-size: 1.6rem;
   text-align: center;
   &:last-child {
     text-align: right;
