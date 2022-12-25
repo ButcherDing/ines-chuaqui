@@ -11,6 +11,7 @@ import {
   ButtonCol,
   HeaderContainer,
   Underlined,
+  Caret,
 } from "./user-dashboard.styles";
 
 import { LeafButton } from "../button/button.styles";
@@ -44,12 +45,14 @@ export const UserDashboard = () => {
       </HeaderContainer>
       <ButtonCol>
         <LeafButton onClick={showUserSettingsToggler}>
-          {showUserSettings ? `Hide Settings` : `Change Account Settings`}
+          Account Settings
+          <Caret className={showUserSettings ? "rotate" : ""} />
         </LeafButton>
         {showUserSettings && <UserSettings currentUser={currentUser} />}
 
         <LeafButton onClick={showHistoryToggler}>
-          {showHistory ? `Hide History` : `Show Order History`}
+          Order History
+          <Caret className={showHistory ? "rotate" : ""} />
         </LeafButton>
         {showHistory && <OrderHistory />}
       </ButtonCol>

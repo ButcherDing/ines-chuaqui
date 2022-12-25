@@ -210,7 +210,6 @@ export const cartSlice = createSlice({
   reducers: {
     chooseItem: (state, action: PayloadAction<CartItem>) => {
       const cartItemToSelect = action.payload;
-      console.log(cartItemToSelect);
       const matchedItem = state.cartItems.find(
         (item) => item.cartId === cartItemToSelect.cartId
       );

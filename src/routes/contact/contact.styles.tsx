@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import {
+  fadeInAnimation,
   primaryShade,
-  primaryShade2,
   primaryTint2,
 } from "../../general.styles";
 
@@ -11,6 +11,7 @@ export const ContactContainer = styled.div`
   box-shadow: 0 2.4rem 4.8rem rgba(0, 0, 0, 0.1);
   border-radius: 1rem;
   margin: 7% 4%;
+  animation: ${fadeInAnimation};
 
   background-image: linear-gradient(to right, ${primaryTint2}, ${primaryTint2});
   overflow: hidden;

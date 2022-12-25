@@ -17,7 +17,6 @@ type ModalFormProps = {
 export const ModalForm: FC<ModalFormProps> = ({ piece }) => {
   const dispatch = useAppDispatch();
   const currentItem = useAppSelector(selectCurrentItem);
-  console.log(currentItem);
   const cartItem = useAppSelector(selectCartItem);
 
   const handleChange = (event: ChangeEvent<HTMLSelectElement>) => {

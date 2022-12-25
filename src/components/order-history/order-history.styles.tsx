@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { primaryShade } from "../../general.styles";
+import { fadeInFromTop, primaryShade } from "../../general.styles";
 
 export const OrderHistoryContainer = styled.div`
   width: 100%;

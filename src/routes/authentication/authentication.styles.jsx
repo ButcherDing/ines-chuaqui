@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { primaryTint2 } from "../../general.styles";
+import { fadeInAnimation, primaryTint2 } from "../../general.styles";
 
 export const AuthenticationContainer = styled.div`
   display: flex;
@@ -10,6 +10,8 @@ export const AuthenticationContainer = styled.div`
   margin: 7% 4%;
   box-shadow: 0 2.4rem 4.8rem rgba(0, 0, 0, 0.15);
   overflow: hidden;
+
+  animation: ${fadeInAnimation};
 
   @media (max-width: 50em) {
     flex-direction: column;

@@ -1,11 +1,18 @@
 import styled from "styled-components";
-import { CheckoutHeaders } from "../../routes/checkout/checkout.styles";
-import {
-  primaryShade,
-  primaryTint2,
-  secondaryTint2,
-} from "../../general.styles";
-import FormInput from "../form-input/form-input.component";
+
+import { ReactComponent as CaretSvg } from "../../assets/logos/chevron-forward-outline.svg";
+
+export const Caret = styled(CaretSvg)`
+  height: 2.4rem;
+  margin-left: 1.2rem;
+
+  transition: all 0.3s;
+  transform: rotate(0deg);
+
+  &.rotate {
+    transform: rotate(90deg);
+  }
+`;
 
 export const DashboardContainer = styled.div`
   display: flex;

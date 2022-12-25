@@ -22,7 +22,6 @@ export const Fader: FC<FaderProps> = ({ faderMessage = "" }) => {
   // useEffect(() => {
   //   const timeout = setInterval(() => {
   //     fade === "fade-in" ? setFade("fade-out") : setFade("fade-in");
-  //     console.log(fade);
   //   }, 1000);
   //   return () => clearInterval(timeout);
   // }, [fade]);

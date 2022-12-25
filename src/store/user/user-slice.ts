@@ -146,7 +146,6 @@ export const signInGooglePopupAsync = createAsyncThunk(
   async (_, thunkAPI) => {
     try {
       const res = await signInWithGooglePopup();
-      console.log(res);
       const userSnapshot = await createUserDocumentFromAuth(res.user);
 
       // throw error?
@@ -223,7 +222,6 @@ export const changeDisplayNameAsync = createAsyncThunk(
   async (newDisplayName: string, thunkAPI) => {
     try {
       await updateDisplayName(newDisplayName);
-      console.log("display name updated");
       return newDisplayName;
     } catch (error) {
       console.log("error changing display name:", error);
@@ -239,7 +237,6 @@ export const deleteAccountAsync = createAsyncThunk(
       const state = getState() as RootState;
       const currentUser = state.user.currentUser;
       await deleteAccountFromFbAuth({ ...currentUser });
-      console.log("account deleted from firebase");
       await dispatch(signOutAsync());
     } catch (error) {
       console.log("error deleting user:", error);

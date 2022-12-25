@@ -1,15 +1,15 @@
 import styled from "styled-components";
-import { primaryShade } from "../../general.styles";
+import { fadeInAnimation, primaryShade } from "../../general.styles";
 
 export const CheckoutContainer = styled.div`
-  /* width: 90%; */
-
   min-width: 32rem;
   min-height: 90vh;
   display: flex;
   flex-direction: column;
   /* justify-items: center; */
   margin: 5rem 2.5rem;
+  animation: ${fadeInAnimation};
+
   @media (max-width: 75em) {
     margin: 5rem 0rem;
   }

@@ -104,25 +104,20 @@ export const NavLinkButton = styled(NavLink)`
   }
 `;
 
-// note to self - text-decoration:underline often looks terrible
 export const LeafButton = styled.button`
+  display: flex;
   text-decoration: none;
   font-size: 2rem;
   font-weight: 500;
   padding: 2rem 4rem;
   border-radius: 0.3rem 2rem;
 
-  /* Only necessary for .btn */
   border: none;
   cursor: pointer;
   font-family: inherit;
-
-  /* Put transition on original "state" */
-  /* transition: background-color 0.3s; */
-
   background-color: ${primaryShade};
   color: #fdf2e9;
-  /* align-self: start; */
+
   padding: 1.2rem;
   border: 1px solid ${primaryShade};
 
@@ -130,7 +125,6 @@ export const LeafButton = styled.button`
 
   :link,
   :visited {
-    display: inline-block;
   }
 
   :hover,
@@ -139,8 +133,6 @@ export const LeafButton = styled.button`
     color: ${primaryShade};
     border: 1px solid ${primaryShade};
   }
-
-  /* border: 3px solid #fff; */
 
   box-shadow: inset 0 0 0 3px #fff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
@@ -167,6 +159,7 @@ export const LeafButton = styled.button`
 export const GoogleLeafButton = styled(LeafButton)`
   background-color: #2a96a2;
   border: 1px solid #2a96a2;
+  display: flex;
 
   :hover,
   :active {

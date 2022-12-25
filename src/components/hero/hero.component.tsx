@@ -9,6 +9,7 @@ import {
 } from "./hero.styles";
 import "./hero.styles";
 import { LeafButton } from "../button/button.styles";
+import { Caret } from "../user-dashboard/user-dashboard.styles";
 
 const Hero = () => {
   return (

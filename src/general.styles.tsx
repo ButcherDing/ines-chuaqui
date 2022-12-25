@@ -89,8 +89,31 @@ export const mainTextColor = primaryShade;
 export const titleTextColor = primaryShade;
 
 export const globalPadding = 2.4;
+export const fadeInAnimation = "0.3s ease-out 0s 1 fadeIn";
+export const fadeInFromTop = "0.3s ease-out 0s 1 fadeInFromTop";
 
 export const GlobalStyle = createGlobalStyle`
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0%;
+  }
+  100% {
+    opacity: 100%;
+  }
+}
+@keyframes fadeInFromTop {
+  0% {
+    opacity: 0%;
+    transform: translateY(-100%)
+  }
+  100% {
+    opacity: 100%;
+    transform: translateY(0%)
+  }
+}
+
+
 * {
   box-sizing: border-box;
   font-family: "Roboto Flex", sans-serif;
@@ -135,8 +158,8 @@ p {
 }
 
 
-span {
 
+span {
   font-weight: 300;  
   font-size: 2rem;
   @media (max-width: 50em) {
@@ -199,10 +222,6 @@ h3 {
 
   position: relative;
   
-
-
-
-
 &::after {
   content: "";
   position: absolute;
@@ -255,6 +274,10 @@ h5 {
     font-size: 1.8rem;
   } */
 }
+a, button {
+  text-decoration: none;
+}
+
   `;
 
 /* - Font sizes (px)
@@ -262,6 +285,7 @@ h5 {
 
 export const RouteContainer = styled.div`
   padding: 2rem 5% 0;
+  animation: ${fadeInAnimation};
 `;
 
 //////////////// MEDIA QUERIES

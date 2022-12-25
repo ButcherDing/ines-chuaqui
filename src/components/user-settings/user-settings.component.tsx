@@ -9,8 +9,8 @@ import {
   selectErrorMessage,
   UserData,
 } from "../../store/user/user-slice";
-import Button, { BUTTON_TYPE_CLASSES } from "../button/button.component";
-import { BlackLeafButton, LeafButton } from "../button/button.styles";
+import { BUTTON_TYPE_CLASSES } from "../button/button.component";
+import { BlackLeafButton } from "../button/button.styles";
 import {
   UserSettingsContainer,
   DashboardFormInput,

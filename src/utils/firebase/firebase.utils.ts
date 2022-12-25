@@ -118,7 +118,7 @@ export const addCollectionAndDocuments = async <T extends ObjectToAdd>(
   console.log("batch committed");
 };
 
-//// example call, or FOR FIRING ONCE ONLY TO UPDATE DB, then TURN OFF
+//// example call, or FOR FIRING ONCE ONLY TO OVERWRITE A COLLECTION, then TURN OFF
 // addCollectionAndDocuments("series", SERIES_DATA);
 ////////////////////
 
@@ -138,7 +138,6 @@ export const addDocumentToCollection = async (
 ): Promise<void> => {
   const docRef = doc(db, collectionKey, documentName);
   await setDoc(docRef, document, { merge: true });
-  console.log("document added");
 };
 
 export const updateDocumentArrayInCollection = async (
@@ -152,7 +151,6 @@ export const updateDocumentArrayInCollection = async (
   await updateDoc(docRef, {
     [updateKey]: arrayUnion(updateValue),
   });
-  console.log("document updated");
 };
 
 export const updateDocumentInCollection = async (
@@ -163,7 +161,6 @@ export const updateDocumentInCollection = async (
 ): Promise<void> => {
   const docRef = doc(db, collectionKey, documentName);
   const res = await updateDoc(docRef, updateObj);
-  console.log("document updated", res);
 };
 
 export const deleteDocumentInCollection = async (
@@ -175,7 +172,6 @@ export const deleteDocumentInCollection = async (
   Object.keys(objectToDelete).forEach(
     (key) => (objectToDelete[key] = deleteField())
   );
-  console.log(objectToDelete);
   const fieldDelRes = await updateDoc(docRef, objectToDelete);
   const res = await deleteDoc(docRef);
   console.log("document deleted", res, fieldDelRes);
@@ -223,7 +219,7 @@ export const createUserDocumentFromAuth = async (
       // only gives a void return, hence fetching again.
       userSnapshot = await getDoc(userDocRef);
     } catch (error) {
-      console.log("error creating user document", error);
+      console.error("error creating user document", error);
       throw error;
     }
   }
@@ -251,7 +247,6 @@ export const updateFbAuthEmail = async (newEmail: string) => {
   try {
     if (!auth.currentUser) return;
     const res = await updateEmail(auth.currentUser, newEmail);
-    console.log("email updated");
     // update email in database
     await updateDocumentInCollection("users", auth.currentUser.uid, {
       email: newEmail,
@@ -303,7 +298,6 @@ export const deleteAccountFromFbAuth = async (dummyCurrentUser: any) => {
     );
     // delete from fb auth
     await deleteUser(auth.currentUser);
-    console.log("user deleted");
   } catch (error) {
     console.error("error deleting user", error);
     throw error;
