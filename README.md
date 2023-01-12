@@ -9,12 +9,12 @@ An e-commerce/artist portfolio app created to:
 
 ## Main Features
 
--Gallery w/ lightbox
--Login/User Dashboard
--Shop
--Cart
--Contact Form
--Checkout
+- Gallery w/ lightbox
+- Login/User Dashboard
+- Shop
+- Cart
+- Contact Form
+- Checkout
 
 ## Sources
 
