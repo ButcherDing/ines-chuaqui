@@ -25,14 +25,14 @@ This project builds on the following e-commerce react app course I completed: [c
 
 ## Technologies
 
-Typescript, Javascript, HTML, CSS
-React Redux Toolkit (v1.8.6)
-Styled Components (v5.3.6)
-Netlify (v1.42.1)
-Firebase (Auth, Firestore) (v9.12.0)
-Stripe (v10.16.0)
-Jest (v27.5.1)
-React Testing Library (v13.4.0)
+-Typescript, Javascript, HTML, CSS
+-React Redux Toolkit (v1.8.6)
+-Styled Components (v5.3.6)
+-Netlify (v1.42.1)
+-Firebase (Auth, Firestore) (v9.12.0)
+-Stripe (v10.16.0)
+-Jest (v27.5.1)
+-React Testing Library (v13.4.0)
 
 ## Status
 
