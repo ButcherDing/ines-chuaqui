@@ -40,7 +40,7 @@ This project builds on the following course I completed: [complete-react-develop
 - Contact route and submittable form
 - Landing page
 - CSS styles (Styled Components) mostly from scratch, implementing an explicit design system and global styles (see general.styles.tsx)
-- Reduced jank
+- Reduced janky UX
 - Improved error handling
 - Responsive down to 320px
 - Testing (Jest, React Testing Library) (in progress)
