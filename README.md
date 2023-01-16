@@ -1,7 +1,7 @@
 
 # Ines Chuaqui - E-commerce/portfolio app w/ React Redux Toolkit
 
-ines-chuaqui-preview.netlify.app
+(ines-chuaqui-preview.netlify.app)
 
 ## Introduction
 
