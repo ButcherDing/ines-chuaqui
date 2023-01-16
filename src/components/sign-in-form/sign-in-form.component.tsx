@@ -1,10 +1,8 @@
-import { useState } from "react";
+import { useState, FormEvent, ChangeEvent } from "react";
 
 import FormInput from "../form-input/form-input.component";
-import Button, { BUTTON_TYPE_CLASSES } from "../button/button.component";
 
 import { useAppDispatch } from "../../store/hooks/hooks";
-import { useAppSelector } from "../../store/hooks/hooks";
 
 import { SignInContainer, ButtonsContainer } from "./sign-in-form.styles";
 import {
@@ -34,15 +32,19 @@ const SignInForm = () => {
     dispatch(signInGooglePopupAsync());
   };
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    await dispatch(signInEmailPassAsync(formFields));
-    resetFormFields();
+
+    try {
+      dispatch(signInEmailPassAsync(formFields));
+      resetFormFields();
+    } catch (error) {
+      console.log("user sign in failed", error);
+    }
   };
 
-  const handleChange = (event) => {
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
-
     setFormFields({ ...formFields, [name]: value });
   };
 
@@ -53,6 +55,7 @@ const SignInForm = () => {
       <form onSubmit={handleSubmit}>
         <FormInput
           label="Email"
+          id="email-input"
           type="email"
           required
           onChange={handleChange}
@@ -62,6 +65,7 @@ const SignInForm = () => {
 
         <FormInput
           label="Password"
+          id="Password"
           type="password"
           required
           onChange={handleChange}
@@ -70,11 +74,7 @@ const SignInForm = () => {
         />
         <ButtonsContainer>
           <LeafButton type="submit">Sign in</LeafButton>
-          <GoogleLeafButton
-            buttonType={BUTTON_TYPE_CLASSES.google}
-            type="button"
-            onClick={signInWithGoogle}
-          >
+          <GoogleLeafButton type="button" onClick={signInWithGoogle}>
             Google Sign In
           </GoogleLeafButton>
         </ButtonsContainer>

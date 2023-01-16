@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { addCartItem } from "../../store/cart/cart.slice";
+import { addCartItem, initialState } from "../../store/cart/cart.slice";
 import { Piece } from "../../store/gallery/gallery.slice";
 import { useAppDispatch, useAppSelector } from "../../store/hooks/hooks";
 
@@ -44,7 +44,9 @@ const Modal: FC<ModalProps> = ({ closeModalHandler, piece }) => {
 
           <Fader
             faderMessage={
-              currentItem.pieceId === -1 ? "choose a size" : "updated cart"
+              currentItem.pieceId === initialState.currentItem.pieceId
+                ? "choose a size"
+                : "updated cart"
             }
           />
           <ModalButtons>

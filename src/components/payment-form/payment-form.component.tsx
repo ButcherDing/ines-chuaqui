@@ -18,6 +18,7 @@ import {
   PaymentTitle,
 } from "./payment-form.styles";
 import { useAppDispatch } from "../../store/hooks/hooks";
+import { useNavigate } from "react-router-dom";
 
 // remember this pattern for type guarding.
 const ifValidCardElement = (
@@ -26,6 +27,7 @@ const ifValidCardElement = (
 
 const PaymentForm = () => {
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const stripe = useStripe();
   const elements = useElements();
   const amount = useSelector(selectCartTotal);
@@ -76,6 +78,7 @@ const PaymentForm = () => {
         alert("Payment Successful");
         console.log(paymentResult);
         dispatch(logTransactionAsync(paymentResult));
+        navigate("/checkout/success");
         // TODO reset cart to initial state
       }
     }

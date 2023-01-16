@@ -29,7 +29,7 @@ export type Piece = {
   description: string;
   largeImageUrl: string;
   smallImageUrl: string;
-  pieceId: number;
+  pieceId: string;
   title: string;
   prints: PrintType[];
 };
@@ -47,9 +47,15 @@ const initialState: GalleryState = {
 export const getSeriesDataAsync = createAsyncThunk(
   "gallery/getSeriesDataAsync",
   async (_, thunkAPI) => {
-    const res = await getCollectionAndDocuments("series");
-    const seriesData = [...(res as Series[])];
-    return seriesData;
+    try {
+      const res = await getCollectionAndDocuments("series");
+      const seriesData = [...(res as Series[])];
+      // TODO validate
+      return seriesData;
+    } catch (error) {
+      console.error("error fetching series data", error);
+      throw error;
+    }
   }
 );
 
@@ -65,6 +71,7 @@ export const gallerySlice = createSlice({
     });
     builder.addCase(getSeriesDataAsync.fulfilled, (state, { payload }) => {
       state.isLoading = false;
+      if (!payload) return;
       state.seriesData = payload;
     });
     builder.addCase(getSeriesDataAsync.rejected, (state, { payload }) => {

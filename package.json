@@ -45,6 +45,9 @@
       "react-app/jest"
     ]
   },
+  "jest": {
+    "resetMocks": false
+  },
   "browserslist": {
     "production": [
       ">0.2%",
@@ -58,6 +61,9 @@
     ]
   },
   "devDependencies": {
-    "@types/styled-components": "^5.1.26"
+    "@types/styled-components": "^5.1.26",
+    "firebase-mock": "^2.3.2",
+    "jest": "^27.5.1",
+    "node-fetch": "^3.3.0"
   }
 }

@@ -89,7 +89,7 @@ export const initialState: CartState = {
     description: "",
     largeImageUrl: "",
     smallImageUrl: "",
-    pieceId: -1,
+    pieceId: "-1",
     title: "draft",
     prints: [],
     quantity: -1,
@@ -112,7 +112,7 @@ export const logTransactionAsync = createAsyncThunk(
       if (!paymentResult.paymentIntent)
         return console.error("no payment result from service provider");
 
-      // new order doc
+      // make new order doc
       const orderDoc = {
         currentUser,
         cartItems,

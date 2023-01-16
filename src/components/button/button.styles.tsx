@@ -111,6 +111,7 @@ export const LeafButton = styled.button`
   font-weight: 500;
   padding: 2rem 4rem;
   border-radius: 0.3rem 2rem;
+  justify-content: center;
 
   border: none;
   cursor: pointer;
