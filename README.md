@@ -1,6 +1,8 @@
 
 # Ines Chuaqui - E-commerce/portfolio app w/ React Redux Toolkit
 
+ines-chuaqui-preview.netlify.app
+
 ## Introduction
 
 An e-commerce/artist portfolio app created to:
