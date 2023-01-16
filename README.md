@@ -1,12 +1,11 @@
 
-# Ines Chuaqui - React / E-commerce/portfolio app
+# Ines Chuaqui - E-commerce/portfolio app w/ React Redux Toolkit
 
 ## Introduction
 
 An e-commerce/artist portfolio app created to:
 - Present the artist's work and enable sale of prints online
 - Consolidate/expand my knowledge on Typescript and React, and learn Redux Toolkit
-
 
 ## Main Features
 
@@ -16,6 +15,17 @@ An e-commerce/artist portfolio app created to:
 - Cart
 - Contact Form
 - Checkout
+
+## Technologies
+
+- Typescript, Javascript, HTML, CSS
+- React Redux Toolkit (v1.8.6)
+- Styled Components (v5.3.6)
+- Netlify (v1.42.1)
+- Firebase (Auth, Firestore) (v9.12.0)
+- Stripe (v10.16.0)
+- Jest (v27.5.1)
+- React Testing Library (v13.4.0)
 
 ## Sources
 
@@ -32,17 +42,6 @@ This project builds on the following course I completed: [complete-react-develop
 - Improved error handling
 - Responsive down to 320px
 - Testing (Jest, React Testing Library) (in progress)
-
-## Technologies
-
-- Typescript, Javascript, HTML, CSS
-- React Redux Toolkit (v1.8.6)
-- Styled Components (v5.3.6)
-- Netlify (v1.42.1)
-- Firebase (Auth, Firestore) (v9.12.0)
-- Stripe (v10.16.0)
-- Jest (v27.5.1)
-- React Testing Library (v13.4.0)
 
 ## Status
 
