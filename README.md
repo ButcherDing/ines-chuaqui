@@ -4,8 +4,9 @@
 ## Introduction
 
 An e-commerce/artist portfolio app created to:
-- Consolidate/expand my knowledge on Typescript and React, and learn Redux Toolkit
 - Present the artist's work and enable sale of prints online
+- Consolidate/expand my knowledge on Typescript and React, and learn Redux Toolkit
+
 
 ## Main Features
 
