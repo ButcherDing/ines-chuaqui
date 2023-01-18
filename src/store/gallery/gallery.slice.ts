@@ -29,7 +29,7 @@ export type Piece = {
   description: string;
   largeImageUrl: string;
   smallImageUrl: string;
-  pieceId: number;
+  pieceId: string;
   title: string;
   prints: PrintType[];
 };

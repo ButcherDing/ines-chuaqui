@@ -89,7 +89,7 @@ export const initialState: CartState = {
     description: "",
     largeImageUrl: "",
     smallImageUrl: "",
-    pieceId: -1,
+    pieceId: "dummy",
     title: "draft",
     prints: [],
     quantity: -1,
