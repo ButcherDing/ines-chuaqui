@@ -12,7 +12,7 @@ import { StripeFormsContainer } from "./payment.styles";
 import { useAppDispatch, useAppSelector } from "../../store/hooks/hooks";
 import { selectCartItems, selectCartTotal } from "../../store/cart/cart.slice";
 
-import StripeForms from "../../components/payment-form/stripe-forms.component";
+import StripeForms from "../../components/stripe-forms/stripe-forms.component";
 
 export const Payment = () => {
   const [clientSecret, setClientSecret] = useState("");

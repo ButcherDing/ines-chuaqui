@@ -63,6 +63,12 @@ const StripeForms: FC<StripeFormsProps> = () => {
     setIsProcessingPayment(false);
   };
 
+  // TODO: get stripe shipping info into firebase
+  // TODO: fix error flow
+
+  // TODO: Style checkout form
+  // TODO: Style checkout form
+
   return (
     <>
       <OrderSummary />
