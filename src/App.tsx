@@ -1,6 +1,6 @@
 import React, { useEffect, lazy, Suspense } from "react";
 import { useAppDispatch } from "./store/hooks/hooks";
-import { Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import GlobalStyle from "./general.styles";
 import ContactSuccess from "./routes/contact-success/contact-success.component";
@@ -20,6 +20,7 @@ const Navigation = lazy(
   () => import("./routes/navigation/navigation.component")
 );
 const Checkout = lazy(() => import("./routes/checkout/checkout.component"));
+const Payment = lazy(() => import("./routes/payment/payment.component"));
 const Contact = lazy(() => import("./routes/contact/contact.component"));
 
 function App() {
@@ -49,6 +50,8 @@ function App() {
             <Route path="contact/success" element={<ContactSuccess />} />
             <Route path="auth" element={<Authentication />} />
             <Route path="checkout" element={<Checkout />} />
+
+            <Route path="checkout/payment" element={<Payment />} />
             <Route path="checkout/success" element={<CheckoutSuccess />} />
           </Route>
         </Routes>

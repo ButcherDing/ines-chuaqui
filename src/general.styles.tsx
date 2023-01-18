@@ -85,6 +85,12 @@ export const secondaryTint = "#d8f7fa";
 export const secondaryTint2 = "#ecfbfd";
 export const secondaryTintTransparent = secondaryTint + "cc";
 
+export const grey1 = "#888";
+export const grey2 = "#767676";
+export const grey3 = "#6f6f6f ";
+export const grey4 = "#555";
+export const grey5 = "#333";
+
 export const mainTextColor = primaryShade;
 export const titleTextColor = primaryShade;
 

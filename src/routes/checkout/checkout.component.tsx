@@ -1,10 +1,8 @@
 import { useSelector } from "react-redux";
-import { Elements } from "@stripe/react-stripe-js";
 
 import { selectCartItems, selectCartTotal } from "../../store/cart/cart.slice";
-import PaymentForm from "../../components/payment-form/payment-form.component";
+
 import CheckoutItem from "../../components/checkout-item/checkout-item.component";
-import { stripePromise } from "../../utils/stripe/stripe.utils";
 
 import {
   CheckoutContainer,
@@ -12,6 +10,8 @@ import {
   HeaderBlock,
   Total,
 } from "./checkout.styles";
+import { LeafButton } from "../../components/button/button.styles";
+import { Link } from "react-router-dom";
 
 const Checkout = () => {
   const cartItems = useSelector(selectCartItems);
@@ -31,10 +31,9 @@ const Checkout = () => {
         <CheckoutItem cartItem={cartItem} key={cartItem.cartId} />
       ))}
       <Total>Total: $ {cartTotal}</Total>
-
-      <Elements stripe={stripePromise}>
-        <PaymentForm />
-      </Elements>
+      <Link to="payment">
+        <LeafButton disabled={cartTotal === 0}>Proceed to Payment</LeafButton>
+      </Link>
     </CheckoutContainer>
   );
 };

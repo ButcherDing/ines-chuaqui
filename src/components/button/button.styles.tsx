@@ -6,6 +6,8 @@ import {
   secondaryTint,
   secondaryColor,
   secondaryShade,
+  grey4,
+  grey1,
 } from "../../general.styles";
 import { SpinnerContainer } from "../spinner/spinner.styles";
 import { NavLink } from "react-router-dom";
@@ -133,6 +135,12 @@ export const LeafButton = styled.button`
     background-color: #fff;
     color: ${primaryShade};
     border: 1px solid ${primaryShade};
+  }
+
+  :disabled {
+    background-color: #bbbbbb;
+    border: #555;
+    color: white;
   }
 
   box-shadow: inset 0 0 0 3px #fff;
