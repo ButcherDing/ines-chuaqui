@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
-export const ContactSuccess = () => {
+export const CheckoutSuccess = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -13,12 +13,12 @@ export const ContactSuccess = () => {
   return (
     <>
       <h5>
-        Your message was sent successfully. We'll get back to you as soon as we
-        can.
+        Your order was submitted successfully! You will receive an email invoice
+        shortly{" "}
       </h5>
-      <span>You'll be sent back to the gallery shortly.</span>
+      <span>You'll be sent back to the gallery in a few seconds.</span>
     </>
   );
 };
 
-export default ContactSuccess;
+export default CheckoutSuccess;

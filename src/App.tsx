@@ -4,17 +4,20 @@ import { Route, Routes } from "react-router-dom";
 
 import GlobalStyle from "./general.styles";
 import ContactSuccess from "./routes/contact-success/contact-success.component";
-import Navigation from "./routes/navigation/navigation.component";
 import Spinner from "./components/spinner/spinner.component";
 
 import { checkUserSessionAsync } from "./store/user/user-slice";
 import { getSeriesDataAsync } from "./store/gallery/gallery.slice";
+import CheckoutSuccess from "./routes/checkout-success/checkout-success.component";
 
 const Home = lazy(() => import("./routes/home/home.component"));
 const Gallery = lazy(() => import("./routes/gallery/gallery.component"));
 const Shop = lazy(() => import("./routes/shop/shop.component"));
 const Authentication = lazy(
   () => import("./routes/authentication/authentication.component")
+);
+const Navigation = lazy(
+  () => import("./routes/navigation/navigation.component")
 );
 const Checkout = lazy(() => import("./routes/checkout/checkout.component"));
 const Contact = lazy(() => import("./routes/contact/contact.component"));
@@ -46,6 +49,7 @@ function App() {
             <Route path="contact/success" element={<ContactSuccess />} />
             <Route path="auth" element={<Authentication />} />
             <Route path="checkout" element={<Checkout />} />
+            <Route path="checkout/success" element={<CheckoutSuccess />} />
           </Route>
         </Routes>
       </Suspense>

@@ -57,7 +57,7 @@ export const store = configureStore({
       serializableCheck: {
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
-    }).concat(logger),
+    }) /*.concat(logger),*/,
 });
 
 export const persistor = persistStore(store);
@@ -74,5 +74,5 @@ export type AppThunk<ReturnType = void> = ThunkAction<
 >;
 
 // EMERGE PURGE (FOR DEV)
-const toPurge: any = persistor.purge();
-console.log(toPurge);
+// const toPurge: any = persistor.purge();
+// console.log(toPurge);

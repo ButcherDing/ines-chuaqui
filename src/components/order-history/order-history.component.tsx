@@ -57,3 +57,5 @@ export const OrderHistory = () => {
     </OrderHistoryContainer>
   );
 };
+
+export default OrderHistory

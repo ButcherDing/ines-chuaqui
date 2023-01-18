@@ -112,7 +112,7 @@ export const logTransactionAsync = createAsyncThunk(
       if (!paymentResult.paymentIntent)
         return console.error("no payment result from service provider");
 
-      // new order doc
+      // make new order doc
       const orderDoc = {
         currentUser,
         cartItems,

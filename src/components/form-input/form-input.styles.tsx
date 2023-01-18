@@ -1,3 +1,5 @@
+import { FC } from "react";
+
 import styled, { css } from "styled-components";
 import { primaryShade } from "../../general.styles";
 
@@ -5,19 +7,23 @@ const subColor = "grey";
 const mainColor = primaryShade;
 
 const shrinkLabelStyles = css`
-  top: -10px;
-  font-size: 12px;
+  top: -1rem;
+  font-size: 1.2rem;
   color: ${mainColor};
 `;
 
-export const FormInputLabel = styled.label`
+interface FormInputLabelProps {
+  shrink: number | null;
+}
+
+export const FormInputLabel = styled.label<FormInputLabelProps>`
   color: ${subColor};
-  font-size: 16px;
+  font-size: 1.6rem;
   font-weight: normal;
   position: absolute;
   pointer-events: none;
-  left: 5px;
-  top: 18px;
+  left: 0.5rem;
+  top: 1.8rem;
   transition: 300ms ease all;
   ${({ shrink }) => shrink && shrinkLabelStyles};
 `;
@@ -26,13 +32,13 @@ export const Input = styled.input`
   background: none;
   background-color: inherit;
   color: ${mainColor};
-  font-size: 18px;
-  padding: 10px 10px 10px 5px;
+  font-size: 1.8rem;
+  padding: 1rem 1rem 1rem 0.5rem;
   display: block;
   width: 100%;
   border: none;
   border-radius: 0;
-  border-bottom: 1px solid ${subColor};
+  border-bottom: 0.1rem solid ${subColor};
   margin: 0 0;
 
   &:focus {

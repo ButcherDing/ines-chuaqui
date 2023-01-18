@@ -1,6 +1,6 @@
 import { useAppSelector } from "../../store/hooks/hooks";
 import { ShopDisplayContainer } from "./shop-display.styles";
-import ShopSeries from "../series-row/series-row.component";
+import SeriesRow from "../series-row/series-row.component";
 
 export const ShopDisplay = () => {
   const seriesArr = useAppSelector((state) => state.gallery.seriesData).map(
@@ -10,7 +10,7 @@ export const ShopDisplay = () => {
   return (
     <ShopDisplayContainer>
       {seriesArr.map((series) => (
-        <ShopSeries series={series} key={"shop_series" + series.title} />
+        <SeriesRow series={series} key={"shop_series" + series.title} />
       ))}
     </ShopDisplayContainer>
   );

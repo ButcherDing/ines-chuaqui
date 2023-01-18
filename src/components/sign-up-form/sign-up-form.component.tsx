@@ -1,14 +1,15 @@
-import { useState } from "react";
+import { useState, FormEvent, ChangeEvent } from "react";
 
 import FormInput from "../form-input/form-input.component";
 
 import {} from "../../utils/firebase/firebase.utils";
 
 import { SignUpContainer } from "./sign-up-form.styles";
-import { useDispatch } from "react-redux";
+
 import { signUpWithEmailPassAsync } from "../../store/user/user-slice";
 import { LeafButton } from "../button/button.styles";
 import { ButtonsContainer } from "../sign-in-form/sign-in-form.styles";
+import { useAppDispatch } from "../../store/hooks/hooks";
 
 const defaultFormFields = {
   displayName: "",
@@ -26,14 +27,18 @@ const SignUpForm = () => {
     setFormFields(defaultFormFields);
   };
   // global state
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    dispatch(signUpWithEmailPassAsync(formFields));
+    try {
+      dispatch(signUpWithEmailPassAsync(formFields));
+    } catch (error) {
+      console.error("user sign up failed", error);
+    }
   };
 
-  const handleChange = (event) => {
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     setFormFields({ ...formFields, [name]: value });
   };
