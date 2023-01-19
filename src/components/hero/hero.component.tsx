@@ -14,7 +14,7 @@ import { Caret } from "../user-dashboard/user-dashboard.styles";
 const Hero = () => {
   return (
     <>
-      <HeroImage>
+      <HeroImage data-testid="hero-image-div">
         <NameTitle>Ines Chuaqui</NameTitle>
         <ArtistDescriptionContainer>
           <BlurbHeading>About the artist</BlurbHeading>

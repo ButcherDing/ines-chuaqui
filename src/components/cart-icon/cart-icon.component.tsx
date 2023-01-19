@@ -4,7 +4,7 @@ import { CartIconContainer, ShoppingIcon, ItemCount } from "./cart-icon.styles";
 import { selectCartCount } from "../../store/cart/cart.slice";
 import { useAppSelector } from "../../store/hooks/hooks";
 import CartDropdown from "../cart-dropdown/cart-dropdown.component";
-import { useOutsideClick } from "../../store/hooks/event-listeners";
+import { useOutsideClick } from "../../store/hooks/event-listeners.hooks";
 
 const CartIcon = () => {
   const [isCartOpen, setIsCartOpen] = useState(false);

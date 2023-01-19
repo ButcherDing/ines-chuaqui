@@ -49,6 +49,7 @@ const Modal: FC<ModalProps> = ({ closeModalHandler, piece }) => {
                 : "updated cart"
             }
           />
+
           <ModalButtons>
             <InvertedLeafButton onClick={() => addItemHandler()}>
               Add to cart
