@@ -5,6 +5,22 @@ import PaymentStatus from "../../components/payment-status/payment-status.compon
 export const CheckoutSuccess = () => {
   const navigate = useNavigate();
 
+  const paymentIntentHandler = async (cartTotal: number) => {
+    const response = await fetch("/.netlify/functions/create-payment-intent", {
+      method: "post",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ amount: cartTotal * 100 }),
+    }).then((res) => res.json());
+
+    if (response.statusCode === 400) throw new Error(response);
+
+    const {
+      paymentIntent: { client_secret },
+    } = response;
+  };
+
   useEffect(() => {
     setTimeout(() => {
       navigate("/gallery");
