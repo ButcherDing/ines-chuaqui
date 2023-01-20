@@ -13,6 +13,8 @@ import {
   LogoContainer,
 } from "./navigation.styles";
 import { useAppSelector } from "../../store/hooks/hooks";
+import { Suspense } from "react";
+import Spinner from "../../components/spinner/spinner.component";
 
 export const Navigation = () => {
   const currentUser = useAppSelector((state) => state.user.currentUser);
@@ -51,7 +53,9 @@ export const Navigation = () => {
           <CartIcon />
         </NavBar>
       </NavigationContainer>
-      <Outlet />
+      <Suspense fallback={<Spinner />}>
+        <Outlet />
+      </Suspense>
     </>
   );
 };

@@ -44,7 +44,7 @@ const StripeForms: FC<StripeFormsProps> = () => {
 
     if (error) {
       console.log(error);
-      alert(JSON.stringify(error));
+      alert(error.message);
     } else {
       alert("payment complete");
       // Your customer will be redirected to your `return_url`. For some payment
