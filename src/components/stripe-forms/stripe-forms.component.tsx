@@ -1,29 +1,23 @@
 import {
+  AddressElement,
   PaymentElement,
   useElements,
   useStripe,
 } from "@stripe/react-stripe-js";
 import { StripeFormsContainer } from "./stripe-forms.styles";
-import { useAppSelector } from "../../store/hooks/hooks";
+import { useAppDispatch, useAppSelector } from "../../store/hooks/hooks";
 import { selectCartTotal } from "../../store/cart/cart.slice";
-import AddressForm from "../address-form/address-form.component";
 import { LeafButton } from "../button/button.styles";
 import OrderSummary from "../order-summary/order-summary.component";
 import { FC, FormEvent, useState } from "react";
-
-// const ifValidPaymentElement = (
-//   card: StripeCardElement | null
-// ): card is StripeCardElement => card !== null;
-
-// const ifValidAddressElement = (
-//   address: StripeAddressElement | null
-// ): address is StripeAddressElement => address !== null;
+import { StripeAddressElementChangeEvent } from "@stripe/stripe-js";
 
 export type StripeFormsProps = {
   clientSecret: string;
 };
 
 const StripeForms: FC<StripeFormsProps> = () => {
+  const dispatch = useAppDispatch();
   const cartTotal = useAppSelector(selectCartTotal);
   const stripe = useStripe();
   const elements = useElements();
@@ -36,21 +30,19 @@ const StripeForms: FC<StripeFormsProps> = () => {
     if (!elements || !stripe) return;
 
     const cardDetails = elements.getElement(PaymentElement);
-    // const shippingDetails = elements.getElement(AddressElement);
-    // if (!ifValidAddressElement(shippingDetails)) return;
+    console.log(cardDetails);
+    const shippingDetails = elements.getElement(AddressElement);
+    console.log(shippingDetails);
 
     const { error } = await stripe.confirmPayment({
       //`Elements` instance that was used to create the Payment Element
       elements,
       confirmParams: {
-        return_url: "localhost:8888/checkout/success",
+        return_url: "https://ines-chuaqui-preview.netlify.app/checkout/success",
       },
     });
 
     if (error) {
-      // This point will only be reached if there is an immediate error when
-      // confirming the payment. Show error to your customer (for example, payment
-      // details incomplete)
       console.log(error);
       alert(JSON.stringify(error));
     } else {
@@ -63,6 +55,12 @@ const StripeForms: FC<StripeFormsProps> = () => {
     setIsProcessingPayment(false);
   };
 
+  const addressChangeHandler = (event: StripeAddressElementChangeEvent) => {
+    if (event.complete) {
+    }
+  };
+  // TODO - do a thing when the event completes?
+
   // TODO: get stripe shipping info into firebase
   // TODO: fix error flow
 
@@ -71,12 +69,22 @@ const StripeForms: FC<StripeFormsProps> = () => {
 
   return (
     <>
-      <OrderSummary />
       <StripeFormsContainer onSubmit={handleSubmit}>
-        <AddressForm />
-        <h4>Payment Details</h4>
-        <PaymentElement />
-        <LeafButton disabled={cartTotal === 0}>Pay now</LeafButton>
+        <OrderSummary />
+        <div>
+          <h4>Shipping Address</h4>
+          <AddressElement
+            options={{ mode: "shipping", allowedCountries: ["US", "CA"] }}
+            onChange={addressChangeHandler}
+          />
+
+          <h4>Payment Details</h4>
+          <PaymentElement />
+
+          <LeafButton disabled={cartTotal === 0 || isProcessingPayment}>
+            Pay now
+          </LeafButton>
+        </div>
       </StripeFormsContainer>
     </>
   );

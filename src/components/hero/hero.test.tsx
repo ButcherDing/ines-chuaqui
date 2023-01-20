@@ -13,5 +13,5 @@ const MockHero = () => {
 it("should render the artist's name", () => {
   render(<MockHero />);
   const headerElement = screen.getByText("Ines Chuaqui");
-  expect(headerElement).toBeInTheDocument;
+  expect(headerElement).toBeInTheDocument();
 });

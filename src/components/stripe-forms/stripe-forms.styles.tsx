@@ -6,10 +6,10 @@ export const StripeFormsContainer = styled.form`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-`;
 
-export const FormContainer = styled.form`
-  min-width: 30rem;
+  button {
+    margin: 2rem 0rem 4rem;
+  }
 `;
 
 export const PaymentButton = styled(Button)`

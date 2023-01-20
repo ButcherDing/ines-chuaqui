@@ -1,16 +1,10 @@
-import { FormEvent, useEffect, useState } from "react";
-import {
-  Elements,
-  PaymentElement,
-  useElements,
-  useStripe,
-} from "@stripe/react-stripe-js";
+import { useEffect, useState } from "react";
+import { Elements } from "@stripe/react-stripe-js";
 
 import { stripePromise } from "../../utils/stripe/stripe.utils";
 
-import { StripeFormsContainer } from "./payment.styles";
-import { useAppDispatch, useAppSelector } from "../../store/hooks/hooks";
-import { selectCartItems, selectCartTotal } from "../../store/cart/cart.slice";
+import { useAppSelector } from "../../store/hooks/hooks";
+import { selectCartTotal } from "../../store/cart/cart.slice";
 
 import StripeForms from "../../components/stripe-forms/stripe-forms.component";
 
@@ -44,7 +38,6 @@ export const Payment = () => {
 
   console.log(clientSecret);
 
-  // TODO - button not working to submit, try putting it inside payment component? Is it because it's not in a separate component from elements, or because of the button, or because it's not in the right order?
   return (
     <>
       {clientSecret !== "" && (

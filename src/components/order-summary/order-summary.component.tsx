@@ -6,7 +6,6 @@ import {
   OrderHeader,
   ItemDetail,
   BoughtItem,
-  SingleOrder,
 } from "../order-history/order-history.styles";
 import {
   ItemTotal,
