@@ -19,14 +19,14 @@ exports.handler = async ({ body, headers }) => {
       const shippingDetails = eventObject.shipping;
 
       // Send and email to our fulfillment provider using Sendgrid.
-      const purchase = { items, shippingDetails };
-      const msg = {
-        to: process.env.FULFILLMENT_EMAIL_ADDRESS,
-        from: process.env.FROM_EMAIL_ADDRESS,
-        subject: `New purchase from ${shippingDetails.name}`,
-        text: JSON.stringify(purchase, null, 2),
-      };
-      await sgMail.send(msg);
+      // const purchase = { items, shippingDetails };
+      // const msg = {
+      //   to: process.env.FULFILLMENT_EMAIL_ADDRESS,
+      //   from: process.env.FROM_EMAIL_ADDRESS,
+      //   subject: `New purchase from ${shippingDetails.name}`,
+      //   text: JSON.stringify(purchase, null, 2),
+      // };
+      // await sgMail.send(msg);
     }
 
     return {

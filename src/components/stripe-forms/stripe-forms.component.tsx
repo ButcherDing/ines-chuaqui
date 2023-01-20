@@ -4,7 +4,12 @@ import {
   useElements,
   useStripe,
 } from "@stripe/react-stripe-js";
-import { StripeFormsContainer } from "./stripe-forms.styles";
+import {
+  AddressFormContainer,
+  Forms,
+  PaymentFormContainer,
+  StripeFormsContainer,
+} from "./stripe-forms.styles";
 import { useAppDispatch, useAppSelector } from "../../store/hooks/hooks";
 import { selectCartTotal } from "../../store/cart/cart.slice";
 import { LeafButton } from "../button/button.styles";
@@ -57,34 +62,37 @@ const StripeForms: FC<StripeFormsProps> = () => {
 
   const addressChangeHandler = (event: StripeAddressElementChangeEvent) => {
     if (event.complete) {
+      // do a thing
     }
   };
   // TODO - do a thing when the event completes?
-
   // TODO: get stripe shipping info into firebase
   // TODO: fix error flow
-
-  // TODO: Style checkout form
-  // TODO: Style checkout form
 
   return (
     <>
       <StripeFormsContainer onSubmit={handleSubmit}>
         <OrderSummary />
-        <div>
-          <h4>Shipping Address</h4>
-          <AddressElement
-            options={{ mode: "shipping", allowedCountries: ["US", "CA"] }}
-            onChange={addressChangeHandler}
-          />
+        <Forms>
+          <AddressFormContainer>
+            <h4>Shipping Address</h4>
+            <AddressElement
+              options={{
+                mode: "shipping",
+                allowedCountries: ["US", "CA"],
+              }}
+              onChange={addressChangeHandler}
+            />
+          </AddressFormContainer>
 
-          <h4>Payment Details</h4>
-          <PaymentElement />
-
-          <LeafButton disabled={cartTotal === 0 || isProcessingPayment}>
-            Pay now
-          </LeafButton>
-        </div>
+          <PaymentFormContainer>
+            <h4>Payment Details</h4>
+            <PaymentElement />
+            <LeafButton disabled={cartTotal === 0 || isProcessingPayment}>
+              Pay now
+            </LeafButton>
+          </PaymentFormContainer>
+        </Forms>
       </StripeFormsContainer>
     </>
   );

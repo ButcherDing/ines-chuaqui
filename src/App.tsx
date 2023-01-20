@@ -16,6 +16,8 @@ import { checkUserSessionAsync } from "./store/user/user-slice";
 import { getSeriesDataAsync } from "./store/gallery/gallery.slice";
 import CheckoutSuccess from "./routes/checkout-success/checkout-success.component";
 
+import Stripe from "stripe";
+
 function App() {
   const dispatch = useAppDispatch();
 
