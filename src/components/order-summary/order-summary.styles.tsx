@@ -2,9 +2,8 @@ import styled from "styled-components";
 import { ItemDetail, SingleOrder } from "../order-history/order-history.styles";
 
 export const OrderSummaryContainer = styled.div`
-  margin-top: 2rem;
-  min-width: 29.2rem;
-  width: 50%;
+  width: 100%;
+  max-width: 60rem;
 `;
 
 export const ItemTotal = styled(ItemDetail)`
@@ -13,4 +12,8 @@ export const ItemTotal = styled(ItemDetail)`
 
 export const OrderSummaryDetails = styled(SingleOrder)`
   margin-bottom: 1rem;
+
+  div {
+    border-bottom: grey 1px;
+  }
 `;

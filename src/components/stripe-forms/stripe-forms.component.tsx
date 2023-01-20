@@ -43,7 +43,8 @@ const StripeForms: FC<StripeFormsProps> = () => {
       //`Elements` instance that was used to create the Payment Element
       elements,
       confirmParams: {
-        return_url: "https://ines-chuaqui-preview.netlify.app/checkout/success",
+        return_url:
+          "https://ines-chuaqui-preview.netlify.app/checkout/success/",
       },
     });
 
@@ -88,10 +89,10 @@ const StripeForms: FC<StripeFormsProps> = () => {
           <PaymentFormContainer>
             <h4>Payment Details</h4>
             <PaymentElement />
-            <LeafButton disabled={cartTotal === 0 || isProcessingPayment}>
-              Pay now
-            </LeafButton>
           </PaymentFormContainer>
+          <LeafButton disabled={cartTotal === 0 || isProcessingPayment}>
+            Pay now
+          </LeafButton>
         </Forms>
       </StripeFormsContainer>
     </>

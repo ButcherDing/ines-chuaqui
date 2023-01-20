@@ -47,7 +47,7 @@ const router = createBrowserRouter(
         <Route path="checkout" element={<Checkout />} />
 
         <Route path="checkout/payment" element={<Payment />} />
-        <Route path="checkout/success*" element={<CheckoutSuccess />} />
+        <Route path="checkout/success/*" element={<CheckoutSuccess />} />
       </Route>
     </Route>
   )

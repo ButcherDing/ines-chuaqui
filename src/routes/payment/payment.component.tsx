@@ -7,6 +7,7 @@ import { useAppSelector } from "../../store/hooks/hooks";
 import { selectCartTotal } from "../../store/cart/cart.slice";
 
 import StripeForms from "../../components/stripe-forms/stripe-forms.component";
+import { PaymentContainer } from "./payment.styles";
 
 export const Payment = () => {
   const [clientSecret, setClientSecret] = useState("");
@@ -39,13 +40,13 @@ export const Payment = () => {
   console.log(clientSecret);
 
   return (
-    <>
+    <PaymentContainer>
       {clientSecret !== "" && (
         <Elements stripe={stripePromise} options={options}>
           <StripeForms clientSecret={clientSecret} />
         </Elements>
       )}
-    </>
+    </PaymentContainer>
   );
 };
 
