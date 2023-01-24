@@ -7,7 +7,8 @@ export const UserSettingsContainer = styled.div`
   display: grid;
   width: 100%;
   grid-template-columns: 2fr 1fr;
-  align-items: center;
+  align-items: baseline;
+  /* justify-items: center; */
   margin-bottom: 4rem;
 
   @media (max-width: 50em) {
@@ -23,4 +24,9 @@ export const DashboardFormInput = styled(FormInput)`
 export const UserSettingsButton = styled(Button)`
   margin: 0rem 2rem 4rem;
   /* max-width: max-content; */
+`;
+
+export const ChangePasswordButton = styled(Button)`
+  margin: 0rem 2rem 2rem;
+  align-self: end;
 `;

@@ -3,7 +3,7 @@ import { useAppDispatch } from "../../store/hooks/hooks";
 
 import { Piece } from "../../store/gallery/gallery.slice";
 
-import { useKeyPress } from "../../store/hooks/event-listeners";
+import { useKeyPress } from "../../store/hooks/event-listeners.hooks";
 
 import { initialState, chooseItem } from "../../store/cart/cart.slice";
 import { SmallInvertedLeafButton } from "../button/button.styles";

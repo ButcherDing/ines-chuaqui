@@ -1,4 +1,4 @@
-import { useState, useEffect, FC } from "react";
+import { useState, useEffect, FC, MouseEvent, FormEvent } from "react";
 import { useAppDispatch, useAppSelector } from "../../store/hooks/hooks";
 
 import {
@@ -15,6 +15,7 @@ import {
   UserSettingsContainer,
   DashboardFormInput,
   UserSettingsButton,
+  ChangePasswordButton,
 } from "./user-settings.styles";
 
 const defaultFormFields = {
@@ -46,7 +47,8 @@ export const UserSettings: FC<UserSettingsProps> = ({ currentUser }) => {
     if (!formFields.newEmail) return;
     dispatch(changeEmailAsync(formFields.newEmail));
   };
-  const changePasswordAsyncHandler = () => {
+  const changePasswordAsyncHandler = (e: FormEvent<HTMLElement>) => {
+    e.preventDefault();
     if (!formFields.newPassword) return;
     if (formFields.newPassword !== formFields.confirmNewPassword) return;
     dispatch(changePasswordAsync(formFields.newPassword));
@@ -96,29 +98,32 @@ export const UserSettings: FC<UserSettingsProps> = ({ currentUser }) => {
         Change email address
       </UserSettingsButton>
 
-      <DashboardFormInput
-        label="Change Password?"
-        type="password"
-        onChange={handleChange}
-        name="newPassword"
-        value={formFields.newPassword}
-      />
-      <div></div>
-
-      <DashboardFormInput
-        label="Confirm new password"
-        type="password"
-        onChange={handleChange}
-        name="confirmNewPassword"
-        value={formFields.confirmNewPassword}
-      />
-      <UserSettingsButton
+      <form id="change-password" onSubmit={changePasswordAsyncHandler}>
+        <DashboardFormInput
+          label="Change Password?"
+          type="password"
+          required
+          onChange={handleChange}
+          name="newPassword"
+          value={formFields.newPassword}
+        />
+        <DashboardFormInput
+          label="Confirm New Password"
+          type="password"
+          required
+          onChange={handleChange}
+          name="confirmNewPassword"
+          value={formFields.confirmNewPassword}
+        />
+      </form>
+      <ChangePasswordButton
         buttonType={BUTTON_TYPE_CLASSES.leaf}
         isLoading={isLoading}
-        onClick={changePasswordAsyncHandler}
+        form="change-password"
       >
         Change Password
-      </UserSettingsButton>
+      </ChangePasswordButton>
+
       {displayDeleteConfirm && (
         <DashboardFormInput
           label="type your email to confirm delete"
