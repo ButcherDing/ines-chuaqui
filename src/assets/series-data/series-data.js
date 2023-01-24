@@ -163,3 +163,5 @@ https://i.ibb.co/wy13pdL/unspoken-3.jpg
 https://i.ibb.co/d4G3yK6/waiting-for-spring.jpg
 
 */
+
+export default SERIES_DATA;
