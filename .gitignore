@@ -26,3 +26,8 @@ yarn-error.log*
 
 # Local Netlify folder
 .netlify
+
+# Firestore
+firestore.rules
+firebase.json
+firestore.indexes.json
