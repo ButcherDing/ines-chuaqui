@@ -31,7 +31,7 @@ An e-commerce/artist portfolio app created to:
 
 ## Sources
 
-This project builds on a project from the following course I completed: [complete-react-developer](https://www.udemy.com/course/complete-react-developer-zero-to-mastery/). The code from my initial project on that course has been greatly expanded/rewritten. Some highlights:
+This project builds on my capstone project from a course I completed: [complete-react-developer](https://www.udemy.com/course/complete-react-developer-zero-to-mastery/). The code from that project has been greatly expanded/rewritten. Some highlights:
 
 - Rewritten store/reducers/slices using RTK/Thunks rather than Redux-saga, making the app more modern, readable, with less boilerplate.
 - User dashboard with order history, ability to change user settings and delete the account. 
