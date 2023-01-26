@@ -2,12 +2,16 @@
 # Ines Chuaqui - E-commerce/portfolio app w/ React Redux Toolkit
 
 preview: https://ines-chuaqui-preview.netlify.app/
+(to test payment, use test credit card details from stripe)
 
 ## Introduction
+Freelance work I have taken on (solo) for a local Vancouver artist, Ines Chuaqui.
 
-An e-commerce/artist portfolio app created to:
-- Present the artist's work and enable sale of prints online
-- Consolidate/expand my knowledge on Typescript and React, and learn Redux Toolkit
+An e-commerce/portfolio app to:
+- Present the artist's work and enable sale of the artist's prints online using custom stripe integration.
+
+Developer learning goals:
+- Consolidate/expand my knowledge on Typescript and React, learn Redux Toolkit, and familiarize myself with testing tools (Jest, React Testing Library)
 
 ## Main Features
 
@@ -31,24 +35,24 @@ An e-commerce/artist portfolio app created to:
 
 ## Sources
 
-This project builds on my capstone project from a course I completed: [complete-react-developer](https://www.udemy.com/course/complete-react-developer-zero-to-mastery/). The code from that project has been greatly expanded/rewritten. Some highlights:
+This project builds on a course project: [complete-react-developer](https://www.udemy.com/course/complete-react-developer-zero-to-mastery/). The code from that project has been greatly expanded/rewritten. Some highlights:
 
 - Rewritten store/reducers/slices using RTK/Thunks rather than Redux-saga, making the app more modern, readable, with less boilerplate.
 - User dashboard with order history, ability to change user settings and delete the account. 
-- Modal and expanded state logic for selecting product sizes, quantity (rather than simple add to cart)
+- Modals and expanded state logic for displaying details and selecting product sizes, quantity (rather than simple add to cart)
 - Added gallery route with lightbox feature using [lightboxjs](https://github.com/silvia-odwyer/lightbox.js).
 - Contact route and submittable form
 - Landing page
-- CSS styles (Styled Components) mostly from scratch, implementing an explicit design system and global styles (see general.styles.tsx)
+- CSS styles (Styled Components) mostly from scratch, implementing an explicit design system and global styles (see src/general.styles.tsx)
 - Reduced janky UX
 - Improved error handling
-- Responsive down to 320px
+- Responsive down to 360px
 - Testing (Jest, React Testing Library) (in progress)
 
 ## Status
 
-App is in preview, pending additional copy/image assets from the artist.
-Testing is in progress.
+App is fully functional but in preview, pending additional copy and image assets from the artist.
+Functional Testing is in progress.
 You can visit the site at: [ines-chuaqui-preview.netlify.app](https://ines-chuaqui-preview.netlify.app/)
 
 ## Additional Info
