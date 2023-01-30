@@ -18,7 +18,6 @@ import Spinner from "../../components/spinner/spinner.component";
 
 export const Navigation = () => {
   const currentUser = useAppSelector((state) => state.user.currentUser);
-
   return (
     <>
       <NavigationContainer>

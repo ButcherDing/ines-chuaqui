@@ -23,6 +23,7 @@ function App() {
 
   useEffect(() => {
     dispatch(checkUserSessionAsync());
+
     dispatch(getSeriesDataAsync());
   }, []);
 

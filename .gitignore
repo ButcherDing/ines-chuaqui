@@ -28,3 +28,7 @@ yarn-error.log*
 
 # Local Netlify folder
 .netlify
+
+
+# Data copy
+series-data.js

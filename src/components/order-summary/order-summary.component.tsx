@@ -15,7 +15,7 @@ import {
 
 export const OrderSummary = () => {
   const cartItems = useAppSelector(selectCartItems);
-  const cartTotal = useAppSelector(selectCartTotal);
+  const serverCartTotal = useAppSelector((state) => state.cart.serverCartTotal);
 
   return (
     <OrderSummaryContainer>
@@ -42,7 +42,7 @@ export const OrderSummary = () => {
               </BoughtItem>
             ))}
           </OrderSummaryDetails>
-          <ItemTotal>Total: ${cartTotal}</ItemTotal>
+          <ItemTotal>Total: ${serverCartTotal}</ItemTotal>
         </>
       ) : (
         <></>

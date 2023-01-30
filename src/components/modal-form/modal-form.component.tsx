@@ -32,7 +32,7 @@ export const ModalForm: FC<ModalFormProps> = ({ piece }) => {
           Select print size:
         </option>
         {piece.prints.map((print, index: number) => (
-          <option key={`${piece.pieceId + print.size}`} value={index}>
+          <option key={`${piece.pieceId + "s" + print.size}`} value={index}>
             {print.size} --- ${print.price}
           </option>
         ))}

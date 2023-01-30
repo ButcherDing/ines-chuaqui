@@ -33,6 +33,7 @@ import {
 import { Order, UserData } from "../../store/user/user-slice";
 
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
+import { SERIES_DATA } from "../../assets/series-data/series-data";
 
 //////////////////////////
 
@@ -118,7 +119,8 @@ export const addCollectionAndDocuments = async <T extends ObjectToAdd>(
   console.log("batch committed");
 };
 
-//// example call, or FOR FIRING ONCE ONLY TO OVERWRITE A COLLECTION, then TURN OFF
+//// DEV
+// FOR FIRING ONCE ONLY TO OVERWRITE A COLLECTION, then TURN OFF
 // addCollectionAndDocuments("series", SERIES_DATA);
 ////////////////////
 
@@ -199,6 +201,7 @@ export const createUserDocumentFromAuth = async (
   additionalInformation = {} as AdditionalInformation
 ): Promise<void | QueryDocumentSnapshot<UserData>> => {
   if (!userAuth) return;
+  console.log(userAuth.uid);
   const userDocRef = doc(db, "users", userAuth.uid);
   let userSnapshot = await getDoc(userDocRef);
   if (!userSnapshot.exists()) {

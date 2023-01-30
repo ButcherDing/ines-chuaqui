@@ -14,6 +14,7 @@ import {
   updateDocumentArrayInCollection,
 } from "../../utils/firebase/firebase.utils";
 import { OrderedItem } from "../user/user-slice";
+import { fetchTotal } from "../../utils/stripe/stripe.utils";
 
 ////  For debugging reducers - use current to console.log a value inside reducer
 // import { current } from "immer";
@@ -65,6 +66,7 @@ export const selectCartTotal = createSelector([selectCartItems], (cartItems) =>
 
 export type CartState = {
   cartItems: CartItem[];
+  serverCartTotal: number;
   isLoading: boolean;
   currentItem: CartItem;
   error: SerializedError | null;
@@ -75,14 +77,13 @@ export type CartItem = {
   printType: PrintType;
   cartId: CartId;
 } & Piece;
-
-export type CartId = string;
-
 export type PrintType = { size: string; price: number };
+export type CartId = string;
 
 ///////////// INITIAL STATE
 
 export const initialState: CartState = {
+  serverCartTotal: 0,
   cartItems: [],
   isLoading: false,
   currentItem: {
@@ -100,7 +101,23 @@ export const initialState: CartState = {
 };
 //////////// THUNKS
 
-// this does a lot of things....
+export const getCartTotal = createAsyncThunk(
+  "checkout/getPrices",
+  async (_, thunkAPI) => {
+    try {
+      console.log("thunk fired");
+      const state = thunkAPI.getState() as RootState;
+      const { cartItems } = state.cart;
+
+      const total = await fetchTotal(cartItems);
+      return total;
+    } catch (error) {
+      console.error("error getting real total from server:", error);
+    }
+  }
+);
+
+// this probably does too many things
 export const logTransactionAsync = createAsyncThunk(
   "checkout/logTransactionAsync",
   async (paymentResult: PaymentIntentResult, thunkAPI) => {
@@ -171,7 +188,7 @@ export const logTransactionAsync = createAsyncThunk(
       );
       return userOrderDoc;
     } catch (error) {
-      console.error(error);
+      console.error("Error logging transaction to database:", error);
       throw error;
     }
   }
@@ -183,7 +200,7 @@ export const makeDraftCartItem = (piece: Piece, printType: PrintType) => {
     ...piece,
     printType,
     quantity: -1,
-    cartId: `${piece.pieceId + printType.size}`,
+    cartId: `${piece.pieceId + "s" + printType.size}`,
   };
 };
 
@@ -263,6 +280,19 @@ export const cartSlice = createSlice({
       // state.isCartOpen = false;
     });
     builder.addCase(logTransactionAsync.rejected, (state, { error }) => {
+      state.isLoading = false;
+      state.error = error;
+    });
+    builder.addCase(getCartTotal.pending, (state) => {
+      state.isLoading = true;
+    });
+
+    builder.addCase(getCartTotal.fulfilled, (state, { payload }) => {
+      state.isLoading = false;
+      state.serverCartTotal = payload;
+      // state.isCartOpen = false;
+    });
+    builder.addCase(getCartTotal.rejected, (state, { error }) => {
       state.isLoading = false;
       state.error = error;
     });

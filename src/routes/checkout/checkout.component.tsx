@@ -1,6 +1,10 @@
-import { useSelector } from "react-redux";
+import { useEffect } from "react";
 
-import { selectCartItems, selectCartTotal } from "../../store/cart/cart.slice";
+import {
+  getCartTotal,
+  selectCartItems,
+  selectCartTotal,
+} from "../../store/cart/cart.slice";
 
 import CheckoutItem from "../../components/checkout-item/checkout-item.component";
 
@@ -13,9 +17,19 @@ import {
 import { LeafButton } from "../../components/button/button.styles";
 import { Link } from "react-router-dom";
 
+import { useAppDispatch, useAppSelector } from "../../store/hooks/hooks";
+
 const Checkout = () => {
-  const cartItems = useSelector(selectCartItems);
-  const cartTotal = useSelector(selectCartTotal);
+  const cartItems = useAppSelector(selectCartItems);
+
+  const cartTotal = useAppSelector(selectCartTotal);
+  const serverCartTotal = useAppSelector((state) => state.cart.serverCartTotal);
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(getCartTotal());
+    console.log("useEffect fired");
+  }, [cartItems]);
 
   return (
     <CheckoutContainer>
@@ -30,7 +44,7 @@ const Checkout = () => {
       {cartItems.map((cartItem) => (
         <CheckoutItem cartItem={cartItem} key={cartItem.cartId} />
       ))}
-      <Total>Total: $ {cartTotal}</Total>
+      <Total>Total: $ {serverCartTotal}</Total>
       <Link to="payment">
         <LeafButton disabled={cartTotal === 0}>Proceed to Payment</LeafButton>
       </Link>
