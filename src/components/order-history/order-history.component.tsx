@@ -20,37 +20,40 @@ export const OrderHistory = () => {
       <h3>Order History</h3>
 
       {orders ? (
-        orders.map((order) => (
-          <>
-            <OrderDateIdContainer>
-              <div>
-                {"      " +
-                  unixToDate(order.paymentResult.paymentIntent?.created)}
-              </div>
-              <div>Order Id: ...{order.orderId.slice(-8)}</div>
-            </OrderDateIdContainer>
-            <OrderHeaders>
-              {/* make dynamic - variables at top - could be reusable table */}
-              <OrderHeader>Item</OrderHeader>
-              <OrderHeader>Size</OrderHeader>
-              <OrderHeader>Quantity</OrderHeader>
-              <OrderHeader>Price each</OrderHeader>
-            </OrderHeaders>
-            {/* separate this component out passing in boughtItem*/}
-            <SingleOrder>
-              {order.orderedItems?.map((boughtItem) => (
-                <BoughtItem>
-                  <ItemDetail>{boughtItem.title} </ItemDetail>
+        orders
+          .slice(0)
+          .reverse()
+          .map((order) => (
+            <div key={"order-" + order.orderId}>
+              <OrderDateIdContainer>
+                <div>
+                  {"      " +
+                    unixToDate(order.paymentResult.paymentIntent?.created)}
+                </div>
+                <div>Order Id: ...{order.orderId.slice(-8)}</div>
+              </OrderDateIdContainer>
+              <OrderHeaders>
+                {/* make dynamic - variables at top - could be reusable table */}
+                <OrderHeader>Item</OrderHeader>
+                <OrderHeader>Size</OrderHeader>
+                <OrderHeader>Quantity</OrderHeader>
+                <OrderHeader>Price each</OrderHeader>
+              </OrderHeaders>
+              {/* separate this component out passing in boughtItem*/}
+              <SingleOrder>
+                {order.orderedItems?.map((boughtItem) => (
+                  <BoughtItem key={"bought-item-" + boughtItem.orderId}>
+                    <ItemDetail>{boughtItem.title} </ItemDetail>
 
-                  <ItemDetail>{boughtItem.size} </ItemDetail>
-                  <ItemDetail>{boughtItem.quantity} </ItemDetail>
+                    <ItemDetail>{boughtItem.size} </ItemDetail>
+                    <ItemDetail>{boughtItem.quantity} </ItemDetail>
 
-                  <ItemDetail>{boughtItem.price} </ItemDetail>
-                </BoughtItem>
-              ))}
-            </SingleOrder>
-          </>
-        ))
+                    <ItemDetail>{boughtItem.price} </ItemDetail>
+                  </BoughtItem>
+                ))}
+              </SingleOrder>
+            </div>
+          ))
       ) : (
         <></>
       )}
@@ -58,4 +61,4 @@ export const OrderHistory = () => {
   );
 };
 
-export default OrderHistory
+export default OrderHistory;

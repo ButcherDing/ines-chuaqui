@@ -7,7 +7,7 @@ export const OrderSummaryContainer = styled.div`
 `;
 
 export const ItemTotal = styled(ItemDetail)`
-  font-size: 1.8rem;
+  font-size: 3rem;
 `;
 
 export const OrderSummaryDetails = styled(SingleOrder)`

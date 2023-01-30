@@ -107,6 +107,7 @@ export const NavLinkButton = styled(NavLink)`
 `;
 
 export const LeafButton = styled.button`
+  flex: flex-grow;
   display: flex;
   text-decoration: none;
   font-size: 2rem;

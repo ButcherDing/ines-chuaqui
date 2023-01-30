@@ -8,10 +8,11 @@ import { OrderHistory } from "../order-history/order-history.component";
 
 import {
   DashboardContainer,
-  ButtonCol,
   HeaderContainer,
   Underlined,
   Caret,
+  SettingsCol,
+  SettingsDropdownButton,
 } from "./user-dashboard.styles";
 
 import { LeafButton } from "../button/button.styles";
@@ -43,19 +44,19 @@ export const UserDashboard = () => {
         <h5>{currentUser.email}</h5>
         <LeafButton onClick={signOutAsyncHandler}>Sign Out</LeafButton>
       </HeaderContainer>
-      <ButtonCol>
-        <LeafButton onClick={showUserSettingsToggler}>
+      <SettingsCol>
+        <SettingsDropdownButton onClick={showUserSettingsToggler}>
           Account Settings
           <Caret className={showUserSettings ? "rotate" : ""} />
-        </LeafButton>
+        </SettingsDropdownButton>
         {showUserSettings && <UserSettings currentUser={currentUser} />}
 
-        <LeafButton onClick={showHistoryToggler}>
+        <SettingsDropdownButton onClick={showHistoryToggler}>
           Order History
           <Caret className={showHistory ? "rotate" : ""} />
-        </LeafButton>
+        </SettingsDropdownButton>
         {showHistory && <OrderHistory />}
-      </ButtonCol>
+      </SettingsCol>
     </DashboardContainer>
   );
 };
