@@ -42,7 +42,9 @@ export const OrderHistory = () => {
               {/* separate this component out passing in boughtItem*/}
               <SingleOrder>
                 {order.orderedItems?.map((boughtItem) => (
-                  <BoughtItem key={"bought-item-" + boughtItem.orderId}>
+                  <BoughtItem
+                    key={"bought-item-" + boughtItem.title + boughtItem.size}
+                  >
                     <ItemDetail>{boughtItem.title} </ItemDetail>
 
                     <ItemDetail>{boughtItem.size} </ItemDetail>

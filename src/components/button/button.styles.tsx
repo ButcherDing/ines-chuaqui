@@ -107,9 +107,9 @@ export const NavLinkButton = styled(NavLink)`
 `;
 
 export const LeafButton = styled.button`
-  flex: flex-grow;
   display: flex;
   text-decoration: none;
+  max-width: 30rem;
   font-size: 2rem;
   font-weight: 500;
   padding: 2rem 4rem;
@@ -207,4 +207,8 @@ export const BlackLeafButton = styled(LeafButton)`
     color: black;
     border: 1px solid black;
   }
+`;
+export const SignOutButton = styled(InvertedLeafButton)`
+  width: 15rem;
+  margin-top: 2.4rem;
 `;

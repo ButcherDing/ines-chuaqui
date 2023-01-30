@@ -1,7 +1,8 @@
 import styled from "styled-components";
 
 import { ReactComponent as CaretSvg } from "../../assets/logos/chevron-forward-outline.svg";
-import { LeafButton } from "../button/button.styles";
+import { primaryShade } from "../../general.styles";
+import { LeafButton, SignOutButton } from "../button/button.styles";
 
 export const Caret = styled(CaretSvg)`
   height: 2.4rem;
@@ -26,6 +27,10 @@ export const DashboardContainer = styled.div`
   margin-bottom: 2rem;
 `;
 
+export const UserHeader = styled.h4`
+  margin: 0rem 0rem 1.6rem;
+`;
+
 export const SettingsCol = styled.div`
   display: flex;
   flex-direction: column;
@@ -40,8 +45,15 @@ export const SettingsDropdownButton = styled(LeafButton)`
   width: 25rem;
   justify-content: left;
 `;
+export const DashboardSignOutButton = styled(SignOutButton)`
+  width: 25rem;
+`;
 
-export const HeaderContainer = styled.div``;
+export const HeaderContainer = styled.div`
+  /* display: flex;
+  justify-content: space-between; */
+  margin: none;
+`;
 
 export const Underlined = styled.span`
   text-decoration: underline;

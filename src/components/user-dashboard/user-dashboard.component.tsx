@@ -13,9 +13,15 @@ import {
   Caret,
   SettingsCol,
   SettingsDropdownButton,
+  UserHeader,
+  DashboardSignOutButton,
 } from "./user-dashboard.styles";
 
-import { LeafButton } from "../button/button.styles";
+import {
+  InvertedLeafButton,
+  LeafButton,
+  SignOutButton,
+} from "../button/button.styles";
 
 import UserSettings from "../user-settings/user-settings.component";
 
@@ -38,25 +44,27 @@ export const UserDashboard = () => {
   return (
     <DashboardContainer>
       <HeaderContainer>
-        <h2>
+        <UserHeader>
           Hi, <Underlined>{currentUser.displayName}</Underlined>.
-        </h2>
-        <h5>{currentUser.email}</h5>
-        <LeafButton onClick={signOutAsyncHandler}>Sign Out</LeafButton>
+        </UserHeader>
+        <span>✉ {currentUser.email}</span>
       </HeaderContainer>
       <SettingsCol>
-        <SettingsDropdownButton onClick={showUserSettingsToggler}>
-          Account Settings
-          <Caret className={showUserSettings ? "rotate" : ""} />
-        </SettingsDropdownButton>
-        {showUserSettings && <UserSettings currentUser={currentUser} />}
-
         <SettingsDropdownButton onClick={showHistoryToggler}>
           Order History
           <Caret className={showHistory ? "rotate" : ""} />
         </SettingsDropdownButton>
         {showHistory && <OrderHistory />}
+
+        <SettingsDropdownButton onClick={showUserSettingsToggler}>
+          Account Settings
+          <Caret className={showUserSettings ? "rotate" : ""} />
+        </SettingsDropdownButton>
+        {showUserSettings && <UserSettings currentUser={currentUser} />}
       </SettingsCol>
+      <DashboardSignOutButton onClick={signOutAsyncHandler}>
+        Sign Out
+      </DashboardSignOutButton>
     </DashboardContainer>
   );
 };

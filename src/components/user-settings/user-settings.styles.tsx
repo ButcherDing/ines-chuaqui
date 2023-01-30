@@ -22,5 +22,7 @@ export const DashboardFormInput = styled(FormInput)`
 
 export const UserSettingsButton = styled(Button)`
   margin: 0rem 2rem 4rem;
+  width: 75%;
+  justify-self: center;
   /* max-width: max-content; */
 `;
