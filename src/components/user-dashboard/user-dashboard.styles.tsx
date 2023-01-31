@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 import { ReactComponent as CaretSvg } from "../../assets/logos/chevron-forward-outline.svg";
-import { primaryShade } from "../../general.styles";
 import { LeafButton, SignOutButton } from "../button/button.styles";
 
 export const Caret = styled(CaretSvg)`

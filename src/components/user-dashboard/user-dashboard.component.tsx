@@ -16,13 +16,6 @@ import {
   UserHeader,
   DashboardSignOutButton,
 } from "./user-dashboard.styles";
-
-import {
-  InvertedLeafButton,
-  LeafButton,
-  SignOutButton,
-} from "../button/button.styles";
-
 import UserSettings from "../user-settings/user-settings.component";
 
 // TODO 'no history to display'
