@@ -1,14 +1,6 @@
 import styled from "styled-components";
-import background from "../../assets/img/magical-journeys-1.jpg";
-import {
-  primaryShade,
-  primaryColor,
-  secondaryShade,
-  secondaryColor,
-  secondaryTint,
-  globalPadding,
-} from "../../general.styles";
-import { NavLinkButton } from "../button/button.styles";
+import background from "../../assets/img/compressed-lg/hero.jpg";
+import { primaryShade, globalPadding } from "../../general.styles";
 
 // export const HeroContainer = styled.div`
 //   width: 105%;

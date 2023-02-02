@@ -32,3 +32,4 @@ yarn-error.log*
 
 # Data copy
 series-data.js
+/src/assets/copy

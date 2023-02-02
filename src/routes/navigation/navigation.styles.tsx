@@ -1,13 +1,8 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import background from "../../assets/img/Compressed/suspended-ani-1.jpg";
+import background from "../../assets/img/compressed-lg/IND001-Magical-Journeys.jpg";
 
-import {
-  globalPadding,
-  primaryShade,
-  secondaryColor,
-  secondaryShade,
-} from "../../general.styles";
+import { globalPadding, primaryShade } from "../../general.styles";
 
 export const NavigationContainer = styled.div`
   position: sticky;
@@ -16,9 +11,6 @@ export const NavigationContainer = styled.div`
   align-content: center;
   flex-direction: column;
   margin: 0 ${-globalPadding}rem;
-  /* transform: rotate(90deg); */
-  /* justify-content: center; */
-  /* background-color: white; */
   background-image: linear-gradient(
       to right,
       #ffffff,
@@ -28,10 +20,7 @@ export const NavigationContainer = styled.div`
     ),
     url(${background});
   background-size: 100%;
-  /* box-shadow: 0 0 0.5rem 0.5rem white inset; */
-  /* height: 12rem; */
   background-size: cover;
-  /* padding: 1.5rem; */
   border-bottom: 0.1rem solid #eee;
   z-index: 4;
 

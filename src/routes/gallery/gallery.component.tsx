@@ -7,9 +7,8 @@ import {
   GalleryContainer,
   RouteTitle,
   SeriesDescription,
-  SeriesDescriptionContainer,
   SeriesTitle,
-  LightboxColumn,
+  SmallP,
 } from "../../routes/gallery/gallery.styles";
 
 export const Gallery = () => {
@@ -19,17 +18,17 @@ export const Gallery = () => {
     <>
       <GalleryContainer>
         <RouteTitle>Gallery</RouteTitle>
-        {seriesData.map((series, i) => (
-          <SeriesContainer key={`gallery` + series.title}>
+        {seriesData.map((series) => (
+          <>
             <SeriesTitle>{series.title}</SeriesTitle>
-            <SeriesDescriptionContainer>
-              <SeriesDescription>{series.blurb}</SeriesDescription>
-              <LightboxColumn>
-                <Lightbox series={series} />
-                <span>click image to enlarge</span>
-              </LightboxColumn>
-            </SeriesDescriptionContainer>
-          </SeriesContainer>
+            <SeriesContainer key={`gallery` + series.title}>
+              <SeriesDescription>
+                {series.blurb}
+                <SmallP>(click an image to expand)</SmallP>
+              </SeriesDescription>
+              <Lightbox series={series} />
+            </SeriesContainer>
+          </>
         ))}
       </GalleryContainer>
     </>
