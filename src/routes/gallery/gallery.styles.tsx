@@ -1,14 +1,6 @@
 import styled from "styled-components";
-import {
-  ArtistDescription,
-  BlurbHeading,
-} from "../../components/hero/hero.styles";
-import {
-  grey3,
-  grey4,
-  primaryShade,
-  RouteContainer,
-} from "../../general.styles";
+
+import { grey3, RouteContainer } from "../../general.styles";
 
 export const RouteTitle = styled.h1`
   margin-bottom: 3rem;
@@ -17,7 +9,7 @@ export const RouteTitle = styled.h1`
 export const SmallSpan = styled.span`
   margin-top: 2.4rem;
   font-size: 1.6rem;
-  color: ${grey3};+
+  color: ${grey3};
 `;
 
 export const GalleryContainer = styled(RouteContainer)``;
