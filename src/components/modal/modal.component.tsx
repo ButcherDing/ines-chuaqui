@@ -36,9 +36,9 @@ const Modal: FC<ModalProps> = ({ closeModalHandler, piece }) => {
           <h2>{piece.title}</h2>
           <ProductThumbnail src={piece.smallImageUrl} />
         </ModalHeader>
-        <ModalBody>
+        {/* <ModalBody>
           <p>{piece.description}</p>
-        </ModalBody>
+        </ModalBody> */}
         <ModalFooter>
           <ModalForm piece={piece} />
 

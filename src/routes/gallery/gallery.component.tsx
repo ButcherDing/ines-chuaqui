@@ -8,7 +8,7 @@ import {
   RouteTitle,
   SeriesDescription,
   SeriesTitle,
-  SmallP,
+  SmallSpan,
 } from "../../routes/gallery/gallery.styles";
 
 export const Gallery = () => {
@@ -24,7 +24,9 @@ export const Gallery = () => {
             <SeriesContainer key={`gallery` + series.title}>
               <SeriesDescription>
                 {series.blurb}
-                <SmallP>(click an image to expand)</SmallP>
+                <br />
+                <br />
+                <SmallSpan>(click an image to expand)</SmallSpan>
               </SeriesDescription>
               <Lightbox series={series} />
             </SeriesContainer>

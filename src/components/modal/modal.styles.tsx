@@ -22,17 +22,18 @@ export const ModalHeader = styled.div`
   display: flex;
   justify-content: space-between;
   padding: 1rem;
+  border-bottom: 0.1rem solid #eee;
 `;
 
 export const ProductThumbnail = styled.img`
   width: 20%;
   height: 20%;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  margin-left: 2.4rem;
 `;
 export const ModalBody = styled.div`
   padding: 1rem;
   border-top: 0.1rem solid #eee;
-  border-bottom: 0.1rem solid #eee;
 `;
 
 export const ModalFooter = styled.div`
