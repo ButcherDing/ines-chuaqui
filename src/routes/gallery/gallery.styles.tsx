@@ -29,5 +29,5 @@ export const SeriesTitle = styled.h3``;
 export const SeriesDescription = styled.p`
   padding-right: 3rem;
   width: 100%;
-  max-width: 70rem;
+  max-width: 50rem;
 `;
