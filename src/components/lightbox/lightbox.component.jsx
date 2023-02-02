@@ -7,13 +7,6 @@ import { SlideshowLightbox, initLightboxJS } from "lightbox.js-react";
 // where should we use our selectors? best practices
 
 export const Lightbox = ({ series }) => {
-  const numStyleCols = series.pieces.length;
-
-  //// INITIALIZER (spams console warnings)
-  // useEffect(() => {
-  //   initLightboxJS("AEBD-F4A5-C371-3200", "Individual");
-  // }, []);
-
   return (
     <>
       <SlideshowLightbox
