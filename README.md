@@ -4,7 +4,7 @@
 preview: https://ines-chuaqui-preview.netlify.app/
 
 ## Introduction
-Freelance work I have taken on (solo) for a local Vancouver artist, Ines Chuaqui.
+Freelance work for a local Vancouver artist. Pending additional assets (artwork, copy) from the artist, but all features are fully-functional.
 
 An e-commerce/portfolio app to:
 - Present the artist's work and enable sale of the artist's prints online using custom stripe integration.
