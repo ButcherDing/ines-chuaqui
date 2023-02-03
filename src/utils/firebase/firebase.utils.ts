@@ -33,7 +33,7 @@ import {
 import { Order, UserData } from "../../store/user/user-slice";
 
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
-import { SERIES_DATA } from "../../assets/series-data/series-data";
+// import { SERIES_DATA } from "../../assets/series-data/series-data";
 
 //////////////////////////
 
@@ -163,6 +163,7 @@ export const updateDocumentInCollection = async (
 ): Promise<void> => {
   const docRef = doc(db, collectionKey, documentName);
   const res = await updateDoc(docRef, updateObj);
+  console.log(res);
 };
 
 export const deleteDocumentInCollection = async (

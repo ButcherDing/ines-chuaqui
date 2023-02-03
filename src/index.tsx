@@ -17,6 +17,7 @@ import Spinner from "./components/spinner/spinner.component";
 
 import CheckoutSuccess from "./routes/checkout-success/checkout-success.component";
 import ContactSuccess from "./routes/contact-success/contact-success.component";
+import ErrorPage from "./routes/error-page/error-page.component";
 
 const Home = lazy(() => import("./routes/home/home.component"));
 const Gallery = lazy(() => import("./routes/gallery/gallery.component"));
@@ -36,7 +37,7 @@ const root = createRoot(container);
 
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route element={<App />}>
+    <Route errorElement={<ErrorPage />} element={<App />}>
       <Route index element={<Home />} />
       <Route path="/" element={<Navigation />}>
         <Route path="gallery" element={<Gallery />} />
@@ -47,7 +48,11 @@ const router = createBrowserRouter(
         <Route path="checkout" element={<Checkout />} />
 
         <Route path="checkout/payment" element={<Payment />} />
-        <Route path="checkout/success/*" element={<CheckoutSuccess />} />
+        <Route
+          path="checkout/success/*"
+          errorElement={<ErrorPage />}
+          element={<CheckoutSuccess />}
+        />
       </Route>
     </Route>
   )
