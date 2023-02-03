@@ -26,12 +26,6 @@ const MockHero = () => {
   );
 };
 
-<<<<<<< HEAD
-it("should render the artist's name", () => {
-  render(<MockHero />);
-  const headerElement = screen.getByText("Ines Chuaqui");
-  expect(headerElement).toBeInTheDocument();
-=======
 const MockLinkButton = () => {
   return (
     <Link to="/gallery">
@@ -77,9 +71,6 @@ const mockHeroImageStyles = describe("Hero", () => {
     const galleryElement = screen.queryByText(/gallery/i);
     expect(galleryElement).toBeInTheDocument();
   });
->>>>>>> 3bf0681 (solving router testing)
 });
 
 describe("link button", () => {});
-
-// ,});
