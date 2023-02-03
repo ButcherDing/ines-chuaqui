@@ -2,7 +2,6 @@
 # Ines Chuaqui - E-commerce/portfolio app w/ React Redux Toolkit
 
 preview: https://ines-chuaqui-preview.netlify.app/
-(to test payment, use test credit card details from stripe)
 
 ## Introduction
 Freelance work I have taken on (solo) for a local Vancouver artist, Ines Chuaqui.
