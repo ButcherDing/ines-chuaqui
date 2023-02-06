@@ -16,17 +16,33 @@ import { LeafButton } from "../button/button.styles";
 import OrderSummary from "../order-summary/order-summary.component";
 import { FC, FormEvent, useState } from "react";
 import { StripeAddressElementChangeEvent } from "@stripe/stripe-js";
+import FormInput from "../form-input/form-input.component";
+import { ChangeEvent } from "react";
+import { ContactForm } from "../../routes/contact/contact.styles";
+import { getCurrentUser } from "../../utils/firebase/firebase.utils";
 
 export type StripeFormsProps = {
   clientSecret: string;
 };
 
+const defaultFormFields = {
+  email: "",
+};
+
 const StripeForms: FC<StripeFormsProps> = () => {
   const dispatch = useAppDispatch();
+  const user = useAppSelector((state) => state.user.currentUser);
   const cartTotal = useAppSelector(selectCartTotal);
   const stripe = useStripe();
   const elements = useElements();
   const [isProcessingPayment, setIsProcessingPayment] = useState(false);
+  const [formFields, setFormFields] = useState(defaultFormFields);
+  const { email } = formFields;
+
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target;
+    setFormFields({ ...formFields, [name]: value });
+  };
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -43,9 +59,9 @@ const StripeForms: FC<StripeFormsProps> = () => {
       //`Elements` instance that was used to create the Payment Element
       elements,
       confirmParams: {
-        return_url:
-          "https://ines-chuaqui-preview.netlify.app/checkout/success/",
+        return_url: "http://localhost:8888/payment/success/",
       },
+      receipt_email: email,
     });
 
     if (error) {
@@ -63,17 +79,17 @@ const StripeForms: FC<StripeFormsProps> = () => {
 
   const addressChangeHandler = (event: StripeAddressElementChangeEvent) => {
     if (event.complete) {
-      // do a thing
+      // potentially do a thing
     }
   };
   // TODO - do a thing when the event completes?
   // TODO: get stripe shipping info into firebase
-  // TODO: fix error flow
 
   return (
     <>
       <StripeFormsContainer onSubmit={handleSubmit}>
         <OrderSummary />
+
         <Forms>
           <AddressFormContainer>
             <h4>Shipping Address</h4>
@@ -84,6 +100,18 @@ const StripeForms: FC<StripeFormsProps> = () => {
               }}
               onChange={addressChangeHandler}
             />
+            {!user && (
+              <ContactForm onSubmit={handleSubmit}>
+                <FormInput
+                  label="Email"
+                  type="email"
+                  required
+                  onChange={handleChange}
+                  name="email"
+                  value={email}
+                />
+              </ContactForm>
+            )}
           </AddressFormContainer>
 
           <PaymentFormContainer>

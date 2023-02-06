@@ -11,6 +11,8 @@ import { CartItem } from "../../store/cart/cart.slice";
 
 import StripeForms from "../../components/stripe-forms/stripe-forms.component";
 import { PaymentContainer } from "./payment.styles";
+import { Route, Routes } from "react-router-dom";
+import CheckoutSuccess from "../checkout-success/checkout-success.component";
 
 export const Payment = () => {
   const [clientSecret, setClientSecret] = useState("");
@@ -20,21 +22,27 @@ export const Payment = () => {
 
   useEffect(() => {
     const paymentIntentHandler = async (cartItems: CartItem[]) => {
-      const client_secret = await fetchPaymentIntent(cartItems);
+      const { client_secret } = await fetchPaymentIntent(cartItems);
       console.log("client secret in useEffect:", client_secret);
       if (!client_secret) return console.error("error fetching from stripe");
       setClientSecret(client_secret);
     };
     paymentIntentHandler(cartItems);
-  }, []);
+  }, [cartItems]);
 
   console.log(clientSecret);
 
   return (
     <PaymentContainer>
       {clientSecret !== "" && (
-        <Elements stripe={stripePromise} options={options}>
-          <StripeForms clientSecret={clientSecret} />
+        <Elements stripe={stripePromise} options={options} key={clientSecret}>
+          <Routes>
+            <Route
+              path="/stripe"
+              element={<StripeForms clientSecret={clientSecret} />}
+            />
+            <Route path="/success/*" element={<CheckoutSuccess />} />
+          </Routes>
         </Elements>
       )}
     </PaymentContainer>

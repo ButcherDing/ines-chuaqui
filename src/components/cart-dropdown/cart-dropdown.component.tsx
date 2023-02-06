@@ -24,7 +24,7 @@ const CartDropdown: FC<CartDropdownProps> = ({ closeClickHandler }) => {
   const navigate = useNavigate();
 
   const goToCheckoutHandler = () => {
-    navigate("/checkout");
+    navigate("/cart");
     closeClickHandler();
   };
 

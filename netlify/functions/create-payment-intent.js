@@ -36,7 +36,8 @@ exports.handler = async (event) => {
     const { cartItems } = JSON.parse(event.body);
 
     const amount = await cartItems.reduce(
-      (acc, cartItem) => (acc += PRICES[cartItem.cartId] * cartItem.quantity),
+      (acc, cartItem) =>
+        (acc += PRICES[cartItem.cartId] * cartItem.quantity * 100),
       0
     );
     console.log("amount:", amount);
@@ -53,7 +54,7 @@ exports.handler = async (event) => {
 
     return {
       statusCode: 200,
-      body: JSON.stringify({ paymentIntent }),
+      body: JSON.stringify({ paymentIntent, amount }),
     };
   } catch (error) {
     console.log({ error });

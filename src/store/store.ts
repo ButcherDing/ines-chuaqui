@@ -74,5 +74,5 @@ export type AppThunk<ReturnType = void> = ThunkAction<
 >;
 
 // EMERGE PURGE (FOR DEV)
-const toPurge: any = persistor.purge();
-console.log(toPurge);
+// const toPurge: any = persistor.purge();
+// console.log(toPurge);

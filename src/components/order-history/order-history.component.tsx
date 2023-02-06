@@ -26,10 +26,7 @@ export const OrderHistory = () => {
           .map((order) => (
             <div key={"order-" + order.orderId}>
               <OrderDateIdContainer>
-                <div>
-                  {"      " +
-                    unixToDate(order.paymentResult.paymentIntent?.created)}
-                </div>
+                <div>{"      " + unixToDate(order.paymentIntent?.created)}</div>
                 <div>Order Id: ...{order.orderId.slice(-8)}</div>
               </OrderDateIdContainer>
               <OrderHeaders>

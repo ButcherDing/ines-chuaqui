@@ -1,5 +1,7 @@
-import { selectCartItems, selectCartTotal } from "../../store/cart/cart.slice";
+import { useEffect, useState } from "react";
+import { selectCartItems } from "../../store/cart/cart.slice";
 import { useAppSelector } from "../../store/hooks/hooks";
+import { fetchTotal } from "../../utils/stripe/stripe.utils";
 
 import {
   OrderHeaders,
@@ -15,7 +17,15 @@ import {
 
 export const OrderSummary = () => {
   const cartItems = useAppSelector(selectCartItems);
-  const serverCartTotal = useAppSelector((state) => state.cart.serverCartTotal);
+  const [total, setTotal] = useState(-1);
+
+  useEffect(() => {
+    const getTotalFromServer = async () => {
+      const total = await fetchTotal(cartItems);
+      setTotal(total);
+    };
+    getTotalFromServer();
+  }, [cartItems]);
 
   return (
     <OrderSummaryContainer>
@@ -42,7 +52,7 @@ export const OrderSummary = () => {
               </BoughtItem>
             ))}
           </OrderSummaryDetails>
-          <ItemTotal>Total: ${serverCartTotal}</ItemTotal>
+          <ItemTotal>Total: ${total !== -1 && total}</ItemTotal>
         </>
       ) : (
         <></>

@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useStripe } from "@stripe/react-stripe-js";
+import { useAppDispatch } from "../../store/hooks/hooks";
+import { logTransactionAsync } from "../../store/cart/cart.slice";
 
 const PaymentStatus = () => {
+  const dispatch = useAppDispatch();
   const stripe = useStripe();
   const [message, setMessage] = useState<null | string>(null);
 
@@ -31,12 +34,14 @@ const PaymentStatus = () => {
       switch (paymentIntent.status) {
         case "succeeded":
           setMessage("Success! Payment received.");
+          dispatch(logTransactionAsync(paymentIntent));
           break;
 
         case "processing":
           setMessage(
             "Payment processing. We'll update you when payment is received."
           );
+
           break;
 
         case "requires_payment_method":

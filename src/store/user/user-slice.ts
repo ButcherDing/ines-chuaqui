@@ -4,7 +4,7 @@ import {
   createSelector,
   SerializedError,
 } from "@reduxjs/toolkit";
-import { PaymentIntentResult } from "@stripe/stripe-js";
+import { PaymentIntent, PaymentIntentResult } from "@stripe/stripe-js";
 import {
   createAuthUserWithEmailAndPassword,
   createUserDocumentFromAuth,
@@ -55,7 +55,7 @@ export type Order = {
   orderedItems: OrderedItem[];
   currentUser: UserData | null;
   orderId: string;
-  paymentResult: PaymentIntentResult;
+  paymentIntent: PaymentIntent;
 };
 
 const initialState: UserState = {
@@ -74,6 +74,7 @@ export type OrderedItem = {
   date: string;
 };
 
+// currently only used to delete in fb utils
 export const dummyCurrentUser: {} = {
   createdAt: "",
   displayName: "",

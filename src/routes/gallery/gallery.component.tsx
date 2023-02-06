@@ -19,9 +19,9 @@ export const Gallery = () => {
       <GalleryContainer>
         <RouteTitle>Gallery</RouteTitle>
         {seriesData.map((series) => (
-          <>
+          <div key={`gallery` + series.title}>
             <SeriesTitle>{series.title}</SeriesTitle>
-            <SeriesContainer key={`gallery` + series.title}>
+            <SeriesContainer>
               <SeriesDescription>
                 {series.blurb}
                 <br />
@@ -30,7 +30,7 @@ export const Gallery = () => {
               </SeriesDescription>
               <Lightbox series={series} />
             </SeriesContainer>
-          </>
+          </div>
         ))}
       </GalleryContainer>
     </>

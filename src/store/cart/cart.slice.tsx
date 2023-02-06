@@ -7,7 +7,7 @@ import {
 } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { Piece } from "../gallery/gallery.slice";
-import { PaymentIntentResult } from "@stripe/stripe-js";
+import { PaymentIntent, PaymentIntentResult } from "@stripe/stripe-js";
 import {
   addDocumentToCollection,
   getCurrentUser,
@@ -38,7 +38,6 @@ export const selectCurrentItem = createSelector(
 export const selectCartItem = createSelector(
   [selectCartItems, selectCurrentItem],
   (cartItems, currentItem) => {
-    // this matching appears everywhere, to helper function?
     const matchedItem = cartItems.find(
       (item) => item.cartId === currentItem.cartId
     );
@@ -66,7 +65,6 @@ export const selectCartTotal = createSelector([selectCartItems], (cartItems) =>
 
 export type CartState = {
   cartItems: CartItem[];
-  serverCartTotal: number;
   isLoading: boolean;
   currentItem: CartItem;
   error: SerializedError | null;
@@ -83,7 +81,6 @@ export type CartId = string;
 ///////////// INITIAL STATE
 
 export const initialState: CartState = {
-  serverCartTotal: 0,
   cartItems: [],
   isLoading: false,
   currentItem: {
@@ -101,56 +98,33 @@ export const initialState: CartState = {
 };
 //////////// THUNKS
 
-export const getCartTotal = createAsyncThunk(
-  "checkout/getPrices",
-  async (_, thunkAPI) => {
-    try {
-      console.log("thunk fired");
-      const state = thunkAPI.getState() as RootState;
-      const { cartItems } = state.cart;
-
-      const total = await fetchTotal(cartItems);
-      return total;
-    } catch (error) {
-      console.error("error getting real total from server:", error);
-    }
-  }
-);
-
-// this probably does too many things
+// Codesmell: does too many things
 export const logTransactionAsync = createAsyncThunk(
   "checkout/logTransactionAsync",
-  async (paymentResult: PaymentIntentResult, thunkAPI) => {
+  async (paymentIntent: PaymentIntent, thunkAPI) => {
     try {
       const state = thunkAPI.getState() as RootState;
       const { currentUser } = state.user;
       const { cartItems } = state.cart;
 
-      if (!paymentResult.paymentIntent)
-        return console.error("no payment result from service provider");
+      console.log("payment intent:", paymentIntent);
+      if (!paymentIntent)
+        return console.error("no payment result from payment provider");
 
       // make new order doc
       const orderDoc = {
         currentUser,
         cartItems,
-        paymentResult,
-        orderId: paymentResult.paymentIntent.id,
+        paymentIntent,
+        orderId: paymentIntent.id,
       };
 
       // write it to fb
-      await addDocumentToCollection(
-        "transactions",
-        paymentResult.paymentIntent.id,
-        orderDoc
-      );
+      await addDocumentToCollection("transactions", paymentIntent.id, orderDoc);
 
       // create our orderHistory object to append to currentUser
-      const formattedDate = paymentResult.paymentIntent
-        ? String(
-            new Date(
-              paymentResult.paymentIntent.created * 1000
-            ).toLocaleDateString()
-          )
+      const formattedDate = paymentIntent
+        ? String(new Date(paymentIntent.created * 1000).toLocaleDateString())
         : "no date";
 
       // helper
@@ -161,7 +135,7 @@ export const logTransactionAsync = createAsyncThunk(
             size: cartItem.printType.size,
             price: cartItem.printType.price,
             quantity: cartItem.quantity,
-            orderId: paymentResult.paymentIntent.id,
+            orderId: paymentIntent.id,
             date: formattedDate,
           };
           return orderedItem;
@@ -174,8 +148,8 @@ export const logTransactionAsync = createAsyncThunk(
       const userOrderDoc = {
         currentUser,
         orderedItems,
-        paymentResult,
-        orderId: paymentResult.paymentIntent.id,
+        paymentIntent,
+        orderId: paymentIntent.id,
       };
 
       const userRes = await getCurrentUser();
@@ -280,19 +254,6 @@ export const cartSlice = createSlice({
       // state.isCartOpen = false;
     });
     builder.addCase(logTransactionAsync.rejected, (state, { error }) => {
-      state.isLoading = false;
-      state.error = error;
-    });
-    builder.addCase(getCartTotal.pending, (state) => {
-      state.isLoading = true;
-    });
-
-    builder.addCase(getCartTotal.fulfilled, (state, { payload }) => {
-      state.isLoading = false;
-      state.serverCartTotal = payload;
-      // state.isCartOpen = false;
-    });
-    builder.addCase(getCartTotal.rejected, (state, { error }) => {
       state.isLoading = false;
       state.error = error;
     });
