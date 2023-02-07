@@ -4,7 +4,7 @@
 preview: https://ines-chuaqui-preview.netlify.app/
 
 ## Introduction
-Freelance work for a local Vancouver artist. Pending additional assets (artwork, copy) from the artist, but all features are fully-functional.
+Freelance work for a local Vancouver artist. Pending a small number of additional assets (artwork, copy) from the artist, but all features are fully-functional.
 
 An e-commerce/portfolio app to:
 - Present the artist's work dynamically
