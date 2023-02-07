@@ -8,7 +8,7 @@ Freelance work for a local Vancouver artist. Pending a small number of additiona
 
 An e-commerce/portfolio app to:
 - Present the artist's work dynamically
-- and enable sale of the artist's prints online using custom stripe integration.
+- Facilitate sale of artist's prints online.
 
 Developer learning goals:
 - Consolidate/expand my knowledge on Typescript and React, learn Redux Toolkit, and familiarize myself with testing tools (Jest, React Testing Library)
