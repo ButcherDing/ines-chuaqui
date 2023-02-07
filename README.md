@@ -7,7 +7,8 @@ preview: https://ines-chuaqui-preview.netlify.app/
 Freelance work for a local Vancouver artist. Pending additional assets (artwork, copy) from the artist, but all features are fully-functional.
 
 An e-commerce/portfolio app to:
-- Present the artist's work and enable sale of the artist's prints online using custom stripe integration.
+- Present the artist's work dynamically
+- and enable sale of the artist's prints online using custom stripe integration.
 
 Developer learning goals:
 - Consolidate/expand my knowledge on Typescript and React, learn Redux Toolkit, and familiarize myself with testing tools (Jest, React Testing Library)
