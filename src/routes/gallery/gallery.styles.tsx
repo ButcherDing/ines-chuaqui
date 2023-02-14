@@ -8,7 +8,7 @@ export const RouteTitle = styled.h1`
 
 export const SmallSpan = styled.span`
   margin-top: 2.4rem;
-  font-size: 1.6rem;
+  font-size: 1.8rem;
   color: ${grey3};
 `;
 

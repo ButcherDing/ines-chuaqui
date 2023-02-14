@@ -127,10 +127,16 @@ export const GlobalStyle = createGlobalStyle`
 
 html {
   font-size: 62.5%;
-  /* overflow-x: hidden; */
+  overflow-x: hidden;
   width: 100vw;
 }
 
+*:focus {
+  outline: none;
+  /* outline: 4px dotted ${primaryColor};
+  outline-offset: 8px; */
+  box-shadow:  0px 0px 5px 8px #e74d3caa;
+}
 
 
 body {

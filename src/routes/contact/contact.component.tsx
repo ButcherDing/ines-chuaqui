@@ -27,10 +27,8 @@ export const Contact = () => {
         <ContactTextBox className="cta-text-box">
           <ContactTitle>Get in touch</ContactTitle>
           <ContactText>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet
-            aspernatur consequatur dolore voluptatem ad nemo molestiae nihil
-            ducimus natus necessitatibus praesentium, nisi architecto harum fuga
-            temporibus nesciunt voluptatum. Omnis, reprehenderit.
+            Contact the artist to find out about viewings of originals, shows,
+            or other inquiries.
           </ContactText>
 
           <ContactForm
@@ -47,7 +45,7 @@ export const Contact = () => {
                 name="name"
                 id="name"
                 type="text"
-                placeholder="Harry Maclary"
+                placeholder="Jane Doe"
                 required
               />
             </div>
@@ -58,19 +56,14 @@ export const Contact = () => {
                 name="email"
                 id="email"
                 type="email"
-                placeholder="hmaclary@example.com"
+                placeholder="jane.doe@example.com"
                 required
               />
             </div>
 
             <div>
               <ContactFormLabel htmlFor="message">Message:</ContactFormLabel>
-              <textarea
-                name="message"
-                id="message"
-                placeholder="hello"
-                required
-              />
+              <textarea name="message" id="message" placeholder="" required />
             </div>
 
             <LeafButton>Send</LeafButton>

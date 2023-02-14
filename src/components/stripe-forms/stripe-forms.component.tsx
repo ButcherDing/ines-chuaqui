@@ -61,7 +61,7 @@ const StripeForms: FC<StripeFormsProps> = () => {
       confirmParams: {
         return_url: "http://localhost:8888/payment/success/",
       },
-      receipt_email: email,
+      // receipt_email: email,
     });
 
     if (error) {
