@@ -2,13 +2,13 @@
 # Ines Chuaqui - E-commerce/portfolio app w/ React Redux Toolkit
 
 preview: https://ines-chuaqui-preview.netlify.app/
-(to test payment, use test credit card details from stripe)
 
 ## Introduction
-Freelance work I have taken on (solo) for a local Vancouver artist, Ines Chuaqui.
+Freelance work for a local Vancouver artist. Pending a small number of additional assets (artwork, copy) from the artist, but all features are fully-functional.
 
 An e-commerce/portfolio app to:
-- Present the artist's work and enable sale of the artist's prints online using custom stripe integration.
+- Present the artist's work dynamically
+- Facilitate sale of artist's prints online.
 
 Developer learning goals:
 - Consolidate/expand my knowledge on Typescript and React, learn Redux Toolkit, and familiarize myself with testing tools (Jest, React Testing Library)
