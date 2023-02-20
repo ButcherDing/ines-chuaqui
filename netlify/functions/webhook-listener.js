@@ -34,7 +34,7 @@ exports.handler = async ({ body, headers }) => {
       body: JSON.stringify({ received: true }),
     };
   } catch (err) {
-    console.log(`Stripe webhook failed with ${err}`);
+    console.error(`Stripe webhook failed with ${err}`);
 
     return {
       statusCode: 400,

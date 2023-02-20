@@ -14,7 +14,6 @@ import {
   updateDocumentArrayInCollection,
 } from "../../utils/firebase/firebase.utils";
 import { OrderedItem } from "../user/user-slice";
-import { fetchTotal } from "../../utils/stripe/stripe.utils";
 
 ////  For debugging reducers - use current to console.log a value inside reducer
 // import { current } from "immer";
@@ -107,7 +106,6 @@ export const logTransactionAsync = createAsyncThunk(
       const { currentUser } = state.user;
       const { cartItems } = state.cart;
 
-      console.log("payment intent:", paymentIntent);
       if (!paymentIntent)
         return console.error("no payment result from payment provider");
 

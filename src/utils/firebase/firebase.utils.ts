@@ -201,11 +201,10 @@ export const createUserDocumentFromAuth = async (
   additionalInformation = {} as AdditionalInformation
 ): Promise<void | QueryDocumentSnapshot<UserData>> => {
   if (!userAuth) return;
-  console.log(userAuth.uid);
   const userDocRef = doc(db, "users", userAuth.uid);
   let userSnapshot = await getDoc(userDocRef);
   if (!userSnapshot.exists()) {
-    // can add other properties below
+    // can add other properties to doc object below
     const { displayName, email } = userAuth;
     const createdAt = JSON.stringify(new Date());
     const orders: Order[] = [];

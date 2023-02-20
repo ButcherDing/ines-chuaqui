@@ -20,7 +20,7 @@ import {
 import { RootState } from "../store";
 import { logTransactionAsync } from "../cart/cart.slice";
 
-//  For debugging reducers - use current to console.log a value inside reducer
+//  For debugging reducers - use current to console.error a value inside reducer
 // import { current } from "immer";
 // import { getCurrentScope } from "immer/dist/internal";
 
@@ -119,7 +119,7 @@ export const checkUserSessionAsync = createAsyncThunk(
       if (!userData) return;
       return userData.data();
     } catch (error) {
-      console.log("error checking current user", error);
+      console.error("error checking current user", error);
       throw error;
     }
   }
@@ -136,7 +136,7 @@ export const signInEmailPassAsync = createAsyncThunk(
       if (!userSnapshot) return;
       return userSnapshot.data();
     } catch (error) {
-      console.log("user sign in failed", error);
+      console.error("user sign in failed", error);
       throw error;
     }
   }
@@ -153,7 +153,7 @@ export const signInGooglePopupAsync = createAsyncThunk(
       if (!userSnapshot) throw new Error("could not find user data");
       return userSnapshot.data();
     } catch (error) {
-      console.log("error signing in with google", error);
+      console.error("error signing in with google", error);
       throw error;
     }
   }
@@ -173,7 +173,7 @@ export const signUpWithEmailPassAsync = createAsyncThunk(
       if (!userSnapshot) return;
       dispatch(signInEmailPassAsync({ email, password }));
     } catch (error) {
-      console.log("sign up failed", error);
+      console.error("sign up failed", error);
       throw error;
     }
   }
@@ -185,7 +185,7 @@ export const signOutAsync = createAsyncThunk(
     try {
       await signOutUser();
     } catch (error) {
-      console.log("error changing signing out:", error);
+      console.error("error changing signing out:", error);
       throw error;
     }
   }
@@ -198,7 +198,7 @@ export const changeEmailAsync = createAsyncThunk(
       await updateFbAuthEmail(newEmail);
       return newEmail;
     } catch (error) {
-      console.log("error changing email:", error);
+      console.error("error changing email:", error);
       throw error;
     }
   }
@@ -212,7 +212,7 @@ export const changePasswordAsync = createAsyncThunk(
       // standard to log user out after change?
       // display confimation message
     } catch (error) {
-      console.log("error changing password:", error);
+      console.error("error changing password:", error);
       throw error;
     }
   }
@@ -225,7 +225,7 @@ export const changeDisplayNameAsync = createAsyncThunk(
       await updateDisplayName(newDisplayName);
       return newDisplayName;
     } catch (error) {
-      console.log("error changing display name:", error);
+      console.error("error changing display name:", error);
       throw error;
     }
   }
@@ -240,7 +240,7 @@ export const deleteAccountAsync = createAsyncThunk(
       await deleteAccountFromFbAuth({ ...currentUser });
       await dispatch(signOutAsync());
     } catch (error) {
-      console.log("error deleting user:", error);
+      console.error("error deleting user:", error);
       throw error;
     }
   }
@@ -362,7 +362,7 @@ export const userSlice = createSlice({
     // email updates in currentUser
     builder.addCase(changeEmailAsync.rejected, (state, { error }) => {
       state.error = error;
-      console.log(error);
+      console.error(error);
       state.isLoading = false;
     });
     //////////////// Change Display Name
@@ -392,7 +392,7 @@ export const userSlice = createSlice({
     });
     builder.addCase(changePasswordAsync.rejected, (state, { error }) => {
       state.isLoading = false;
-      console.log(error);
+      console.error(error);
       state.error = error;
     });
     //////////////// Delete Account

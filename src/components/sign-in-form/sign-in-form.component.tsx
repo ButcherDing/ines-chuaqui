@@ -39,7 +39,7 @@ const SignInForm = () => {
       dispatch(signInEmailPassAsync(formFields));
       resetFormFields();
     } catch (error) {
-      console.log("user sign in failed", error);
+      console.error("user sign in failed", error);
     }
   };
 

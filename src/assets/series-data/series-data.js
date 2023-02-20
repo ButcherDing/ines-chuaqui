@@ -2,7 +2,7 @@ export const SERIES_DATA = [
   {
     title: "Skull Series",
     blurb:
-      "This portrait-like series touches on the idea of 'Memento Mori' (a reminder of our death and the fleetingness of life). This idea is expressed using different symbols such as Spring or Summer flowers, or animal or bird skulls, which are then juxtaposed so as to merge life and death inseparably.",
+      "This portrait-like series touches on the idea of 'Memento Mori' (a reminder of our death and the fleetingness of life). This idea is expressed using different symbols such as Spring or Summer flowers, or animal or bird skulls, which are juxtaposed so as to merge life and death inseparably.",
     pieces: [
       {
         description: "",

@@ -22,15 +22,12 @@ export const Payment = () => {
 
   useEffect(() => {
     const paymentIntentHandler = async (cartItems: CartItem[]) => {
-      const { client_secret } = await fetchPaymentIntent(cartItems);
-      console.log("client secret in useEffect:", client_secret);
+      const client_secret = await fetchPaymentIntent(cartItems);
       if (!client_secret) return console.error("error fetching from stripe");
       setClientSecret(client_secret);
     };
     paymentIntentHandler(cartItems);
   }, [cartItems]);
-
-  console.log(clientSecret);
 
   return (
     <PaymentContainer>

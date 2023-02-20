@@ -21,12 +21,10 @@ export const fetchPaymentIntent = async (cartItems: CartItem[]) => {
     amount,
     paymentIntent: { client_secret },
   } = response;
-  console.log("client_secret:", client_secret);
-  return { client_secret, amount };
+  return client_secret;
 };
 
 export const fetchTotal = async (cartItems: CartItem[]) => {
-  console.log(cartItems);
   const response = await fetch("/.netlify/functions/fetch-total", {
     method: "post",
     headers: {
@@ -38,8 +36,6 @@ export const fetchTotal = async (cartItems: CartItem[]) => {
   if (response.statusCode === 400) throw new Error(response);
 
   const { total } = response;
-  console.log("got new total from server:", total);
-  console.log(response);
 
   return total;
 };

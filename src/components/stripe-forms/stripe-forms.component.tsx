@@ -51,9 +51,7 @@ const StripeForms: FC<StripeFormsProps> = () => {
     if (!elements || !stripe) return;
 
     const cardDetails = elements.getElement(PaymentElement);
-    console.log(cardDetails);
     const shippingDetails = elements.getElement(AddressElement);
-    console.log(shippingDetails);
 
     const { error } = await stripe.confirmPayment({
       //`Elements` instance that was used to create the Payment Element
@@ -65,7 +63,7 @@ const StripeForms: FC<StripeFormsProps> = () => {
     });
 
     if (error) {
-      console.log(error);
+      console.error(error);
       alert(error.message);
     } else {
       alert("payment complete");

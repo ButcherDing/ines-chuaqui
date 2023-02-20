@@ -43,7 +43,7 @@ const CartDropdown: FC<CartDropdownProps> = ({ closeClickHandler }) => {
         )}
       </CartItems>
 
-      <LeafButton onClick={goToCheckoutHandler}>Checkout</LeafButton>
+      <LeafButton onClick={goToCheckoutHandler}>Shopping Bag</LeafButton>
     </CartDropdownContainer>
   );
 };

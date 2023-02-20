@@ -30,7 +30,6 @@ const PaymentStatus = () => {
       //
       // [0]: https://stripe.com/docs/payments/payment-methods#payment-notification
       if (!paymentIntent) return;
-      console.log(paymentIntent);
       switch (paymentIntent.status) {
         case "succeeded":
           setMessage("Success! Payment received.");
