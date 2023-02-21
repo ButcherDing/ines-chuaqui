@@ -18,7 +18,6 @@ export const fetchPaymentIntent = async (cartItems: CartItem[]) => {
   if (response.statusCode === 400) throw new Error(response);
 
   const {
-    amount,
     paymentIntent: { client_secret },
   } = response;
   return client_secret;

@@ -30,19 +30,21 @@ export const Payment = () => {
   }, [cartItems]);
 
   return (
-    <PaymentContainer>
-      {clientSecret !== "" && (
-        <Elements stripe={stripePromise} options={options} key={clientSecret}>
-          <Routes>
-            <Route
-              path="/stripe"
-              element={<StripeForms clientSecret={clientSecret} />}
-            />
-            <Route path="/success/*" element={<CheckoutSuccess />} />
-          </Routes>
-        </Elements>
-      )}
-    </PaymentContainer>
+    <>
+      <PaymentContainer>
+        {clientSecret !== "" && (
+          <Elements stripe={stripePromise} options={options} key={clientSecret}>
+            <Routes>
+              <Route
+                path="/stripe"
+                element={<StripeForms clientSecret={clientSecret} />}
+              />
+              <Route path="/success/*" element={<CheckoutSuccess />} />
+            </Routes>
+          </Elements>
+        )}
+      </PaymentContainer>
+    </>
   );
 };
 

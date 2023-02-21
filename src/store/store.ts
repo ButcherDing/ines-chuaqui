@@ -52,13 +52,22 @@ export const store = configureStore({
     cart: persistedCartReducer,
     user: userReducer,
   },
-  middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware({
+  middleware: (getDefaultMiddleware) => {
+    const defaultMiddleWare = getDefaultMiddleware({
       serializableCheck: {
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
-    }).concat(logger),
+    });
+    if (process.env.NODE_ENV === "development") {
+      return defaultMiddleWare.concat(logger);
+    } else {
+      return defaultMiddleWare;
+    }
+  },
 });
+
+// .concat(logger)
+// process.env.NODE_ENV !== 'production' ?
 
 export const persistor = persistStore(store);
 

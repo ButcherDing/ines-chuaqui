@@ -10,6 +10,12 @@ const ShopDisplay = lazy(
 export const Shop = () => {
   return (
     <ShopContainer>
+      <p>
+        <em>
+          *** preview - for demonstration purposes only - please contact the
+          artist to order prints or originals ***
+        </em>
+      </p>
       <h1>Order Prints</h1>
       <Suspense fallback={<Spinner />}>
         <ShopDisplay />

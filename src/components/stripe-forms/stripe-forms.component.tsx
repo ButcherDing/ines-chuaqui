@@ -57,7 +57,10 @@ const StripeForms: FC<StripeFormsProps> = () => {
       //`Elements` instance that was used to create the Payment Element
       elements,
       confirmParams: {
-        return_url: "http://localhost:8888/payment/success/",
+        return_url:
+          process.env.NODE_ENV === "production"
+            ? "https://ines-chuaqui-preview.netlify.app/payment/success"
+            : "http://localhost:8888/payment/success/",
       },
       // receipt_email: email,
     });
@@ -86,6 +89,26 @@ const StripeForms: FC<StripeFormsProps> = () => {
   return (
     <>
       <StripeFormsContainer onSubmit={handleSubmit}>
+        <p style={{ width: "75%" }}>
+          <em>
+            *** preview - for demonstration and testing only - please contact
+            the artist to order prints or originals ***
+          </em>
+        </p>
+        {/* <p>
+          <em>
+            Please enter test card details from
+            <a
+              href="https://stripe.com/docs/testing"
+              target="_blank"
+              rel="noreferrer noopener"
+            >
+              {" "}
+              stripe
+            </a>{" "}
+            to test payment.
+          </em>
+        </p> */}
         <OrderSummary />
 
         <Forms>
@@ -98,7 +121,7 @@ const StripeForms: FC<StripeFormsProps> = () => {
               }}
               onChange={addressChangeHandler}
             />
-            {!user && (
+            {/* {!user && (
               <ContactForm onSubmit={handleSubmit}>
                 <FormInput
                   label="Email"
@@ -109,7 +132,7 @@ const StripeForms: FC<StripeFormsProps> = () => {
                   value={email}
                 />
               </ContactForm>
-            )}
+            )} */}
           </AddressFormContainer>
 
           <PaymentFormContainer>

@@ -24,6 +24,12 @@ const Cart = () => {
   return (
     <>
       <CheckoutContainer>
+        <p>
+          <em>
+            *** preview - for demonstration purposes only - please contact the
+            artist to order prints or originals ***
+          </em>
+        </p>
         <CheckoutHeaders>
           <HeaderBlock>Product</HeaderBlock>
           <HeaderBlock>Title</HeaderBlock>
