@@ -24,7 +24,7 @@ const Cart = () => {
   return (
     <>
       <CheckoutContainer>
-        <p>
+        <p style={{ textAlign: "center" }}>
           <em>
             *** preview - for demonstration purposes only - please contact the
             artist to order prints or originals ***
