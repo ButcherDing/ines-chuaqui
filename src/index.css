@@ -573,20 +573,25 @@ img.hoverShadow {
   border: 5px solid;
   border-color: #fff #fff transparent;
 }
-
+/* ///////////// */
 .test_img {
-  /* max-width: 90%; */
-  /* max-height: 90%; */
+  max-width: 100%;
+  max-height: 100%;
   margin-left: auto;
   margin-right: auto;
 }
 
 .div_img {
   display: flex;
-  width: 90vw;
-  height: 80vh;
+  max-width: 85vw;
+
+  padding: 0 2rem;
+  margin-right: auto;
+  margin-left: auto;
   place-items: center;
 }
+
+/* ///////////// */
 
 .closeIcon svg,
 .controls svg {
