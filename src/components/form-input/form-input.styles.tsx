@@ -42,7 +42,7 @@ export const Input = styled.input`
   margin: 0 0;
 
   &:focus {
-    outline: none;
+    /* outline: none; */
   }
 
   &:focus ~ ${FormInputLabel} {

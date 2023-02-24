@@ -28,7 +28,7 @@ export const ContactBox = styled.div`
   margin-bottom: 3.2rem;
 
   *:focus {
-    outline: none;
+    /* outline: none; */
     box-shadow: 0 0 0 0.5rem rgba(253, 242, 233, 0.8);
   }
 

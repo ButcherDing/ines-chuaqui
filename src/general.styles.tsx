@@ -132,10 +132,10 @@ html {
 }
 
 *:focus {
-  outline: none;
-  /* outline: 4px dotted ${primaryColor};
-  outline-offset: 8px; */
-  box-shadow:  0px 0px 5px 8px #e74d3caa;
+  /* outline: none; */
+  outline: 6px solid #3cd7e777;
+  outline-offset: -2px;
+  /* box-shadow: inset 0 0 3px 3px #e74d3c77; */
 }
 
 
