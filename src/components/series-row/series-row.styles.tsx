@@ -3,6 +3,8 @@ import styled from "styled-components";
 export const ShopRow = styled.div`
   display: flex;
   flex-wrap: wrap;
+  margin-left: auto;
+  margin-right: auto;
   width: 95%;
   justify-content: space-around;
   align-items: center;

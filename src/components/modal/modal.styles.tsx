@@ -13,23 +13,42 @@ export const ModalContainer = styled.div`
   z-index: 5;
 `;
 export const ModalContent = styled.div`
-  width: 50rem;
+  max-height: 90%;
   background-color: #fff;
   padding: 2.4rem;
   margin: 2.4rem;
 `;
 export const ModalHeader = styled.div`
+  max-height: 100vh;
+  max-width: 100vw;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   padding: 1rem;
   border-bottom: 0.1rem solid #eee;
+
+  @media (max-width: 34em) {
+    flex-direction: column-reverse;
+  }
+`;
+
+export const ModalTitle = styled.h2`
+  @media (max-width: 34em) {
+    font-size: 2.8rem;
+  }
 `;
 
 export const ProductThumbnail = styled.img`
-  width: 20%;
-  height: 20%;
+  height: 40%;
+  width: 40%;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   margin-left: 2.4rem;
+
+  @media (max-width: 34em) {
+    margin: 0;
+    height: 40%;
+    width: 40%;
+  }
 `;
 export const ModalBody = styled.div`
   padding: 1rem;

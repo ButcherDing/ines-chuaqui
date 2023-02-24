@@ -11,6 +11,7 @@ import {
   ModalContent,
   ModalFooter,
   ProductThumbnail,
+  ModalTitle,
 } from "./modal.styles";
 
 import { InvertedLeafButton } from "../button/button.styles";
@@ -33,7 +34,7 @@ const Modal: FC<ModalProps> = ({ closeModalHandler, piece }) => {
     <ModalContainer onClick={closeModalHandler}>
       <ModalContent onClick={(e) => e.stopPropagation()}>
         <ModalHeader>
-          <h2>{piece.title}</h2>
+          <ModalTitle>{piece.title}</ModalTitle>
           <ProductThumbnail src={piece.smallImageUrl} />
         </ModalHeader>
         {/* <ModalBody>
