@@ -584,10 +584,12 @@ img.hoverShadow {
 .div_img {
   display: flex;
   max-width: 85vw;
+  max-height: 90vh;
 
-  padding: 0 2rem;
+  padding: 0 2rem 2rem;
   margin-right: auto;
   margin-left: auto;
+  margin-bottom: 9rem;
   place-items: center;
 }
 
