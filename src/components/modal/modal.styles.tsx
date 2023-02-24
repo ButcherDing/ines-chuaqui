@@ -13,15 +13,15 @@ export const ModalContainer = styled.div`
   z-index: 5;
 `;
 export const ModalContent = styled.div`
-  max-height: 90%;
   background-color: #fff;
   padding: 2.4rem;
   margin: 2.4rem;
 `;
 export const ModalHeader = styled.div`
-  max-height: 100vh;
-  max-width: 100vw;
+  /* max-height: 100%;
+  max-width: 100%; */
   display: flex;
+  gap: 3.6rem;
   justify-content: space-between;
   align-items: center;
   padding: 1rem;
@@ -39,15 +39,15 @@ export const ModalTitle = styled.h2`
 `;
 
 export const ProductThumbnail = styled.img`
-  height: 40%;
-  width: 40%;
+  height: 30rem;
+  width: auto;
+  /* max-height: 30%;
+  max-width: auto; */
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  margin-left: 2.4rem;
 
   @media (max-width: 34em) {
-    margin: 0;
-    height: 40%;
-    width: 40%;
+    width: 10rem;
+    height: auto;
   }
 `;
 export const ModalBody = styled.div`
@@ -61,6 +61,7 @@ export const ModalFooter = styled.div`
 
 export const ModalButtons = styled.div`
   display: flex;
+  gap: 2.4rem;
   justify-content: space-between;
   align-items: center;
   margin-top: 2.5rem;
