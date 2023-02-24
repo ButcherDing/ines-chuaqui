@@ -22,7 +22,7 @@ Developer learning goals:
 - Contact Form
 - Checkout
 
-## Technologies
+## Tech / Libraries
 
 - Typescript, Javascript, HTML, CSS
 - React Redux Toolkit (v1.8.6)
