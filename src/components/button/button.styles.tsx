@@ -4,10 +4,6 @@ import {
   primaryShade,
   primaryTint,
   secondaryTint,
-  secondaryColor,
-  secondaryShade,
-  grey4,
-  grey1,
 } from "../../general.styles";
 import { SpinnerContainer } from "../spinner/spinner.styles";
 import { NavLink } from "react-router-dom";
@@ -199,8 +195,12 @@ export const BlackLeafButton = styled(LeafButton)`
   border: 1px solid black;
   padding: 1.2rem 3rem;
   margin: 2.4rem 1.6rem;
-  /* width: 50%; */
-  /* align-self: center; */
+
+  width: 30rem;
+  @media (max-width: 34rem) {
+    margin-left: auto;
+    margin-right: auto;
+  }
   :hover,
   :active {
     background-color: white;

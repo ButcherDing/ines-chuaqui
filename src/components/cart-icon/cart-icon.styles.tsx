@@ -17,7 +17,7 @@ export const CartIconContainer = styled.div`
   cursor: pointer;
 
   @media (max-width: 27em) {
-    right: 0rem;
+    right: -1.2rem;
   }
 
   /* @media (max-width: 23em) {

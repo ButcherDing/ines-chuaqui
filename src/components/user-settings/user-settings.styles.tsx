@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { fadeInFromTop } from "../../general.styles";
 import Button from "../button/button.component";
+import { BlackLeafButton } from "../button/button.styles";
 import FormInput from "../form-input/form-input.component";
 
 export const UserSettingsContainer = styled.div`
@@ -21,8 +22,19 @@ export const DashboardFormInput = styled(FormInput)`
 `;
 
 export const UserSettingsButton = styled(Button)`
-  margin: 0rem 2rem 4rem;
+  margin: 0rem 0rem 4rem;
   width: 75%;
-  justify-self: center;
-  /* max-width: max-content; */
+  justify-self: end;
+  @media (max-width: 50em) {
+    justify-self: center;
+  }
+`;
+
+export const DeleteButton = styled(BlackLeafButton)`
+  margin: 2rem 0rem 4rem;
+  justify-self: start;
+  width: 75%;
+  @media (max-width: 50em) {
+    justify-self: center;
+  }
 `;

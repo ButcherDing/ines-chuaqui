@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import background from "../../assets/img/compressed-lg/hero.jpg";
-import { primaryShade, globalPadding } from "../../general.styles";
+import { primaryShade } from "../../general.styles";
 
 // export const HeroContainer = styled.div`
 //   width: 105%;
@@ -9,7 +9,7 @@ import { primaryShade, globalPadding } from "../../general.styles";
 export const HeroImage = styled.div`
   width: 100vw;
   position: relative;
-  right: ${globalPadding}rem;
+  right: 0.8rem;
   min-height: 100vh;
   background-image: linear-gradient(
       to right,

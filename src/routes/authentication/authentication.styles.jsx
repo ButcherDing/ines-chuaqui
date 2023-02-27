@@ -16,6 +16,11 @@ export const AuthenticationContainer = styled.div`
   @media (max-width: 50em) {
     flex-direction: column;
   }
+  @media (max-width: 34em) {
+    box-shadow: none;
+    margin: 0.8rem;
+    padding: 0.8rem;
+  }
 `;
 
 export const NotSignedIn = styled.div`

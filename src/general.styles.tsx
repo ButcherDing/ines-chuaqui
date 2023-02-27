@@ -94,7 +94,6 @@ export const grey5 = "#333";
 export const mainTextColor = primaryShade;
 export const titleTextColor = primaryShade;
 
-export const globalPadding = 2.4;
 export const fadeInAnimation = "0.3s ease-out 0s 1 fadeIn";
 export const fadeInFromTop = "0.3s ease-out 0s 1 fadeInFromTop";
 
@@ -142,7 +141,7 @@ html {
 body {
   box-sizing: border-box;
   width: 100vw;
-  padding: 0rem ${globalPadding}rem;
+  padding: 0rem .8rem;
   overflow-x: clip;
   margin: 0;
   color: ${primaryShade};
