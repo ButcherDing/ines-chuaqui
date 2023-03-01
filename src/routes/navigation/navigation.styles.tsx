@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import background from "../../assets/img/compressed-lg/IND001-Magical-Journeys.jpg";
+import background from "../../assets/img/hero.jpg";
 
 import { primaryShade } from "../../general.styles";
 
