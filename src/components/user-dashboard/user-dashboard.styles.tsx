@@ -27,7 +27,7 @@ export const DashboardContainer = styled.div`
 `;
 
 export const UserHeader = styled.h4`
-  margin: 0rem 0rem 1.6rem;
+  margin: 1.2rem 1.2rem 1.6rem;
 `;
 
 export const SettingsCol = styled.div`
@@ -37,6 +37,9 @@ export const SettingsCol = styled.div`
   justify-content: start;
   gap: 2rem;
   margin-top: 3rem;
+  @media (max-width: 34rem) {
+    align-items: center;
+  }
 `;
 
 export const SettingsDropdownButton = styled(LeafButton)`
@@ -46,11 +49,12 @@ export const SettingsDropdownButton = styled(LeafButton)`
 `;
 export const DashboardSignOutButton = styled(SignOutButton)`
   width: 25rem;
+  justify-self: end;
 `;
 
 export const HeaderContainer = styled.div`
-  /* display: flex;
-  justify-content: space-between; */
+  display: flex;
+  justify-content: center;
   margin: none;
 `;
 

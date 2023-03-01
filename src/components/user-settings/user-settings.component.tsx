@@ -15,6 +15,7 @@ import {
   UserSettingsContainer,
   DashboardFormInput,
   UserSettingsButton,
+  DeleteButton,
 } from "./user-settings.styles";
 
 const defaultFormFields = {
@@ -128,9 +129,9 @@ export const UserSettings: FC<UserSettingsProps> = ({ currentUser }) => {
           value={formFields.confirmDelete}
         />
       )}
-      <BlackLeafButton onClick={deleteAccountAsyncHandler}>
+      <DeleteButton onClick={deleteAccountAsyncHandler}>
         Delete account
-      </BlackLeafButton>
+      </DeleteButton>
       <>
         {errorMessage && (
           <div style={{ color: "red" }}>{`error: ${errorMessage}`}</div>

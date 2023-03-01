@@ -2,15 +2,16 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import background from "../../assets/img/compressed-lg/IND001-Magical-Journeys.jpg";
 
-import { globalPadding, primaryShade } from "../../general.styles";
+import { primaryShade } from "../../general.styles";
 
 export const NavigationContainer = styled.div`
   position: sticky;
+  /* width: 100vw; */
   top: -10.9rem;
   display: flex;
   align-content: center;
   flex-direction: column;
-  margin: 0 ${-globalPadding}rem;
+  margin: 0;
   background-image: linear-gradient(
       to right,
       #ffffff,

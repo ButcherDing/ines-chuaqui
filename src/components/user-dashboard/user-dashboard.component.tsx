@@ -39,8 +39,8 @@ export const UserDashboard = () => {
       <HeaderContainer>
         <UserHeader>
           Hi, <Underlined>{currentUser.displayName}</Underlined>.
+          <p>✉ {currentUser.email}</p>
         </UserHeader>
-        <span>✉ {currentUser.email}</span>
       </HeaderContainer>
       <SettingsCol>
         <SettingsDropdownButton onClick={showHistoryToggler}>
@@ -54,10 +54,10 @@ export const UserDashboard = () => {
           <Caret className={showUserSettings ? "rotate" : ""} />
         </SettingsDropdownButton>
         {showUserSettings && <UserSettings currentUser={currentUser} />}
+        <DashboardSignOutButton onClick={signOutAsyncHandler}>
+          Sign Out
+        </DashboardSignOutButton>
       </SettingsCol>
-      <DashboardSignOutButton onClick={signOutAsyncHandler}>
-        Sign Out
-      </DashboardSignOutButton>
     </DashboardContainer>
   );
 };
