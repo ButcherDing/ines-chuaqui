@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import background from "../../assets/img/compressed-lg/hero.jpg";
+import background from "../../assets/img/hero.jpg";
 import { primaryShade } from "../../general.styles";
 
 // export const HeroContainer = styled.div`

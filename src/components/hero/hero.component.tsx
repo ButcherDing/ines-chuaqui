@@ -8,7 +8,6 @@ import {
 import {
   ArtistDescriptionContainer,
   ArtistDescription,
-  // HeroImg,
   HeroImage,
   NameTitle,
   BlurbHeading,
