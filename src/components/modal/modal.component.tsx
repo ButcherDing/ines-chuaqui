@@ -4,7 +4,6 @@ import { Piece } from "../../store/gallery/gallery.slice";
 import { useAppDispatch, useAppSelector } from "../../store/hooks/hooks";
 
 import {
-  ModalBody,
   ModalContainer,
   ModalButtons,
   ModalHeader,
