@@ -2,7 +2,6 @@
 --- 01 TYPOGRAPHY SYSTEM
 - Custom Fonts
 font-family: 'Roboto Flex', sans-serif;
-font-family: 'Roboto Serif', serif;
 
 - Font sizes (px)
 10 / 12 / 14 / 16 / 18 / 20 / 24 / 30 / 36 / 44 / 52 / 62 / 74 / 86 / 98
