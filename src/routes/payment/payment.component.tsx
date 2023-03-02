@@ -6,10 +6,10 @@ import {
   stripePromise,
 } from "../../utils/stripe/stripe.utils";
 
-import { useAppDispatch, useAppSelector } from "../../store/hooks/hooks";
+import { useAppSelector } from "../../store/hooks/hooks";
 import { CartItem } from "../../store/cart/cart.slice";
 
-import StripeForms from "../../components/stripe-forms/stripe-forms.component";
+import StripeForms from "../../components/checkout/checkout.component";
 import { PaymentContainer } from "./payment.styles";
 import { Route, Routes } from "react-router-dom";
 import CheckoutSuccess from "../checkout-success/checkout-success.component";

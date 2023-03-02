@@ -2,8 +2,8 @@ import { FC } from "react";
 // not a great solution: TCartItem
 import { CartItem as TCartItem } from "../../store/cart/cart.slice";
 import {
-  CartItemContainer,
-  CartItemImage,
+  CartItemCardContainer,
+  CartItemCardImage,
   ItemDetails,
 } from "./cart-item-card.styles";
 
@@ -11,20 +11,20 @@ type CartItemProps = {
   cartItem: TCartItem;
 };
 
-const CartItem: FC<CartItemProps> = ({ cartItem }) => {
+const CartItemCard: FC<CartItemProps> = ({ cartItem }) => {
   const { title, smallImageUrl, quantity, printType } = cartItem;
 
   return (
-    <CartItemContainer>
-      <CartItemImage src={smallImageUrl} alt={title}></CartItemImage>
+    <CartItemCardContainer>
+      <CartItemCardImage src={smallImageUrl} alt={title}></CartItemCardImage>
       <ItemDetails>
         <span>{title}</span>
         <span>
-          {quantity} x ${printType.price}
+          {quantity} ● {printType.size}
         </span>
       </ItemDetails>
-    </CartItemContainer>
+    </CartItemCardContainer>
   );
 };
 
-export default CartItem;
+export default CartItemCard;

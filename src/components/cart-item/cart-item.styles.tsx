@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { primaryShade } from "../../general.styles";
 
-export const CheckoutItemContainer = styled.div`
+export const CartItemContainer = styled.div`
   width: 100%;
   display: grid;
   grid-template-columns: repeat(6, 1fr);
@@ -14,20 +14,19 @@ export const CheckoutItemContainer = styled.div`
   /* gap: 1.5rem; */
 `;
 
-export const CheckoutImageContainer = styled.div`
+export const CartItemImageContainer = styled.div`
   display: flex;
-  width: 100%;
+  height: 12rem;
   justify-content: center;
   /* padding-right: 15px; */
 
   img {
-    min-width: 50%;
-    width: 90%;
+    max-width: 90%;
     height: 100%;
   }
 `;
 
-export const CheckoutItemDetail = styled.span`
+export const CartItemDetail = styled.span`
   margin: 1rem;
 
   @media (max-width: 50em) {

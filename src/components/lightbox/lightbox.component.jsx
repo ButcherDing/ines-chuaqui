@@ -1,10 +1,6 @@
-import { useEffect } from "react";
-
 import "../../index.css";
 import "./lightbox.styles.scss";
-import { SlideshowLightbox, initLightboxJS } from "lightbox.js-react";
-
-// where should we use our selectors? best practices
+import { SlideshowLightbox } from "lightbox.js-react";
 
 export const Lightbox = ({ series }) => {
   return (
@@ -21,6 +17,7 @@ export const Lightbox = ({ series }) => {
             src={piece.largeImageUrl}
             key={piece.title}
             alt={`a painting called` + piece.title}
+            caption={`${piece.title}`}
           />
         ))}
       </SlideshowLightbox>

@@ -27,11 +27,22 @@ const CartIcon = () => {
     handleContainerClick(event);
   };
 
+  const enterKeyHandler = (event: React.KeyboardEvent<HTMLElement>) => {
+    if (event.key === "Enter") setIsCartOpen(!isCartOpen);
+    console.log("enter pressed");
+  };
+
   return (
-    <CartIconContainer onClick={iconClickHandler} ref={ref}>
+    <CartIconContainer
+      role={"button"}
+      tabIndex={0}
+      onClick={iconClickHandler}
+      onKeyDown={enterKeyHandler}
+      ref={ref}
+    >
       <ShoppingIcon className="shopping-icon" />
       <ItemCount className="item-count">{cartCount}</ItemCount>
-      <div onClick={handleContainerClick}>
+      <div onClick={handleContainerClick} onKeyDown={enterKeyHandler}>
         {isCartOpen && <CartDropdown closeClickHandler={handleClickOutside} />}
       </div>
     </CartIconContainer>

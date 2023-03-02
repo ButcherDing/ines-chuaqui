@@ -81,9 +81,7 @@ export const gallerySlice = createSlice({
   },
 });
 
-export const {
-  /*setCurSlideIndex, setCurSeriesIndex */
-} = gallerySlice.actions;
+// export const { setCurSlideIndex, setCurSeriesIndex } = gallerySlice.actions;
 // export const selectCount = (state: RootState) => state.gallery.curSlideIndex
 
 export default gallerySlice.reducer;

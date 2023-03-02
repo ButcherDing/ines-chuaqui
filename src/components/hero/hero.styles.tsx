@@ -1,30 +1,45 @@
 import styled from "styled-components";
-import background from "../../assets/img/hero.jpg";
 import { primaryShade } from "../../general.styles";
+import { LeafButton } from "../button/button.styles";
+import placeholder from "../../assets/img/heroLazy.jpg";
 
 // export const HeroContainer = styled.div`
 //   width: 105%;
 // `;
 
-export const HeroImage = styled.div`
+type HeroImageProps = {
+  loaded: string | null;
+};
+
+export const GradientContainer = styled.div`
+  background: linear-gradient(
+    to right,
+    #fffffff5,
+    #fffffff5,
+    #fffffff5,
+    #ffffffdd,
+    #ffffffbb,
+    #ffffff55,
+    rgba(255, 255, 255, 0)
+  );
+  @media (max-width: 50em) {
+    background: none;
+  }
+`;
+
+export const HeroImage = styled.div<HeroImageProps>`
+  display: flex;
+  flex-direction: column;
   width: 100vw;
   position: relative;
   right: 0.8rem;
   min-height: 100vh;
-  background-image: linear-gradient(
-      to right,
-      rgb(255, 255, 255),
-      #fffffff5,
-      #ffffffd7,
-      #ffffffb9,
-      #ffffff65,
-      rgba(255, 255, 255, 0)
-    ),
-    url(${background});
+  background-image: url(${(props) => props.loaded || placeholder});
 
   background-size: cover;
   overflow: hidden;
   @media (max-width: 27em) {
+    background-image: none;
     background-image: linear-gradient(
         to bottom,
         rgb(255, 255, 255),
@@ -37,10 +52,7 @@ export const HeroImage = styled.div`
         #ffffffc5,
         #ffffffb5
       ),
-      url(${background});
-  }
-  @media (max-width: 50em) {
-    background-image: url(${background});
+      url(${(props) => props.loaded || placeholder});
   }
 `;
 
@@ -78,12 +90,12 @@ export const Subtitle = styled.p`
 
 export const Spacer = styled.div`
   @media (max-width: 50em) {
-    height: 10rem;
+    height: 8rem;
   }
 `;
 export const ArtistDescriptionGradient = styled(GradientWrapper)`
   @media (max-width: 50em) {
-    padding-bottom: 2.4rem;
+    padding-bottom: 0.4rem;
     background: linear-gradient(
       to bottom,
 
@@ -109,10 +121,9 @@ export const ArtistDescriptionContainer = styled.div`
   width: 50%;
   display: flex;
   flex-direction: column;
-  padding-bottom: 3.2rem;
+  padding: 1.2rem 0 6.4rem;
   align-items: center;
-  /* margin-top: 2rem; */
-  margin: 3rem 0 0 3.2rem;
+  margin-left: 3.6rem;
 
   @media (max-width: 50em) {
     width: 80%;
@@ -124,16 +135,37 @@ export const ArtistDescriptionContainer = styled.div`
     margin-left: 1.2rem;
   }
 `;
-export const BlurbHeading = styled.h3`
-  padding-bottom: 0.2rem;
-  /* text-decoration: underline; */
-  border-bottom: 0.2rem solid ${primaryShade}22;
-  width: 95%;
-  align-self: start;
+export const BlurbHeading = styled.h2`
+  color: ${primaryShade};
+  letter-spacing: 0.8rem;
+  font-size: 2rem;
+  text-transform: uppercase;
+  font-weight: 300;
+  padding-bottom: 0.1rem;
+  margin-bottom: 2rem;
+  width: 100%;
+
+  position: relative;
+
+  &::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    width: 100%;
+    left: 0;
+    height: 1px;
+    border-radius: 2rem;
+    background: linear-gradient(90deg, ${primaryShade}, transparent 80%);
+  }
 `;
 export const ArtistDescription = styled.p`
   width: 100%;
-
   line-height: 2;
-  margin-bottom: 3.2rem;
+`;
+
+export const EnterButton = styled(LeafButton)`
+  /* align-self: center; */
+  position: relative;
+  margin: 0 auto 3.6rem;
+  top: -3.6rem;
 `;

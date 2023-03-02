@@ -49,6 +49,7 @@ export const Navigation = () => {
               </NavLink>
             )}
           </NavLinksContainer>
+
           <CartIcon />
         </NavBar>
       </NavigationContainer>

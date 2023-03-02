@@ -1,13 +1,12 @@
-import { useEffect, useRef, FC } from "react";
+import { FC } from "react";
 
 import "./cart-dropdown.styles";
-import Button from "../button/button.component";
 
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 import { CartItem, selectCartItems } from "../../store/cart/cart.slice";
-import CartItemCard from "../cart-item/cart-item-card.component";
+import CartItemCard from "../cart-item-card/cart-item-card.component";
 import {
   CartDropdownContainer,
   CartItems,

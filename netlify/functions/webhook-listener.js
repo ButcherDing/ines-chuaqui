@@ -18,7 +18,8 @@ exports.handler = async ({ body, headers }) => {
       const items = eventObject.display_items;
       const shippingDetails = eventObject.shipping;
 
-      // Send and email to our fulfillment provider using Sendgrid.
+      // Send and email to Sendgrid.
+
       // const purchase = { items, shippingDetails };
       // const msg = {
       //   to: process.env.FULFILLMENT_EMAIL_ADDRESS,

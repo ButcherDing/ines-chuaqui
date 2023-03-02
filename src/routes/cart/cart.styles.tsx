@@ -1,21 +1,26 @@
 import styled from "styled-components";
 import { fadeInAnimation, primaryShade } from "../../general.styles";
 
-export const CheckoutContainer = styled.div`
+export const CartContainer = styled.div`
   min-width: 32rem;
   min-height: 90vh;
+  max-width: 100rem;
+  margin: auto;
+
+  align-self: center;
+
   display: flex;
   flex-direction: column;
   /* justify-items: center; */
-  margin: 5rem 2.5rem;
+  padding: 5rem 2.5rem;
   animation: ${fadeInAnimation};
 
   @media (max-width: 75em) {
-    margin: 5rem 0rem;
+    margin: auto;
   }
 `;
 
-export const CheckoutHeaders = styled.div`
+export const CartHeaders = styled.div`
   width: 100%;
   padding: 1.5rem 0rem;
   display: grid;

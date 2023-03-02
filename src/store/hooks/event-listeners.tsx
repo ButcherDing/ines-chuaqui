@@ -42,10 +42,11 @@ export const useOutsideClick = (callback: () => void) => {
 
   useEffect(() => {
     const handleClick = (event: MouseEvent): void => {
-      // const checkedIfNode = assertIsNode(event.target);
+      const checkedIfNode = assertIsNode(event.target);
       if (ref.current && !ref.current.contains(event.target as Node)) {
         callback();
       }
+      // unsure why we still get a type error after our assertion above. We are indeed checking, though, and can safely do "as Node"
     };
 
     document.addEventListener("click", handleClick, true);
@@ -53,7 +54,7 @@ export const useOutsideClick = (callback: () => void) => {
     return () => {
       document.removeEventListener("click", handleClick, true);
     };
-  }, [ref]);
+  }, [ref, callback]);
 
   return ref;
 };

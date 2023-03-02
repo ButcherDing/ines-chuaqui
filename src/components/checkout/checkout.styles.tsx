@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import Button from "../button/button.component";
+import { LeafButton } from "../button/button.styles";
 
-export const StripeFormsContainer = styled.form`
+export const CheckoutContainer = styled.form`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -9,10 +9,12 @@ export const StripeFormsContainer = styled.form`
   margin: 2rem 0rem 4rem;
 `;
 
-export const PaymentButton = styled(Button)`
-  margin-left: auto;
-  margin-top: 3.2rem;
-  padding: 2rem;
+export const PaymentButton = styled(LeafButton)`
+  padding: 1.6rem;
+  font-size: 2rem;
+  @media (max-width: 34em) {
+    margin: auto;
+  }
 `;
 
 export const PaymentTitle = styled.h2`
@@ -27,12 +29,7 @@ export const Forms = styled.div`
     flex-direction: column;
   }
 `;
-export const AddressFormContainer = styled.div`
-  /* display: flex;
-  flex-direction: column; */
-`;
+export const AddressFormContainer = styled.div``;
 export const PaymentFormContainer = styled.div`
-  /* display: flex;
-  flex-direction: column; */
   margin-bottom: 2.4rem;
 `;

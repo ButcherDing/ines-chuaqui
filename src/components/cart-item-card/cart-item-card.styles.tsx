@@ -1,14 +1,16 @@
 import styled from "styled-components";
 
-export const CartItemContainer = styled.div`
+export const CartItemCardContainer = styled.div`
   width: 100%;
   display: flex;
   height: 80px;
   margin-bottom: 15px;
 `;
 
-export const CartItemImage = styled.img`
-  width: 30%;
+export const CartItemCardImage = styled.img`
+  height: auto;
+  width: 100%;
+  max-width: 5rem;
 `;
 export const ItemDetails = styled.div`
   width: 70%;

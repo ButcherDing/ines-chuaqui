@@ -6,22 +6,21 @@ import {
 } from "@stripe/react-stripe-js";
 import {
   AddressFormContainer,
+  CheckoutContainer,
   Forms,
+  PaymentButton,
   PaymentFormContainer,
-  StripeFormsContainer,
-} from "./stripe-forms.styles";
+} from "./checkout.styles";
 import { useAppDispatch, useAppSelector } from "../../store/hooks/hooks";
 import { selectCartTotal } from "../../store/cart/cart.slice";
-import { LeafButton } from "../button/button.styles";
 import OrderSummary from "../order-summary/order-summary.component";
 import { FC, FormEvent, useState } from "react";
 import { StripeAddressElementChangeEvent } from "@stripe/stripe-js";
 import FormInput from "../form-input/form-input.component";
 import { ChangeEvent } from "react";
 import { ContactForm } from "../../routes/contact/contact.styles";
-import { getCurrentUser } from "../../utils/firebase/firebase.utils";
 
-export type StripeFormsProps = {
+export type CheckoutProps = {
   clientSecret: string;
 };
 
@@ -29,7 +28,7 @@ const defaultFormFields = {
   email: "",
 };
 
-const StripeForms: FC<StripeFormsProps> = () => {
+const Checkout: FC<CheckoutProps> = () => {
   const dispatch = useAppDispatch();
   const user = useAppSelector((state) => state.user.currentUser);
   const cartTotal = useAppSelector(selectCartTotal);
@@ -70,7 +69,7 @@ const StripeForms: FC<StripeFormsProps> = () => {
       alert(error.message);
     } else {
       alert("payment complete");
-      // Your customer will be redirected to your `return_url`. For some payment
+      // customer will be redirected to your `return_url`. For some payment
       // methods like iDEAL, your customer will be redirected to an intermediate
       // site first to authorize the payment, then redirected to the `return_url`.
     }
@@ -83,32 +82,16 @@ const StripeForms: FC<StripeFormsProps> = () => {
       // potentially do a thing
     }
   };
-  // TODO - do a thing when the event completes?
-  // TODO: get stripe shipping info into firebase
 
   return (
     <>
-      <StripeFormsContainer onSubmit={handleSubmit}>
+      <CheckoutContainer onSubmit={handleSubmit}>
         <p style={{ width: "75%" }}>
           <em>
             *** preview - for demonstration and testing only - please contact
             the artist to order prints or originals ***
           </em>
         </p>
-        {/* <p>
-          <em>
-            Please enter test card details from
-            <a
-              href="https://stripe.com/docs/testing"
-              target="_blank"
-              rel="noreferrer noopener"
-            >
-              {" "}
-              stripe
-            </a>{" "}
-            to test payment.
-          </em>
-        </p> */}
         <OrderSummary />
 
         <Forms>
@@ -121,7 +104,9 @@ const StripeForms: FC<StripeFormsProps> = () => {
               }}
               onChange={addressChangeHandler}
             />
-            {/* {!user && (
+            {/* 
+            FOR COLLECTING EMAIL IF NECCESSARY
+            {!user && (
               <ContactForm onSubmit={handleSubmit}>
                 <FormInput
                   label="Email"
@@ -139,15 +124,15 @@ const StripeForms: FC<StripeFormsProps> = () => {
             <h4>Payment Details</h4>
             <PaymentElement />
           </PaymentFormContainer>
-          <LeafButton disabled={cartTotal === 0 || isProcessingPayment}>
-            Pay now
-          </LeafButton>
+          <PaymentButton disabled={cartTotal === 0 || isProcessingPayment}>
+            submit payment
+          </PaymentButton>
         </Forms>
-      </StripeFormsContainer>
+      </CheckoutContainer>
     </>
   );
 };
 
 // caution - any button inside FormContainer will be a submission button!
 
-export default StripeForms;
+export default Checkout;

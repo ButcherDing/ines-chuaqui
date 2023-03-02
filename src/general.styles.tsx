@@ -158,6 +158,7 @@ p {
   /* color: ${altPrimaryShade}; */
   line-height: 1.5;
   font-size: 2rem;
+  font-weight: 400;
   @media (max-width: 50em) {
     font-size: 1.8rem;
   }
@@ -203,6 +204,7 @@ h1 {
 
 h2 {
   font-size: 4.4rem;
+  font-weight: 300;
 
   @media (max-width: 50em) {
     font-size: 4.4rem;
@@ -254,6 +256,7 @@ h3 {
 
 h4 {
   font-size: 3.6rem;
+  font-weight: 300;
 
   @media (max-width: 50em) {
     font-size: 3rem;
@@ -285,6 +288,7 @@ h5 {
   } */
 }
 a, button {
+  
   text-decoration: none;
 }
 
