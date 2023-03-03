@@ -1,15 +1,8 @@
 import styled from "styled-components";
 import { primaryShade } from "../../general.styles";
 import { LeafButton } from "../button/button.styles";
-import placeholder from "../../assets/img/heroLazy.jpg";
 
-// export const HeroContainer = styled.div`
-//   width: 105%;
-// `;
-
-type HeroImageProps = {
-  loaded: string | null;
-};
+import heroImg from "../../assets/img/hero.jpg";
 
 export const GradientContainer = styled.div`
   background: linear-gradient(
@@ -27,14 +20,14 @@ export const GradientContainer = styled.div`
   }
 `;
 
-export const HeroImage = styled.div<HeroImageProps>`
+export const HeroImage = styled.div`
   display: flex;
   flex-direction: column;
   width: 100vw;
   position: relative;
   right: 0.8rem;
   min-height: 100vh;
-  background-image: url(${(props) => props.loaded || placeholder});
+  background-image: url(${heroImg});
 
   background-size: cover;
   overflow: hidden;
@@ -52,7 +45,7 @@ export const HeroImage = styled.div<HeroImageProps>`
         #ffffffc5,
         #ffffffb5
       ),
-      url(${(props) => props.loaded || placeholder});
+      url(${heroImg});
   }
 `;
 
