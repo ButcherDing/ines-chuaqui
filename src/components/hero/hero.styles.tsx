@@ -1,15 +1,12 @@
 import styled from "styled-components";
 import { primaryShade } from "../../general.styles";
 import { LeafButton } from "../button/button.styles";
-import heroImg from "../../assets/img/hero.jpg";
 
-// export const HeroContainer = styled.div`
-//   width: 105%;
-// `;
+export const HeroContainer = styled.div``;
 
 export const RightGradientContainer = styled.div`
   height: 100vh;
-  overflow: scroll;
+  overflow-y: scroll;
   background: linear-gradient(
     to right,
     rgba(255, 255, 255, 0.821),
@@ -20,22 +17,6 @@ export const RightGradientContainer = styled.div`
   );
   @media (max-width: 50em) {
     background: none;
-  }
-`;
-
-export const HeroImage = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 100vw;
-  position: relative;
-  right: 0.8rem;
-  min-height: 100vh;
-  background-image: url(${heroImg});
-
-  background-size: cover;
-  overflow: hidden;
-  @media (max-width: 27em) {
-    background-image: url(${heroImg});
   }
 `;
 

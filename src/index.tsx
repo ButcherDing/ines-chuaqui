@@ -15,8 +15,6 @@ import { persistor, store } from "./store/store";
 import { PersistGate } from "redux-persist/lib/integration/react";
 import Spinner from "./components/spinner/spinner.component";
 
-import ContactSuccess from "./routes/contact-success/contact-success.component";
-
 const Home = lazy(() => import("./routes/home/home.component"));
 const Gallery = lazy(() => import("./routes/gallery/gallery.component"));
 const Shop = lazy(() => import("./routes/shop/shop.component"));
@@ -29,6 +27,9 @@ const Navigation = lazy(
 const Cart = lazy(() => import("./routes/cart/cart.component"));
 const Payment = lazy(() => import("./routes/payment/payment.component"));
 const Contact = lazy(() => import("./routes/contact/contact.component"));
+const ContactSuccess = lazy(
+  () => import("./routes/contact-success/contact-success.component")
+);
 
 const container = document.getElementById("root")!;
 const root = createRoot(container);
