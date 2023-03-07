@@ -20,8 +20,6 @@ import background from "../../assets/img/hero.jpg";
 // ok, make a prop for hero component
 
 const Hero = () => {
-  const loaded = useProgressiveImage(background);
-
   return (
     <>
       <HeroImage>

@@ -25,6 +25,15 @@ export const DashboardContainer = styled.div`
   width: 100%;
   margin-bottom: 2rem;
 `;
+export const HeaderContainer = styled.div`
+  display: flex;
+  justify-content: start;
+  margin: none;
+
+  @media (max-width: 34rem) {
+    justify-content: center;
+  } ;
+`;
 
 export const UserHeader = styled.h4`
   margin: 1.2rem 1.2rem 1.6rem;
@@ -50,12 +59,6 @@ export const SettingsDropdownButton = styled(LeafButton)`
 export const DashboardSignOutButton = styled(SignOutButton)`
   width: 25rem;
   justify-self: end;
-`;
-
-export const HeaderContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  margin: none;
 `;
 
 export const Underlined = styled.span`
