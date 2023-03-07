@@ -2,8 +2,8 @@ import { Link } from "react-router-dom";
 import {
   ArtistDescriptionGradient,
   EnterButton,
-  GradientContainer,
-  GradientWrapper,
+  RightGradientContainer,
+  HeaderGradient,
   HeroImage,
   Spacer,
   Subtitle,
@@ -24,12 +24,12 @@ const Hero = () => {
 
   return (
     <>
-      <HeroImage loaded={loaded}>
-        <GradientContainer>
-          <GradientWrapper>
+      <HeroImage>
+        <RightGradientContainer>
+          <HeaderGradient>
             <NameTitle>Ines Chuaqui</NameTitle>
             <Subtitle>Mixed Media / Design</Subtitle>
-          </GradientWrapper>
+          </HeaderGradient>
           <ArtistDescriptionGradient>
             <Spacer />
             <ArtistDescriptionContainer>
@@ -49,12 +49,12 @@ const Hero = () => {
                 textures and elemental moods in the natural environment and
                 strives to express these in her work.
               </ArtistDescription>
+              <Link to="/gallery">
+                <EnterButton>Explore Work</EnterButton>
+              </Link>
             </ArtistDescriptionContainer>
           </ArtistDescriptionGradient>
-          <Link to="/gallery">
-            <EnterButton>Explore Work</EnterButton>
-          </Link>
-        </GradientContainer>
+        </RightGradientContainer>
       </HeroImage>
     </>
   );

@@ -1,25 +1,21 @@
 import styled from "styled-components";
 import { primaryShade } from "../../general.styles";
 import { LeafButton } from "../button/button.styles";
-import placeholder from "../../assets/img/heroLazy.jpg";
+import heroImg from "../../assets/img/hero.jpg";
 
 // export const HeroContainer = styled.div`
 //   width: 105%;
 // `;
 
-type HeroImageProps = {
-  loaded: string | null;
-};
-
-export const GradientContainer = styled.div`
+export const RightGradientContainer = styled.div`
+  height: 100vh;
+  overflow: scroll;
   background: linear-gradient(
     to right,
-    #fffffff5,
-    #fffffff5,
-    #fffffff5,
-    #ffffffdd,
-    #ffffffbb,
-    #ffffff55,
+    rgba(255, 255, 255, 0.821),
+    rgba(255, 255, 255, 0.821),
+    rgba(255, 255, 255, 0.821),
+    #ffffff14,
     rgba(255, 255, 255, 0)
   );
   @media (max-width: 50em) {
@@ -27,41 +23,29 @@ export const GradientContainer = styled.div`
   }
 `;
 
-export const HeroImage = styled.div<HeroImageProps>`
+export const HeroImage = styled.div`
   display: flex;
   flex-direction: column;
   width: 100vw;
   position: relative;
   right: 0.8rem;
   min-height: 100vh;
-  background-image: url(${(props) => props.loaded || placeholder});
+  background-image: url(${heroImg});
 
   background-size: cover;
   overflow: hidden;
   @media (max-width: 27em) {
-    background-image: none;
-    background-image: linear-gradient(
-        to bottom,
-        rgb(255, 255, 255),
-        rgba(255, 255, 255, 0.679),
-        #ffffff05,
-        #ffffffec,
-        #ffffffec,
-        #ffffffe5,
-        #ffffffd5,
-        #ffffffc5,
-        #ffffffb5
-      ),
-      url(${(props) => props.loaded || placeholder});
+    background-image: url(${heroImg});
   }
 `;
 
-export const GradientWrapper = styled.div`
+export const HeaderGradient = styled.div`
   @media (max-width: 50em) {
-    padding-bottom: 9.6rem;
+    padding-bottom: 12rem;
     background: linear-gradient(
       to bottom,
       rgb(255, 255, 255),
+      rgba(255, 255, 255, 0.781),
       rgba(255, 255, 255, 0.781),
       rgba(255, 255, 255, 0.781),
       rgba(255, 255, 255, 0.39),
@@ -93,7 +77,7 @@ export const Spacer = styled.div`
     height: 8rem;
   }
 `;
-export const ArtistDescriptionGradient = styled(GradientWrapper)`
+export const ArtistDescriptionGradient = styled(HeaderGradient)`
   @media (max-width: 50em) {
     padding-bottom: 0.4rem;
     background: linear-gradient(
@@ -165,7 +149,7 @@ export const ArtistDescription = styled.p`
 
 export const EnterButton = styled(LeafButton)`
   /* align-self: center; */
-  position: relative;
-  margin: 0 auto 3.6rem;
-  top: -3.6rem;
+  /* position: relative; */
+  margin: 2.4rem auto 3.6rem;
+  /* top: -3.6rem; */
 `;
