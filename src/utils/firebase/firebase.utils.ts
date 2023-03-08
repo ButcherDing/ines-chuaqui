@@ -94,23 +94,22 @@ export const getDocumentFromFirebase = async (
 };
 
 export type ObjectToAdd = {
-  title: string;
+  dbDocumentKey: string;
 };
 // Object.keys(DocFieldsObj).forEach(v => DocFieldsObj[v]= deleteField())
 
-// note: extends, not 'is'.
 export const addCollectionAndDocuments = async <T extends ObjectToAdd>(
   collectionKey: string,
   objectsToAdd: T[]
 ): Promise<void> => {
-  // where is the db, which collection? Apparently it creates one even if it doesn't exist.
+  // where is the db, which collection? It creates one even if it doesn't exist.
   const collectionRef = collection(db, collectionKey);
   // how do you write a batch on my db?
   const batch = writeBatch(db);
   // this is why it's an array of objects, so that we can iterate through each of them.
   objectsToAdd.forEach((object) => {
-    // give the object a name based on our 'title' property
-    const docRef = doc(collectionRef, object.title.toLowerCase());
+    // give the object a name based on our 'dbDocumentKey' property
+    const docRef = doc(collectionRef, object.dbDocumentKey.toLowerCase());
     // set this object in our array to our batch of operations
     batch.set(docRef, object);
   });
@@ -120,7 +119,7 @@ export const addCollectionAndDocuments = async <T extends ObjectToAdd>(
 };
 
 //// DEV
-// FOR FIRING ONCE ONLY TO OVERWRITE A COLLECTION, then TURN OFF
+// FOR FIRING ONCE ONLY TO REWRITE A COLLECTION, then TURN OFF
 // addCollectionAndDocuments("series", SERIES_DATA);
 ////////////////////
 

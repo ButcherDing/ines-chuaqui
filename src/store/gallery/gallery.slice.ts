@@ -20,6 +20,7 @@ export interface GalleryState {
 }
 
 export type Series = {
+  dbDocumentKey: string;
   blurb: string;
   title: string;
   pieces: Piece[];
