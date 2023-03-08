@@ -15,15 +15,19 @@ import {
 
 import heroImg from "../../assets/img/hero.jpg";
 import heroImgLazy from "../../assets/img/heroLazy.jpg";
+import Spinner from "../spinner/spinner.component";
 
 const HeroImage = lazy(() => import("./hero-image"));
 
 // ok, make a prop for hero component
 
 const Hero = () => {
+  console.log(heroImg);
+  console.log(heroImgLazy);
+
   return (
     <>
-      <Suspense fallback={<HeroImage heroImg={heroImgLazy} />}>
+      <Suspense fallback={<Spinner />}>
         <HeroImage heroImg={heroImg}>
           <RightGradientContainer>
             <HeaderGradient>

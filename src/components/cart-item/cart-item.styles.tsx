@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { primaryShade } from "../../general.styles";
+import { useWindowSize } from "../../store/hooks/event-listeners";
 
 export const CartItemContainer = styled.div`
   width: 100%;
@@ -12,6 +13,9 @@ export const CartItemContainer = styled.div`
   align-items: center;
   justify-items: center;
   /* gap: 1.5rem; */
+  @media (max-width: 40em) {
+    grid-template-columns: repeat(5, 1fr);
+  }
 `;
 
 export const CartItemImageContainer = styled.div`

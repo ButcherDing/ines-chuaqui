@@ -14,9 +14,10 @@ import {
 
 type CartItemProps = {
   cartItem: TCartItem;
+  showImage: boolean;
 };
 
-const CartItem: FC<CartItemProps> = ({ cartItem }) => {
+const CartItem: FC<CartItemProps> = ({ cartItem, showImage = false }) => {
   const { smallImageUrl, title, printType } = cartItem;
   const dispatch = useDispatch();
 
@@ -26,9 +27,11 @@ const CartItem: FC<CartItemProps> = ({ cartItem }) => {
 
   return (
     <CartItemContainer>
-      <CartItemImageContainer>
-        <img src={smallImageUrl} alt={title}></img>
-      </CartItemImageContainer>
+      {showImage && (
+        <CartItemImageContainer>
+          <img src={smallImageUrl} alt={title}></img>
+        </CartItemImageContainer>
+      )}
 
       <CartItemDetail>{title}</CartItemDetail>
       <CartItemDetail>{printType.size}</CartItemDetail>

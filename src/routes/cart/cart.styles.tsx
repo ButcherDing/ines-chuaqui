@@ -15,8 +15,8 @@ export const CartContainer = styled.div`
   padding: 5rem 2.5rem;
   animation: ${fadeInAnimation};
 
-  @media (max-width: 75em) {
-    margin: auto;
+  @media (max-width: 50em) {
+    padding: 0.5rem 1.5rem;
   }
 `;
 
@@ -29,6 +29,9 @@ export const CartHeaders = styled.div`
   justify-self: center;
   /* gap: 2.4rem; */
   border-bottom: 1px solid ${primaryShade};
+  @media (max-width: 50em) {
+    grid-template-columns: repeat(5, 1fr);
+  }
 `;
 
 export const HeaderBlock = styled.span`

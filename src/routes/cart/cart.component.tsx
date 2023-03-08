@@ -6,17 +6,18 @@ import { Link } from "react-router-dom";
 
 import { useAppSelector } from "../../store/hooks/hooks";
 import CartItem from "../../components/cart-item/cart-item.component";
+import { useWindowSize } from "../../store/hooks/event-listeners";
 
 const Cart = () => {
   const cartItems = useAppSelector(selectCartItems);
-
   const cartTotal = useAppSelector(selectCartTotal);
+  const windowIsBig = useWindowSize().width > 640;
 
   return (
     <>
       <CartContainer>
         <CartHeaders>
-          <HeaderBlock>Piece</HeaderBlock>
+          {windowIsBig && <HeaderBlock>Piece</HeaderBlock>}
           <HeaderBlock>Title</HeaderBlock>
           <HeaderBlock>Size</HeaderBlock>
           <HeaderBlock>Quantity</HeaderBlock>
@@ -24,7 +25,11 @@ const Cart = () => {
           <HeaderBlock>Remove</HeaderBlock>
         </CartHeaders>
         {cartItems.map((cartItem) => (
-          <CartItem cartItem={cartItem} key={cartItem.cartId} />
+          <CartItem
+            cartItem={cartItem}
+            key={cartItem.cartId}
+            showImage={windowIsBig}
+          />
         ))}
         <Total>Total: $ {cartTotal}</Total>
         <Link to="../payment/stripe">

@@ -58,3 +58,23 @@ export const useOutsideClick = (callback: () => void) => {
 
   return ref;
 };
+
+export const useWindowSize = () => {
+  const [windowSize, setWindowSize] = useState({
+    width: window.innerWidth,
+    height: window.innerHeight,
+  });
+
+  const resizeHandler = (): void =>
+    setWindowSize({
+      width: window.innerWidth,
+      height: window.innerHeight,
+    });
+
+  useEffect(() => {
+    window.addEventListener("resize", resizeHandler);
+    return () => window.removeEventListener("resize", resizeHandler);
+  }, [windowSize]);
+
+  return windowSize;
+};
