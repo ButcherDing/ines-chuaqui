@@ -51,9 +51,9 @@ This project builds on a course project: [complete-react-developer](https://www.
 
 ## Status
 
-App is fully functional but in preview, pending additional copy and image assets from the artist.
+App is fully functional but in preview, pending additional copy and image assets from the artist. You can visit and test the site at: [ines-chuaqui-preview.netlify.app](https://ines-chuaqui-preview.netlify.app/)
 Functional Testing is in progress, though testing was never within the project's budget, so it is happening at a slower pace (pro-bono).
-You can visit the site at: [ines-chuaqui-preview.netlify.app](https://ines-chuaqui-preview.netlify.app/)
+
 
 ## Additional Info
 
