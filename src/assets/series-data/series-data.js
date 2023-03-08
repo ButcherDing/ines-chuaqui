@@ -1,5 +1,6 @@
 export const SERIES_DATA = [
   {
+    dbDocumentKey: "s00 Skull Series",
     title: "Skull Series",
     blurb:
       "This portrait-like series touches on the idea of 'Memento Mori' (a reminder of our death and the fleetingness of life). This idea is expressed using different symbols such as Spring or Summer flowers, or animal or bird skulls, which are juxtaposed so as to merge life and death inseparably.",
@@ -83,6 +84,7 @@ export const SERIES_DATA = [
     ],
   },
   {
+    dbDocumentKey: "s01 Frost Series",
     title: "Frost Series",
     blurb:
       "This collection reflects the otherworldly beauty of plant life captured by winter's frost, keeping it temporarily suspended in time.",
@@ -217,6 +219,7 @@ export const SERIES_DATA = [
     ],
   },
   {
+    dbDocumentKey: "s02 Individual Works",
     title: "Individual Works",
     blurb:
       "These pieces all revolve around the abstraction of nature in some form or another, so as to create a new composition.",
