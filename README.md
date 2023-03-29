@@ -15,8 +15,8 @@ Developer learning goals:
 
 ## Main Features
 
-- Gallery w/ lightbox
-- Login/User Dashboard
+- Gallery w/ lightbox ([Lightbox.js](https://www.getlightboxjs.com/docs/))
+- Auth
 - Shop
 - Cart
 - Contact Form
@@ -27,11 +27,12 @@ Developer learning goals:
 - Typescript, Javascript, HTML, CSS
 - React Redux Toolkit (v1.8.6)
 - Styled Components (v5.3.6)
-- Netlify (v1.42.1)
+- Netlify (v1.42.1) incl. serverless functions
 - Firebase (Auth, Firestore) (v9.12.0)
 - Stripe (v10.16.0)
 - Jest (v27.5.1)
 - React Testing Library (v13.4.0)
+- Lightbox.js-react (v0.1.8)
 
 ## Sources
 
@@ -51,9 +52,9 @@ This project builds on a course project: [complete-react-developer](https://www.
 
 ## Status
 
-App is fully functional but in preview, pending additional copy and image assets from the artist. You can visit and test the site at: [ines-chuaqui-preview.netlify.app](https://ines-chuaqui-preview.netlify.app/)
-Functional Testing is in progress, though testing was never within the project's budget, so it is happening at a slower pace (pro-bono).
+App is fully functional but in preview as the artist sources a print supplier. You can visit and try it out at: [ines-chuaqui-preview.netlify.app](https://ines-chuaqui-preview.netlify.app/)
 
+The project has undergone extensive manual testing, as agreed with client. Though unit testing was never within the project's budget, I am writing these (with Jest, React Testing Library) on a pro-bono basis, as a personal project.
 
 ## Additional Info
 
