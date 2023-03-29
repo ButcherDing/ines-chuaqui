@@ -36,7 +36,7 @@ Developer learning goals:
 
 ## Sources
 
-This project builds on a course project: [complete-react-developer](https://www.udemy.com/course/complete-react-developer-zero-to-mastery/). The code from that project has been greatly expanded/rewritten. Some highlights:
+This project builds on a much smaller course project: [complete-react-developer](https://www.udemy.com/course/complete-react-developer-zero-to-mastery/). The code from that project has been greatly expanded/rewritten. Some highlights:
 
 - Rewritten store/reducers/slices using RTK/Thunks rather than Redux-saga, making the app more modern, readable, with less boilerplate.
 - User dashboard with order history, ability to change user settings and delete the account. 
