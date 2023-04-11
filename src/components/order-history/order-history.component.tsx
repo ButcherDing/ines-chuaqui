@@ -52,7 +52,7 @@ export const OrderHistory = () => {
           </>
         ))
       ) : (
-        <></>
+        <span>No order history to display</span>
       )}
     </OrderHistoryContainer>
   );

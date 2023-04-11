@@ -15,7 +15,7 @@ import {
 
 import { InvertedLeafButton } from "../button/button.styles";
 import ModalForm from "../modal-form/modal-form.component";
-import Fader from "../fader/fader.component";
+import FadedMessage from "../fader/fader.component";
 
 type ModalProps = {
   closeModalHandler: () => void;
@@ -42,7 +42,7 @@ const Modal: FC<ModalProps> = ({ closeModalHandler, piece }) => {
         <ModalFooter>
           <ModalForm piece={piece} />
 
-          <Fader
+          <FadedMessage
             faderMessage={
               currentItem.pieceId === initialState.currentItem.pieceId
                 ? "choose a size"
@@ -51,11 +51,11 @@ const Modal: FC<ModalProps> = ({ closeModalHandler, piece }) => {
           />
 
           <ModalButtons>
-            <InvertedLeafButton onClick={() => addItemHandler()}>
+            <InvertedLeafButton onClick={addItemHandler}>
               Add to cart
             </InvertedLeafButton>
 
-            <InvertedLeafButton onClick={() => closeModalHandler()}>
+            <InvertedLeafButton onClick={closeModalHandler}>
               Close
             </InvertedLeafButton>
           </ModalButtons>

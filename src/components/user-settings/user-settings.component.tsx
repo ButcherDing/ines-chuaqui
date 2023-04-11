@@ -98,6 +98,7 @@ export const UserSettings: FC<UserSettingsProps> = ({ currentUser }) => {
         Change email address
       </UserSettingsButton>
 
+<<<<<<< Updated upstream
       <form id="change-password" onSubmit={changePasswordAsyncHandler}>
         <DashboardFormInput
           label="Change Password?"
@@ -117,6 +118,25 @@ export const UserSettings: FC<UserSettingsProps> = ({ currentUser }) => {
         />
       </form>
       <ChangePasswordButton
+=======
+      <DashboardFormInput
+        label="Change Password?"
+        type="password"
+        onChange={handleChange}
+        name="newPassword"
+        value={formFields.newPassword}
+      />
+      <div></div>
+
+      <DashboardFormInput
+        label="Retype new password"
+        type="password"
+        onChange={handleChange}
+        name="confirmNewPassword"
+        value={formFields.confirmNewPassword}
+      />
+      <UserSettingsButton
+>>>>>>> Stashed changes
         buttonType={BUTTON_TYPE_CLASSES.leaf}
         isLoading={isLoading}
         form="change-password"

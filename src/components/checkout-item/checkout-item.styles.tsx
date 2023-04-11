@@ -12,6 +12,17 @@ export const CheckoutItemContainer = styled.div`
   align-items: center;
   justify-items: center;
   /* gap: 1.5rem; */
+<<<<<<< Updated upstream:src/components/checkout-item/checkout-item.styles.tsx
+=======
+
+  @media (max-width: 40em) {
+    grid-template-columns: repeat(5, 1fr);
+    &:first-child {
+      justify-self: left;
+      align-self: left;
+    }
+  }
+>>>>>>> Stashed changes:src/components/cart-item/cart-item.styles.tsx
 `;
 
 export const CheckoutImageContainer = styled.div`
@@ -30,13 +41,24 @@ export const CheckoutImageContainer = styled.div`
 export const CheckoutItemDetail = styled.span`
   margin: 1rem;
 
+  &:nth-child(2) {
+    justify-self: left;
+  }
+
   @media (max-width: 50em) {
     font-size: 2rem;
   }
 
-  @media (max-width: 34em) {
+  @media (max-width: 40em) {
     font-size: 1.8rem;
+    &:nth-child(2) {
+      justify-self: center;
+    }
+    &:nth-child(1) {
+      justify-self: left;
+    }
   }
+
   @media (max-width: 27em) {
     font-size: 1.6rem;
   }
@@ -47,7 +69,3 @@ export const CheckoutItemDetail = styled.span`
 
 export const Quantity = styled.div``;
 
-export const RemoveButton = styled.span`
-  /* padding-left: 5rem; */
-  cursor: pointer;
-`;

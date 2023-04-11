@@ -13,7 +13,17 @@ import {
   NameTitle,
   BlurbHeading,
 } from "./hero.styles";
+<<<<<<< Updated upstream
 import { LeafButton } from "../button/button.styles";
+=======
+
+import heroImg from "../../assets/img/hero.jpg";
+import Spinner from "../spinner/spinner.component";
+
+const HeroImage = lazy(() => import("./hero-image"));
+
+// ok, make a prop for hero component
+>>>>>>> Stashed changes
 
 const Hero = () => {
   return (

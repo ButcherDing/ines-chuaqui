@@ -23,7 +23,6 @@ import galleryReducer from "./gallery/gallery.slice";
 import userReducer from "./user/user-slice";
 import cartReducer from "./cart/cart.slice";
 //
-
 // NOTE: Type doesn't get passed properly if we merge everything into one state as commented out below - probably an automation problem with configurestore.
 // const reducers = combineReducers({
 //   cartReducer,
@@ -34,19 +33,20 @@ const persistStandardConfig = {
   key: "root",
   storage,
 };
+
 const persistUserConfig = {
   key: "user",
   storageSession,
 };
 
-const persistedCartReducer = persistReducer(persistStandardConfig, cartReducer);
-const persistedGalleryReducer = persistReducer(
+export const persistedCartReducer = persistReducer(persistStandardConfig, cartReducer);
+export const persistedGalleryReducer = persistReducer(
   persistStandardConfig,
   galleryReducer
 );
 // const persistedUserReducer = persistReducer(persistStandardConfig, userReducer);
 
-export const store = configureStore({
+export const setupStore = () => configureStore({
   reducer: {
     gallery: persistedGalleryReducer,
     cart: persistedCartReducer,
@@ -60,11 +60,15 @@ export const store = configureStore({
     }) /*.concat(logger),*/,
 });
 
+
+export const store = setupStore()
+
 export const persistor = persistStore(store);
 
 export type GetState = typeof store.getState;
 
 export type RootState = ReturnType<typeof store.getState>;
+export type AppStore = ReturnType<typeof setupStore>
 export type AppDispatch = typeof store.dispatch;
 export type AppThunk<ReturnType = void> = ThunkAction<
   ReturnType,
@@ -73,6 +77,6 @@ export type AppThunk<ReturnType = void> = ThunkAction<
   Action<string>
 >;
 
-// EMERGE PURGE (FOR DEV)
+// EMERGENCY PURGE (FOR DEV)
 // const toPurge: any = persistor.purge();
-// console.log(toPurge);
+// console.log("purged:", toPurge);

@@ -27,6 +27,13 @@ const CartIcon = () => {
     handleContainerClick(event);
   };
 
+<<<<<<< Updated upstream
+=======
+  const enterKeyHandler = (event: React.KeyboardEvent<HTMLElement>) => {
+    if (event.key === "Enter") setIsCartOpen(!isCartOpen);
+  };
+
+>>>>>>> Stashed changes
   return (
     <CartIconContainer onClick={iconClickHandler} ref={ref}>
       <ShoppingIcon className="shopping-icon" />

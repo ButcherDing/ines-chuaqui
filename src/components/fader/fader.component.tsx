@@ -12,9 +12,11 @@ export const Fader: FC<FaderProps> = ({ faderMessage = "" }) => {
 
   useEffect(() => {
     setFade("fade-in");
-    setTimeout(() => {
+    const timer = setTimeout(() => {
       setFade("fade-out");
     }, 2000);
+
+    return clearTimeout(timer);
   }, [cartItems]);
 
   //// REPEAT FADE IN AND OUT

@@ -10,8 +10,13 @@ export const CheckoutContainer = styled.div`
   margin: 5rem 2.5rem;
   animation: ${fadeInAnimation};
 
+<<<<<<< Updated upstream:src/routes/checkout/checkout.styles.tsx
   @media (max-width: 75em) {
     margin: 5rem 0rem;
+=======
+  @media (max-width: 50em) {
+    padding: 1.5rem 0.4rem;
+>>>>>>> Stashed changes:src/routes/cart/cart.styles.tsx
   }
 `;
 
@@ -24,6 +29,13 @@ export const CheckoutHeaders = styled.div`
   justify-self: center;
   /* gap: 2.4rem; */
   border-bottom: 1px solid ${primaryShade};
+<<<<<<< Updated upstream:src/routes/checkout/checkout.styles.tsx
+=======
+
+  @media (max-width: 40em) {
+    grid-template-columns: repeat(5, 1fr);
+  }
+>>>>>>> Stashed changes:src/routes/cart/cart.styles.tsx
 `;
 
 export const HeaderBlock = styled.span`

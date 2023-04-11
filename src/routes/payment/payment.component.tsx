@@ -34,10 +34,21 @@ export const Payment = () => {
   };
 
   useEffect(() => {
+<<<<<<< Updated upstream
     paymentIntentHandler(cartTotal);
   }, [cartTotal]);
 
   console.log(clientSecret);
+=======
+    const paymentIntentHandler = async (cartItems: CartItem[]) => {
+      console.log(cartItems);
+      const client_secret = await fetchPaymentIntent(cartItems);
+      if (!client_secret) return console.error("error fetching from stripe");
+      setClientSecret(client_secret);
+    };
+    paymentIntentHandler(cartItems);
+  }, [cartItems]);
+>>>>>>> Stashed changes
 
   return (
     <PaymentContainer>
