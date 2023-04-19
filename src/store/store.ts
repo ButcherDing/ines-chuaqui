@@ -2,7 +2,7 @@ import {
   configureStore,
   ThunkAction,
   Action,
-  combineReducers,
+  // combineReducers,
 } from "@reduxjs/toolkit";
 import {
   persistStore,
@@ -18,13 +18,14 @@ import logger from "redux-logger";
 
 import storage from "redux-persist/lib/storage";
 import storageSession from "redux-persist/lib/storage/session";
+
 // REDUCER SLICES
 import galleryReducer from "./gallery/gallery.slice";
 import userReducer from "./user/user-slice";
 import cartReducer from "./cart/cart.slice";
-//
 
-// NOTE: Type doesn't get passed properly if we merge everything into one state as commented out below - probably an automation problem with configurestore.
+
+///// NOTE: Type doesn't get passed properly if we merge everything into one state as below as recommended - probably an automation problem with configurestore.
 // const reducers = combineReducers({
 //   cartReducer,
 //   userReducer,
