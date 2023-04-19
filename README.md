@@ -13,7 +13,7 @@ An e-commerce/portfolio app to:
 Developer learning goals:
 - Consolidate/expand my knowledge on Typescript and React, learn Redux Toolkit, and familiarize myself with testing tools (Jest, React Testing Library)
 
-## Main Features
+## Main Features / [Architecture](https://excalidraw.com/#json=r8ALMuKRw1mLbJ6f5bMK4,KLhlyctrZakdBSTHvrqzog)
 
 - Gallery w/ lightbox ([Lightbox.js](https://www.getlightboxjs.com/docs/))
 - Auth
