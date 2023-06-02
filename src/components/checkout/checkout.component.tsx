@@ -29,14 +29,12 @@ const defaultFormFields = {
 };
 
 const Checkout: FC<CheckoutProps> = () => {
-  const dispatch = useAppDispatch();
-  const user = useAppSelector((state) => state.user.currentUser);
-  const cartTotal = useAppSelector(selectCartTotal);
   const stripe = useStripe();
   const elements = useElements();
+  const cartTotal = useAppSelector(selectCartTotal);
   const [isProcessingPayment, setIsProcessingPayment] = useState(false);
   const [formFields, setFormFields] = useState(defaultFormFields);
-  const { email } = formFields;
+  // const { email } = formFields;
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -45,15 +43,13 @@ const Checkout: FC<CheckoutProps> = () => {
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    setIsProcessingPayment(true);
-    // elements.getElement(CardElement) could return null value, but this is not assignable to the card element, so we have to do this check.
     if (!elements || !stripe) return;
-
-    const cardDetails = elements.getElement(PaymentElement);
-    const shippingDetails = elements.getElement(AddressElement);
+    setIsProcessingPayment(true);
+    
+    // const cardDetails = elements.getElement(PaymentElement);
+    // const shippingDetails = elements.getElement(AddressElement);
 
     const { error } = await stripe.confirmPayment({
-      //`Elements` instance that was used to create the Payment Element
       elements,
       confirmParams: {
         return_url:

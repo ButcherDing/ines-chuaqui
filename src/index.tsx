@@ -14,6 +14,7 @@ import App from "./App";
 import { persistor, store } from "./store/store";
 import { PersistGate } from "redux-persist/lib/integration/react";
 import Spinner from "./components/spinner/spinner.component";
+import CheckoutSuccess from "./routes/checkout-success/checkout-success.component";
 
 const Home = lazy(() => import("./routes/home/home.component"));
 const Gallery = lazy(() => import("./routes/gallery/gallery.component"));
@@ -45,7 +46,8 @@ const router = createBrowserRouter(
         <Route path="contact/success" element={<ContactSuccess />} />
         <Route path="auth" element={<Authentication />} />
         <Route path="cart" element={<Cart />} />
-        <Route path="payment/*" element={<Payment />} />
+        <Route path="payment" element={<Payment />}/>
+        <Route path="payment/success/*" element={<CheckoutSuccess />} />
       </Route>
     </Route>
   )

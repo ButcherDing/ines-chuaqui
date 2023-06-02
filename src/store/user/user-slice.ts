@@ -37,11 +37,21 @@ interface SignUpFormInput extends FormInput {
   displayName: string;
 }
 
+type UserError = SerializedError | null
+
+type UserErrors = {
+  signIn: UserError;
+  signUp: UserError;
+  signOut: UserError;
+  dashboard: UserError;
+  record: UserError;
+}
+
 type UserState = {
   readonly changedMsg: boolean;
   readonly currentUser: UserData | null;
   readonly isLoading: boolean;
-  readonly error: SerializedError | null;
+  readonly error: UserErrors;
 };
 
 export type UserData = {
@@ -62,7 +72,13 @@ const initialState: UserState = {
   changedMsg: false,
   currentUser: null,
   isLoading: false,
-  error: null,
+  error: {
+    signIn: null,
+    signUp: null,
+    signOut: null,
+    dashboard: null,
+    record: null,
+  }
 };
 
 export type OrderedItem = {
@@ -96,12 +112,11 @@ export const selectOrders = createSelector(
     return currentUser.orders;
   }
 );
-export const selectErrorMessage = createSelector(
+export const selectError = createSelector(
   [selectUserReducer],
   (user) => {
     if (!user.error) return;
-    if (!user.error.message) return "";
-    return user.error.message;
+    return user.error;
   }
 );
 
@@ -265,11 +280,13 @@ export const userSlice = createSlice({
     });
     builder.addCase(signUpWithEmailPassAsync.fulfilled, (state) => {
       state.isLoading = false;
+      state.error.signUp = null;
       // state is updated by sign in thunk at end of this thunk
     });
     builder.addCase(signUpWithEmailPassAsync.rejected, (state, { error }) => {
       state.isLoading = false;
-      state.error = error;
+      state.error.signUp = error;
+      alert(error)
     });
     ////////////////// Sign in with Google
     builder.addCase(signInGooglePopupAsync.pending, (state) => {
@@ -280,11 +297,12 @@ export const userSlice = createSlice({
       if (!payload) return;
       //// doesn't give us back an object that we can get our currentUser off of the first time, so checksession.
       state.currentUser = payload;
+      state.error.signIn = null;
     });
     builder.addCase(signInGooglePopupAsync.rejected, (state, action) => {
       state.isLoading = false;
       if (!state.error) return;
-      state.error = action.error;
+      state.error.signIn = action.error;
     });
 
     ///////////////// Sign in with Email
@@ -295,10 +313,12 @@ export const userSlice = createSlice({
       state.isLoading = false;
       if (!payload) return;
       state.currentUser = payload;
+      state.error.signIn = null;
     });
     builder.addCase(signInEmailPassAsync.rejected, (state, { error }) => {
       state.isLoading = false;
-      state.error = error;
+      state.error.signIn = error;
+      alert(error.message)
     });
 
     /////////////// Check User Session
@@ -310,10 +330,12 @@ export const userSlice = createSlice({
       if (!payload) return;
       state.currentUser = payload;
       state.isLoading = false;
+      state.error.dashboard = null;
     });
     builder.addCase(checkUserSessionAsync.rejected, (state, { error }) => {
       state.isLoading = false;
-      state.error = error;
+      state.error.dashboard = error;
+      alert(error.message)
     });
 
     //////////////// Sign Out
@@ -324,10 +346,13 @@ export const userSlice = createSlice({
     builder.addCase(signOutAsync.fulfilled, (state) => {
       state.isLoading = false;
       state.currentUser = null;
+      state.error.signOut = null;
     });
     builder.addCase(signOutAsync.rejected, (state, { error }) => {
       state.isLoading = false;
-      state.error = error;
+      state.error.signOut = error;
+      alert(error.message)
+      
     });
     // TODO consider isLoaded...
     //////////////// Log transaction
@@ -341,11 +366,13 @@ export const userSlice = createSlice({
       // because someone not logged in can still make a purchase - in this case there is no user to which to push an order record.
       state.currentUser.orders.push(payload);
       state.isLoading = false;
+      state.error.record = null;
     });
     // order history updates
     builder.addCase(logTransactionAsync.rejected, (state, { error }) => {
       state.isLoading = false;
-      state.error = error;
+      state.error.record = error;
+      alert(error.message)
     });
 
     //////////////// Change Email
@@ -357,13 +384,14 @@ export const userSlice = createSlice({
       if (!state.currentUser) return;
       if (typeof payload !== "string") return;
       state.currentUser.email = payload;
+      state.error.dashboard = null;
       state.isLoading = false;
     });
     // email updates in currentUser
     builder.addCase(changeEmailAsync.rejected, (state, { error }) => {
-      state.error = error;
-      console.error(error);
+      state.error.dashboard = error;
       state.isLoading = false;
+      alert(error.message)
     });
     //////////////// Change Display Name
     builder.addCase(changeDisplayNameAsync.pending, (state) => {
@@ -375,10 +403,12 @@ export const userSlice = createSlice({
       if (typeof payload !== "string") return;
       if (!state.currentUser) return;
       state.currentUser.displayName = payload;
+      state.error.dashboard = null;
     });
     builder.addCase(changeDisplayNameAsync.rejected, (state, { error }) => {
       state.isLoading = false;
-      state.error = error;
+      state.error.dashboard = error;
+      alert(error.message)
     });
     //////////////// Change Password
     builder.addCase(changePasswordAsync.pending, (state) => {
@@ -389,11 +419,13 @@ export const userSlice = createSlice({
       // confirmation
       state.isLoading = false;
       state.changedMsg = true;
+      state.error.dashboard = null;
     });
     builder.addCase(changePasswordAsync.rejected, (state, { error }) => {
       state.isLoading = false;
       console.error(error);
-      state.error = error;
+      state.error.dashboard = error;
+      alert(error.message)
     });
     //////////////// Delete Account
     builder.addCase(deleteAccountAsync.pending, (state) => {
@@ -403,11 +435,13 @@ export const userSlice = createSlice({
     builder.addCase(deleteAccountAsync.fulfilled, (state) => {
       state.isLoading = false;
       state = initialState;
+      state.error.dashboard = null;
       // account deleted redirect?
     });
     builder.addCase(deleteAccountAsync.rejected, (state, { error }) => {
       state.isLoading = false;
-      state.error = error;
+      state.error.dashboard = error;
+      alert(error.message)
     });
     /// SURELY something more elegant than this... useQuery, or possibly something else?
   },

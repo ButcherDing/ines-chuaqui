@@ -6,7 +6,7 @@ import {
   changeEmailAsync,
   changePasswordAsync,
   deleteAccountAsync,
-  selectErrorMessage,
+  selectError,
   UserData,
 } from "../../store/user/user-slice";
 import { BUTTON_TYPE_CLASSES } from "../button/button.component";
@@ -32,10 +32,8 @@ export type UserSettingsProps = {
 
 export const UserSettings: FC<UserSettingsProps> = ({ currentUser }) => {
   const [formFields, setFormFields] = useState(defaultFormFields);
-  // const [errorMessage, setErrorMessage] = useState("");
   const dispatch = useAppDispatch();
-  const { isLoading } = useAppSelector((state) => state.user);
-  const errorMessage = useAppSelector(selectErrorMessage);
+  const { isLoading, error } = useAppSelector((state) => state.user);
 
   const [displayDeleteConfirm, setDisplayDeleteConfirm] = useState(false);
 
@@ -61,7 +59,6 @@ export const UserSettings: FC<UserSettingsProps> = ({ currentUser }) => {
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
-    let errorMessage = null;
     setFormFields({ ...formFields, [name]: value });
   };
 
@@ -133,8 +130,8 @@ export const UserSettings: FC<UserSettingsProps> = ({ currentUser }) => {
         Delete account
       </DeleteButton>
       <>
-        {errorMessage && (
-          <div style={{ color: "red" }}>{`error: ${errorMessage}`}</div>
+        {error.dashboard && (
+          <div style={{ color: "red" }}>{`error: ${error.dashboard}`}</div>
         )}
       </>
     </UserSettingsContainer>

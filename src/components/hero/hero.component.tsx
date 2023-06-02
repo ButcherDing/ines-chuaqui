@@ -22,8 +22,6 @@ const HeroImage = lazy(() => import("./hero-image"));
 // ok, make a prop for hero component
 
 const Hero = () => {
-  console.log(heroImg);
-  console.log(heroImgLazy);
 
   return (
     <>

@@ -71,7 +71,7 @@ export const getFirebaseStorageUrl = async (path: string) => {
       return url;
     })
     .catch((error) => {
-      console.log(error);
+      console.error(error);
       throw error;
       // Handle any errors
     });
@@ -323,7 +323,6 @@ export const getCurrentUser = (): Promise<User | null> => {
       auth,
       (userAuth) => {
         unsubscribe();
-        // console.log(userAuth);
         resolve(userAuth);
       },
       reject

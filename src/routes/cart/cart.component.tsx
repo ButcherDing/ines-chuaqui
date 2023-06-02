@@ -32,7 +32,7 @@ const Cart = () => {
           />
         ))}
         <Total>Total: $ {cartTotal}</Total>
-        <Link to="../payment/stripe">
+        <Link to="../payment">
           <LeafButton disabled={cartTotal === 0}>Proceed to Payment</LeafButton>
         </Link>
       </CartContainer>

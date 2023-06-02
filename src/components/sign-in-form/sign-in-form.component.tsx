@@ -20,14 +20,13 @@ const SignInForm = () => {
   // local state (useState)
   const [formFields, setFormFields] = useState(defaultFormFields);
   const { email, password } = formFields;
+  const [message, setMessage] = useState('')
 
   const resetFormFields = () => {
     setFormFields(defaultFormFields);
   };
-  // global state (redux toolkit)
   const dispatch = useAppDispatch();
 
-  // Action Handlers
   const signInWithGoogle = () => {
     dispatch(signInGooglePopupAsync());
   };
@@ -78,7 +77,9 @@ const SignInForm = () => {
             Google Sign In
           </GoogleLeafButton>
         </ButtonsContainer>
+      <p style={{color: "red"}}>{message}</p>
       </form>
+
     </SignInContainer>
   );
 };

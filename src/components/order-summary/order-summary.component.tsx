@@ -42,7 +42,7 @@ export const OrderSummary = () => {
           {/* separate this component out passing in boughtItem*/}
           <OrderSummaryDetails>
             {cartItems.map((cartItem) => (
-              <BoughtItem>
+              <BoughtItem key={cartItem.cartId}>
                 <ItemDetail>{cartItem.title} </ItemDetail>
 
                 <ItemDetail>{cartItem.printType.size} </ItemDetail>

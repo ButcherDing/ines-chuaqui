@@ -1,25 +1,27 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import PaymentStatus from "../../components/payment-status/payment-status.component";
+import { RouteContainer } from "../../general.styles";
 
 export const CheckoutSuccess = () => {
   const navigate = useNavigate();
 
-  useEffect(() => {
-    setTimeout(() => {
-      navigate("/gallery");
-    }, 8000);
-  }, []);
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     navigate("/gallery");
+  //   }, 8000);
+  // }, []);
 
   return (
-    <>
-      {/* <h5>
-        Your order was submitted successfully! You will receive an email invoice
-        shortly{" "}
-      </h5> */}
-      <PaymentStatus />
-      <span>You'll be sent back to the gallery in a few seconds.</span>
-    </>
+    <RouteContainer>
+      <h1>Thank You! 🎉</h1>
+      <p>
+        Your order was submitted successfully! You'll receive an email invoice
+        shortly. <br />
+        We'll also send you back to the gallery in a few seconds.
+      </p>
+      {/* TODO <PaymentStatus /> */}
+    </RouteContainer>
   );
 };
 

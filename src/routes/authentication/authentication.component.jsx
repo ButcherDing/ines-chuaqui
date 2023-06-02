@@ -7,7 +7,8 @@ import { UserDashboard } from "../../components/user-dashboard/user-dashboard.co
 import { AuthenticationContainer, NotSignedIn } from "./authentication.styles";
 
 const Authentication = () => {
-  const currentUser = useAppSelector(selectCurrentUser);
+  const {currentUser, error} = useAppSelector((state) => state.user);
+
 
   return (
     <AuthenticationContainer>

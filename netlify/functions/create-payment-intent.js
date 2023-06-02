@@ -29,35 +29,52 @@ const PRICES = {
   FRS003s3x5: 10,
   FRS003s8x11: 20,
   FRS003s16x20: 40,
+  FRS004s3x5: 10,
+  FRS004s8x11: 20,
+  FRS004s16x20: 40,
+  FRS005s3x5: 10,
+  FRS005s8x11: 20,
+  FRS005s16x20: 40,
+  FRS006s3x5: 10,
+  FRS006s8x11: 20,
+  FRS006s16x20: 40,
+  FRS007s3x5: 10,
+  FRS007s8x11: 20,
+  FRS007s16x20: 40,
+  IND000s3x5: 10,
+  IND000s8x11: 20,
+  IND000s16x20: 40,
+  IND001s3x5: 10,
+  IND001s8x11: 20,
+  IND001s16x20: 40,
 };
 
 exports.handler = async (event) => {
   try {
     const { cartItems } = JSON.parse(event.body);
-
-    const amount = await cartItems.reduce(
-      (acc, cartItem) =>
-        (acc += PRICES[cartItem.cartId] * cartItem.quantity * 100),
-      0
-    );
-    console.log("amount:", amount);
+    // console.log("cartItems", cartItems)
+    const amount = cartItems.reduce((acc, cartItem) => {
+      return acc + PRICES[cartItem.cartId] * cartItem.quantity * 100;
+    }, 0);
 
     const paymentIntent = await stripe.paymentIntents.create({
-      amount,
       currency: "CAD",
+      amount,
+
       //// to cherrypick payment methods:
       // payment_method_types: ["card"],
+
       automatic_payment_methods: { enabled: true },
     });
 
-    console.log(paymentIntent);
+    // console.log(paymentIntent);
 
     return {
       statusCode: 200,
-      body: JSON.stringify({ paymentIntent, amount }),
+      body: JSON.stringify({ clientSecret: paymentIntent.client_secret }),
     };
   } catch (error) {
-    console.log({ error });
+    // console.log({ error });
 
     return {
       statusCode: 400,

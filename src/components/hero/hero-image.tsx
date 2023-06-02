@@ -6,7 +6,6 @@ export type HeroImageProps = {
 };
 
 export const HeroImage = (props: PropsWithChildren<HeroImageProps>) => {
-  console.log(props.heroImg);
 
   return (
     <HeroImageContainer heroImg={props.heroImg}>

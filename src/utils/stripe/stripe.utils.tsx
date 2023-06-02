@@ -7,8 +7,9 @@ export const stripePromise =
     : null;
 
 export const fetchPaymentIntent = async (cartItems: CartItem[]) => {
-  const response = await fetch("/.netlify/functions/create-payment-intent", {
-    method: "post",
+  try {
+    const response = await fetch("/.netlify/functions/create-payment-intent", {
+      method: "post",
     headers: {
       "Content-Type": "application/json",
     },
@@ -17,10 +18,13 @@ export const fetchPaymentIntent = async (cartItems: CartItem[]) => {
 
   if (response.statusCode === 400) throw new Error(response);
 
-  const {
-    paymentIntent: { client_secret },
-  } = response;
-  return client_secret;
+
+  const {clientSecret} = response
+  return clientSecret
+
+  } catch(error) {
+    return error
+  }
 };
 
 export const fetchTotal = async (cartItems: CartItem[]) => {

@@ -26,26 +26,40 @@ const PRICES = {
   FRS003s3x5: 10,
   FRS003s8x11: 20,
   FRS003s16x20: 40,
+  FRS004s3x5: 10,
+  FRS004s8x11: 20,
+  FRS004s16x20: 40,
+  FRS005s3x5: 10,
+  FRS005s8x11: 20,
+  FRS005s16x20: 40,
+  FRS006s3x5: 10,
+  FRS006s8x11: 20,
+  FRS006s16x20: 40,
+  FRS007s3x5: 10,
+  FRS007s8x11: 20,
+  FRS007s16x20: 40,
+  IND000s3x5: 10,
+  IND000s8x11: 20,
+  IND000s16x20: 40,
+  IND001s3x5: 10,
+  IND001s8x11: 20,
+  IND001s16x20: 40,
 };
 
 exports.handler = async (event) => {
   try {
     const { cartItems } = JSON.parse(event.body);
-    console.log(cartItems);
 
     const total = cartItems.reduce(
       (acc, cartItem) => (acc += PRICES[cartItem.cartId] * cartItem.quantity),
       0
     );
-    console.log("total:", total);
 
     return {
       statusCode: 200,
       body: JSON.stringify({ total }),
     };
   } catch (error) {
-    console.log({ error });
-
     return {
       statusCode: 400,
       body: JSON.stringify({ error }),

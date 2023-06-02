@@ -29,7 +29,6 @@ const CartIcon = () => {
 
   const enterKeyHandler = (event: React.KeyboardEvent<HTMLElement>) => {
     if (event.key === "Enter") setIsCartOpen(!isCartOpen);
-    console.log("enter pressed");
   };
 
   return (
