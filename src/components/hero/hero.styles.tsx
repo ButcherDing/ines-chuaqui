@@ -12,7 +12,7 @@ export const RightGradientContainer = styled.div`
     rgba(255, 255, 255, 0.821),
     rgba(255, 255, 255, 0.821),
     rgba(255, 255, 255, 0.821),
-    #ffffff14,
+    #ffffff62,
     rgba(255, 255, 255, 0)
   );
   @media (max-width: 50em) {
@@ -21,6 +21,8 @@ export const RightGradientContainer = styled.div`
 `;
 
 export const HeaderGradient = styled.div`
+
+  
   @media (max-width: 50em) {
     padding-bottom: 12rem;
     background: linear-gradient(
@@ -37,7 +39,8 @@ export const HeaderGradient = styled.div`
 
 export const NameTitle = styled.h1`
   text-align: center;
-  letter-spacing: 2.2rem;
+  text-shadow: white 5 5 10px;
+  letter-spacing: 2rem;
   line-height: 1.5;
   font-weight: 200;
   padding: 2rem 2rem 0rem;
